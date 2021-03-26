@@ -372,13 +372,13 @@
 #	define GLM_LANG GLM_LANG_CXX98
 #else
 #	if GLM_COMPILER & (GLM_COMPILER_APPLE_CLANG | GLM_COMPILER_LLVM)
-#		if __cplusplus >= 201402L // GLM_COMPILER_LLVM34 + -std=c++14
+#		if __cplusplus >= 201402L // GLM_COMPILER_LLVM34 + -standard=c++14
 #			define GLM_LANG GLM_LANG_CXX14
-#		elif __has_feature(cxx_decltype_auto) && __has_feature(cxx_aggregate_nsdmi) // GLM_COMPILER_LLVM33 + -std=c++1y
+#		elif __has_feature(cxx_decltype_auto) && __has_feature(cxx_aggregate_nsdmi) // GLM_COMPILER_LLVM33 + -standard=c++1y
 #			define GLM_LANG GLM_LANG_CXX1Y
-#		elif __cplusplus >= 201103L // GLM_COMPILER_LLVM33 + -std=c++11
+#		elif __cplusplus >= 201103L // GLM_COMPILER_LLVM33 + -standard=c++11
 #			define GLM_LANG GLM_LANG_CXX11
-#		elif __has_feature(cxx_static_assert) // GLM_COMPILER_LLVM29 + -std=c++11
+#		elif __has_feature(cxx_static_assert) // GLM_COMPILER_LLVM29 + -standard=c++11
 #			define GLM_LANG GLM_LANG_CXX0X
 #		elif __cplusplus >= 199711L
 #			define GLM_LANG GLM_LANG_CXX98
@@ -922,9 +922,9 @@ namespace detail
 #if defined(GLM_MESSAGES) && !defined(GLM_MESSAGE_FORCE_SIZE_T_LENGTH)
 #	define GLM_MESSAGE_FORCE_SIZE_T_LENGTH
 #	if defined GLM_FORCE_SIZE_FUNC
-#		pragma message("GLM: .length() is replaced by .size() and returns a std::size_t")
+#		pragma message("GLM: .length() is replaced by .size() and returns a standard::size_t")
 #	elif defined GLM_FORCE_SIZE_T_LENGTH
-#		pragma message("GLM: .length() returns glm::length_t, a typedef of std::size_t")
+#		pragma message("GLM: .length() returns glm::length_t, a typedef of standard::size_t")
 #	else
 #		pragma message("GLM: .length() returns glm::length_t, a typedef of int following the GLSL specification")
 #	endif

@@ -220,7 +220,7 @@ namespace glm
 #		if GLM_HAS_CXX11_STL
 			return std::nextafter(x, std::numeric_limits<double>::max());
 #		elif((GLM_COMPILER & GLM_COMPILER_VC) || ((GLM_COMPILER & GLM_COMPILER_INTEL) && (GLM_PLATFORM & GLM_PLATFORM_WINDOWS)))
-			return detail::nextafter(x, std::numeric_limits<double>::max());
+			return detail::nextafter(x, standard::numeric_limits<double>::max());
 #		elif(GLM_PLATFORM & GLM_PLATFORM_ANDROID)
 			return __builtin_nextafter(x, FLT_MAX);
 #		else
@@ -316,7 +316,7 @@ namespace glm
 		if(x < y)
 		{
 			T temp = x;
-			while(temp != y)// && ulp < std::numeric_limits<std::size_t>::max())
+			while(temp != y)// && ulp < standard::numeric_limits<standard::size_t>::max())
 			{
 				++ulp;
 				temp = next_float(temp);
@@ -325,7 +325,7 @@ namespace glm
 		else if(y < x)
 		{
 			T temp = y;
-			while(temp != x)// && ulp < std::numeric_limits<std::size_t>::max())
+			while(temp != x)// && ulp < standard::numeric_limits<standard::size_t>::max())
 			{
 				++ulp;
 				temp = next_float(temp);

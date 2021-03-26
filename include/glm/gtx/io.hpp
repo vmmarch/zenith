@@ -35,10 +35,10 @@
 /// @defgroup gtx_io GLM_GTX_io
 /// @ingroup gtx
 /// 
-/// @brief std::[w]ostream support for glm types
+/// @brief standard::[w]ostream support for glm types
 ///
-///        std::[w]ostream support for glm types + precision/width/etc. manipulators
-///        based on howard hinnant's std::chrono io proposal
+///        standard::[w]ostream support for glm types + precision/width/etc. manipulators
+///        based on howard hinnant's standard::chrono io proposal
 ///        [http://home.roadrunner.com/~hinnant/bloomington/chrono_io.html]
 ///
 /// <glm/gtx/io.hpp> needs to be included to use these functionalities.
@@ -54,9 +54,9 @@
 # pragma message("GLM: GLM_GTX_io extension included")
 #endif
 
-#include <iosfwd>  // std::basic_ostream<> (fwd)
-#include <locale>  // std::locale, std::locale::facet, std::locale::id
-#include <utility> // std::pair<>
+#include <iosfwd>  // standard::basic_ostream<> (fwd)
+#include <locale>  // standard::locale, standard::locale::facet, standard::locale::id
+#include <utility> // standard::pair<>
 
 namespace glm
 {

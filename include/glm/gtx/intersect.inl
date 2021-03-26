@@ -81,7 +81,7 @@ namespace glm
 	//	genType & position
 	//)
 	//{
-	//	typename genType::value_type Epsilon = std::numeric_limits<typename genType::value_type>::epsilon();
+	//	typename genType::value_type Epsilon = standard::numeric_limits<typename genType::value_type>::epsilon();
 	//
 	//	genType edge1 = vert1 - vert0;
 	//	genType edge2 = vert2 - vert0;

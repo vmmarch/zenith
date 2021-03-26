@@ -231,7 +231,7 @@ namespace detail
 		template <typename genType>
 		GLM_FUNC_QUALIFIER genType trunc(genType x)
 		{
-			GLM_STATIC_ASSERT(std::numeric_limits<genType>::is_iec559, "'trunc' only accept floating-point inputs");
+			GLM_STATIC_ASSERT(standard::numeric_limits<genType>::is_iec559, "'trunc' only accept floating-point inputs");
 
 			return x < static_cast<genType>(0) ? -floor(-x) : floor(x);
 		}
@@ -250,7 +250,7 @@ namespace detail
 		template <typename genType>
 		GLM_FUNC_QUALIFIER genType round(genType x)
 		{
-			GLM_STATIC_ASSERT(std::numeric_limits<genType>::is_iec559, "'round' only accept floating-point inputs");
+			GLM_STATIC_ASSERT(standard::numeric_limits<genType>::is_iec559, "'round' only accept floating-point inputs");
 
 			return x < static_cast<genType>(0) ? static_cast<genType>(int(x - static_cast<genType>(0.5))) : static_cast<genType>(int(x + static_cast<genType>(0.5)));
 		}
@@ -267,7 +267,7 @@ namespace detail
 	template <typename genType>
 	GLM_FUNC_QUALIFIER genType roundEven(genType const& x)
 	{
-		GLM_STATIC_ASSERT(std::numeric_limits<genType>::is_iec559, "'roundEven' only accept floating-point inputs");
+		GLM_STATIC_ASSERT(standard::numeric_limits<genType>::is_iec559, "'roundEven' only accept floating-point inputs");
 
 		return genType(int(x + genType(int(x) % 2)));
 	}
@@ -544,22 +544,22 @@ namespace detail
 		template <typename genType> 
 		GLM_FUNC_QUALIFIER bool isnan(genType x)
 		{
-			GLM_STATIC_ASSERT(std::numeric_limits<genType>::is_iec559, "'isnan' only accept floating-point inputs");
+			GLM_STATIC_ASSERT(standard::numeric_limits<genType>::is_iec559, "'isnan' only accept floating-point inputs");
 
 #			if GLM_HAS_CXX11_STL
-				return std::isnan(x);
+				return standard::isnan(x);
 #			elif GLM_COMPILER & (GLM_COMPILER_VC | GLM_COMPILER_INTEL)
 				return _isnan(x) != 0;
 #			elif GLM_COMPILER & (GLM_COMPILER_GCC | (GLM_COMPILER_APPLE_CLANG | GLM_COMPILER_LLVM))
 #				if GLM_PLATFORM & GLM_PLATFORM_ANDROID && __cplusplus < 201103L
 					return _isnan(x) != 0;
 #				else
-					return std::isnan(x);
+					return standard::isnan(x);
 #				endif
 #			elif GLM_COMPILER & GLM_COMPILER_CUDA
 				return isnan(x) != 0;
 #			else
-				return std::isnan(x);
+				return standard::isnan(x);
 #			endif
 		}
 #	endif
@@ -578,23 +578,23 @@ namespace detail
 		template <typename genType> 
 		GLM_FUNC_QUALIFIER bool isinf(genType x)
 		{
-			GLM_STATIC_ASSERT(std::numeric_limits<genType>::is_iec559, "'isinf' only accept floating-point inputs");
+			GLM_STATIC_ASSERT(standard::numeric_limits<genType>::is_iec559, "'isinf' only accept floating-point inputs");
 
 #			if GLM_HAS_CXX11_STL
-				return std::isinf(x);
+				return standard::isinf(x);
 #			elif GLM_COMPILER & (GLM_COMPILER_INTEL | GLM_COMPILER_VC)
 				return _fpclass(x) == _FPCLASS_NINF || _fpclass(x) == _FPCLASS_PINF;
 #			elif GLM_COMPILER & (GLM_COMPILER_GCC | (GLM_COMPILER_APPLE_CLANG | GLM_COMPILER_LLVM))
 #				if(GLM_PLATFORM & GLM_PLATFORM_ANDROID && __cplusplus < 201103L)
 					return _isinf(x) != 0;
 #				else
-					return std::isinf(x);
+					return standard::isinf(x);
 #				endif
 #			elif GLM_COMPILER & GLM_COMPILER_CUDA
 				// http://developer.download.nvidia.com/compute/cuda/4_2/rel/toolkit/docs/online/group__CUDA__MATH__DOUBLE_g13431dd2b40b51f9139cbb7f50c18fab.html#g13431dd2b40b51f9139cbb7f50c18fab
 				return isinf(double(x)) != 0;
 #			else
-				return std::isinf(x);
+				return standard::isinf(x);
 #			endif
 	}
 #	endif

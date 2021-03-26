@@ -30,8 +30,8 @@
 /// @author Jan P Springer (regnirpsj@gmail.com)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <iomanip> // std::setfill<>, std::fixed, std::setprecision, std::right, std::setw
-#include <ostream> // std::basic_ostream<>
+#include <iomanip> // standard::setfill<>, standard::fixed, standard::setprecision, standard::right, standard::setw
+#include <ostream> // standard::basic_ostream<>
 
 namespace glm{
 namespace io

@@ -1,14 +1,7 @@
-#include "zenith.h"
+#include "launcher.h"
 
-class launcher : public zenith::application
+int main()
 {
-public:
-    launcher() = default;
-    ~launcher() override = default;
-
-};
-
-zenith::app zenith::createApplication()
-{
-    return new launcher();
+	return 0;
 }
+

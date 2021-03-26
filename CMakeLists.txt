@@ -1,18 +1,24 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
-PROJECT(zenith)
+cmake_minimum_required(VERSION 3.17)
+project(zenith)
 
-SET(CMAKE_CXX_STANDARD 20)
-SET(ROOT_DIR .)
+add_subdirectory(launcher launcher_binary_dir)
 
-ADD_DEFINITIONS(-DZENITH_PLATFORM_WINDOWS)
+################################################
+### ÅäÖÃÔ´ÂëÄ¿Â¼ SOURCEALL_DIR
+################################################
+aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
-ADD_SUBDIRECTORY(${ROOT_DIR}/gui gui_binary_dir)
-ADD_SUBDIRECTORY(${ROOT_DIR}/launcher launcher_binary_dir)
+set(CMAKE_CXX_STANDARD 20)
+add_definitions(-DZENITH_PLATFORM_WINDOWS)
 
-INCLUDE_DIRECTORIES(zenith ${CMAKE_SOURCE_DIR}/include)
+include_directories(${PROJECT_NAME} SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/launcher)
 
-ADD_EXECUTABLE(zenith main.cpp glad.c)
+add_executable(${PROJECT_NAME} ${SOURCE_DIRECTORY})
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE launcher)
+target_link_libraries(${PROJECT_NAME} PRIVATE launcher)
 
-TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PRIVATE ${ROOT_DIR}/launcher)
+install(
+	TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}
+)
+
