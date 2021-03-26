@@ -24,7 +24,7 @@ void error(zenith_uc msg, ...)
 
 #ifdef ZENITH_PLATFORM_WINDOWS
     #ifdef ZENITH_BUILD_DLL
-        #define ZENITH_API __declspec(dllexport)
+        #define ZENITH __declspec(dllexport)
     #else
         #define ZENITH_API __declspec(dllimport)
     #endif
