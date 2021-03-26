@@ -6,11 +6,12 @@ SET(ROOT_DIR .)
 
 ADD_DEFINITIONS(-DZENITH_PLATFORM_WINDOWS)
 
+ADD_SUBDIRECTORY(${ROOT_DIR}/gui gui_binary_dir)
 ADD_SUBDIRECTORY(${ROOT_DIR}/launcher launcher_binary_dir)
 
 INCLUDE_DIRECTORIES(zenith ${CMAKE_SOURCE_DIR}/include)
 
-ADD_EXECUTABLE(zenith main.cpp)
+ADD_EXECUTABLE(zenith main.cpp glad.c)
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} PRIVATE launcher)
 

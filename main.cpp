@@ -3,13 +3,8 @@
 class launcher : public zenith::application
 {
 public:
-    launcher()
-    {
-    }
-
-    ~launcher()
-    {
-    }
+    launcher() = default;
+    ~launcher() override = default;
 
 };
 
