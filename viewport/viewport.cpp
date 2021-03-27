@@ -15,13 +15,24 @@ int Viewport::ViewportInitialize()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    this->kWindowHandle = glfwCreateWindow(this->width, this->height, "", NULL, NULL);
+    ///////////////////////////////
+    // 获取监视器
+    GLFWmonitor *monitor = glfwGetPrimaryMonitor();
+    const GLFWvidmode *mode = glfwGetVideoMode(monitor);
+
+    glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+    glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+    glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
+    glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+
+    this->kWindowHandle = glfwCreateWindow(mode->width, mode->height, "", monitor, NULL);
     if (this->kWindowHandle == NULL)
     {
         ZENITH_LOGGER_ERROR("创建视窗失败！");
         glfwTerminate();
         return EXIT_FAILURE;
     }
+
     glfwMakeContextCurrent(this->kWindowHandle);
     glfwSetFramebufferSizeCallback(this->kWindowHandle, framebuffer_size_callback);
 
