@@ -2,13 +2,13 @@
 
 namespace zenith
 {
-    zenith::APPLICATION *CreateApplication()
+    APPLICATION *CreateApplication()
     {
-        return new zenith::Application();
+        return new Application();
     }
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     auto app = zenith::CreateApplication();
     return app->StartEngine();

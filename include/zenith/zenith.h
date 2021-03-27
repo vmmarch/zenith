@@ -11,12 +11,12 @@ typedef const char *zenith_uc;
 
 void info(zenith_uc msg, ...)
 {
-    // do nothing...
+    printf("[INFO] - %s\n", msg);
 }
 
 void error(zenith_uc msg, ...)
 {
-    // do nothing...
+    printf("[ERROR] - %s\n", msg);
 }
 
 #define ZENITH_LOGGER_INFO(...) info(__VA_ARGS__)
