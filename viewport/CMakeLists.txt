@@ -3,8 +3,7 @@ project(viewport)
 
 add_definitions(-DZENITH_PLATFORM_WINDOWS)
 
-include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/include/SDL2/include)
-
+link_libraries(imm32)
 link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
 add_library(
@@ -17,9 +16,9 @@ add_library(
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_tables.cpp
+        ${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_glfw.cpp
+        ${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_opengl3.cpp
 )
-
-target_link_libraries(${PROJECT_NAME} PRIVATE SDL2)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 

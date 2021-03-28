@@ -3,12 +3,7 @@
 //
 
 #pragma once
-
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 #include <zenith/zenith.h>
-
-#include <imgui.h>
 
 /*!
  * 模型以及场景展示区
@@ -23,8 +18,7 @@ public:
      */
     Viewport(int, int);
     int ViewportInitialize();
-    void StartLoop();
+    int StartLoop();
 private:
-    GLFWwindow *kWindowHandle; // 窗口句柄
     int width, height;
 };
