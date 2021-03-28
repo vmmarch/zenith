@@ -8,6 +8,8 @@
 #include <GLFW/glfw3.h>
 #include <zenith/zenith.h>
 
+#include <imgui.h>
+
 /*!
  * 模型以及场景展示区
  */

@@ -1,3 +1,12 @@
 [submodule "include/imgui"]
 	path = include/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "include/SDL2"]
+	path = include/SDL2
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "vendor/SDL2"]
+	path = vendor/SDL2
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "vendor/imgui"]
+	path = vendor/imgui
+	url = https://github.com/ocornut/imgui.git

@@ -49,6 +49,13 @@ int Viewport::ViewportInitialize()
 
 void Viewport::StartLoop()
 {
+
+    ImGui::Text("hello world %d", 123);
+    if(ImGui::Button("ok"))
+    {
+        // do nothing...
+    }
+
     while (!glfwWindowShouldClose(this->kWindowHandle))
     {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

@@ -1,7 +1,7 @@
 #include <zenith/zenith.h>
 #include "viewport.h"
 
-typedef void (*CALLBACK_BEFORE_ENGINE_SHUTDOWN)(); // 关闭引擎之前的回调函数
+typedef void (*CALLBACK_BEFORE_ENGINE_SHUTDOWN)(); // shutdown engine before callback process. 
 
 namespace zenith
 {
@@ -12,14 +12,14 @@ namespace zenith
         ~Application();
         void InitializeViewport(int= -1, int= -1);
         int StartEngine();
-        void TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN); // 关闭zenith
+        void TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN); // shutdown engine.
 
     private:
-        bool is_stop = false;
+        bool is_stop = false; // judge engine is close.
         Viewport *viewport;
     };
 
     typedef Application APPLICATION;
 
-    APPLICATION *CreateApplication();
+    APPLICATION *CreateApplication(); // create engine application.
 }
