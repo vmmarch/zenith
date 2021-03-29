@@ -4,18 +4,17 @@
 
 #pragma once
 
-#include <cstdarg>
 #include <iostream>
+#include <cstring>
 
-typedef const char      zenith_cc;
-typedef unsigned char   zenith_uc;
+typedef unsigned char zenith_uc;
 
-extern void info(zenith_cc *msg, ...);
-extern void error(char const*, ...);
+extern void INFO(std::string *__fmt, ...);
+extern void ERROR(std::string *__fmt, ...);
 
-extern void ZENITH_LOGGER_INFO(char const*, ...);
-extern void ZENITH_LOGGER_ERROR(char const*, ...);
-extern void ZENITH_FATAL_ERROR(char const*, ...); // 如果是致命错误就退出引擎
+extern void ZENITH_LOGGER_INFO(std::string, ...);
+extern void ZENITH_LOGGER_ERROR(std::string, ...);
+extern void ZENITH_FATAL_ERROR(std::string, ...); // 如果是致命错误就退出引擎
 
 #ifdef ZENITH_PLATFORM_WINDOWS
     #ifdef ZENITH_BUILD_DLL

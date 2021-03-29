@@ -14,4 +14,4 @@ add_library(
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
-
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY  ../)

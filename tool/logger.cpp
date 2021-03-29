@@ -3,23 +3,46 @@
 //
 
 #include "zenith/zenith.h"
+#include <cstdarg>
 
-void info(zenith_cc *msg, ...)
+void INFO(std::string __fmt, ...)
 {
-    printf("[INFO] - %s\n", msg);
+    va_list  argument;
+    va_start(argument, __fmt);
+    __fmt = "[INFO] - " + __fmt + "\n";
+    printf(__fmt.c_str(), argument);
+    va_end(argument);
 }
 
-void error(zenith_cc *msg, ...)
+void ERROR(std::string __fmt, ...)
 {
-    printf("[ERROR] - %s\n", msg);
+    va_list  argument;
+    va_start(argument, __fmt);
+    __fmt = "[ERROR] - " + __fmt + "\n";
+    printf(__fmt.c_str(), argument);
+    va_end(argument);
 }
 
-void ZENITH_LOGGER_INFO(zenith_cc *msg, ...)
+void ZENITH_LOGGER_INFO(std::string __fmt, ...)
 {
+    va_list  argument;
+    va_start(argument, __fmt);
+    INFO(__fmt, argument);
+    va_end(argument);
 }
 
-void ZENITH_LOGGER_ERROR(zenith_cc *msg, ...)
-{}
+void ZENITH_LOGGER_ERROR(std::string __fmt, ...)
+{
+    va_list  argument;
+    va_start(argument, __fmt);
+    ERROR(__fmt, argument);
+    va_end(argument);
+}
 
-void ZENITH_FATAL_ERROR(zenith_cc *msg, ...)
-{}
+void ZENITH_FATAL_ERROR(std::string __fmt, ...)
+{
+    va_list  argument;
+    va_start(argument, __fmt);
+    ERROR(__fmt, argument);
+    va_end(argument);
+}

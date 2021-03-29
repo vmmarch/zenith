@@ -2,17 +2,7 @@
 
 namespace zenith
 {
-    Application::Application()
-    {
-        // do nothing...
-    }
-
-    Application::~Application()
-    {
-        delete this->viewport;
-    }
-
-    void Application::InitializeViewport(int w, int h)
+    Application::Application(int w, int h)
     {
         if (w == -1 && h == -1)
         {
@@ -23,6 +13,11 @@ namespace zenith
         }
     }
 
+    Application::~Application()
+    {
+        delete this->viewport;
+    }
+
     void Application::TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN func)
     {
         func();
@@ -31,7 +26,6 @@ namespace zenith
 
     int Application::StartEngine()
     {
-        InitializeViewport();
         // 展示viewport
         this->viewport->StartLoop();
 

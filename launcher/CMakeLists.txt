@@ -12,6 +12,7 @@ add_library(
         launcher.h
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE viewport)
-
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY  ../)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE viewport)

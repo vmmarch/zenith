@@ -23,7 +23,8 @@ add_library(
         ${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_opengl3.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE tool)
-
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
+set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY  ../)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE tool)
 

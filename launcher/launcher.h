@@ -8,12 +8,10 @@ namespace zenith
     class Application
     {
     public:
-        Application();
+        Application(int= -1, int= -1);
         ~Application();
-        void InitializeViewport(int= -1, int= -1);
         int StartEngine();
         void TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN); // shutdown engine.
-
     private:
         bool is_stop = false; // judge engine is close.
         Viewport *viewport;
@@ -21,5 +19,5 @@ namespace zenith
 
     typedef Application APPLICATION;
 
-    APPLICATION *CreateApplication(); // create engine application.
+    APPLICATION *CreateApplication(int = -1, int = -1); // create engine application.
 }
