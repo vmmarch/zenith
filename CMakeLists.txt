@@ -15,6 +15,7 @@ include_directories(launcher ${CMAKE_SOURCE_DIR}/viewport)
 
 add_subdirectory(launcher launcher_binary_dir)
 add_subdirectory(viewport viewport_binary_dir)
+add_subdirectory(tool tool_binary_dir)
 
 ################################################
 ### ÅäÖÃÔ´ÂëÄ¿Â¼ SOURCEALL_DIR

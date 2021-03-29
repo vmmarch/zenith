@@ -2,7 +2,7 @@
 // Created by aorus on 2021/3/29.
 //
 
-#include "zenith.h"
+#include "zenith/zenith.h"
 
 void info(zenith_cc *msg, ...)
 {

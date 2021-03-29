@@ -21,9 +21,9 @@ add_library(
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_tables.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_glfw.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_opengl3.cpp
-
-        ${CMAKE_SOURCE_DIR}/include/zenith/logger.cpp
 )
+
+target_link_libraries(${PROJECT_NAME} PRIVATE tool)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 
