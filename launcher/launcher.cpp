@@ -21,8 +21,6 @@ namespace zenith
         {
             this->viewport = new Viewport(w, h);
         }
-
-        this->viewport->ViewportInitialize();
     }
 
     void Application::TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN func)

@@ -4,7 +4,7 @@ project(launcher)
 aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
 set(CMAKE_CXX_STANDARD 20)
-add_definitions(-DZENITH_PLATFORM_WINDOWS -DZENITH_BUILD_DLL)
+add_definitions(-DZENITH_PLATFORM_WINDOWS -DZENITH_BUILD_DLL -DIN_CHINA)
 
 add_library(
         ${PROJECT_NAME} SHARED

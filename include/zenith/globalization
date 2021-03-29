@@ -1,0 +1,22 @@
+//
+// Created by aorus on 2021/3/28.
+// 国际化
+//
+
+#pragma once
+
+#define ENGINE_NAME "zenith3D"
+
+#ifdef IN_CHINA
+///////////////////////////////////////////////////////////
+// IN_CHINA
+
+// MENU MESSAGE
+
+// ERROR MESSAGE
+#define STARTUP_ERROR ENGINE_NAME "启动失败"
+
+///////////////////////////////////////////////////////////
+#else
+#error error message not support other country
+#endif

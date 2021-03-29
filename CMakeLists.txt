@@ -22,7 +22,8 @@ add_subdirectory(viewport viewport_binary_dir)
 aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
 set(CMAKE_CXX_STANDARD 20)
-add_definitions(-DZENITH_PLATFORM_WINDOWS)
+
+add_definitions(-DZENITH_PLATFORM_WINDOWS -DIN_CHINA)
 
 include_directories(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/launcher)
 
