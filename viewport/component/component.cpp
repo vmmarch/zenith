@@ -13,8 +13,3 @@ void component::set_should_be_render(bool render)
 {
     this->should_be_render = render;
 }
-
-void component::render()
-{
-    // do nothing...
-}

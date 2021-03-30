@@ -8,7 +8,7 @@ void _render_menu(vector<zenith::menu_node *> children)
 {
     for (auto iter : children)
     {
-        iter->render();
+        iter->vrender();
     }
 }
 
@@ -42,7 +42,7 @@ namespace zenith
         return node;
     }
 
-    void menu::render()
+    void menu::vrender()
     {
         if (ImGui::BeginMainMenuBar())
         {
@@ -77,7 +77,7 @@ namespace zenith
         return node;
     }
 
-    void menu_node::render()
+    void menu_node::vrender()
     {
         if (ImGui::BeginMenu(this->name))
         {

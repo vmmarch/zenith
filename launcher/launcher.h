@@ -1,5 +1,6 @@
 #include <zenith/zenith.h>
 #include "child-window.h"
+#include "engine-iface-config.h"
 
 typedef void (*CALLBACK_BEFORE_ENGINE_SHUTDOWN)(); // shutdown engine before callback process. 
 

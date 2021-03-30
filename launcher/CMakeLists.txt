@@ -15,4 +15,5 @@ add_library(
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 set_target_properties(${PROJECT_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY  ../)
 
+target_link_libraries(${PROJECT_NAME} PRIVATE iface)
 target_link_libraries(${PROJECT_NAME} PRIVATE viewport)

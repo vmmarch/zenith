@@ -2,9 +2,9 @@
 
 /*! /////////////////////////////////////////////////////////////////////// */
 /*! class: viewport_state_manager */
-void state_manager::render_menu(zenith::menu *_menu)
+void state_manager::render(component* _comp)
 {
-    _menu->render();
+     _comp->vrender();
 }
 
 /*! /////////////////////////////////////////////////////////////////////// */
@@ -12,6 +12,11 @@ void state_manager::render_menu(zenith::menu *_menu)
 child_window::child_window(int width, int height) : ImGUILayout(width, height)
 {
     setup_glfw();
+}
+
+child_window::~child_window()
+{
+    delete this->_comps;
 }
 
 state_manager *child_window::get_state_manager()
@@ -22,6 +27,11 @@ state_manager *child_window::get_state_manager()
     return this->vsm;
 }
 
+comps_container *child_window::get_component_container()
+{
+    return this->_comps;
+}
+
 GLFWwindow* child_window::get_window()
 {
     if(this->kWindowHandle == nullptr)
@@ -30,16 +40,12 @@ GLFWwindow* child_window::get_window()
     return this->kWindowHandle;
 }
 
-void child_window::Display()
+void child_window::Display(func_custom_iface __custom_iface__, func_render_iface __render_iface__)
 {
     ImGuiIO &io = setup_imgui();
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    zenith::menu menu;
-    zenith::menu_node node(GUI_FILE);
-    menu.add_menu_node(&node);
-    node.add_menu_children("aaaa")->add_item_children("a-1");
-    node.add_item_children("bbbb");
+    __custom_iface__(get_component_container());
 
     /*! /////////////////////////////////////////////////////////////////////////////// */
     /*! main loop */
@@ -58,7 +64,7 @@ void child_window::Display()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        this->get_state_manager()->render_menu(&menu);
+        __render_iface__(this->get_state_manager(), _comps);
 
         // Rendering
         ImGui::Render();

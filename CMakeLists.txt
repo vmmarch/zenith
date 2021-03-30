@@ -12,10 +12,13 @@ include_directories(SYSTEM vendor/imgui/backends)
 ################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(launcher ${CMAKE_SOURCE_DIR}/viewport)
+include_directories(iface ${CMAKE_SOURCE_DIR}/viewport)
+include_directories(launcher ${CMAKE_SOURCE_DIR}/iface)
 
 add_subdirectory(launcher launcher_binary_dir)
 add_subdirectory(viewport viewport_binary_dir)
 add_subdirectory(tool tool_binary_dir)
+add_subdirectory(iface iface_binary_dir)
 
 ################################################
 ### ÅäÖÃÔ´ÂëÄ¿Â¼ SOURCEALL_DIR

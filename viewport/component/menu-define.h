@@ -48,7 +48,7 @@ namespace zenith
     {
     public:
         menu_node *add_menu_node(menu_node *node); // 添加菜单节点
-        void render();                             // 渲染
+        void vrender();                             // 渲染
 
     private:
         vector<menu_node *> children;
@@ -60,7 +60,7 @@ namespace zenith
         menu_node(const char *name, menu_type= NODE_TYPE_MENU);
         menu_node *add_menu_children(const char *name);
         menu_node *add_item_children(const char *name, func_button_pressed= NULL);
-        void render();
+        void vrender();
         const char *get_name();
         void set_name(const char *);
         vector<menu_node *> get_children();

@@ -10,6 +10,6 @@ namespace zenith
 
 int main(int argc, char **argv)
 {
-    auto app = zenith::CreateApplication(1200, 800);
-    return app->StartEngine();
+     auto app = zenith::CreateApplication(1200, 800);
+     return app->StartEngine();
 }
