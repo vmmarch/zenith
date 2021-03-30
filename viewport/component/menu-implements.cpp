@@ -21,15 +21,11 @@ void _render_item(vector<zenith::menu_node *> children)
             if (iter->is_menu())
             {
                 if (ImGui::BeginMenu(iter->get_name()))
-                {
-                    _render_item(iter->get_children());
-                    ImGui::EndMenu();
-                }
+                { _render_item(iter->get_children()); ImGui::EndMenu(); }
             } else
             {
                 if (ImGui::MenuItem(iter->get_name()))
-                {
-                }
+                { iter->execute(); }
                 _render_item(iter->get_children());
             }
         }
@@ -63,9 +59,20 @@ namespace zenith
         this->type = type;
     }
 
-    menu_node *menu_node::add_children(const char *_name, menu_type type)
+    menu_node *menu_node::add_menu_children(const char *_name)
     {
-        auto node = new menu_node(_name, type);
+        auto node = new menu_node(_name, NODE_TYPE_MENU);
+        this->children.push_back(node);
+
+        return node;
+    }
+
+    menu_node *menu_node::add_item_children(const char *_name, func_button_pressed _pressed_func)
+    {
+        auto node = new menu_node(_name, NODE_TYPE_ITEM);
+        if(_pressed_func != NULL)
+            node->button_press_func = _pressed_func;
+
         this->children.push_back(node);
         return node;
     }
@@ -97,6 +104,12 @@ namespace zenith
     bool menu_node::is_menu()
     {
         return this->type == NODE_TYPE_MENU;
+    }
+
+    void menu_node::execute()
+    {
+        if(this->button_press_func != NULL)
+            button_press_func();
     }
 
 }

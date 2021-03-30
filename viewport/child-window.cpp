@@ -38,8 +38,8 @@ void child_window::Display()
     zenith::menu menu;
     zenith::menu_node node(GUI_FILE);
     menu.add_menu_node(&node);
-    node.add_children("aaaa", NODE_TYPE_MENU)->add_children("a-1");
-    node.add_children("bbbb");
+    node.add_menu_children("aaaa")->add_item_children("a-1");
+    node.add_item_children("bbbb");
 
     /*! /////////////////////////////////////////////////////////////////////////////// */
     /*! main loop */
