@@ -4,7 +4,8 @@ project(viewport)
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
 ################################################
-aux_source_directory(${CMAKE_CURRENT_LIST_DIR} SOURCE_DIRECTORY)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SOURCE_DIRECTORY)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/component COMPONENT_SOURCE_DIRECTORY)
 
 add_definitions(-DZENITH_PLATFORM_WINDOWS -DIN_CHINA)
 
@@ -14,6 +15,7 @@ link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 add_library(
         ${PROJECT_NAME} SHARED
         ${SOURCE_DIRECTORY}
+        ${COMPONENT_SOURCE_DIRECTORY}
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp

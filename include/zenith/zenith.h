@@ -9,8 +9,8 @@
 
 typedef unsigned char zenith_uc;
 
-extern void INFO(std::string *__fmt, ...);
-extern void ERROR(std::string *__fmt, ...);
+extern void INFO(std::string __fmt, ...);
+extern void ERROR(std::string __fmt, ...);
 
 extern void ZENITH_LOGGER_INFO(std::string, ...);
 extern void ZENITH_LOGGER_ERROR(std::string, ...);
