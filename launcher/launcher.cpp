@@ -6,10 +6,10 @@ namespace zenith
     {
         if (w == -1 && h == -1)
         {
-            this->viewport = new child_window(600, 600);
+            this->viewport = new __viewport__(600, 600);
         } else
         {
-            this->viewport = new child_window(w, h);
+            this->viewport = new __viewport__(w, h);
         }
     }
 
@@ -27,7 +27,7 @@ namespace zenith
     int Application::StartEngine()
     {
         // 展示viewport
-        this->viewport->Display(custom_iface, render_iface);
+        this->viewport->Display(custom_iface, render_iface, font_iface);
 
         return EXIT_SUCCESS;
     }

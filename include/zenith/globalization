@@ -7,12 +7,24 @@
 
 #define ENGINE_NAME "zenith3D"
 
+#define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
+
 #ifdef IN_CHINA
 ///////////////////////////////////////////////////////////
 // IN_CHINA
 
 // MENU MESSAGE
-#define GUI_FILE "FILE"
+#define GUI_TEXT_FILE "文件"
+#define GUI_TEXT_CREATE "新建"
+#define GUI_TEXT_CREATE_PROJECT "新建项目"
+
+#define GUI_TEXT_OPEN "打开"
+#define GUI_TEXT_OPEN_PROJECT "打开项目"
+#define GUI_TEXT_OPEN_FOLDER "打开文件夹"
+#define GUI_TEXT_IMPORT "导入"
+#define GUI_TEXT_SETTING "引擎配置"
+#define GUI_TEXT_RESTART "重启引擎"
+#define GUI_TEXT_EXIT "退出引擎"
 
 // ERROR MESSAGE
 #define STARTUP_ERROR ENGINE_NAME "启动失败"

@@ -1,5 +1,5 @@
 #include <zenith/zenith.h>
-#include "child-window.h"
+#include "viewport.h"
 #include "engine-iface-config.h"
 
 typedef void (*CALLBACK_BEFORE_ENGINE_SHUTDOWN)(); // shutdown engine before callback process. 
@@ -15,7 +15,7 @@ namespace zenith
         void TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN); // shutdown engine.
     private:
         bool is_stop = false; // judge engine is close.
-        child_window *viewport;
+        __viewport__ *viewport;
     };
 
     typedef Application APPLICATION;

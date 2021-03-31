@@ -4,7 +4,8 @@
 
 #pragma once
 
-#include "child-window.h"
+#include "viewport.h"
 
 void custom_iface(comps_container* _comps);
 void render_iface(state_manager *state, comps_container* _comps);
+void font_iface(ImFontAtlas*);
