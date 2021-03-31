@@ -31,18 +31,18 @@ namespace zenith
 
     void window::vrender()
     {
-        ImGuiWindowFlags window_flags = 0;
-        if (no_titlebar)        window_flags |= ImGuiWindowFlags_NoTitleBar;
-        if (no_scrollbar)       window_flags |= ImGuiWindowFlags_NoScrollbar;
-        if (!no_menu)           window_flags |= ImGuiWindowFlags_MenuBar;
-        if (no_move)            window_flags |= ImGuiWindowFlags_NoMove;
-        if (no_resize)          window_flags |= ImGuiWindowFlags_NoResize;
-        if (no_collapse)        window_flags |= ImGuiWindowFlags_NoCollapse;
-        if (no_nav)             window_flags |= ImGuiWindowFlags_NoNav;
-        if (no_background)      window_flags |= ImGuiWindowFlags_NoBackground;
-        if (no_bring_to_front)  window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-        if (no_docking)         window_flags |= ImGuiWindowFlags_NoDocking;
-        if (no_close)           p_open = NULL; // Don't pass our bool* to Begin
+        ImGuiWindowFlags     window_flags = 0;
+        if (titlebar)        window_flags |= ImGuiWindowFlags_NoTitleBar;
+        if (scrollbar)       window_flags |= ImGuiWindowFlags_NoScrollbar;
+        if (menu)            window_flags |= ImGuiWindowFlags_MenuBar;
+        if (move)            window_flags |= ImGuiWindowFlags_NoMove;
+        if (resize)          window_flags |= ImGuiWindowFlags_NoResize;
+        if (collapse)        window_flags |= ImGuiWindowFlags_NoCollapse;
+        if (nav)             window_flags |= ImGuiWindowFlags_NoNav;
+        if (background)      window_flags |= ImGuiWindowFlags_NoBackground;
+        if (bring_to_front)  window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+        if (docking)         window_flags |= ImGuiWindowFlags_NoDocking;
+        if (close)           p_open = NULL; // Don't pass our bool* to Begin
 
         int w, h;
         glfwGetWindowSize(__window__, &w, &h);
@@ -54,9 +54,7 @@ namespace zenith
         ImGui::SetNextWindowSize(ImVec2(w, h), ImGuiCond_FirstUseEver);
 
         // Main body of the Demo window starts here.
-        if (!ImGui::Begin(title, p_open, window_flags))
-        {
-        }
+        ImGui::Begin(title, p_open, window_flags);
         ImGui::End();
     }
 }

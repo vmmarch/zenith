@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(viewport)
 
+add_subdirectory(component)
+
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
 ################################################

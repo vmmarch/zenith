@@ -108,30 +108,31 @@ namespace zenith                                                                
         void set_GLFWwindow(GLFWwindow*);                                                                     //
         const char* get_title        ();                                                                      //
         /*! ================================================================================================= */
-        /*! window config */
+        /*! window config */                                                                                  //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*|*/      void __no_titlebar           () { titlebar       =    false;  }                            //
-        /*|*/      void __no_scrollbar          () { scrollbar      =    false;  }                            //
-        /*|*/      void __no_menu               () { menu           =    false;  }                            //
-        /*|*/      void __no_move               () { move           =    false;  }                            //
-        /*|*/      void __no_resize             () { resize         =    false;  }                            //
-        /*|*/      void __no_collapse           () { collapse       =    false;  }                            //
-        /*|*/      void __no_close              () { close          =    false;  }                            //
-        /*|*/      void __no_nav                () { nav            =    false;  }                            //
-        /*|*/      void __no_background         () { background     =    false;  }                            //
-        /*|*/      void __no_bring_to_front     () { bring_to_front =    false;  }                            //
-        /*|*/      void __no_docking            () { docking        =    false;  }                            //
+        /*|*/      void __no_titlebar           () { titlebar       =    true;  }                             //
+        /*|*/      void __no_scrollbar          () { scrollbar      =    true;  }                             //
+        /*|*/      void __no_menu               () { menu           =    true;  }                             //
+        /*|*/      void __no_move               () { move           =    true;  }                             //
+        /*|*/      void __no_resize             () { resize         =    true;  }                             //
+        /*|*/      void __no_collapse           () { collapse       =    true;  }                             //
+        /*|*/      void __no_close              () { close          =    true;  }                             //
+        /*|*/      void __no_nav                () { nav            =    true;  }                             //
+        /*|*/      void __no_background         () { background     =    true;  }                             //
+        /*|*/      void __no_bring_to_front     () { bring_to_front =    true;  }                             //
+        /*|*/      void __no_docking            () { docking        =    true;  }                             //
         /*|*/                                                                                                 //
-        /*|*/      void __yes_titlebar          () { titlebar       =    true;   }                            //
-        /*|*/      void __yes_scrollbar         () { scrollbar      =    true;   }                            //
-        /*|*/      void __yes_menu              () { menu           =    true;   }                            //
-        /*|*/      void __yes_resize            () { move           =    true;   }                            //
-        /*|*/      void __yes_collapse          () { resize         =    true;   }                            //
-        /*|*/      void __yes_close             () { collapse       =    true;   }                            //
-        /*|*/      void __yes_nav               () { close          =    true;   }                            //
-        /*|*/      void __yes_background        () { nav            =    true;   }                            //
-        /*|*/      void __yes_bring_to_front    () { background     =    true;   }                            //
-        /*|*/      void __yes_docking           () { bring_to_front =    true;   }                            //
+        /*|*/      void __yes_titlebar          () { titlebar       =    false; }                             //
+        /*|*/      void __yes_scrollbar         () { scrollbar      =    false; }                             //
+        /*|*/      void __yes_menu              () { menu           =    false; }                             //
+        /*|*/      void __yes_move              () { move           =    false; }                             //
+        /*|*/      void __yes_resize            () { resize         =    false; }                             //
+        /*|*/      void __yes_collapse          () { collapse       =    false; }                             //
+        /*|*/      void __yes_close             () { close          =    false; }                             //
+        /*|*/      void __yes_nav               () { nav            =    false; }                             //
+        /*|*/      void __yes_background        () { background     =    false; }                             //
+        /*|*/      void __yes_bring_to_front    () { bring_to_front =    false; }                             //
+        /*|*/      void __yes_docking           () { docking        =    false; }                             //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         /*! ================================================================================================= */
     private:                                                                                                  //
@@ -139,19 +140,21 @@ namespace zenith                                                                
         GLFWwindow* __window__;                                                                               //
         const char* title;                                                                                    //
                                                                                                               //
-        bool titlebar;                                                                                        //
-        bool scrollbar;                                                                                       //
-        bool menu;                                                                                            //
-        bool move;                                                                                            //
-        bool resize;                                                                                          //
-        bool collapse;                                                                                        //
-        bool close;                                                                                           //
-        bool nav;                                                                                             //
-        bool background;                                                                                      //
-        bool bring_to_front;                                                                                  //
-        bool docking;                                                                                         //
+        bool titlebar                                               = false;                                  //
+        bool scrollbar                                              = false;                                  //
+        bool menu                                                   = false;                                  //
+        bool move                                                   = false;                                  //
+        bool resize                                                 = false;                                  //
+        bool collapse                                               = false;                                  //
+        bool close                                                  = false;                                  //
+        bool nav                                                    = false;                                  //
+        bool background                                             = false;                                  //
+        bool bring_to_front                                         = false;                                  //
+        bool docking                                                = false;                                  //
     };                                                                                                        //
                                                                                                               //
 }                                                                                                             //
                                                                                                               //
 #endif //ZENITH_COMPONENT_H                                                                                   //
+                                                                                                              //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
