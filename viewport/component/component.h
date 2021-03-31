@@ -34,19 +34,19 @@
 using namespace std;                                                                                          //
                                                                                                               //
 typedef unsigned int menu_type;                                                                               //
-typedef void (*func_button_pressed)(); // 按钮按下选项的时候回调函数                                               //
+typedef void (*func_button_pressed)(); // pressd button callback                                              //
                                                                                                               //
 namespace zenith                                                                                              //
 {                                                                                                             //
                                                                                                               //
     /*! ===================================================================================================== */
-    /*! 所有组件父类 */                                                                                         //
+    /*! all component for father class */                                                                     //
     class component                                                                                           //
     {                                                                                                         //
     public:                                                                                                   //
         bool get_should_be_render();                                                                          //
-        void set_should_be_render(bool render);  // 是否渲染该组件，默认为true                                    //
-        virtual void vrender() = 0;              // 渲染                                                       //
+        void set_should_be_render(bool render);  // is render this commponet，default true.                   //
+        virtual void vrender() = 0;              // render                                                    //
         void set_comps_name(const char* name);                                                                //
         const char* get_comps_name();                                                                         //
                                                                                                               //
