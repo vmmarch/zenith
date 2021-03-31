@@ -97,7 +97,7 @@ protected:
     const char *glsl_version;
     bool show_demo_window;
     bool show_another_window;
-    void setup_glfw();
-    ImGuiIO &setup_imgui();
+    void SETUP_GLFW();
+    ImGuiIO &SETUP_IMGUI();
 };
 

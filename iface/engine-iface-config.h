@@ -32,7 +32,8 @@
 
 #include "viewport.h"
 
-void custom_iface(zenith::comps_cntr* _comps);
-void render_iface(state_manager *state, zenith::comps_cntr* _comps);
+void iface(zenith::comps_cntr*);
+void glfw(GLFWwindow*);
+void render(state_manager *state, zenith::comps_cntr*);
 
 #endif // ===> ZENITH_ENGINE_IFACE_CONFIG_H <===

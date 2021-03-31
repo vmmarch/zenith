@@ -47,7 +47,7 @@ namespace zenith
     int Application::StartEngine()
     {
         // 展示viewport
-        this->viewport->Display(custom_iface, render_iface);
+        this->viewport->Display(glfw, iface, render);
 
         return EXIT_SUCCESS;
     }

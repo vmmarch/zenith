@@ -23,7 +23,13 @@
  */
 #include "engine-iface-config.h"
 
-void custom_iface(zenith::comps_cntr *_comps)
+void glfw(GLFWwindow *window)
+{
+    glfwHideWindow(window);
+    glfwMaximizeWindow(window);
+}
+
+void iface(zenith::comps_cntr *_comps)
 {
 
     /*! ============================================================================ */
@@ -61,7 +67,7 @@ void custom_iface(zenith::comps_cntr *_comps)
     _comps->add_menu_comps(menu);
 }
 
-void render_iface(state_manager *state, zenith::comps_cntr *_comps)
+void render(state_manager *state, zenith::comps_cntr *_comps)
 {
     state->render(_comps->get_menu_comps());
 }

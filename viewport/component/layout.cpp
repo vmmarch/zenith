@@ -29,7 +29,7 @@ ImGUILayout::ImGUILayout(int width, int height)
     this->height = height;
 }
 
-void ImGUILayout::setup_glfw()
+void ImGUILayout::SETUP_GLFW()
 {
     // 窗口配置
     glfwSetErrorCallback(glfw_error_callback);
@@ -86,7 +86,7 @@ void ImGUILayout::setup_glfw()
     }
 }
 
-ImGuiIO& ImGUILayout::setup_imgui()
+ImGuiIO& ImGUILayout::SETUP_IMGUI()
 {
     /*! /////////////////////////////////////////////////////////////////////////////// */
     /*! setup imgui */

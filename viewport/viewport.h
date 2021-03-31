@@ -28,6 +28,7 @@
 class state_manager;
 
 typedef void (*func_custom_iface)(zenith::comps_cntr*);
+typedef void (*func_custom_glfw)(GLFWwindow*);
 typedef void (*func_render_iface)(state_manager*, zenith::comps_cntr*);
 
 /*!
@@ -38,7 +39,7 @@ class __viewport__ : public ImGUILayout
 public:
     __viewport__(int, int);
     ~__viewport__();
-    void Display(func_custom_iface, func_render_iface);
+    void Display(func_custom_glfw, func_custom_iface, func_render_iface);
     /*! //////////////////////////////////////////////////////////////// */
     // get/set
 
