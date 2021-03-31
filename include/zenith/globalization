@@ -1,11 +1,10 @@
-//
 // Created by aorus on 2021/3/28.
 // 国际化
 //
 
 #pragma once
 
-#define ENGINE_NAME "zenith3D"
+#define ENGINE_NAME "ZENITH3D ENGINE - "
 
 #define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
 
@@ -28,6 +27,7 @@
 
 // ERROR MESSAGE
 #define STARTUP_ERROR ENGINE_NAME "启动失败"
+#define APPLY_FONT_ERROR ENGINE_NAME "应用字体失败：未获取到字体信息【%s】" // %s font name
 
 ///////////////////////////////////////////////////////////
 #else

@@ -9,9 +9,8 @@
 
 class state_manager;
 
-typedef void (*func_font_config)(ImFontAtlas*);
-typedef void (*func_custom_iface)(comps_container*);
-typedef void (*func_render_iface)(state_manager*, comps_container*);
+typedef void (*func_custom_iface)(zenith::comps_cntr*);
+typedef void (*func_render_iface)(state_manager*, zenith::comps_cntr*);
 
 /*!
  * 模型以及场景展示区
@@ -21,17 +20,17 @@ class __viewport__ : public ImGUILayout
 public:
     __viewport__(int, int);
     ~__viewport__();
-    void Display(func_custom_iface, func_render_iface, func_font_config);
+    void Display(func_custom_iface, func_render_iface);
     /*! //////////////////////////////////////////////////////////////// */
     // get/set
 
     GLFWwindow *get_window();
     state_manager *get_state_manager();
-    comps_container *get_component_container();
+    zenith::comps_cntr *get_component_container();
 
 private:
-    state_manager *vsm;
-    comps_container* _comps = new comps_container(); // 组件容器列表
+    state_manager *state_m;
+    zenith::comps_cntr* comps = new zenith::comps_cntr(); // 组件容器列表
 
     /*! //////////////////////////////////////////////////////////////// */
     // config

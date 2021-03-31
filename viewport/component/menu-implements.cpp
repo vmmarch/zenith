@@ -25,15 +25,18 @@ void _render_item(vector<zenith::menu_node *> children)
             } else
             {
                 const char* shortname = iter->get_shortname();
+                // 当前菜单选项是否存在shortname
                 if(shortname == NULL)
                 {
-                    if (ImGui::MenuItem(iter->get_name()))
+                    if (ImGui::MenuItem(iter->get_name())) // 渲染没有shortname的选项
                     { iter->execute(); }
                 }else
                 {
-                    if (ImGui::MenuItem(iter->get_name(), shortname))
+                    if (ImGui::MenuItem(iter->get_name(), shortname)) // 渲染带有shortname的选项
                     { iter->execute(); }
                 }
+
+                // 如果它存在子选项的话就继续去渲染当前菜单子集
                 _render_item(iter->get_children());
             }
         }
@@ -87,9 +90,7 @@ namespace zenith
         if(__pressed_func != NULL)
             node->button_press_func = __pressed_func;
 
-        if(__shortname != NULL)
-            node->set_shortname(__shortname);
-
+        node->set_shortname(__shortname);
         this->children.push_back(node);
         return node;
     }
@@ -103,7 +104,7 @@ namespace zenith
         }
     }
 
-    const char *menu_node::get_name()
+    const char *menu_node::get_name() const
     {
         return this->name;
     }
@@ -134,7 +135,7 @@ namespace zenith
         this->shortname = __shortname;
     }
 
-    const char *menu_node::get_shortname()
+    const char *menu_node::get_shortname() const
     {
         return this->shortname;
     }

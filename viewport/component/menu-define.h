@@ -62,18 +62,19 @@ namespace zenith
         menu_node *add_item_children(const char *name, func_button_pressed= NULL);
         menu_node *add_item_children(const char *name, const char*, func_button_pressed= NULL);
         void vrender();
-        const char *get_name();
+        const char *get_name() const;
         void set_name(const char *);
         vector<menu_node *> get_children();
         bool is_menu(); // 判断当前节点类型是否是为 NODE_TYPE_MENU
         void execute(); // 执行 pressed_func 函数指针
-        void set_shortname(const char *);
-        const char *get_shortname();
+        void set_shortname(const char *string);
+
+        const char *get_shortname() const;
 
     private:
         func_button_pressed button_press_func = NULL;
         const char *name;
-        const char *shortname = NULL;
+        const char *shortname;
         menu_type type;
         vector<menu_node *> children;
     };

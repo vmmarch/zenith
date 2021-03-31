@@ -21,7 +21,7 @@ add_subdirectory(tool tool_binary_dir)
 add_subdirectory(iface iface_binary_dir)
 
 ################################################
-### ÅäÖÃÔ´ÂëÄ¿Â¼ SOURCEALL_DIR
+### é…ç½®æºç ç›®å½• SOURCEALL_DIR
 ################################################
 aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 

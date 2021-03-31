@@ -16,20 +16,20 @@ __viewport__::__viewport__(int width, int height) : ImGUILayout(width, height)
 
 __viewport__::~__viewport__()
 {
-    delete this->_comps;
+    delete this->comps;
 }
 
 state_manager *__viewport__::get_state_manager()
 {
-    if(vsm == NULL)
-        this->vsm = new state_manager();
+    if(state_m == NULL)
+        this->state_m = new state_manager();
 
-    return this->vsm;
+    return this->state_m;
 }
 
-comps_container *__viewport__::get_component_container()
+zenith::comps_cntr *__viewport__::get_component_container()
 {
-    return this->_comps;
+    return this->comps;
 }
 
 GLFWwindow* __viewport__::get_window()
@@ -41,16 +41,14 @@ GLFWwindow* __viewport__::get_window()
 }
 
 void __viewport__::Display(func_custom_iface __custom_iface__,
-                           func_render_iface __render_iface__,
-                           func_font_config  __font_iface__)
+                           func_render_iface __render_iface__)
 {
     ImGuiIO &io = setup_imgui();
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    if(__font_iface__ != NULL)
-        __font_iface__(io.Fonts);
+    comps->imGuiIO = &io;
 
-    __custom_iface__(get_component_container());
+    __custom_iface__(this->comps);
 
     /*! /////////////////////////////////////////////////////////////////////////////// */
     /*! main loop */
@@ -69,7 +67,7 @@ void __viewport__::Display(func_custom_iface __custom_iface__,
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        __render_iface__(this->get_state_manager(), _comps);
+        __render_iface__(this->state_m, comps);
 
         // Rendering
         ImGui::Render();
