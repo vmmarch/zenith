@@ -5,12 +5,9 @@ namespace zenith
     Application::Application(int w, int h)
     {
         if (w == -1 && h == -1)
-        {
             this->viewport = new __viewport__(600, 600);
-        } else
-        {
+        else
             this->viewport = new __viewport__(w, h);
-        }
     }
 
     Application::~Application()

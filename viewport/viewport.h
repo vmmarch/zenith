@@ -22,18 +22,21 @@ public:
     __viewport__(int, int);
     ~__viewport__();
     void Display(func_custom_iface, func_render_iface, func_font_config);
-    ////////////////////////////////////////////////////////////////
+    /*! //////////////////////////////////////////////////////////////// */
     // get/set
 
     GLFWwindow *get_window();
     state_manager *get_state_manager();
     comps_container *get_component_container();
 
-    ////////////////////////////////////////////////////////////////
-
 private:
     state_manager *vsm;
     comps_container* _comps = new comps_container(); // 组件容器列表
+
+    /*! //////////////////////////////////////////////////////////////// */
+    // config
+    float c_font_size = 18.0f; // font size
+
 };
 
 /**
