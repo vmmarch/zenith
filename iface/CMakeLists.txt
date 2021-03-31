@@ -10,7 +10,6 @@ add_definitions(-DZENITH_PLATFORM_WINDOWS -DIN_CHINA)
 
 add_library(
 		${PROJECT_NAME} SHARED
-		engine-iface-config.h
 		engine-iface-config.cpp
 )
 
