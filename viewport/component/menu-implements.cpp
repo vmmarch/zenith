@@ -21,7 +21,7 @@
 /*!
  * @author orvals
  */
-#include "menu-define.h"
+#include "component.h"
 
 void _render_menu(vector<zenith::menu_node *> children)
 {
@@ -66,6 +66,12 @@ namespace zenith
 {
     /*! /////////////////////////////////////////////////////////////////////// */
     /*! class: menu */
+
+    menu::menu(const char* name)
+    {
+        this->comps_name = name;
+    }
+
     menu_node *menu::add_menu_node(menu_node *node)
     {
         this->children.push_back(node);

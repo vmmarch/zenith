@@ -21,11 +21,12 @@
 /*!
  * @author orvals
  */
-#include "component/zenith-component.h"
+#include "component/component.h"
 #include "zenith-font.h"
 #include <map>
 
 typedef map<const char *, zenith::font*> fonts_map;
+typedef map<const char *, zenith::component*> comps_map;
 
 namespace zenith
 {
@@ -38,15 +39,19 @@ namespace zenith
         {
             delete menu;
         }
-        void add_menu_comps(zenith::menu *);
-        component *get_menu_comps();
+        void add_comps(zenith::component*);
         // void add_font(font);
         font *create_font(const char*);
         font *create_font(const char*, const ImWchar*);
         font *get_font(const char *); // 获取字体，根据name
         void apply_font(const char*);
+        zenith::component* get_comps(const char*);
+        void set_GLFWwindow(GLFWwindow*);
+        GLFWwindow *get_GLFWwindow();
     private:
         zenith::menu *menu = NULL;
         fonts_map fonts;
+        comps_map comps;
+        GLFWwindow *__window__;
     };
 }

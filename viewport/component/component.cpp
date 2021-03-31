@@ -23,12 +23,26 @@
  */
 #include "component.h"
 
-bool component::get_should_be_render()
+namespace zenith
 {
-    return this->should_be_render;
-}
+    bool component::get_should_be_render()
+    {
+        return this->should_be_render;
+    }
 
-void component::set_should_be_render(bool render)
-{
-    this->should_be_render = render;
+    void component::set_should_be_render(bool render)
+    {
+        this->should_be_render = render;
+    }
+
+    void component::set_comps_name(const char *name)
+    {
+        this->comps_name = name;
+    }
+
+    const char* component::get_comps_name()
+    {
+        return this->comps_name;
+    }
+
 }

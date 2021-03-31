@@ -23,6 +23,10 @@
  */
 #include "engine-iface-config.h"
 
+/*! =================================================>> */
+/*! */
+#define COMPS_MENU_BAR "#menu_bar"
+
 void glfw(GLFWwindow *window)
 {
     glfwHideWindow(window);
@@ -46,7 +50,7 @@ void iface(zenith::comps_cntr *_comps)
 
     /*! ============================================================================ */
     /*! menu config */
-    auto menu = new zenith::menu();
+    auto menu = new zenith::menu(COMPS_MENU_BAR);
     auto __FILE_OPT__ = new zenith::menu_node(GUI_TEXT_FILE);
     menu->add_menu_node(__FILE_OPT__);
 
@@ -64,10 +68,14 @@ void iface(zenith::comps_cntr *_comps)
     __FILE_OPT__->add_item_children(GUI_TEXT_RESTART);
     __FILE_OPT__->add_item_children(GUI_TEXT_EXIT);
 
-    _comps->add_menu_comps(menu);
+    _comps->add_comps(menu);
+
+    auto window = new zenith::window("test");
+    window->set_GLFWwindow(_comps->get_GLFWwindow());
+    _comps->add_comps(window);
 }
 
-void render(state_manager *state, zenith::comps_cntr *_comps)
+void render(__viewport__ *viewport, zenith::comps_cntr *_comps)
 {
-    state->render(_comps->get_menu_comps());
+    viewport->render("test");
 }

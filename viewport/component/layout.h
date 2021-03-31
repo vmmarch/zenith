@@ -81,7 +81,7 @@ static void glfw_error_callback(int error, const char *description)
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include <zenith/zenith.h>
-#include <zenith/globalization>
+#include <zenith/globalization.h>
 
 /*!
  * ImGui布局管理

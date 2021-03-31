@@ -25,9 +25,9 @@
 
 /*! /////////////////////////////////////////////////////////////////////// */
 /*! class: viewport_state_manager */
-void state_manager::render(component *_comp)
+void __viewport__::render(const char* name)
 {
-    _comp->vrender();
+    this->comps->get_comps(name)->vrender();
 }
 
 /*! /////////////////////////////////////////////////////////////////////// */
@@ -35,6 +35,7 @@ void state_manager::render(component *_comp)
 __viewport__::__viewport__(int width, int height) : ImGUILayout(width, height)
 {
     SETUP_GLFW();
+    this->comps->set_GLFWwindow(kWindowHandle);
 }
 
 __viewport__::~__viewport__()
@@ -42,20 +43,12 @@ __viewport__::~__viewport__()
     delete this->comps;
 }
 
-state_manager *__viewport__::get_state_manager()
-{
-    if (state_m == NULL)
-        this->state_m = new state_manager();
-
-    return this->state_m;
-}
-
 zenith::comps_cntr *__viewport__::get_component_container()
 {
     return this->comps;
 }
 
-GLFWwindow *__viewport__::get_window()
+GLFWwindow *__viewport__::get_GLFWwindow()
 {
     if (this->kWindowHandle == nullptr)
         ZENITH_LOGGER_ERROR("this->kWindowHandle = %s", this->kWindowHandle);
@@ -92,7 +85,7 @@ void __viewport__::Display(func_custom_glfw  __CUSTOM_GLFW__,
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        __RENDER_IFACE__(this->state_m, comps);
+        __RENDER_IFACE__(this, comps);
 
         // Rendering
         ImGui::Render();

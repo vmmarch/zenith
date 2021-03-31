@@ -25,14 +25,9 @@
 
 namespace zenith
 {
-    void comps_cntr::add_menu_comps(zenith::menu *__menu)
+    void comps_cntr::add_comps(zenith::component *__comps)
     {
-        this->menu = __menu;
-    }
-
-    component *comps_cntr::get_menu_comps()
-    {
-        return this->menu;
+        this->comps[__comps->get_comps_name()] = __comps;
     }
 
 //    void comps_cntr::add_font(font font)
@@ -80,12 +75,27 @@ namespace zenith
         if (cfg == NULL)
         {
             imGuiIO->Fonts->AddFontFromFileTTF(__font->font_source_path, __font->size_pixels, NULL,
-                                              __font->get_im_wchar());
+                                               __font->get_im_wchar());
         } else
         {
             imGuiIO->Fonts->AddFontFromFileTTF(__font->font_source_path, __font->size_pixels, cfg,
                                                __font->get_im_wchar());
         }
+    }
+
+    zenith::component* comps_cntr::get_comps(const char *name)
+    {
+        return this->comps.at(name);
+    }
+
+    void comps_cntr::set_GLFWwindow(GLFWwindow *_window)
+    {
+        this->__window__ = _window;
+    }
+
+    GLFWwindow* comps_cntr::get_GLFWwindow()
+    {
+        return this->__window__;
     }
 }
 
