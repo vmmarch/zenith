@@ -30,7 +30,6 @@
 void glfw(GLFWwindow *window)
 {
     glfwHideWindow(window);
-    glfwMaximizeWindow(window);
 }
 
 void iface(zenith::comps_cntr *_comps)
@@ -72,10 +71,12 @@ void iface(zenith::comps_cntr *_comps)
 
     auto window = new zenith::window("test");
     window->set_GLFWwindow(_comps->get_GLFWwindow());
+    window->__flag_n_resize();
     _comps->add_comps(window);
 }
 
 void render(__viewport__ *viewport, zenith::comps_cntr *_comps)
 {
-    viewport->render("test");
+//     ImGui::ShowDemoWindow();
+     viewport->render("test");
 }

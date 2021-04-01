@@ -25,7 +25,8 @@
 
 /*! /////////////////////////////////////////////////////////////////////// */
 /*! class: viewport_state_manager */
-void __viewport__::render(const char* name)
+void __viewport__::
+render(const char* name)
 {
     this->comps->get_comps(name)->vrender();
 }

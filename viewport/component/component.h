@@ -110,29 +110,29 @@ namespace zenith                                                                
         /*! ================================================================================================= */
         /*! window config */                                                                                  //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*|*/      void __no_titlebar           () { titlebar       =    true;  }                             //
-        /*|*/      void __no_scrollbar          () { scrollbar      =    true;  }                             //
-        /*|*/      void __no_menu               () { menu           =    true;  }                             //
-        /*|*/      void __no_move               () { move           =    true;  }                             //
-        /*|*/      void __no_resize             () { resize         =    true;  }                             //
-        /*|*/      void __no_collapse           () { collapse       =    true;  }                             //
-        /*|*/      void __no_close              () { close          =    true;  }                             //
-        /*|*/      void __no_nav                () { nav            =    true;  }                             //
-        /*|*/      void __no_background         () { background     =    true;  }                             //
-        /*|*/      void __no_bring_to_front     () { bring_to_front =    true;  }                             //
-        /*|*/      void __no_docking            () { docking        =    true;  }                             //
+        /*|*/      void __flag_n_titlebar           () { titlebar       =    true;  }                         //
+        /*|*/      void __flag_n_scrollbar          () { scrollbar      =    true;  }                         //
+        /*|*/      void __flag_n_menu               () { menu           =    true;  }                         //
+        /*|*/      void __flag_n_move               () { move           =    true;  }                         //
+        /*|*/      void __flag_n_resize             () { resize         =    true;  }                         //
+        /*|*/      void __flag_n_collapse           () { collapse       =    true;  }                         //
+        /*|*/      void __flag_n_close              () { close          =    true;  }                         //
+        /*|*/      void __flag_n_nav                () { nav            =    true;  }                         //
+        /*|*/      void __flag_n_background         () { background     =    true;  }                         //
+        /*|*/      void __flag_n_bring_to_front     () { bring_to_front =    true;  }                         //
+        /*|*/      void __flag_n_docking            () { docking        =    true;  }                         //
         /*|*/                                                                                                 //
-        /*|*/      void __yes_titlebar          () { titlebar       =    false; }                             //
-        /*|*/      void __yes_scrollbar         () { scrollbar      =    false; }                             //
-        /*|*/      void __yes_menu              () { menu           =    false; }                             //
-        /*|*/      void __yes_move              () { move           =    false; }                             //
-        /*|*/      void __yes_resize            () { resize         =    false; }                             //
-        /*|*/      void __yes_collapse          () { collapse       =    false; }                             //
-        /*|*/      void __yes_close             () { close          =    false; }                             //
-        /*|*/      void __yes_nav               () { nav            =    false; }                             //
-        /*|*/      void __yes_background        () { background     =    false; }                             //
-        /*|*/      void __yes_bring_to_front    () { bring_to_front =    false; }                             //
-        /*|*/      void __yes_docking           () { docking        =    false; }                             //
+        /*|*/      void __flag_y_titlebar          () { titlebar       =    false; }                          //
+        /*|*/      void __flag_y_scrollbar         () { scrollbar      =    false; }                          //
+        /*|*/      void __flag_y_menu              () { menu           =    false; }                          //
+        /*|*/      void __flag_y_move              () { move           =    false; }                          //
+        /*|*/      void __flag_y_resize            () { resize         =    false; }                          //
+        /*|*/      void __flag_y_collapse          () { collapse       =    false; }                          //
+        /*|*/      void __flag_y_close             () { close          =    false; }                          //
+        /*|*/      void __flag_y_nav               () { nav            =    false; }                          //
+        /*|*/      void __flag_y_background        () { background     =    false; }                          //
+        /*|*/      void __flag_y_bring_to_front    () { bring_to_front =    false; }                          //
+        /*|*/      void __flag_y_docking           () { docking        =    false; }                          //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         /*! ================================================================================================= */
     private:                                                                                                  //
