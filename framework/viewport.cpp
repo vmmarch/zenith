@@ -25,7 +25,7 @@
 
 /*! /////////////////////////////////////////////////////////////////////// */
 /*! class: viewport_state_manager */
-void __viewport__::
+void __framework__::
 render(const char* name)
 {
     this->comps->get_comps(name)->vrender();
@@ -33,23 +33,23 @@ render(const char* name)
 
 /*! /////////////////////////////////////////////////////////////////////// */
 /*! class: viewport */
-__viewport__::__viewport__(int width, int height) : ImGUILayout(width, height)
+__framework__::__framework__(int width, int height) : ImGUILayout(width, height)
 {
     SETUP_GLFW();
     this->comps->set_GLFWwindow(kWindowHandle);
 }
 
-__viewport__::~__viewport__()
+__framework__::~__framework__()
 {
     delete this->comps;
 }
 
-zenith::comps_cntr *__viewport__::get_component_container()
+zenith::comps_cntr *__framework__::get_component_container()
 {
     return this->comps;
 }
 
-GLFWwindow *__viewport__::get_GLFWwindow()
+GLFWwindow *__framework__::get_GLFWwindow()
 {
     if (this->kWindowHandle == nullptr)
         ZENITH_LOGGER_ERROR("this->kWindowHandle = %s", this->kWindowHandle);
@@ -57,7 +57,7 @@ GLFWwindow *__viewport__::get_GLFWwindow()
     return this->kWindowHandle;
 }
 
-void __viewport__::Display(func_custom_glfw  __CUSTOM_GLFW__,
+void __framework__::Display(func_custom_glfw  __CUSTOM_GLFW__,
                            func_custom_iface __CUSTOM_IFACE__,
                            func_render_iface __RENDER_IFACE__)
 {

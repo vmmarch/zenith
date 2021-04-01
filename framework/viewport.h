@@ -25,20 +25,20 @@
 
 #include "component-container.h"
 
-class __viewport__;
+class __framework__;
 
 typedef void (*func_custom_iface)(zenith::comps_cntr*);
 typedef void (*func_custom_glfw)(GLFWwindow*);
-typedef void (*func_render_iface)(__viewport__*, zenith::comps_cntr*);
+typedef void (*func_render_iface)(__framework__*, zenith::comps_cntr*);
 
 /*!
  * 模型以及场景展示区
  */
-class __viewport__ : public ImGUILayout
+class __framework__ : public ImGUILayout
 {
 public:
-    __viewport__(int, int);
-    ~__viewport__();
+    __framework__(int, int);
+    ~__framework__();
     void Display(func_custom_glfw, func_custom_iface, func_render_iface);
     void render(const char *__comps_name);
 

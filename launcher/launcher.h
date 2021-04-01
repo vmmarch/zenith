@@ -40,7 +40,7 @@ namespace zenith
         void TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN); // shutdown engine.
     private:
         bool is_stop = false; // judge engine is close.
-        __viewport__ *viewport;
+        __framework__ *framework;
     };
 
     typedef Application APPLICATION;

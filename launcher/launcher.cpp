@@ -28,14 +28,14 @@ namespace zenith
     Application::Application(int w, int h)
     {
         if (w == -1 && h == -1)
-            this->viewport = new __viewport__(600, 600);
+            this->framework = new __framework__(600, 600);
         else
-            this->viewport = new __viewport__(w, h);
+            this->framework = new __framework__(w, h);
     }
 
     Application::~Application()
     {
-        delete this->viewport;
+        delete this->framework;
     }
 
     void Application::TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN func)
@@ -47,7 +47,7 @@ namespace zenith
     int Application::StartEngine()
     {
         // 展示viewport
-        this->viewport->Display(glfw, iface, render);
+        this->framework->Display(glfw, iface, render);
 
         return EXIT_SUCCESS;
     }

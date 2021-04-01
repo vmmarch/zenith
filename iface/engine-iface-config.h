@@ -34,6 +34,6 @@
 
 void iface(zenith::comps_cntr*);
 void glfw(GLFWwindow*);
-void render(__viewport__*, zenith::comps_cntr*);
+void render(__framework__*, zenith::comps_cntr*);
 
 #endif // ===> ZENITH_ENGINE_IFACE_CONFIG_H <===

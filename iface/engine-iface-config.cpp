@@ -75,7 +75,7 @@ void iface(zenith::comps_cntr *_comps)
     _comps->add_comps(window);
 }
 
-void render(__viewport__ *viewport, zenith::comps_cntr *_comps)
+void render(__framework__ *viewport, zenith::comps_cntr *_comps)
 {
 //     ImGui::ShowDemoWindow();
      viewport->render("test");
