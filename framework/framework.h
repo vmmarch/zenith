@@ -16,24 +16,44 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/31. <=== */
+/*! ===> Creates on 2021/3/27. <=== */
 
 /*!
- * 这个头文件作用在launcher.cpp, 用于配置视窗的布局以及各个组件等初始化操作。
- * 总体来说它可以理解为一个配置文件。
- *
- * This header file used in launcher.cpp. launcher.cpp in launcher dll. the engine-iface-config.h
- * is a config file. it is responsible for the layout and initialization of the components.
- *
  * @author orvals
  */
-#ifndef ZENITH_ENGINE_IFACE_CONFIG_H
-#define ZENITH_ENGINE_IFACE_CONFIG_H
+#pragma once
 
-#include "viewport.h"
+#include "imgui-env.h"
+#include <zenith/zenith.h>
+#include <zenith/globalization.h>
 
-void iface(zenith::comps_cntr*);
-void glfw(GLFWwindow*);
-void render(__framework__*, zenith::comps_cntr*);
+class framework;
 
-#endif // ===> ZENITH_ENGINE_IFACE_CONFIG_H <===
+typedef void (*other_render)();
+
+class framework
+{
+public:
+    framework(int, int);
+    ~framework();
+    void render(other_render);
+
+private:
+    /*! //////////////////////////////////////////////////////////////// */
+    /*! variable */
+    int width, height;
+    // config
+    GLFWwindow* window{};
+    bool p_open{};
+    float c_font_size = 18.0f; // font size
+    zenith_cc glslVersion;
+
+    bool show_demo_window;
+    bool show_another_window;
+
+    /*! //////////////////////////////////////////////////////////////// */
+    /*! method */
+    ImGuiIO& setupImGui();
+    void setupGLFW();
+
+};

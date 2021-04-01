@@ -16,12 +16,13 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/29. <=== */
+/*! ===> Creates on 2021/4/1. <=== */
 
 /*!
  * @author orvals
  */
-#pragma once
+#ifndef ZENITH_IMGUI_ENV_H
+#define ZENITH_IMGUI_ENV_H
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dear ImGui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
@@ -80,24 +81,4 @@ static void glfw_error_callback(int error, const char *description)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#include <zenith/zenith.h>
-#include <zenith/globalization.h>
-
-/*!
- * ImGui布局管理
- */
-class ImGUILayout
-{
-public:
-    ImGUILayout(int, int);
-
-protected:
-    int width, height;
-    GLFWwindow *kWindowHandle;
-    const char *glsl_version;
-    bool show_demo_window;
-    bool show_another_window;
-    void SETUP_GLFW();
-    ImGuiIO &SETUP_IMGUI();
-};
-
+#endif // ===> ZENITH_IMGUI_ENV_H <===

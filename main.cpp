@@ -1,15 +1,14 @@
-#include "launcher.h"
+#include "framework.h"
 
-namespace zenith
+void imgui_envconf()
 {
-    APPLICATION *CreateApplication(int w, int h)
-    {
-        return new Application(w, h);
-    }
+
 }
 
 int main(int argc, char **argv)
 {
-     auto app = zenith::CreateApplication(1200, 800);
-     return app->StartEngine();
+     auto app = new framework(1000, 800);
+     app->render(imgui_envconf);
+
+     return 0;
 }

@@ -16,39 +16,30 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/25. <=== */
+/*! ===> Creates on 2021/3/31. <=== */
 
 /*!
  * @author orvals
  */
-#include "launcher.h"
+#ifndef ZENITH_FONT_H
+#define ZENITH_FONT_H
 
 namespace zenith
 {
-    Application::Application(int w, int h)
+    struct font
     {
-        if (w == -1 && h == -1)
-            this->framework = new __framework__(600, 600);
-        else
-            this->framework = new __framework__(w, h);
-    }
+        ImFontConfig* cfg;
+        const char *font_source_path;
+        float size_pixels;
 
-    Application::~Application()
-    {
-        delete this->framework;
-    }
+        void set_im_wchar(const ImWchar *imwchar) { this->im_wchar = imwchar; }
+        const char *get_name() { return name; }
+        const ImWchar *get_im_wchar() { return im_wchar; }
 
-    void Application::TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN func)
-    {
-        func();
-        is_stop = true;
-    }
-
-    int Application::StartEngine()
-    {
-        // 展示viewport
-        this->framework->Display(glfw, iface, render);
-
-        return EXIT_SUCCESS;
-    }
+    private:
+        const char* name;
+        const ImWchar *im_wchar;
+    };
 }
+
+#endif //ZENITH_FONT_H

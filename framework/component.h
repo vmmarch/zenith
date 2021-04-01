@@ -16,34 +16,12 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/25. <=== */
+/*! ===> Creates on 2021/4/1. <=== */
 
 /*!
  * @author orvals
  */
-#pragma once
+#ifndef ZENITH_COMPONENT_H
+#define ZENITH_COMPONENT_H
 
-#include <zenith/zenith.h>
-#include "viewport.h"
-#include "engine-iface-config.h"
-
-typedef void (*CALLBACK_BEFORE_ENGINE_SHUTDOWN)(); // shutdown engine before callback process. 
-
-namespace zenith
-{
-    class Application
-    {
-    public:
-        Application(int= -1, int= -1);
-        ~Application();
-        int StartEngine();
-        void TurnOffEngine(CALLBACK_BEFORE_ENGINE_SHUTDOWN); // shutdown engine.
-    private:
-        bool is_stop = false; // judge engine is close.
-        __framework__ *framework;
-    };
-
-    typedef Application APPLICATION;
-
-    APPLICATION *CreateApplication(int = -1, int = -1); // create engine application.
-}
+#endif // ===> ZENITH_COMPONENT_H <===

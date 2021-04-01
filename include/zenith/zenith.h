@@ -26,7 +26,7 @@
 #include <iostream>
 #include <cstring>
 
-typedef unsigned char zenith_uc;
+typedef const char* zenith_cc;
 
 extern void INFO(std::string __fmt, ...);
 extern void ERROR(std::string __fmt, ...);

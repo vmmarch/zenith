@@ -16,20 +16,26 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/29. <=== */
+/*! ===> Creates on 2021/3/27. <=== */
 
 /*!
  * @author orvals
  */
-#include "layout.h"
+#include "framework.h"
 
-ImGUILayout::ImGUILayout(int width, int height)
+/*! /////////////////////////////////////////////////////////////////////// */
+/*! class: framework */
+framework::framework(int width, int height)
 {
     this->width = width;
     this->height = height;
 }
 
-void ImGUILayout::SETUP_GLFW()
+framework::~framework()
+{
+}
+
+void framework::setupGLFW()
 {
     // 窗口配置
     glfwSetErrorCallback(glfw_error_callback);
@@ -46,7 +52,7 @@ void ImGUILayout::SETUP_GLFW()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
 #else
     // GL 3.0 + GLSL 130
-    glsl_version = "#version 130";
+    glslVersion = "#version 130";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
@@ -54,11 +60,11 @@ void ImGUILayout::SETUP_GLFW()
 #endif
 
     // Create window with graphics context
-    this->kWindowHandle = glfwCreateWindow(this->width, this->height, "Zenith 3D", NULL, NULL);
-    if (this->kWindowHandle == NULL)
+    this->window = glfwCreateWindow(this->width, this->height, "Zenith 3D", NULL, NULL);
+    if (this->window == NULL)
         ZENITH_FATAL_ERROR(STARTUP_ERROR);
 
-    glfwMakeContextCurrent(this->kWindowHandle);
+    glfwMakeContextCurrent(this->window);
     glfwSwapInterval(1); // Enable vsync
 
     // Initialize OpenGL loader
@@ -86,7 +92,7 @@ void ImGUILayout::SETUP_GLFW()
     }
 }
 
-ImGuiIO& ImGUILayout::SETUP_IMGUI()
+ImGuiIO& framework::setupImGui()
 {
     /*! /////////////////////////////////////////////////////////////////////////////// */
     /*! setup imgui */
@@ -116,8 +122,8 @@ ImGuiIO& ImGUILayout::SETUP_IMGUI()
     }
 
     // Setup Platform/Renderer backends
-    ImGui_ImplGlfw_InitForOpenGL(this->kWindowHandle, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGui_ImplGlfw_InitForOpenGL(this->window, true);
+    ImGui_ImplOpenGL3_Init(glslVersion);
 
     // Load Fonts
     // - If no fonts are loaded, dear imgui will use the default font. You can also load multiple fonts and use ImGui::PushFont()/PopFont() to select them.
@@ -142,4 +148,68 @@ ImGuiIO& ImGUILayout::SETUP_IMGUI()
     /*! /////////////////////////////////////////////////////////////////////////////// */
 
     return io;
+}
+
+void framework::render(other_render _render)
+{
+
+    // initialize glfw&imgui
+    setupGLFW();
+    ImGuiIO& io = setupImGui();
+
+    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+
+    /*! /////////////////////////////////////////////////////////////////////////////// */
+    /*! main loop */
+
+    while (!glfwWindowShouldClose(this->window))
+    {
+        // Poll and handle events (inputs, window resize, etc.)
+        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
+        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
+        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
+        // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+        glfwPollEvents();
+
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        _render();
+
+        // Rendering
+        ImGui::Render();
+        int display_w, display_h;
+        glfwGetFramebufferSize(this->window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
+                     clear_color.w);
+        glClear(GL_COLOR_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        // Update and Render additional Platform Windows.
+        // (Platform functions may change the current OpenGL context, so we save/restore it to make it easier to paste this code elsewhere.
+        //  For this specific demo app we could also call glfwMakeContextCurrent(window) directly)
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow *backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
+
+        glfwSwapBuffers(this->window);
+    }
+
+    /*! main loop */
+    /*! /////////////////////////////////////////////////////////////////////////////// */
+
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
 }
