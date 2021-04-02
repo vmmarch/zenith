@@ -24,44 +24,44 @@
 #include "zenith/zenith.h"
 #include <cstdarg>
 
-void INFO(std::string __fmt, ...)
+void INFO(std::string fmt, ...)
 {
     va_list  argument;
-    va_start(argument, __fmt);
-    __fmt = "[INFO] - " + __fmt + "\n";
-    printf(__fmt.c_str(), argument);
+    va_start(argument, fmt);
+    fmt = "[INFO] - " + fmt + "\n";
+    printf(fmt.c_str(), argument);
     va_end(argument);
 }
 
-void ERROR(std::string __fmt, ...)
+void ERROR(std::string fmt, ...)
 {
     va_list  argument;
-    va_start(argument, __fmt);
-    __fmt = "[ERROR] - " + __fmt + "\n";
-    printf(__fmt.c_str(), argument);
+    va_start(argument, fmt);
+    fmt = "[ERROR] - " + fmt + "\n";
+    printf(fmt.c_str(), argument);
     va_end(argument);
 }
 
-void ZENITH_LOGGER_INFO(std::string __fmt, ...)
+void ZENITH_INFO(std::string fmt, ...)
 {
     va_list  argument;
-    va_start(argument, __fmt);
-    INFO(__fmt, argument);
+    va_start(argument, fmt);
+    INFO(fmt, argument);
     va_end(argument);
 }
 
-void ZENITH_LOGGER_ERROR(std::string __fmt, ...)
+void ZENITH_LOGGER_ERROR(std::string fmt, ...)
 {
     va_list  argument;
-    va_start(argument, __fmt);
-    ERROR(__fmt, argument);
+    va_start(argument, fmt);
+    ERROR(fmt, argument);
     va_end(argument);
 }
 
-void ZENITH_FATAL_ERROR(std::string __fmt, ...)
+void ZENITH_FATAL_ERROR(std::string fmt, ...)
 {
     va_list  argument;
-    va_start(argument, __fmt);
-    ERROR(__fmt, argument);
+    va_start(argument, fmt);
+    ERROR(fmt, argument);
     va_end(argument);
 }

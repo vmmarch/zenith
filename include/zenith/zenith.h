@@ -23,21 +23,32 @@
  */
 #pragma once
 
+#include <memory>
 #include <iostream>
 #include <cstring>
 
-typedef const char* zenith_cc;
+typedef const char* def_v_cc;
+typedef unsigned char def_v_uc;
+typedef unsigned int def_v_ui;
 
-extern void INFO(std::string __fmt, ...);
-extern void ERROR(std::string __fmt, ...);
+template<typename T>
+using def_ptr_scope = std::unique_ptr<T> ;
 
-extern void ZENITH_LOGGER_INFO(std::string, ...);
+template<typename T, typename... Args>
+constexpr def_ptr_scope<T> CreateScope(Args&&... args)
+{
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
+
+extern void INFO(std::string fmt, ...);
+extern void ERROR(std::string fmt, ...);
+extern void ZENITH_INFO(std::string, ...);
 extern void ZENITH_LOGGER_ERROR(std::string, ...);
 extern void ZENITH_FATAL_ERROR(std::string, ...); // 如果是致命错误就退出引擎
 
-#ifdef ZENITH_PLATFORM_WINDOWS
-    #ifdef ZENITH_BUILD_DLL
-        #define ZENITH __declspec(dllexport)
+#ifdef __ZENITH_PLATFORM_WINDOWS__
+    #ifdef __ZENITH_BUILD_DLL__
+        #define ZENITH_API __declspec(dllexport)
     #else
         #define ZENITH_API __declspec(dllimport)
     #endif

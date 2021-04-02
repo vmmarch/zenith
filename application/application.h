@@ -16,12 +16,20 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/3. <=== */
 
 /*!
  * @author orvals
  */
-#ifndef ZENITH_COMPONENT_H
-#define ZENITH_COMPONENT_H
+#ifndef ZENITH_APPLICATION_H
+#define ZENITH_APPLICATION_H
 
-#endif // ===> ZENITH_COMPONENT_H <===
+
+class Application
+{
+public:
+    void StartEngine();
+};
+
+
+#endif // ==> ZENITH_APPLICATION_H <===

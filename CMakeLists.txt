@@ -11,9 +11,10 @@ include_directories(SYSTEM vendor/imgui/backends)
 ### for include dir.
 ################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/framework)
+include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/application)
+include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/tool)
 
-add_subdirectory(framework framework_binary_dir)
+add_subdirectory(application application_binary_dir)
 add_subdirectory(tool tool_binary_dir)
 
 ################################################
@@ -23,13 +24,13 @@ aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_definitions(-DZENITH_PLATFORM_WINDOWS -DIN_CHINA)
+add_definitions(-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__)
 
 include_directories(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/launcher)
 
 add_executable(${PROJECT_NAME} ${SOURCE_DIRECTORY})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE framework)
+target_link_libraries(${PROJECT_NAME} PRIVATE application)
 
 install(
 	TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}

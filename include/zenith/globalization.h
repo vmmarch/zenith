@@ -25,30 +25,30 @@
  */
 #pragma once
 
-#define ENGINE_NAME "ZENITH3D ENGINE - "
+#define __ENGINE_NAME__ "ZENITH3D ENGINE"
 
 #define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
 
-#ifdef IN_CHINA
+#ifdef __IN_CHINA__
 ///////////////////////////////////////////////////////////
-// IN_CHINA
+// __IN_CHINA__
 
 // MENU MESSAGE
-#define GUI_TEXT_FILE "文件"
-#define GUI_TEXT_CREATE "新建"
-#define GUI_TEXT_CREATE_PROJECT "新建项目"
+#define __GUI_TEXT_FILE__ "文件"
+#define __GUI_TEXT_CREATE__ "新建"
+#define __GUI_TEXT_CREATE_PROJECT__ "新建项目"
 
-#define GUI_TEXT_OPEN "打开"
-#define GUI_TEXT_OPEN_PROJECT "打开项目"
-#define GUI_TEXT_OPEN_FOLDER "打开文件夹"
-#define GUI_TEXT_IMPORT "导入"
-#define GUI_TEXT_SETTING "引擎配置"
-#define GUI_TEXT_RESTART "重启引擎"
-#define GUI_TEXT_EXIT "退出引擎"
+#define __GUI_TEXT_OPEN__ "打开"
+#define __GUI_TEXT_OPEN_PROJECT__ "打开项目"
+#define __GUI_TEXT_OPEN_FOLDER__ "打开文件夹"
+#define __GUI_TEXT_IMPORT__ "导入"
+#define __GUI_TEXT_SETTING__ "引擎配置"
+#define __GUI_TEXT_RESTART__ "重启引擎"
+#define __GUI_TEXT_EXIT__ "退出引擎"
 
 // ERROR MESSAGE
-#define STARTUP_ERROR ENGINE_NAME "启动失败"
-#define APPLY_FONT_ERROR ENGINE_NAME "应用字体失败：未获取到字体信息【%s】" // %s font name
+#define __STARTUP_ERROR__ __ENGINE_NAME__ "启动失败"
+#define __APPLY_FONT_ERROR__ __ENGINE_NAME__ "应用字体失败：未获取到字体信息【%s】" // %s font name
 
 ///////////////////////////////////////////////////////////
 #else

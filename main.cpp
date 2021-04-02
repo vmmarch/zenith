@@ -1,14 +1,8 @@
-#include "framework.h"
-
-void imgui_envconf()
-{
-
-}
+#include "application.h"
 
 int main(int argc, char **argv)
 {
-     auto app = new framework(1000, 800);
-     app->render(imgui_envconf);
-
-     return 0;
+    auto app = new Application();
+    app->StartEngine();
+    return 0;
 }

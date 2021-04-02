@@ -16,44 +16,22 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/27. <=== */
+/*! ===> Creates on 2021/4/2. <=== */
 
 /*!
  * @author orvals
  */
-#pragma once
+#ifndef ZENITH_ASSERT_H
+#define ZENITH_ASSERT_H
 
-#include "imgui-env.h"
-#include <zenith/zenith.h>
-#include <zenith/globalization.h>
+#include <filesystem>
 
-class framework;
+#ifdef __ZENITH_ENABLE_ASSERTS__
+    #define __ZENITH_ASSERT__(...)
+	#define __ZENITH_CORE_ASSERT__(...)
+#else
+	#define __ZENITH_ASSERT__(...)
+	#define __ZENITH_CORE_ASSERT__(...)
+#endif
 
-typedef void (*other_render)();
-
-class framework
-{
-public:
-    framework(int, int);
-    ~framework();
-    void render(other_render);
-
-private:
-    /*! //////////////////////////////////////////////////////////////// */
-    /*! variable */
-    int width, height;
-    // config
-    GLFWwindow* window{};
-    bool p_open{};
-    float c_font_size = 18.0f; // font size
-    zenith_cc glslVersion;
-
-    bool show_demo_window;
-    bool show_another_window;
-
-    /*! //////////////////////////////////////////////////////////////// */
-    /*! method */
-    ImGuiIO& setupImGui();
-    void setupGLFW();
-
-};
+#endif // ===> ZENITH_ASSERT_H <===
