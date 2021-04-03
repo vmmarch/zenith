@@ -22,3 +22,7 @@
  * @author orvals
  */
 #include "event-window-resize.h"
+
+WindowResizeEvent::WindowResizeEvent(int w, int h)
+{
+}

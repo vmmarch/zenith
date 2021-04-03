@@ -26,10 +26,10 @@
 
 #include "event.h"
 
-class EventOf_WindowResize : public Event
+class WindowResizeEvent : public Event
 {
 public:
-    EventOf_WindowResize(int width, int height);
+    WindowResizeEvent(int width, int height);
 };
 
 #endif // ===> ZENITH_EVENT_WINDOW_RESIZE_H <===

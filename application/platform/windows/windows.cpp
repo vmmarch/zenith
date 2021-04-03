@@ -74,9 +74,23 @@ namespace zenith::platform::windows
             info.Width = width;
             info.Height = height;
 
-            EventOf_WindowResize event(width, height);
+            WindowResizeEvent event(width, height);
             info.EventCallback(event);
         });
+
+    }
+
+    void Window::OnUpdate()
+    {
+    }
+
+    void Window::GetSize(int &w, int &h) const
+    {
+
+    }
+
+    void Window::SetEventCallbackFn(const f_EventCallbackFn &f)
+    {
 
     }
 

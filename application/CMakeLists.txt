@@ -15,6 +15,7 @@ add_library(
         ${PROJECT_NAME} SHARED
         application.cpp event.cpp glad.c window.cpp
         platform/windows/windows.cpp
+        event/event-window-resize.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp

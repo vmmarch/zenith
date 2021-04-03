@@ -25,4 +25,5 @@
 
 defv_scope<WindowTemplate> WindowTemplate::Create(const WindowProps &)
 {
+    return nullptr;
 }
