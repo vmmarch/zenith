@@ -27,8 +27,6 @@ add_definitions(-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__)
 
 include_directories(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/launcher)
 
-link_libraries(${PROJECT_NAME} ./library/spdlogd.dll)
-
 add_executable(${PROJECT_NAME} ${SOURCE_DIRECTORY})
 
 target_link_libraries(${PROJECT_NAME} PRIVATE application)
