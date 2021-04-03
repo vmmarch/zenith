@@ -24,6 +24,11 @@
 #ifndef ZENITH_EVENT_H
 #define ZENITH_EVENT_H
 
+enum class EventStatus
+{
+    None = 0,
+};
+
 class Event
 {
 
