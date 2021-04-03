@@ -12,11 +12,9 @@ include_directories(SYSTEM vendor/imgui/backends)
 ################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/application)
-include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/tool)
 include_directories(${CMAKE_SOURCE_DIR}/vendor/spdlog/include)
 
 add_subdirectory(application application_binary_dir)
-add_subdirectory(tool tool_binary_dir)
 
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
@@ -29,7 +27,7 @@ add_definitions(-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__)
 
 include_directories(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/launcher)
 
-link_libraries(${PROJECT_NAME} ./library/spdlogd.a)
+link_libraries(${PROJECT_NAME} ./library/spdlogd.dll)
 
 add_executable(${PROJECT_NAME} ${SOURCE_DIRECTORY})
 
