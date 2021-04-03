@@ -24,7 +24,7 @@
 #ifndef ZENITH_EVENT_H
 #define ZENITH_EVENT_H
 
-enum class EventStatus
+enum class EventType
 {
     None = 0,
     WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,

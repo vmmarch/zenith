@@ -25,7 +25,6 @@
 
 #include <memory>
 #include <iostream>
-#include <spdlog/spdlog.h>
 
 typedef const char* v_cc;
 typedef unsigned char v_uchar;
@@ -39,12 +38,6 @@ constexpr v_scope<T> CreateVScope(Args&& ... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
-
-// logger...
-#define __ZENITH_INFO__(...) spdlog::info(__VA_ARGS__)
-#define __ZENITH_DEBUG__(...) spdlog::debug(__VA_ARGS__)
-#define __ZENITH_WARN__(...) spdlog::warn(__VA_ARGS__)
-#define __ZENITH_ERROR__(...) spdlog::error(__VA_ARGS__)
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     #ifdef __ZENITH_BUILD_DLL__
