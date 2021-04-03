@@ -31,15 +31,6 @@ typedef const char* def_v_cc;
 typedef unsigned char def_v_uc;
 typedef unsigned int def_v_ui;
 
-template<typename T>
-using def_ptr_scope = std::unique_ptr<T> ;
-
-template<typename T, typename... Args>
-constexpr def_ptr_scope<T> CreateScope(Args&&... args)
-{
-    return std::make_unique<T>(std::forward<Args>(args)...);
-}
-
 extern void INFO(std::string fmt, ...);
 extern void ERROR(std::string fmt, ...);
 extern void ZENITH_INFO(std::string, ...);

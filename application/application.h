@@ -24,12 +24,13 @@
 #ifndef ZENITH_APPLICATION_H
 #define ZENITH_APPLICATION_H
 
-
-class Application
+namespace zenith
 {
-public:
-    void StartEngine();
-};
-
+    class Application
+    {
+    public:
+        void StartEngine();
+    };
+}
 
 #endif // ==> ZENITH_APPLICATION_H <===

@@ -1,13 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
-project(Application)
-
-add_subdirectory(event)
+project(application)
 
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
 ################################################
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SOURCE_DIRECTORY)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/event EVENT_DIRECTORY)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} SOURCE_DIR)
 
 add_definitions(-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__)
 
@@ -16,7 +13,7 @@ link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
 add_library(
         ${PROJECT_NAME} SHARED
-        ${SOURCE_DIRECTORY} ${EVENT_DIRECTORY}
+        ${SOURCE_DIR}
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp

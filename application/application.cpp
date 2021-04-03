@@ -22,3 +22,10 @@
  * @author orvals
  */
 #include "application.h"
+
+namespace zenith
+{
+    void Application::StartEngine()
+    {
+    }
+}

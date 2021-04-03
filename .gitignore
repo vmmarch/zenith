@@ -13,3 +13,5 @@ cmake-build-debug
 build
 out
 .idea
+
+release/vendor
