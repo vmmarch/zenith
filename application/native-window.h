@@ -21,8 +21,35 @@
 /*!
  * @author orvals
  */
-#include "event-window-resize.h"
+#pragma once
 
-WindowResizeEvent::WindowResizeEvent(int w, int h)
+#include <zenith.h>
+#include "event.h"
+#include <functional>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+namespace zenith
 {
+    struct WindowProps
+    {
+        v_cc Title;
+        int Width, Height;
+    };
+
+    typedef WindowProps v_winprops;
+
+    class NativeWindow
+    {
+    public:
+        using f_EventCallbackFn = std::function<void(Event &)>;
+        virtual ~NativeWindow() = default;
+        virtual void OnUpdate() = 0;
+        virtual void GetSize(int &w, int &h) const = 0;
+        virtual void SetEventCallbackFn(const f_EventCallbackFn &) = 0;
+        virtual void SetVSync(bool) = 0;
+        virtual bool GetVSync() = 0;
+        static v_scope<NativeWindow> Create(const WindowProps &);
+    };
+
 }

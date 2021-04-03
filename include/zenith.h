@@ -29,6 +29,8 @@
 typedef const char* v_cc;
 typedef unsigned char v_uchar;
 typedef unsigned int v_uint;
+typedef uint8_t v_uint8t;
+typedef uint16_t v_uint16t;
 
 template<typename T>
 using v_scope = std::unique_ptr<T>;

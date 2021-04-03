@@ -21,35 +21,13 @@
 /*!
  * @author orvals
  */
-#ifndef ZENITH_WINDOW_H
-#define ZENITH_WINDOW_H
+#include "native-window.h"
+#include "platform/windows/window.h"
 
-#include <zenith.h>
-#include <event.h>
-#include <functional>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
-
-struct WindowProps
+namespace zenith
 {
-    v_cc Title;
-    int Width, Height;
-};
-
-typedef WindowProps v_winprops;
-
-class WindowTemplate
-{
-public:
-    using f_EventCallbackFn = std::function<void(Event & )>;
-    virtual ~WindowTemplate() = default;
-    virtual void OnUpdate() = 0;
-    virtual void GetSize(int &w, int &h) const = 0;
-    virtual void SetEventCallbackFn(const f_EventCallbackFn&) = 0;
-    virtual void SetVSync(bool) = 0;
-    virtual bool GetVSync() = 0;
-
-    static v_scope<WindowTemplate> Create(const WindowProps&);
-};
-
-#endif // ==> ZENITH_WINDOW_H <===
+    v_scope<NativeWindow> NativeWindow::Create(const WindowProps &)
+    {
+        return nullptr;
+    }
+}

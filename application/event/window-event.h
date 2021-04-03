@@ -21,38 +21,33 @@
 /*!
  * @author orvals
  */
-#ifndef ZENITH_PLATFORM_WINDOWS_H
-#define ZENITH_PLATFORM_WINDOWS_H
+#pragma once
 
-#include "window.h"
+#include "event.h"
 
-namespace zenith::platform::windows
+namespace zenith
 {
-    class Window : public WindowTemplate
+
+    // =======================================================================================
+    // Window resize event class.
+    class WindowResizeEvent : public Event
     {
     public:
-        Window(v_winprops&);
-        ~Window();
-        void Initialize(v_winprops&);
-        void OnUpdate() override;
-        void GetSize(int&, int&) const override;
-        void SetEventCallbackFn(const f_EventCallbackFn&) override;
-        void SetVSync(bool) override;
-        bool GetVSync() override;
-    private:
-        struct WindowInfo
+        WindowResizeEvent(v_uint width, v_uint height)
+                : m_Width(width), m_Height(height) {}
+        void GetSize(int &width, int &height)
         {
-            v_cc Title;
-            v_uint Width, Height;
-            bool VSync;
+            width = m_Width;
+            height = m_Height;
+        }
+    private:
+        v_uint m_Width, m_Height;
+    };
 
-            f_EventCallbackFn EventCallback;
-        };
-        typedef WindowInfo v_info;
+    // =======================================================================================
+    // Window close event class.
+    class WindowCloseEvent : public Event
+    {
 
-        v_info m_Info;
-        GLFWwindow* m_Window;
     };
 }
-
-#endif // ===> ZENITH_PLATFORM_WINDOWS_H <===

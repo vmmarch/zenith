@@ -21,22 +21,23 @@
 /*!
  * @author orvals
  */
-#ifndef ZENITH_EVENT_H
-#define ZENITH_EVENT_H
+#pragma once
 
-enum class EventType
+#include <zenith.h>
+
+namespace zenith
 {
-    None = 0,
-    WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
-    AppTick, AppUpdate, AppRender,
-    KeyPressed, KeyReleased, KeyTyped,
-    MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
-};
+    enum class EventType
+    {
+        None = 0,
+        WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
+        AppTick, AppUpdate, AppRender,
+        KeyPressed, KeyReleased, KeyTyped,
+        MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
+    };
 
-class Event
-{
+    class Event
+    {
 
-};
-
-
-#endif // ==> ZENITH_EVENT_H <===
+    };
+}

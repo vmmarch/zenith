@@ -21,15 +21,37 @@
 /*!
  * @author orvals
  */
-#ifndef ZENITH_EVENT_WINDOW_RESIZE_H
-#define ZENITH_EVENT_WINDOW_RESIZE_H
+#pragma once
 
-#include "event.h"
+#include "native-window.h"
 
-class WindowResizeEvent : public Event
+namespace zenith::platform::windows
 {
-public:
-    WindowResizeEvent(int width, int height);
-};
+    class Window : public NativeWindow
+    {
+    public:
+        Window(v_winprops &);
+        ~Window();
+        void Initialize(v_winprops &);
+        void OnUpdate() override;
+        void CloseWindow();
+        void GetSize(int &, int &) const override;
+        void SetEventCallbackFn(const f_EventCallbackFn &) override;
+        void SetVSync(bool) override;
+        bool GetVSync() override;
 
-#endif // ===> ZENITH_EVENT_WINDOW_RESIZE_H <===
+    private:
+        struct WindowInfo
+        {
+            v_cc Title;
+            v_uint Width, Height;
+            bool VSync;
+
+            f_EventCallbackFn EventCallback;
+        };
+        typedef WindowInfo v_info;
+
+        v_info m_Info;
+        GLFWwindow *m_Window;
+    };
+}

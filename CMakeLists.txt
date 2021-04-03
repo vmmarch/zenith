@@ -9,11 +9,9 @@ include_directories(SYSTEM vendor/imgui/backends)
 
 ################################################
 ### for include dir.
-################################################
+#################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/application)
-
-add_subdirectory(application application_binary_dir)
+include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/application)
 
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
@@ -24,9 +22,21 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_definitions(-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__)
 
-add_executable(${PROJECT_NAME} ${SOURCE_DIRECTORY})
+link_libraries(imm32)
+link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE application)
+add_executable(
+		${PROJECT_NAME} main.cpp glad.c
+		application/application.cpp application/event.cpp application/native-window.cpp
+		platform/windows/window.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_tables.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_glfw.cpp
+		${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_opengl3.cpp
+)
 
 install(
 	TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}
