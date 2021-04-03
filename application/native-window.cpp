@@ -33,7 +33,7 @@ namespace zenith
     v_scope<NativeWindow> NativeWindow::Create(const v_winprops &props)
     {
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-        return CreateVScope<platform::windows::Window>(props);
+        return CreateScope<platform::windows::Window>(props);
 #else
         return nullptr;
 #endif

@@ -16,37 +16,9 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/3/25. <=== */
+/*! ===> Creates on 2021/4/3. <=== */
 
 /*!
  * @author orvals
  */
 #pragma once
-
-#include <memory>
-#include <iostream>
-
-typedef const char* v_cc;
-typedef unsigned char v_uchar;
-typedef unsigned int v_uint;
-typedef uint8_t v_uint8t;
-typedef uint16_t v_uint16t;
-
-template<typename T>
-using v_scope = std::unique_ptr<T>;
-
-template<typename T, typename ... Args>
-constexpr v_scope<T> CreateScope(Args&& ... args)
-{
-    return std::make_unique<T>(std::forward<Args>(args)...);
-}
-
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-    #ifdef __ZENITH_BUILD_DLL__
-        #define ZENITH_API __declspec(dllexport)
-    #else
-        #define ZENITH_API __declspec(dllimport)
-    #endif
-#else
-    #error Zenith only support Windows platform!
-#endif
