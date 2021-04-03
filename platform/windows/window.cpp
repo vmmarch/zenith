@@ -53,11 +53,13 @@ namespace zenith::platform::windows
         m_Info.Width = props.Width;
         m_Info.Height = props.Height;
 
+        // TODO ADD LOGGER.;
         // __ZENITH_INFO__("Create window {0} ({1}, {2})", m_Info.Title, m_Info.Width, m_Info.Height);
 
         if (s_GLFWwindowCount == 0)
         {
             int success = glfwInit();
+// TODO ADD LOGGER.;
 //            if (!success)
 //                __ZENITH_ERROR__("Could not initialize GLFW~");
 
@@ -169,7 +171,7 @@ namespace zenith::platform::windows
     void Window::OnUpdate()
     {
         glfwPollEvents();
-
+        glfwSwapBuffers(m_Window);
     }
 
     void Window::GetSize(int &w, int &h) const

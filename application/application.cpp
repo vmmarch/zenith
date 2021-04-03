@@ -34,5 +34,10 @@ namespace zenith
         props.Height = 900;
         auto window = NativeWindow::Create(props);
 
+        while(!window->IsClose())
+        {
+            window->OnUpdate();
+        }
+
     }
 }
