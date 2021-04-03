@@ -25,17 +25,26 @@
 
 #include <memory>
 #include <iostream>
-#include <cstring>
+#include <spdlog/spdlog.h>
 
-typedef const char* def_v_cc;
-typedef unsigned char def_v_uc;
-typedef unsigned int def_v_ui;
+typedef const char* defv_cc;
+typedef unsigned char defv_uchar;
+typedef unsigned int defv_uint;
 
-extern void INFO(std::string fmt, ...);
-extern void ERROR(std::string fmt, ...);
-extern void ZENITH_INFO(std::string, ...);
-extern void ZENITH_LOGGER_ERROR(std::string, ...);
-extern void ZENITH_FATAL_ERROR(std::string, ...); // 如果是致命错误就退出引擎
+template<typename T>
+using defv_scope = std::unique_ptr<T>;
+
+template<typename T, typename ... Args>
+constexpr defv_scope<T> Create_Def_V_Scope(Args&& ... args)
+{
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
+
+// logger...
+#define __ZENITH_INFO__(...) spdlog::info(__VA_ARGS__)
+#define __ZENITH_DEBUG__(...) spdlog::debug(__VA_ARGS__)
+#define __ZENITH_WARN__(...) spdlog::warn(__VA_ARGS__)
+#define __ZENITH_ERROR__(...) spdlog::error(__VA_ARGS__)
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     #ifdef __ZENITH_BUILD_DLL__

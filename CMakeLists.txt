@@ -12,7 +12,6 @@ include_directories(SYSTEM vendor/imgui/backends)
 ################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/application)
-include_directories(${CMAKE_SOURCE_DIR}/vendor/spdlog/include)
 
 add_subdirectory(application application_binary_dir)
 

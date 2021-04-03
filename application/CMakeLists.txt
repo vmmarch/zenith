@@ -13,7 +13,8 @@ link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
 add_library(
         ${PROJECT_NAME} SHARED
-        ${SOURCE_DIR}
+        application.cpp event.cpp glad.c window.cpp
+        platform/windows/windows.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
         ${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp

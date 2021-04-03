@@ -16,22 +16,9 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/2. <=== */
+/*! ===> Creates on 2021/4/3. <=== */
 
 /*!
  * @author orvals
  */
-#ifndef ZENITH_ASSERT_H
-#define ZENITH_ASSERT_H
-
-#include <filesystem>
-
-#ifdef __ZENITH_ENABLE_ASSERTS__
-    #define __ZENITH_ASSERT__(...)
-	#define __ZENITH_CORE_ASSERT__(...)
-#else
-	#define __ZENITH_ASSERT__(...)
-	#define __ZENITH_CORE_ASSERT__(...)
-#endif
-
-#endif // ===> ZENITH_ASSERT_H <===
+#include "event.h"
