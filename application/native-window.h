@@ -49,6 +49,8 @@ namespace zenith
         virtual void SetEventCallbackFn(const f_EventCallbackFn &) = 0;
         virtual void SetVSync(bool) = 0;
         virtual bool GetVSync() = 0;
+        virtual void CloseWindow()  = 0;
+        virtual bool IsClose() const = 0;
         static v_scope<NativeWindow> Create(const WindowProps &);
     };
 

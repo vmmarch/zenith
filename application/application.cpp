@@ -22,10 +22,17 @@
  * @author orvals
  */
 #include "application.h"
+#include "native-window.h"
 
 namespace zenith
 {
     void Application::StartEngine()
     {
+        v_winprops props;
+        props.Title = __ENGINE_NAME__;
+        props.Width = 1200;
+        props.Height = 900;
+        auto window = NativeWindow::Create(props);
+
     }
 }

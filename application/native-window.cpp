@@ -22,12 +22,20 @@
  * @author orvals
  */
 #include "native-window.h"
+
+#ifdef __ZENITH_PLATFORM_WINDOWS__
 #include "platform/windows/window.h"
+#endif
+
 
 namespace zenith
 {
-    v_scope<NativeWindow> NativeWindow::Create(const WindowProps &)
+    v_scope<NativeWindow> NativeWindow::Create(const v_winprops &props)
     {
+#ifdef __ZENITH_PLATFORM_WINDOWS__
+        return CreateVScope<platform::windows::Window>(props);
+#else
         return nullptr;
+#endif
     }
 }

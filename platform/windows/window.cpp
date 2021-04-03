@@ -23,6 +23,7 @@
  */
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "hicpp-multiway-paths-covered"
+#pragma ide diagnostic ignored "cppcoreguidelines-pro-type-member-init"
 
 #include "window.h"
 #include "event/window-event.h"
@@ -38,16 +39,15 @@ namespace zenith::platform::windows
         // __ZENITH_ERROR__("GLFW Error ({}): {}", error, description);
     }
 
-    Window::Window(zenith::v_winprops &props)
+    Window::Window(const zenith::v_winprops &props)
     {
         Initialize(props);
     }
 
     Window::~Window()
-    {
-    }
+    = default;
 
-    void Window::Initialize(v_winprops &props)
+    void Window::Initialize(const v_winprops &props)
     {
         m_Info.Title = props.Title;
         m_Info.Width = props.Width;
@@ -166,15 +166,6 @@ namespace zenith::platform::windows
 
     }
 
-    void Window::CloseWindow()
-    {
-        glfwDestroyWindow(m_Window);
-        s_GLFWwindowCount--;
-
-        if (s_GLFWwindowCount == 0)
-            glfwTerminate();
-    }
-
     void Window::OnUpdate()
     {
         glfwPollEvents();
@@ -198,5 +189,18 @@ namespace zenith::platform::windows
 
     bool Window::GetVSync()
     { return m_Info.VSync; }
+
+    void Window::CloseWindow()
+    {
+        glfwDestroyWindow(m_Window);
+        s_GLFWwindowCount--;
+
+        if (s_GLFWwindowCount == 0)
+            glfwTerminate();
+    }
+
+    bool Window::IsClose() const
+    { return glfwWindowShouldClose(m_Window); }
 }
+
 #pragma clang diagnostic pop

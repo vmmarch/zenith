@@ -21,8 +21,9 @@
 /*!
  * @author orvals
  */
-#ifndef ZENITH_APPLICATION_H
-#define ZENITH_APPLICATION_H
+#pragma once
+
+#include <zenith/globalization.h>
 
 namespace zenith
 {
@@ -32,5 +33,3 @@ namespace zenith
         void StartEngine();
     };
 }
-
-#endif // ==> ZENITH_APPLICATION_H <===

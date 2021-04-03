@@ -30,15 +30,16 @@ namespace zenith::platform::windows
     class Window : public NativeWindow
     {
     public:
-        Window(v_winprops &);
-        ~Window();
-        void Initialize(v_winprops &);
+        explicit Window(const v_winprops&);
+        ~Window() override;
+        void Initialize(const v_winprops &);
         void OnUpdate() override;
-        void CloseWindow();
         void GetSize(int &, int &) const override;
         void SetEventCallbackFn(const f_EventCallbackFn &) override;
         void SetVSync(bool) override;
         bool GetVSync() override;
+        void CloseWindow() override;
+        bool IsClose() const override;
 
     private:
         struct WindowInfo
