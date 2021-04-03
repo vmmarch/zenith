@@ -29,12 +29,12 @@ namespace zenith::platform::windows
 
     static uint8_t s_GLFWwindowCount = 0;
 
-    static void GLFWErrorCallback(int error, defv_cc description)
+    static void GLFWErrorCallback(int error, v_cc description)
     {
         __ZENITH_ERROR__("GLFW Error ({}): {}", error, description);
     }
 
-    Window::Window(defv_winprops &props)
+    Window::Window(v_winprops &props)
     {
         Initialize(props);
     }
@@ -43,7 +43,7 @@ namespace zenith::platform::windows
     {
     }
 
-    void Window::Initialize(defv_winprops &props)
+    void Window::Initialize(v_winprops &props)
     {
         m_Info.Title = props.Title;
         m_Info.Width = props.Width;
@@ -70,7 +70,7 @@ namespace zenith::platform::windows
         // set glfw callback
         glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height)
         {
-            defv_info& info = *(defv_info*) glfwGetWindowUserPointer(window);
+            v_info& info = *(v_info*) glfwGetWindowUserPointer(window);
             info.Width = width;
             info.Height = height;
 

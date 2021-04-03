@@ -27,15 +27,15 @@
 #include <iostream>
 #include <spdlog/spdlog.h>
 
-typedef const char* defv_cc;
-typedef unsigned char defv_uchar;
-typedef unsigned int defv_uint;
+typedef const char* v_cc;
+typedef unsigned char v_uchar;
+typedef unsigned int v_uint;
 
 template<typename T>
-using defv_scope = std::unique_ptr<T>;
+using v_scope = std::unique_ptr<T>;
 
 template<typename T, typename ... Args>
-constexpr defv_scope<T> Create_Def_V_Scope(Args&& ... args)
+constexpr v_scope<T> CreateVScope(Args&& ... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }

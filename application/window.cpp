@@ -23,7 +23,7 @@
  */
 #include "window.h"
 
-defv_scope<WindowTemplate> WindowTemplate::Create(const WindowProps &)
+v_scope<WindowTemplate> WindowTemplate::Create(const WindowProps &)
 {
     return nullptr;
 }

@@ -31,9 +31,9 @@ namespace zenith::platform::windows
     class Window : public WindowTemplate
     {
     public:
-        Window(defv_winprops&);
+        Window(v_winprops&);
         ~Window();
-        void Initialize(defv_winprops&);
+        void Initialize(v_winprops&);
         void OnUpdate() override;
         void GetSize(int&, int&) const override;
         void SetEventCallbackFn(const f_EventCallbackFn&) override;
@@ -42,15 +42,15 @@ namespace zenith::platform::windows
     private:
         struct WindowInfo
         {
-            defv_cc Title;
-            defv_uint Width, Height;
+            v_cc Title;
+            v_uint Width, Height;
             bool VSync;
 
             f_EventCallbackFn EventCallback;
         };
-        typedef WindowInfo defv_info;
+        typedef WindowInfo v_info;
 
-        defv_info m_Info;
+        v_info m_Info;
         GLFWwindow* m_Window;
     };
 }

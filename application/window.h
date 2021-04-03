@@ -32,11 +32,11 @@
 
 struct WindowProps
 {
-    defv_cc Title;
+    v_cc Title;
     int Width, Height;
 };
 
-typedef WindowProps defv_winprops;
+typedef WindowProps v_winprops;
 
 class WindowTemplate
 {
@@ -49,7 +49,7 @@ public:
     virtual void SetVSync(bool) = 0;
     virtual bool GetVSync() = 0;
 
-    static defv_scope<WindowTemplate> Create(const WindowProps&);
+    static v_scope<WindowTemplate> Create(const WindowProps&);
 };
 
 #endif // ==> ZENITH_WINDOW_H <===
