@@ -22,7 +22,7 @@
  * @author 2B键盘
  */
 #include "graphics-context.h"
-#include "render-api.h"
+#include "render-graphics.h"
 #include "platform/opengl/opengl-context.h"
 #include <zenith/globalization.h>
 
@@ -30,20 +30,20 @@ namespace zenith
 {
     v_scope<GraphicsContext> GraphicsContext::Create(void *window)
     {
-        switch (RenderAPI::GetAPI())
+        switch (RenderGraphics::GetAPI())
         {
-            case RenderAPI::API::None:
+            case RenderGraphics::API::None:
             {
                 __ZENITH_ERROR__(__PLEASE_CHOOSE_RENDER_API__)
                 return nullptr;
             }
 
-            case RenderAPI::API::OpenGL:
+            case RenderGraphics::API::OpenGL:
             {
                 return CreateScope<OpenGLContext>(static_cast<GLFWwindow*>(window));
             }
 
-            case RenderAPI::API::DirectX:
+            case RenderGraphics::API::DirectX:
             {
                 __ZENITH_ERROR__(__NOT_SUPPORT_DIRECTX_API__)
                 return nullptr;

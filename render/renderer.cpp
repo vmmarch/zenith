@@ -22,10 +22,12 @@
  * @author 2B键盘
  */
 #include "renderer.h"
+#include "render-command.h"
 
 namespace zenith
 {
     void Renderer::OnWindowResize(v_uint32t width, v_uint32t height)
     {
+        RenderCommand::SetViewport(0, 0, width, height);
     }
 }

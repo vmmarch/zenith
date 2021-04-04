@@ -1,4 +1,4 @@
-/* ************************************************************************
+/*! ************************************************************************
  *
  * Copyright (C) 2020 dahan All rights reserved.
  *
@@ -21,30 +21,31 @@
 /*!
  * @author 2B键盘
  */
-#include "render-impl-opengl.h"
+#pragma once
+#include <zenith.h>
+#include "render-graphics.h"
 
 namespace zenith
 {
-
-    void OpenGLRenderAPI::Initialize()
+    class RenderCommand
     {
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        glEnable(GL_DEPTH_TEST);
-    }
+    public:
+        static void Initialize() { s_RenderAPI->Initialize(); }
+        static void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
+        {
+            s_RenderAPI->SetViewport(x, y, width, height);
+        }
 
-    void OpenGLRenderAPI::SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
-    {
-        glViewport(x, y, width, height);
-    }
+        static void SetClearColor(const glm::vec4& color)
+        {
+            s_RenderAPI->SetClearColor(color);
+        }
 
-    void OpenGLRenderAPI::SetClearColor(const glm::vec4& color)
-    {
-        glClearColor(color.r, color.g, color.b, color.a);
-    }
-
-    void OpenGLRenderAPI::Clear()
-    {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
+        static void Clear()
+        {
+            s_RenderAPI->Clear();
+        }
+    private:
+        static v_scope<RenderGraphics> s_RenderAPI;
+    };
 }

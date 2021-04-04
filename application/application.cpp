@@ -53,6 +53,8 @@ namespace zenith
 
         m_Minimized = false;
         Renderer::OnWindowResize(width, height);
+
+        return false;
     }
 
     void Application::StartEngine()

@@ -23,11 +23,11 @@
  */
 #pragma once
 
-#include "render/render-api.h"
+#include "render/render-graphics.h"
 
 namespace zenith
 {
-    class OpenGLRenderAPI : public RenderAPI
+    class OpenGLRenderAPI : public RenderGraphics
     {
     public:
         ~OpenGLRenderAPI() {};

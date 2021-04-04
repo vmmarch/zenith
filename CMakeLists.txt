@@ -39,8 +39,9 @@ add_executable(
 		### =================================================================================
 		### render
 		render/graphics-context.cpp
-		render/render-api.cpp
+		render/render-graphics.cpp
 		render/renderer.cpp
+		render/render-command.cpp
 
 		### =================================================================================
 		### platform

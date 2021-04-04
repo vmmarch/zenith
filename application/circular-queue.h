@@ -20,7 +20,6 @@
 
 /*!
  * @author mmc1234
- * @author 2B键盘
  */
 template <typename T>
 class CircularQueue {

@@ -21,34 +21,41 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
+#include "render-graphics.h"
 
-#include "glad/glad.h"
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <zenith.h>
+#ifdef __ZENITH_RENDERAPI_OPENGL__
+
+#include "platform/opengl/render-impl-opengl.h"
+
+#endif
+
+// conf render api
+#define __RENDER_API__ RenderGraphics::API::OpenGL
 
 namespace zenith
 {
-    class RenderAPI
+    RenderGraphics::API RenderGraphics::s_API = __RENDER_API__;
+
+    v_scope<RenderGraphics> RenderGraphics::Create()
     {
-    public:
-        enum class API
+        switch (GetAPI())
         {
-            None = 0,
-            OpenGL, DirectX
-        };
-        virtual ~RenderAPI() = default ;
-        virtual void Initialize() = 0;
-        virtual void SetViewport(v_uint32t x, v_uint32t y,
-                                 v_uint32t width, v_uint32t height) = 0;
+            case API::None:
+            {
+                __ZENITH_ERROR__(__PLEASE_CHOOSE_RENDER_API__)
+                return nullptr;
+            }
+            case API::OpenGL:
+            {
+                return CreateScope<OpenGLRenderAPI>();
+            }
+            case API::DirectX:
+            {
+                __ZENITH_ERROR__(__NOT_SUPPORT_DIRECTX_API__)
+                return nullptr;
+            }
+        }
 
-        virtual void SetClearColor(const glm::vec4& color) = 0;
-        virtual void Clear() = 0;
-
-        static API GetAPI() { return s_API; }
-        static v_scope<RenderAPI> Create();
-    private:
-        static API s_API;
-    };
+        return nullptr;
+    }
 }
