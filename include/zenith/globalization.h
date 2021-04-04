@@ -21,7 +21,7 @@
 /*!
  * 国际化标准定义
  *
- * @author orvals
+ * @author 2B键盘
  */
 #pragma once
 

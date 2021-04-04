@@ -19,7 +19,7 @@
 /*! ===> Creates on 2021/4/1. <=== */
 
 /*!
- * @author orvals
+ * @author 2B键盘
  */
 #include "application.h"
 #include <zenith.h>

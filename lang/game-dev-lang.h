@@ -21,6 +21,6 @@
 /*!
  * zenith引擎支持的开发语言
  *
- * @author orvals
+ * @author 2B键盘
  */
 #pragma once
