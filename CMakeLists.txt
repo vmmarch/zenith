@@ -31,13 +31,23 @@ link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
 add_executable(
 		${PROJECT_NAME} main.cpp glad.c
+		### =================================================================================
+		### application
 		application/application.cpp
 		application/native-window.cpp
-		platform/windows/window.cpp
+
+		### =================================================================================
+		### render
 		render/graphics-context.cpp
 		render/render-api.cpp
+		render/renderer.cpp
+
+		### =================================================================================
+		### platform
 		platform/opengl/opengl-context.cpp
 		platform/opengl/render-impl-opengl.cpp
+		platform/windows/window.cpp
+
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp

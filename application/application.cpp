@@ -23,13 +23,36 @@
  */
 #include "application.h"
 #include "native-window.h"
+#include "render/renderer.h"
 
 namespace zenith
 {
 
-    void Application::Close()
+    void Application::OnEvent(Event &event)
+    {
+        EventDispatcher dispatcher(event);
+        dispatcher.Dispatch<WindowCloseEvent>(__ZENITH_BIND_EVENT_FN__(Application::OnClose));
+        dispatcher.Dispatch<WindowResizeEvent>(__ZENITH_BIND_EVENT_FN__(Application::OnResize));
+    }
+
+    bool Application::OnClose(WindowCloseEvent& event)
     {
         this->m_Running = false;
+        return true;
+    }
+
+    bool Application::OnResize(WindowResizeEvent& event)
+    {
+        v_uint width, height;
+        event.GetSize(&width, &height);
+        if(width == 0 || height == 0)
+        {
+            m_Minimized = true;
+            return false;
+        }
+
+        m_Minimized = false;
+        Renderer::OnWindowResize(width, height);
     }
 
     void Application::StartEngine()
@@ -40,7 +63,9 @@ namespace zenith
         props.Height = 900;
         auto window = NativeWindow::Create(props);
 
-        while(m_Running)
+        window->SetEventCallbackFn(__ZENITH_BIND_EVENT_FN__(Application::OnEvent));
+
+        while(!m_Running)
         {
             window->OnUpdate();
         }

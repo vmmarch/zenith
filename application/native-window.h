@@ -42,7 +42,7 @@ namespace zenith
     class NativeWindow
     {
     public:
-        using f_EventCallbackFn = std::function<void(Event &)>;
+        using f_EventCallbackFn = std::function<void(Event&)>;
         virtual ~NativeWindow() = default;
         virtual void OnUpdate() = 0;
         virtual void GetSize(int &w, int &h) const = 0;

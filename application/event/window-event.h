@@ -34,21 +34,30 @@ namespace zenith
     {
     public:
         WindowResizeEvent(v_uint width, v_uint height)
-                : m_Width(width), m_Height(height) {}
-        void GetSize(int &width, int &height)
+                : m_Width(width), m_Height(height)
+        {}
+
+        int GetWidth()
+        { return this->m_Width; }
+
+        int GetHeight()
+        { return this->m_Height; }
+
+        void GetSize(v_uint* w, v_uint* h)
         {
-            width = m_Width;
-            height = m_Height;
+            w = &m_Width;
+            h = &m_Height;
         }
 
         [[nodiscard]] std::string toString() const override
         {
             std::stringstream ss;
-            ss << "WindowResizeEvent: w,h(" << m_Width << ", " << m_Height <<")";
+            ss << "WindowResizeEvent: w,h(" << m_Width << ", " << m_Height << ")";
             return ss.str();
         }
 
         __EVENT_CLASS_TYPE__(WindowResize);
+
         __EVENT_CLASS_CATEGORY__(EventCategoryApplication);
     private:
         v_uint m_Width, m_Height;
@@ -68,6 +77,7 @@ namespace zenith
         }
 
         __EVENT_CLASS_TYPE__(WindowClose);
+
         __EVENT_CLASS_CATEGORY__(EventCategoryApplication);
     };
 }

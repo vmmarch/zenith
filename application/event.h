@@ -28,8 +28,13 @@
 #include <sstream>
 #include <zenith.h>
 
-namespace zenith
-{
+namespace zenith {
+
+    // Events in Hazel are currently blocking, meaning when an event occurs it
+    // immediately gets dispatched and must be dealt with right then an there.
+    // For the future, a better strategy might be to buffer events in an event
+    // bus and process them during the "event" part of the update stage.
+
     enum class EventType
     {
         None = 0,
@@ -49,23 +54,25 @@ namespace zenith
         EventCategoryMouseButton    = __BIT__(4)
     };
 
-#define __EVENT_CLASS_TYPE__(type) static EventType GetStaticEventType() { return EventType::type; } \
-                               virtual EventType GetEventType() const override { return GetStaticEventType(); } \
-                               virtual v_cc GetName() const override { return #type; }
+#define __EVENT_CLASS_TYPE__(type) static EventType GetStaticType() { return EventType::type; }\
+								virtual EventType GetEventType() const override { return GetStaticType(); }\
+								virtual const char* GetName() const override { return #type; }
 
 #define __EVENT_CLASS_CATEGORY__(category) virtual int GetCategoryFlags() const override { return category; }
 
     class Event
     {
     public:
-        bool Handled = false;
         virtual ~Event() = default;
-        virtual v_cc GetName() const = 0;
-        virtual EventType GetEventType() const = 0;
-        virtual int GetCategoryFlags() const = 0;
-        virtual std::string toString() const { return GetName();  };
 
-        bool IsInCategory(EventCategory category) const
+        bool Handled = false;
+
+        virtual EventType GetEventType() const = 0;
+        virtual const char* GetName() const = 0;
+        virtual int GetCategoryFlags() const = 0;
+        virtual std::string toString() const { return GetName(); }
+
+        bool IsInCategory(EventCategory category)
         {
             return GetCategoryFlags() & category;
         }
@@ -74,27 +81,29 @@ namespace zenith
     class EventDispatcher
     {
     public:
-        explicit EventDispatcher(Event &event) : m_Event(event)
-        {}
-
-        template<typename T, typename F>
-        bool Dispatcher(const F& func)
+        EventDispatcher(Event& event)
+                : m_Event(event)
         {
-            if (m_Event.GetEventType() == T::GetStaticEventType)
+        }
+
+        // F will be deduced by the compiler
+        template<typename T, typename F>
+        bool Dispatch(const F& func)
+        {
+            if (m_Event.GetEventType() == T::GetStaticType())
             {
                 m_Event.Handled |= func(static_cast<T&>(m_Event));
                 return true;
             }
             return false;
         }
-
     private:
         Event& m_Event;
     };
 
-    inline std::ostream& operator << (std::ostream& os, const Event& event)
+    inline std::ostream& operator<<(std::ostream& os, const Event& e)
     {
-        return os << event.toString();
+        return os << e.toString();
     }
 
 }

@@ -49,6 +49,8 @@ constexpr v_scope<T> CreateScope(Args&& ... args)
 
 #define __BIT__(x) (1 << x)
 
+#define __ZENITH_BIND_EVENT_FN__(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
+
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     #ifdef __ZENITH_BUILD_DLL__
         #define ZENITH_API __declspec(dllexport)

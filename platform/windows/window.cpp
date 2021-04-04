@@ -147,7 +147,7 @@ namespace zenith::platform::windows
 
                 case GLFW_RELEASE:
                 {
-                    MouseButtonReleaseEvent event(button);
+                    MouseButtonReleasedEvent event(button);
                     info.EventCallback(event);
                     break;
                 }
@@ -158,7 +158,7 @@ namespace zenith::platform::windows
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
-            MouseScrollEvent event((float) x_offset, (float) y_offset);
+            MouseScrolledEvent event((float) x_offset, (float) y_offset);
             info.EventCallback(event);
         });
 
@@ -166,7 +166,7 @@ namespace zenith::platform::windows
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
-            MouseMoveEvent event((float) x_pos, (float) y_pos);
+            MouseMovedEvent event((float) x_pos, (float) y_pos);
             info.EventCallback(event);
         });
 

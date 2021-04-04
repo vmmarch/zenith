@@ -16,30 +16,16 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author orvals
  */
-#pragma once
-
-#include <zenith.h>
-#include "event/window-event.h"
-#include <zenith/globalization.h>
-#include "event.h"
+#include "renderer.h"
 
 namespace zenith
 {
-    class Application
+    void Renderer::OnWindowResize(v_uint32t width, v_uint32t height)
     {
-    public:
-        void OnEvent(Event&);
-        bool OnClose(WindowCloseEvent&);
-        bool OnResize(WindowResizeEvent&);
-        void StartEngine();
-
-    private:
-        bool m_Minimized = true;
-        bool m_Running = false;
-    };
+    }
 }

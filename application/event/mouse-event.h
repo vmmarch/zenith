@@ -28,86 +28,92 @@
 
 namespace zenith
 {
+    class MouseMovedEvent : public Event
+    {
+    public:
+        MouseMovedEvent(const float x, const float y)
+                : m_MouseX(x), m_MouseY(y) {}
+
+        float GetX() const { return m_MouseX; }
+        float GetY() const { return m_MouseY; }
+
+        std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "MouseMovedEvent: " << m_MouseX << ", " << m_MouseY;
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(MouseMoved)
+        __EVENT_CLASS_CATEGORY__(EventCategoryMouse | EventCategoryInput)
+    private:
+        float m_MouseX, m_MouseY;
+    };
+
+    class MouseScrolledEvent : public Event
+    {
+    public:
+        MouseScrolledEvent(const float xOffset, const float yOffset)
+                : m_XOffset(xOffset), m_YOffset(yOffset) {}
+
+        float GetXOffset() const { return m_XOffset; }
+        float GetYOffset() const { return m_YOffset; }
+
+        std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(MouseScrolled)
+        __EVENT_CLASS_CATEGORY__(EventCategoryMouse | EventCategoryInput)
+    private:
+        float m_XOffset, m_YOffset;
+    };
+
     class MouseButtonEvent : public Event
     {
     public:
-        explicit MouseButtonEvent(v_mousecode mousecode) : m_MouseCode(mousecode) {}
-        [[nodiscard]] v_mousecode GetMouseCode() const { return m_MouseCode; }
-        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
+        v_mousecode GetMouseButton() const { return m_Button; }
+
+        __EVENT_CLASS_CATEGORY__(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
     protected:
-        v_mousecode m_MouseCode;
+        MouseButtonEvent(const v_mousecode button)
+                : m_Button(button) {}
+
+        v_mousecode m_Button;
     };
 
     class MouseButtonPressedEvent : public MouseButtonEvent
     {
     public:
-        explicit MouseButtonPressedEvent(v_mousecode button) : MouseButtonEvent(button) {}
-        [[nodiscard]] std::string toString() const override
+        MouseButtonPressedEvent(const v_mousecode button)
+                : MouseButtonEvent(button) {}
+
+        std::string toString() const override
         {
             std::stringstream ss;
-            ss << "ButtonPressedEvent: " << m_MouseCode;
+            ss << "MouseButtonPressedEvent: " << m_Button;
             return ss.str();
         }
 
-        __EVENT_CLASS_TYPE__(MouseButtonPressed);
+        __EVENT_CLASS_TYPE__(MouseButtonPressed)
     };
 
-    class MouseButtonReleaseEvent : public MouseButtonEvent
+    class MouseButtonReleasedEvent : public MouseButtonEvent
     {
     public:
-        explicit MouseButtonReleaseEvent(v_mousecode button) : MouseButtonEvent(button) {}
-        [[nodiscard]] std::string toString() const override
+        MouseButtonReleasedEvent(const v_mousecode button)
+                : MouseButtonEvent(button) {}
+
+        std::string toString() const override
         {
             std::stringstream ss;
-            ss << "MouseButtonReleaseEvent: " << m_MouseCode;
+            ss << "MouseButtonReleasedEvent: " << m_Button;
             return ss.str();
         }
 
-        __EVENT_CLASS_TYPE__(MouseButtonReleased);
-    };
-
-    class MouseScrollEvent : public Event
-    {
-    public:
-        MouseScrollEvent(float x_offset, float y_offset) : m_XOffset(x_offset), m_YOffset(y_offset) {}
-        [[nodiscard]] float GetXOffset() const { return m_XOffset; }
-        [[nodiscard]] float GetYOffset() const { return m_YOffset; }
-
-        [[nodiscard]] std::string toString() const override
-        {
-            std::stringstream ss;
-            ss << "MouseScrollEvent: x,y offset(" << m_XOffset << ", " << m_YOffset <<")";
-            return ss.str();
-        }
-
-        __EVENT_CLASS_TYPE__(MouseScrolled);
-        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
-    private:
-        float m_XOffset, m_YOffset;
-    };
-
-    class MouseMoveEvent : public Event
-    {
-    public:
-        MouseMoveEvent(float x, float y) : m_XPos(x), m_YPos(y) {}
-        [[nodiscard]] float GetXPosition() const { return m_XPos;}
-        [[nodiscard]] float GetYPosition() const { return m_YPos;}
-        void GetPosition(float &x, float &y) const
-        {
-            x = m_XPos;
-            y = m_YPos;
-        }
-
-        [[nodiscard]] std::string toString() const override
-        {
-            std::stringstream ss;
-            ss << "MouseMoveEvent: x,y position(" << m_XPos << ", " << m_YPos <<")";
-            return ss.str();
-        }
-
-        __EVENT_CLASS_TYPE__(MouseScrolled);
-        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
-    private:
-        float m_XPos, m_YPos;
+        __EVENT_CLASS_TYPE__(MouseButtonReleased)
     };
 }
