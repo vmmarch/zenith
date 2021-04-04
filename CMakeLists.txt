@@ -20,15 +20,24 @@ aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_definitions(-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__)
+add_definitions(
+		-D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
+		-D__ZENITH_IN_CHINA__							# 引擎语言为中文
+		-D__ZENITH_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
+)
 
 link_libraries(imm32)
 link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
 add_executable(
 		${PROJECT_NAME} main.cpp glad.c
-		application/application.cpp application/event.cpp application/native-window.cpp
+		application/application.cpp
+		application/native-window.cpp
 		platform/windows/window.cpp
+		render/graphics-context.cpp
+		render/render-api.cpp
+		platform/opengl/opengl-context.cpp
+		platform/opengl/render-impl-opengl.cpp
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp

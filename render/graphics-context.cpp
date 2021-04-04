@@ -21,4 +21,35 @@
 /*!
  * @author orvals
  */
-#include "event.h"
+#include "graphics-context.h"
+#include "render-api.h"
+#include "platform/opengl/opengl-context.h"
+#include <zenith/globalization.h>
+
+namespace zenith
+{
+    v_scope<GraphicsContext> GraphicsContext::Create(void *window)
+    {
+        switch (RenderAPI::GetAPI())
+        {
+            case RenderAPI::API::None:
+            {
+                __ZENITH_ERROR__(__PLEASE_CHOOSE_RENDER_API__)
+                return nullptr;
+            }
+
+            case RenderAPI::API::OpenGL:
+            {
+                return CreateScope<OpenGLContext>(static_cast<GLFWwindow*>(window));
+            }
+
+            case RenderAPI::API::DirectX:
+            {
+                __ZENITH_ERROR__(__NOT_SUPPORT_DIRECTX_API__)
+                return nullptr;
+            }
+        }
+
+        return nullptr;
+    }
+}

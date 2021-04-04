@@ -16,21 +16,43 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author orvals
  */
-#pragma once
-#include <zenith.h>
+#include "render-api.h"
+
+#ifdef __ZENITH_RENDERAPI_OPENGL__
+
+#include "platform/opengl/render-impl-opengl.h"
+
+#endif
 
 namespace zenith
 {
-    class RenderContext
+    RenderAPI::API RenderAPI::s_API = RenderAPI::API::OpenGL;
+
+    v_scope<RenderAPI> RenderAPI::Create()
     {
-        virtual ~RenderContext() = default;
-        virtual void Initialize() = 0;
-        virtual void SwapBuffers() = 0;
-        static v_scope<RenderContext> Create(void* window);
-    };
+        switch (GetAPI())
+        {
+            case API::None:
+            {
+                __ZENITH_ERROR__(__PLEASE_CHOOSE_RENDER_API__)
+                return nullptr;
+            }
+            case API::OpenGL:
+            {
+                return CreateScope<OpenGLRenderAPI>();
+            }
+            case API::DirectX:
+            {
+                __ZENITH_ERROR__(__NOT_SUPPORT_DIRECTX_API__)
+                return nullptr;
+            }
+        }
+
+        return nullptr;
+    }
 }

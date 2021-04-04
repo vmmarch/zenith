@@ -26,6 +26,12 @@
 
 namespace zenith
 {
+
+    void Application::Close()
+    {
+        this->m_Running = false;
+    }
+
     void Application::StartEngine()
     {
         v_winprops props;
@@ -34,7 +40,7 @@ namespace zenith
         props.Height = 900;
         auto window = NativeWindow::Create(props);
 
-        while(!window->IsClose())
+        while(m_Running)
         {
             window->OnUpdate();
         }

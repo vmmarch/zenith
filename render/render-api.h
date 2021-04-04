@@ -16,24 +16,39 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author orvals
  */
 #pragma once
 
-#include <zenith/globalization.h>
+#include "glad/glad.h"
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <zenith.h>
 
 namespace zenith
 {
-    class Application
+    class RenderAPI
     {
     public:
-        void Close();
-        void StartEngine();
+        enum class API
+        {
+            None = 0,
+            OpenGL, DirectX
+        };
+        virtual ~RenderAPI() = default ;
+        virtual void Initialize() = 0;
+        virtual void SetViewport(v_uint32t x, v_uint32t y,
+                                 v_uint32t width, v_uint32t height) = 0;
 
+        virtual void SetClearColor(const glm::vec4& color) = 0;
+        virtual void Clear() = 0;
+
+        static API GetAPI() { return s_API; }
+        static v_scope<RenderAPI> Create();
     private:
-        bool m_Running = true;
+        static API s_API;
     };
 }

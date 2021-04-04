@@ -31,6 +31,7 @@ typedef unsigned char v_uchar;
 typedef unsigned int v_uint;
 typedef uint8_t v_uint8t;
 typedef uint16_t v_uint16t;
+typedef uint32_t v_uint32t;
 
 template<typename T>
 using v_scope = std::unique_ptr<T>;
@@ -40,6 +41,13 @@ constexpr v_scope<T> CreateScope(Args&& ... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
+
+#define __ZENITH_INFO__(...)
+#define __ZENITH_DEBUG__(...)
+#define __ZENITH_WARN__(...)
+#define __ZENITH_ERROR__(...)
+
+#define __BIT__(x) (1 << x)
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     #ifdef __ZENITH_BUILD_DLL__

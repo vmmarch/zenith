@@ -16,24 +16,26 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author orvals
  */
 #pragma once
-
-#include <zenith/globalization.h>
+#include "render/graphics-context.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "opengl-context.h"
 
 namespace zenith
 {
-    class Application
+    class OpenGLContext : public GraphicsContext
     {
     public:
-        void Close();
-        void StartEngine();
-
+        explicit OpenGLContext(GLFWwindow* window);
+        virtual void Initialize() override;
+        virtual void SwapBuffers() override;
     private:
-        bool m_Running = true;
+        GLFWwindow* m_Window;
     };
 }

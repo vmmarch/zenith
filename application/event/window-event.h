@@ -40,6 +40,16 @@ namespace zenith
             width = m_Width;
             height = m_Height;
         }
+
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "WindowResizeEvent: w,h(" << m_Width << ", " << m_Height <<")";
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(WindowResize);
+        __EVENT_CLASS_CATEGORY__(EventCategoryApplication);
     private:
         v_uint m_Width, m_Height;
     };
@@ -48,6 +58,16 @@ namespace zenith
     // Window close event class.
     class WindowCloseEvent : public Event
     {
+    public:
 
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "WindowCloseEvent";
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(WindowClose);
+        __EVENT_CLASS_CATEGORY__(EventCategoryApplication);
     };
 }

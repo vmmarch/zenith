@@ -16,9 +16,17 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author orvals
  */
 #pragma once
+#include <stdio.h>
+#include <zenith/globalization.h>
+
+#ifdef __ZENITH_ENABLE_ASSERT__
+    #define __ZENITH_ASSERT__(check, msg) if(check) printf("%s", msg)
+#else
+    #define __ZENITH_ASSERT__(check, msg) {}
+#endif

@@ -22,6 +22,7 @@
  * @author orvals
  */
 #pragma once
+
 #include "event.h"
 #include "key-codes.h"
 
@@ -35,7 +36,7 @@ namespace zenith
     {
     public:
         [[nodiscard]] v_keycode GetKeyCode() const { return m_KeyCode; }
-
+        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
     protected:
         explicit KeyEvent(const v_keycode vkeycode) : m_KeyCode(vkeycode) {}
         v_keycode m_KeyCode;
@@ -46,6 +47,14 @@ namespace zenith
     public:
         KeyPressedEvent(const v_keycode keycode, v_uint16t repeat) : KeyEvent(keycode), m_Repeat(repeat) {}
         [[nodiscard]] v_uint16t GetRepeat() const { return m_Repeat; }
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyPressedEvent: " << m_KeyCode << "(" << m_Repeat << ") repeats.";
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(KeyPressed);
     private:
         v_uint16t m_Repeat;
     };
@@ -54,11 +63,28 @@ namespace zenith
     {
     public:
         explicit KeyReleaseEvent(const v_keycode keycode) : KeyEvent(keycode) {}
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyReleaseEvent: " << m_KeyCode;
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(KeyReleased);
     };
 
     class KeyTypeEvent : public KeyEvent
     {
     public:
         explicit KeyTypeEvent(const v_keycode keycode) : KeyEvent(keycode) {}
+
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyTypedEvent: " << m_KeyCode;
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(KeyTyped);
     };
 }

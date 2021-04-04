@@ -24,6 +24,7 @@
 #pragma once
 
 #include "native-window.h"
+#include "render/graphics-context.h"
 
 namespace zenith::platform::windows
 {
@@ -54,5 +55,6 @@ namespace zenith::platform::windows
 
         v_info m_Info;
         GLFWwindow *m_Window;
+        v_scope<GraphicsContext> m_Context;
     };
 }

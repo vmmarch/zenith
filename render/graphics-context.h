@@ -22,18 +22,16 @@
  * @author orvals
  */
 #pragma once
-
-#include <zenith/globalization.h>
+#include <zenith.h>
 
 namespace zenith
 {
-    class Application
+    class GraphicsContext
     {
     public:
-        void Close();
-        void StartEngine();
-
-    private:
-        bool m_Running = true;
+        virtual ~GraphicsContext() = default;
+        virtual void Initialize() = 0;
+        virtual void SwapBuffers() = 0;
+        static v_scope<GraphicsContext> Create(void* window);
     };
 }

@@ -16,24 +16,26 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author orvals
  */
 #pragma once
 
-#include <zenith/globalization.h>
+#include "render/render-api.h"
 
 namespace zenith
 {
-    class Application
+    class OpenGLRenderAPI : public RenderAPI
     {
     public:
-        void Close();
-        void StartEngine();
+        ~OpenGLRenderAPI() {};
+        virtual void Initialize() override;
+        virtual void SetViewport(v_uint32t x, v_uint32t y,
+                                 v_uint32t width, v_uint32t height) override;
 
-    private:
-        bool m_Running = true;
+        virtual void SetClearColor(const glm::vec4& color) override;
+        virtual void Clear() override;
     };
 }

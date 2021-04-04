@@ -69,6 +69,10 @@ namespace zenith::platform::windows
         m_Window = glfwCreateWindow((int) props.Width, (int) props.Height, props.Title, NULL, NULL);
         s_GLFWwindowCount++;
 
+        // Create context.
+        m_Context = GraphicsContext::Create(m_Window);
+        m_Context->Initialize();
+
         // set user pointer
         glfwSetWindowUserPointer(m_Window, &m_Info);
         SetVSync(true);
@@ -171,7 +175,7 @@ namespace zenith::platform::windows
     void Window::OnUpdate()
     {
         glfwPollEvents();
-        glfwSwapBuffers(m_Window);
+        m_Context->SwapBuffers();
     }
 
     void Window::GetSize(int &w, int &h) const
@@ -181,7 +185,7 @@ namespace zenith::platform::windows
 
     void Window::SetEventCallbackFn(const f_EventCallbackFn &f)
     {
-
+        m_Info.EventCallback = f;
     }
 
     void Window::SetVSync(bool v_sync)

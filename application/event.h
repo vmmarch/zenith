@@ -22,7 +22,10 @@
  * @author orvals
  */
 #pragma once
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "modernize-use-nodiscard"
 
+#include <sstream>
 #include <zenith.h>
 
 namespace zenith
@@ -36,8 +39,64 @@ namespace zenith
         MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
     };
 
+    enum EventCategory
+    {
+        None = 0,
+        EventCategoryApplication    = __BIT__(0),
+        EventCategoryInput          = __BIT__(1),
+        EventCategoryKeyboard       = __BIT__(2),
+        EventCategoryMouse          = __BIT__(3),
+        EventCategoryMouseButton    = __BIT__(4)
+    };
+
+#define __EVENT_CLASS_TYPE__(type) static EventType GetStaticEventType() { return EventType::type; } \
+                               virtual EventType GetEventType() const override { return GetStaticEventType(); } \
+                               virtual v_cc GetName() const override { return #type; }
+
+#define __EVENT_CLASS_CATEGORY__(category) virtual int GetCategoryFlags() const override { return category; }
+
     class Event
     {
+    public:
+        bool Handled = false;
+        virtual ~Event() = default;
+        virtual v_cc GetName() const = 0;
+        virtual EventType GetEventType() const = 0;
+        virtual int GetCategoryFlags() const = 0;
+        virtual std::string toString() const { return GetName();  };
 
+        bool IsInCategory(EventCategory category) const
+        {
+            return GetCategoryFlags() & category;
+        }
     };
+
+    class EventDispatcher
+    {
+    public:
+        explicit EventDispatcher(Event &event) : m_Event(event)
+        {}
+
+        template<typename T, typename F>
+        bool Dispatcher(const F& func)
+        {
+            if (m_Event.GetEventType() == T::GetStaticEventType)
+            {
+                m_Event.Handled |= func(static_cast<T&>(m_Event));
+                return true;
+            }
+            return false;
+        }
+
+    private:
+        Event& m_Event;
+    };
+
+    inline std::ostream& operator << (std::ostream& os, const Event& event)
+    {
+        return os << event.toString();
+    }
+
 }
+
+#pragma clang diagnostic pop

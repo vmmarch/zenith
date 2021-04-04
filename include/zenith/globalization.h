@@ -29,9 +29,10 @@
 
 #define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
 
-#ifdef __IN_CHINA__
+#ifdef __ZENITH_IN_CHINA__
 ///////////////////////////////////////////////////////////
-// __IN_CHINA__
+// __ZENITH_IN_CHINA__
+#define __ERROR__ "错误："
 
 // MENU MESSAGE
 #define __GUI_TEXT_FILE__ "文件"
@@ -46,9 +47,22 @@
 #define __GUI_TEXT_RESTART__ "重启引擎"
 #define __GUI_TEXT_EXIT__ "退出引擎"
 
+// INFO MESSAGE
+#define __OPENGL_INFO__ "OpenGL创建信息: "
+#define __VENDOR_INFO__ "VENDOR: {0}"
+#define __RENDER_INFO__ "RENDER: {0}"
+#define __VERSION_INFO__ "VERSION: {0}"
+
+// WARN MESSAGE
+#define __OPENGL_SUPPORT_VERSION__ "Zenith3D引擎需要使用4.5以上的OpenGL版本"
+
 // ERROR MESSAGE
 #define __STARTUP_ERROR__ __ENGINE_NAME__ "启动失败"
-#define __APPLY_FONT_ERROR__ __ENGINE_NAME__ "应用字体失败：未获取到字体信息【%s】" // %s font name
+#define __CREATE_OPENGL_CONTEXT_ERROR__ __ERROR__##"创建OpenGLContext失败。原因：window == NULL"
+#define __INIT_GLAD_ERROR__ __ERROR__##"初始化GLAD失败。"
+#define __APPLY_FONT_ERROR__ __ENGINE_NAME__ __ERROR__##"应用字体失败：未获取到字体信息【%s】" // %s font name
+#define __PLEASE_CHOOSE_RENDER_API__ __ERROR__##"请选择渲染API。"
+#define __NOT_SUPPORT_DIRECTX_API__ __ERROR__##"暂不支持DirectX。"
 
 ///////////////////////////////////////////////////////////
 #else

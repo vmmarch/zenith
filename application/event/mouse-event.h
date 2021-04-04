@@ -33,7 +33,8 @@ namespace zenith
     public:
         explicit MouseButtonEvent(v_mousecode mousecode) : m_MouseCode(mousecode) {}
         [[nodiscard]] v_mousecode GetMouseCode() const { return m_MouseCode; }
-    private:
+        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
+    protected:
         v_mousecode m_MouseCode;
     };
 
@@ -41,12 +42,28 @@ namespace zenith
     {
     public:
         explicit MouseButtonPressedEvent(v_mousecode button) : MouseButtonEvent(button) {}
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "ButtonPressedEvent: " << m_MouseCode;
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(MouseButtonPressed);
     };
 
     class MouseButtonReleaseEvent : public MouseButtonEvent
     {
     public:
         explicit MouseButtonReleaseEvent(v_mousecode button) : MouseButtonEvent(button) {}
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "MouseButtonReleaseEvent: " << m_MouseCode;
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(MouseButtonReleased);
     };
 
     class MouseScrollEvent : public Event
@@ -55,6 +72,16 @@ namespace zenith
         MouseScrollEvent(float x_offset, float y_offset) : m_XOffset(x_offset), m_YOffset(y_offset) {}
         [[nodiscard]] float GetXOffset() const { return m_XOffset; }
         [[nodiscard]] float GetYOffset() const { return m_YOffset; }
+
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "MouseScrollEvent: x,y offset(" << m_XOffset << ", " << m_YOffset <<")";
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(MouseScrolled);
+        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
     private:
         float m_XOffset, m_YOffset;
     };
@@ -70,6 +97,16 @@ namespace zenith
             x = m_XPos;
             y = m_YPos;
         }
+
+        [[nodiscard]] std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "MouseMoveEvent: x,y position(" << m_XPos << ", " << m_YPos <<")";
+            return ss.str();
+        }
+
+        __EVENT_CLASS_TYPE__(MouseScrolled);
+        __EVENT_CLASS_CATEGORY__(EventCategoryInput);
     private:
         float m_XPos, m_YPos;
     };
