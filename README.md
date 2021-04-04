@@ -1,4 +1,7 @@
 # Zenith 3D游戏引擎
+
+![LOGO](https://github.com/orvals/zenith/blob/master/resources/zlogo.png)
+
 zenith 3D游戏引擎
 
 # GIT Clone
