@@ -32,9 +32,7 @@ namespace zenith
     public:
         ~OpenGLRenderAPI() {};
         virtual void Initialize() override;
-        virtual void SetViewport(v_uint32t x, v_uint32t y,
-                                 v_uint32t width, v_uint32t height) override;
-
+        virtual void SetViewport(v_uint32t x, v_uint32t y,v_uint32t width, v_uint32t height) override;
         virtual void SetClearColor(const glm::vec4& color) override;
         virtual void Clear() override;
     };
