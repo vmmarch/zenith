@@ -25,5 +25,5 @@
 
 namespace zenith
 {
-    v_scope<RenderGraphics> RenderCommand::s_RenderAPI =RenderGraphics::Create();
+    v_scope<RenderAPI> RenderCommand::s_RenderAPI =RenderAPI::Create();
 }

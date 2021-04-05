@@ -16,38 +16,11 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/5. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include "glad/glad.h"
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <zenith.h>
-
-namespace zenith
-{
-    class RenderGraphics
-    {
-    public:
-        enum class API
-        {
-            None = 0,
-            OpenGL, DirectX
-        };
-        virtual ~RenderGraphics() = default ;
-        virtual void Initialize() = 0;
-        virtual void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height) = 0;
-
-        virtual void SetClearColor(const glm::vec4& color) = 0;
-        virtual void Clear() = 0;
-
-        static API GetAPI() { return s_API; }
-        static v_scope<RenderGraphics> Create();
-    private:
-        static API s_API;
-    };
-}
+#include "ortho-graphics-camera-controller.h"

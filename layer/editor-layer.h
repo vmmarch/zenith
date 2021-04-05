@@ -16,36 +16,42 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/5. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <zenith.h>
-#include "render-api.h"
+
+#include "layer.h"
+#include "event/key-event.h"
+#include "render/camera/ortho-graphics-camera-controller.h"
+#include "render/model/vec.h"
 
 namespace zenith
 {
-    class RenderCommand
+    class EditorLayer : public Layer
     {
     public:
-        static void Initialize() { s_RenderAPI->Initialize(); }
-        static void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
-        {
-            s_RenderAPI->SetViewport(x, y, width, height);
-        }
+        EditorLayer(v_cc name) : Layer(name) {}
+        virtual ~EditorLayer() = default;
 
-        static void SetClearColor(const glm::vec4& color)
-        {
-            s_RenderAPI->SetClearColor(color);
-        }
+        virtual void OnAttach() override;
+        virtual void OnDetach() override;
 
-        static void Clear()
-        {
-            s_RenderAPI->Clear();
-        }
+        void OnUpdate(Timestep timestep) override;
+        virtual void OnImGuiRender() override;
+        void OnEvent(Event&) override;
+
     private:
-        static v_scope<RenderAPI> s_RenderAPI;
+        OrthoGraphicsCameraController m_CameraController;
+
+        // temp
+        Ref<vec::VertexArray> m_SquareVA;
+
+        void NewScene();
+        void OpenScene();
+        void SaveSceneAs();
+        bool OnKeyPressed(KeyPressedEvent&);
     };
 }

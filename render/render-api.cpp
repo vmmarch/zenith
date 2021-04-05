@@ -21,31 +21,41 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
-#include <zenith.h>
 #include "render-api.h"
+
+#ifdef __ZENITH_RENDERAPI_OPENGL__
+
+#include "platform/opengl/render-impl-opengl.h"
+
+#endif
+
+// conf render api
+#define __RENDER_API__ RenderAPI::API::OpenGL
 
 namespace zenith
 {
-    class RenderCommand
+    RenderAPI::API RenderAPI::s_API = __RENDER_API__;
+
+    v_scope<RenderAPI> RenderAPI::Create()
     {
-    public:
-        static void Initialize() { s_RenderAPI->Initialize(); }
-        static void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
+        switch (GetAPI())
         {
-            s_RenderAPI->SetViewport(x, y, width, height);
+            case API::None:
+            {
+                __ZENITH_ERROR__(__PLEASE_CHOOSE_RENDER_API__)
+                return nullptr;
+            }
+            case API::OpenGL:
+            {
+                return CreateScope<OpenGLRenderAPI>();
+            }
+            case API::DirectX:
+            {
+                __ZENITH_ERROR__(__NOT_SUPPORT_DIRECTX_API__)
+                return nullptr;
+            }
         }
 
-        static void SetClearColor(const glm::vec4& color)
-        {
-            s_RenderAPI->SetClearColor(color);
-        }
-
-        static void Clear()
-        {
-            s_RenderAPI->Clear();
-        }
-    private:
-        static v_scope<RenderAPI> s_RenderAPI;
-    };
+        return nullptr;
+    }
 }

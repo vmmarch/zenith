@@ -16,36 +16,15 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/5. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <zenith.h>
-#include "render-api.h"
 
-namespace zenith
-{
-    class RenderCommand
-    {
-    public:
-        static void Initialize() { s_RenderAPI->Initialize(); }
-        static void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
-        {
-            s_RenderAPI->SetViewport(x, y, width, height);
-        }
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
-        static void SetClearColor(const glm::vec4& color)
-        {
-            s_RenderAPI->SetClearColor(color);
-        }
-
-        static void Clear()
-        {
-            s_RenderAPI->Clear();
-        }
-    private:
-        static v_scope<RenderAPI> s_RenderAPI;
-    };
-}
+#define __glDeleteBuffer__(bufs)                         { glDeleteBuffers(1, &bufs); }
+#define __glCreateArrayBuffer__(bufs, size, data, usage) { glCreateBuffers(1, &bufs); glBindBuffer(GL_ARRAY_BUFFER, bufs); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }

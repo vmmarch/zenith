@@ -39,9 +39,18 @@ add_executable(
 		### =================================================================================
 		### render
 		render/graphics-context.cpp
-		render/render-graphics.cpp
+		render/render-api.cpp
 		render/renderer.cpp
 		render/render-command.cpp
+
+		### render/camera
+		render/camera/ortho-graphics-camera.cpp
+		render/camera/ortho-graphics-camera-controller.cpp
+
+		### render/model
+		render/model/buf.cpp
+		render/model/opengl-veca.cpp
+		render/model/opengl-buf.cpp
 
 		### =================================================================================
 		### platform

@@ -16,9 +16,31 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/5. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
+#include "buf.h"
+#include <memory>
+
+namespace zenith::vec
+{
+    class VertexArray
+    {
+    public:
+        virtual ~VertexArray() = default;
+
+        virtual void Bind() const = 0;
+        virtual void Unbind() const = 0;
+
+        virtual void AddVertexBuffer(const Ref<buf::VertexArray>& vertexBuffers) = 0;
+        virtual void SetIndexBuffer(const Ref<buf::IndexBuffer>& indexBuffer) = 0;
+
+        virtual const std::vector<Ref<buf::VertexBuffer>>& GetVertexBuffers() const = 0;
+        virtual const Ref<buf::IndexBuffer>& GetIndexBuffer() const = 0;
+
+        static Ref<VertexArray> Create();
+    };
+}

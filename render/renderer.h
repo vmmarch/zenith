@@ -23,6 +23,7 @@
  */
 #pragma once
 #include <zenith.h>
+#include "render-api.h"
 
 namespace zenith
 {
@@ -30,5 +31,6 @@ namespace zenith
     {
     public:
         static void OnWindowResize(v_uint32t, v_uint32t);
+        static RenderAPI::API GetAPI() { return RenderAPI::GetAPI(); }
     };
 }

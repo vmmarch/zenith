@@ -63,6 +63,7 @@
 #define __APPLY_FONT_ERROR__ __ENGINE_NAME__ __ERROR__##"应用字体失败：未获取到字体信息【%s】" // %s font name
 #define __PLEASE_CHOOSE_RENDER_API__ __ERROR__##"请选择渲染API。"
 #define __NOT_SUPPORT_DIRECTX_API__ __ERROR__##"暂不支持DirectX。"
+#define __UNKNOWN_SHADER_TYPE__ __ERROR__##"位置着色器类型"
 
 ///////////////////////////////////////////////////////////
 #else

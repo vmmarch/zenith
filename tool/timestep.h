@@ -16,36 +16,26 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/5. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <zenith.h>
-#include "render-api.h"
 
 namespace zenith
 {
-    class RenderCommand
+    class Timestep
     {
     public:
-        static void Initialize() { s_RenderAPI->Initialize(); }
-        static void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
-        {
-            s_RenderAPI->SetViewport(x, y, width, height);
-        }
+        Timestep(float time = 0.0f) : m_Time(time) {}
 
-        static void SetClearColor(const glm::vec4& color)
-        {
-            s_RenderAPI->SetClearColor(color);
-        }
+        operator float() const { return m_Time; }
 
-        static void Clear()
-        {
-            s_RenderAPI->Clear();
-        }
+        float GetSeconds() const { return m_Time; }
+        float GetMilliseconds() const { return m_Time * 1000.0f; }
+
     private:
-        static v_scope<RenderAPI> s_RenderAPI;
+        float m_Time;
     };
 }

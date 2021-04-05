@@ -16,36 +16,38 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/5. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <zenith.h>
-#include "render-api.h"
+#include "tool/timestep.h"
+#include "event/mouse-event.h"
+#include "event/window-event.h"
 
 namespace zenith
 {
-    class RenderCommand
+    class OrthoGraphicsCameraController
     {
     public:
-        static void Initialize() { s_RenderAPI->Initialize(); }
-        static void SetViewport(v_uint32t x, v_uint32t y, v_uint32t width, v_uint32t height)
-        {
-            s_RenderAPI->SetViewport(x, y, width, height);
-        }
+        OrthoGraphicsCameraController(float aspectRation, bool rotation = false);
+        void OnUpdate(Timestep timestep);
+        void OnEvent(Event&);
 
-        static void SetClearColor(const glm::vec4& color)
-        {
-            s_RenderAPI->SetClearColor(color);
-        }
+        void OnResize(float width, float height);
 
-        static void Clear()
-        {
-            s_RenderAPI->Clear();
-        }
+        OrthoGraphicsCamera& GetCamera() { return m_Camera; }
+        const OrthoGraphicsCamera& GetCamera() const { return m_Camera; }
+
+        float GetZoomLevel() const { return m_ZoomLevel; }
+        float SetZoomLevel(float level) { m_ZoomLevel = level; }
+
     private:
-        static v_scope<RenderAPI> s_RenderAPI;
+        float m_ZoomLevel = 1.0f;
+        OrthoGraphicsCamera m_Camera;
+
+        bool OnMouseScrolled(MouseScrolledEvent&);
+        bool OnWindowResized(WindowResizeEvent&);
     };
 }

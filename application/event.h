@@ -72,7 +72,7 @@ namespace zenith {
         virtual int GetCategoryFlags() const = 0;
         virtual std::string toString() const { return GetName(); }
 
-        bool IsInCategory(EventCategory category)
+        bool IsInCategory(EventCategory category) const
         {
             return GetCategoryFlags() & category;
         }
@@ -81,7 +81,7 @@ namespace zenith {
     class EventDispatcher
     {
     public:
-        EventDispatcher(Event& event)
+        explicit EventDispatcher(Event& event)
                 : m_Event(event)
         {
         }

@@ -22,10 +22,27 @@
  * @author 2B键盘
  */
 #pragma once
+#include <zenith.h>
+#include "event.h"
+#include "tool/timestep.h"
 
 namespace zenith
 {
     class Layer
     {
+    public:
+        Layer(v_cc name) : m_DebugName(name);
+        virtual ~Layer() = default;
+
+        virtual OnAttach() {}
+        virtual OnDetach() {}
+        virtual OnUpdate(Timestep timestep) {}
+        virtual OnImGuiRender() {}
+        virtual void OnEvent(Event&); {}
+
+        v_cc GetName() const { return m_DebugName; }
+
+    private:
+        v_cc m_DebugName;
     };
 }
