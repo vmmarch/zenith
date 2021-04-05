@@ -22,8 +22,7 @@
  * @author 2B键盘
  */
 #include "opengl-veca.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "api/opengl/glfw-api.h"
 #include <zenith/assert.h>
 #include <zenith/globalization.h>
 
@@ -66,12 +65,12 @@ namespace zenith
 
     OpenGLVeca::OpenGLVeca()
     {
-        glCreateVertexArrays(1, &rendererId);
+        glGenVertexArrays(1, &rendererId);
     }
 
     OpenGLVeca::~OpenGLVeca()
     {
-
+        glDeleteVertexArrays(1, &rendererId);
     }
 
     void OpenGLVeca::Bind() const
@@ -84,29 +83,29 @@ namespace zenith
         glBindVertexArray(0);
     }
 
-    void OpenGLVeca::AddVertexBuffer(const Ref<buf::VertexBuffer> &vertexBuffers)
+    void OpenGLVeca::AddVertexBuffer(const Ref<buf::VertexBuffer> &__vertexBuffers)
     {
         Bind();
-        vertexBuffers->Bind();
+        __vertexBuffers->Bind();
 
-        const auto &layout = vertexBuffers->GetLayout();
+        const auto &layout = __vertexBuffers->GetLayout();
         for (const auto &elem : layout)
         {
-            switch (elem.Type)
+            switch (elem.type)
             {
                 case ShaderType::FLOAT:
                 case ShaderType::FLOAT2:
                 case ShaderType::FLOAT3:
                 case ShaderType::FLOAT4:
                 {
-                    glEnableVertexAttribArray(m_VertexBufferIndex);
-                    glVertexAttribPointer(m_VertexBufferIndex,
-                                          elem.getComponentCount(),
+                    glEnableVertexAttribArray(this->vertexBufferIndex);
+                    glVertexAttribPointer(this->vertexBufferIndex,
+                                          elem.GetComponentCount(),
                                           ShaderTypeToGLType(elem.type),
-                                          elem.Normalized ? GL_TRUE : GL_FALSE,
+                                          elem.normalized ? GL_TRUE : GL_FALSE,
                                           layout.GetStride(),
                                           (const void *) elem.offset);
-                    m_VertexBufferIndex++;
+                    this->vertexBufferIndex++;
                     break;
                 }
 
@@ -116,37 +115,48 @@ namespace zenith
                 case ShaderType::INT4:
                 case ShaderType::BOOL:
                 {
-                    glEnableVertexAttribArray(m_VertexBufferIndex);
-                    glVertexAttribIPointer(m_VertexBufferIndex,
-                                           elem.getComponentCount(),
+                    glEnableVertexAttribArray(this->vertexBufferIndex);
+                    glVertexAttribIPointer(this->vertexBufferIndex,
+                                           elem.GetComponentCount(),
                                            ShaderTypeToGLType(elem.type),
-                                           elem.Normalized ? GL_TRUE : GL_FALSE,
                                            layout.GetStride(),
                                            (const void *) elem.offset);
+                    this->vertexBufferIndex++;
                     break;
                 }
 
                 case ShaderType::MAT3:
                 case ShaderType::MAT4:
                 {
-                    v_uint8t count = elem.getComponentCount();
+                    v_uint8t count = elem.GetComponentCount();
                     for (v_uint8t i = 0; i < count; i++)
                     {
-                        glEnableVertexArrayAttrib(m_VertexBufferIndex);
-                        glVertexAttribPointer(m_VertexBufferIndex,
-                                              count, elem.Normalized ? GL_TRUE : GL_FALSE,
+                        glEnableVertexAttribArray(this->vertexBufferIndex);
+                        glVertexAttribPointer(this->vertexBufferIndex,
+                                              count,
+                                              ShaderTypeToGLType(elem.type),
+                                              elem.normalized ? GL_TRUE : GL_FALSE,
                                               layout.GetStride(),
-                                              (const void *) elem.offset);
+                                              (const void*)(elem.offset + sizeof(float) * count * i));
                     }
                     break;
                 }
 
-                default: __ZENITH_ASSERT__(false, __UNKNOWN_SHADER_TYPE__);
+                default:
+                __ZENITH_ASSERT__(false, __UNKNOWN_SHADER_TYPE__);
             }
 
-            m_VertexBuffers.push_back(vertexBuffers);
+            this->vertexBuffers.push_back(__vertexBuffers);
         }
 
+    }
+
+    void OpenGLVeca::SetIndexBuffer(const Ref<buf::IndexBuffer> &__indexBuffer)
+    {
+        glBindVertexArray(rendererId);
+        __indexBuffer->Bind();
+
+        this->indexBuffer = __indexBuffer;
     }
 
 }

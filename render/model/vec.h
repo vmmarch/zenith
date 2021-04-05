@@ -35,7 +35,7 @@ namespace zenith::vec
         virtual void Bind() const = 0;
         virtual void Unbind() const = 0;
 
-        virtual void AddVertexBuffer(const Ref<buf::VertexArray>& vertexBuffers) = 0;
+        virtual void AddVertexBuffer(const Ref<buf::VertexBuffer>& vertexBuffers) = 0;
         virtual void SetIndexBuffer(const Ref<buf::IndexBuffer>& indexBuffer) = 0;
 
         virtual const std::vector<Ref<buf::VertexBuffer>>& GetVertexBuffers() const = 0;

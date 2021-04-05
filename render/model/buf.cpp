@@ -24,7 +24,7 @@
 #include "buf.h"
 #include "render/renderer.h"
 #include <zenith/globalization.h>
-#include "render/model/opengl-buf.h"
+#include "platform/opengl/opengl-buf.h"
 
 namespace zenith::buf
 {

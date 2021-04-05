@@ -21,6 +21,4 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
-
 #include "ortho-graphics-camera-controller.h"

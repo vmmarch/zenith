@@ -21,6 +21,8 @@
 /*!
  * @author 2B键盘
  */
+#define GLFW_DLL
+
 #include "application.h"
 #include <zenith.h>
 

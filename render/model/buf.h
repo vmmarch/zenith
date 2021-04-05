@@ -52,19 +52,21 @@ namespace zenith
         switch (type)
         {
             case ShaderType::FLOAT:         return 4;
-            case ShaderType::FLOAT2         return 4 * 2;
-            case ShaderType::FLOAT3         return 4 * 3;
-            case ShaderType::FLOAT4         return 4 * 4;
+            case ShaderType::FLOAT2:        return 4 * 2;
+            case ShaderType::FLOAT3:        return 4 * 3;
+            case ShaderType::FLOAT4:        return 4 * 4;
 
-            case ShaderType::MAT3           return 4 * 3 * 3;
-            case ShaderType::MAT4           return 4 * 4 * 4;
+            case ShaderType::MAT3:          return 4 * 3 * 3;
+            case ShaderType::MAT4:          return 4 * 4 * 4;
 
-            case ShaderType::INT             return 4;
-            case ShaderType::INT2            return 4 * 2;
-            case ShaderType::INT3            return 4 * 3;
-            case ShaderType::INT4            return 4 * 4;
+            case ShaderType::INT:           return 4;
+            case ShaderType::INT2:          return 4 * 2;
+            case ShaderType::INT3:          return 4 * 3;
+            case ShaderType::INT4:          return 4 * 4;
 
-            case ShaderType::BOOL           return 1;
+            case ShaderType::BOOL:          return 1;
+
+            case ShaderType::None:          break;
         }
 
         return 0;
@@ -72,9 +74,76 @@ namespace zenith
 
     namespace buf
     {
+
+        struct BufferElement
+        {
+            v_cc name;
+            ShaderType type;
+            v_uint32t size;
+            size_t offset;
+            bool normalized;
+
+            BufferElement() = default;
+
+            BufferElement(ShaderType __type, v_cc __name, bool __normalized = false)
+                    : name(__name), type(__type), size(ShaderTypeSize(__type)), offset(0), normalized(__normalized)
+            {
+            }
+
+            uint32_t GetComponentCount() const
+            {
+                switch (type)
+                {
+                    case ShaderType::FLOAT:   return 1;
+                    case ShaderType::FLOAT2:  return 2;
+                    case ShaderType::FLOAT3:  return 3;
+                    case ShaderType::FLOAT4:  return 4;
+                    case ShaderType::MAT3:    return 3; // 3* float3
+                    case ShaderType::MAT4:    return 4; // 4* float4
+                    case ShaderType::INT:     return 1;
+                    case ShaderType::INT2:    return 2;
+                    case ShaderType::INT3:    return 3;
+                    case ShaderType::INT4:    return 4;
+                    case ShaderType::BOOL:    return 1;
+                    case ShaderType::None:    break;
+                }
+
+                return 0;
+            }
+        };
+
         class BufferLayout
         {
+        public:
+            BufferLayout() {}
+            BufferLayout(std::initializer_list<BufferElement> __elements) : elements(__elements)
+            {
+                CalculateOffsetAndStride();
+            }
 
+            const v_uint32t GetStride() const { return stride; }
+            const std::vector<BufferElement>& GetElements() const { return elements; }
+
+            std::vector<BufferElement>::iterator begin() { return elements.begin(); }
+            std::vector<BufferElement>::iterator end()   { return elements.end();   }
+
+            std::vector<BufferElement>::const_iterator begin() const { return elements.begin(); }
+            std::vector<BufferElement>::const_iterator end() const   { return elements.end();   }
+
+        private:
+            v_uint32t stride;
+            std::vector<BufferElement> elements;
+            void CalculateOffsetAndStride()
+            {
+                size_t offset = 0;
+                stride = 0;
+                for(auto& elem : elements)
+                {
+                    elem.offset = offset;
+                    offset += elem.size;
+                    stride += elem.size;
+                }
+            }
         };
 
         // Currently Hazel only supports 32-bit index buffers
@@ -97,7 +166,7 @@ namespace zenith
             virtual ~VertexBuffer() = default;
 
             virtual void Bind() const = 0;
-            virtual void UnBind() const = 0;
+            virtual void Unbind() const = 0;
 
             virtual void SetData(const void* data, v_uint32t size) = 0;
             virtual const BufferLayout& GetLayout() const = 0;

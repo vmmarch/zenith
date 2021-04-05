@@ -49,8 +49,8 @@ add_executable(
 
 		### render/model
 		render/model/buf.cpp
-		render/model/opengl-veca.cpp
-		render/model/opengl-buf.cpp
+		platform/opengl/opengl-veca.cpp
+		platform/opengl/opengl-buf.cpp
 
 		### =================================================================================
 		### platform

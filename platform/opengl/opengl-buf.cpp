@@ -21,7 +21,6 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
 #include "opengl-buf.h"
 #include "api/opengl/glfw-api.h"
 
@@ -47,12 +46,12 @@ namespace zenith::buf
 
     void OpenGLVecBuf::Bind() const
     {
-        glBindBuffer(GL_ARRAY_BUFFER, rendererId);
+        __glBindArrayBuffer__(rendererId);
     }
 
-    void OpenGLVecBuf::UnBind() const
+    void OpenGLVecBuf::Unbind() const
     {
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        __glUnbindArrayBuffer__()
     }
 
     void OpenGLVecBuf::SetData(const void *data, uint32_t size)
@@ -81,7 +80,12 @@ namespace zenith::buf
 
     void OpenGLIndexBuf::Bind() const
     {
-        glBindBuffer(GL_ARRAY_BUFFER, rendererId);
+        __glBindElemArrayBuffer__(rendererId);
+    }
+
+    void OpenGLIndexBuf::Unbind() const
+    {
+        __glUnbindElemArrayBuffer__();
     }
 
 }

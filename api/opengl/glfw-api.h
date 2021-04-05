@@ -27,4 +27,8 @@
 #include <GLFW/glfw3.h>
 
 #define __glDeleteBuffer__(bufs)                         { glDeleteBuffers(1, &bufs); }
-#define __glCreateArrayBuffer__(bufs, size, data, usage) { glCreateBuffers(1, &bufs); glBindBuffer(GL_ARRAY_BUFFER, bufs); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
+#define __glCreateArrayBuffer__(bufs, size, data, usage) { glGenBuffers(1, &bufs); glBindBuffer(GL_ARRAY_BUFFER, bufs); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
+#define __glBindArrayBuffer__(bufs)                      { glBindBuffer(GL_ARRAY_BUFFER, bufs); }
+#define __glBindElemArrayBuffer__(bufs)                  { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufs); }
+#define __glUnbindElemArrayBuffer__()                    { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
+#define __glUnbindArrayBuffer__()                        { glBindBuffer(GL_ARRAY_BUFFER, 0); }

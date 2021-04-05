@@ -32,7 +32,7 @@ namespace zenith
         void SetProjection(float top, float bottom, float left, float right );
 
         [[nodiscard]] float GetRotation() const { return m_Rotation; }
-        float SetRotation(float rotation) { m_Rotation = rotation; }
+        float SetRotation(float rotation) { return m_Rotation = rotation; }
 
         [[nodiscard]] const glm::mat4& GetProjectionMatrix() const { return m_ProjectionMatrix; }
         [[nodiscard]] const glm::mat4& GetViewMatrix() const { return m_ViewMatrix; }

@@ -25,6 +25,7 @@
 #include "tool/timestep.h"
 #include "event/mouse-event.h"
 #include "event/window-event.h"
+#include "render/camera/ortho-graphics-camera.h"
 
 namespace zenith
 {
@@ -41,7 +42,7 @@ namespace zenith
         const OrthoGraphicsCamera& GetCamera() const { return m_Camera; }
 
         float GetZoomLevel() const { return m_ZoomLevel; }
-        float SetZoomLevel(float level) { m_ZoomLevel = level; }
+        float SetZoomLevel(float level) { return m_ZoomLevel = level; }
 
     private:
         float m_ZoomLevel = 1.0f;

@@ -21,7 +21,7 @@
 /*!
  * @author 2B键盘
  */
-#include "vec.h"
+#include "render/model/vec.h"
 
 namespace zenith
 {
@@ -37,13 +37,13 @@ namespace zenith
         void AddVertexBuffer(const Ref<buf::VertexBuffer>& vertexBuffers) override;
         virtual void SetIndexBuffer(const Ref<buf::IndexBuffer>& indexBuffer) override;
 
-        virtual const std::vector<Ref<buf::VertexBuffer>>& GetVertexBuffers() const;
-        virtual const Ref<buf::IndexBuffer>& GetIndexBuffer() const { return m_IndexBuffer; }
+        virtual const std::vector<Ref<buf::VertexBuffer>>& GetVertexBuffers() const { return vertexBuffers; }
+        virtual const Ref<buf::IndexBuffer>& GetIndexBuffer() const { return indexBuffer; }
 
     private:
         v_uint32t rendererId;
-        v_uint32t m_VertexBufferIndex = 0;
-        std::vector<Ref<buf::VertexBuffer>> m_VertexBuffers;
-        Ref<buf::IndexBuffer> m_IndexBuffer;
+        v_uint32t vertexBufferIndex = 0;
+        std::vector<Ref<buf::VertexBuffer>> vertexBuffers;
+        Ref<buf::IndexBuffer> indexBuffer;
     };
 }
