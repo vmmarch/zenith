@@ -31,17 +31,17 @@ namespace zenith
     void Application::OnEvent(Event &event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<WindowCloseEvent>(__ZENITH_BIND_EVENT_FN__(Application::OnClose));
-        dispatcher.Dispatch<WindowResizeEvent>(__ZENITH_BIND_EVENT_FN__(Application::OnResize));
+        dispatcher.Dispatch<WindowCloseEvent>(__ZENITH_BIND_EVENT_FN__(Application::WindowClose));
+        dispatcher.Dispatch<WindowResizeEvent>(__ZENITH_BIND_EVENT_FN__(Application::WindowResize));
     }
 
-    bool Application::OnClose(WindowCloseEvent& event)
+    bool Application::WindowClose(WindowCloseEvent& event)
     {
         this->m_Running = false;
         return true;
     }
 
-    bool Application::OnResize(WindowResizeEvent& event)
+    bool Application::WindowResize(WindowResizeEvent& event)
     {
         v_uint width, height;
         event.GetSize(&width, &height);
@@ -67,10 +67,12 @@ namespace zenith
 
         window->SetEventCallbackFn(__ZENITH_BIND_EVENT_FN__(Application::OnEvent));
 
-        while(!m_Running)
+        while(m_Running)
         {
             window->OnUpdate();
         }
+
+        window->CloseWindow();
 
     }
 }

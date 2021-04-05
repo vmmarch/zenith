@@ -34,12 +34,12 @@ namespace zenith
     {
     public:
         void OnEvent(Event&);
-        bool OnClose(WindowCloseEvent&);
-        bool OnResize(WindowResizeEvent&);
+        bool WindowClose(WindowCloseEvent&);
+        bool WindowResize(WindowResizeEvent&);
         void StartEngine();
 
     private:
         bool m_Minimized = true;
-        bool m_Running = false;
+        bool m_Running = true;
     };
 }
