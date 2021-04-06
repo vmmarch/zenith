@@ -23,13 +23,13 @@
  */
 #pragma once
 
-#include <zenith.h>
+#include <xm.h>
 #include "event.h"
 #include <functional>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-namespace zenith
+namespace xm
 {
     struct WindowProps
     {

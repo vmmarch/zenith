@@ -25,13 +25,13 @@
  */
 #pragma once
 
-#define __ENGINE_NAME__ "ZENITH3D ENGINE"
+#define __ENGINE_NAME__ "XM3D ENGINE"
 
 #define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
 
-#ifdef __ZENITH_IN_CHINA__
+#ifdef __XM_IN_CHINA__
 ///////////////////////////////////////////////////////////
-// __ZENITH_IN_CHINA__
+// __XM_IN_CHINA__
 #define __ERROR__ "错误："
 
 // MENU MESSAGE

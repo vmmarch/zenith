@@ -1,5 +1,5 @@
-# ZENITH ENGINE
-Zenith game engine for 3D.
+# xm ENGINE
+xm game engine for 3D.
 
 # Code Style
 

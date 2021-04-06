@@ -22,27 +22,38 @@
  * @author 2B键盘
  */
 #pragma once
-#include <zenith.h>
-#include "event.h"
-#include "tool/timestep.h"
 
-namespace zenith
+#include "native-window.h"
+
+namespace xm::platform::windows
 {
-    class Layer
+    class Window : public NativeWindow
     {
     public:
-        Layer(v_cc name) : __DebugName(name) {}
-        virtual ~Layer() = default;
+        explicit Window(const v_winprops&);
+        ~Window() override;
+        void Initialize(const v_winprops &);
+        void OnUpdate() override;
+        void GetSize(int &, int &) const override;
+        void SetEventCallbackFn(const f_EventCallbackFn &) override;
+        void SetVSync(bool) override;
+        bool GetVSync() override;
+        void CloseWindow() override;
+        bool IsClose() const override;
+        void* GetWindowHandle() const { return __Window; };
 
-        virtual void OnAttach();
-        virtual void OnDetach();
-        virtual void OnUpdate(Timestep timestep);
-        virtual void OnImGuiRender();
-        virtual void OnEvent(Event&);
+    private:
+        struct WindowInfo
+        {
+            v_cc Title;
+            v_uint Width, Height;
+            bool VSync;
 
-        v_cc GetName() const { return __DebugName; }
+            f_EventCallbackFn EventCallback;
+        };
+        typedef WindowInfo v_info;
 
-    protected:
-        v_cc __DebugName;
+        v_info __Info;
+        GLFWwindow *__Window;
     };
 }

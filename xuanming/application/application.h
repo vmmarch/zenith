@@ -16,26 +16,35 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/5. <=== */
+/*! ===> Creates on 2021/4/3. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-namespace zenith
+#include <xm.h>
+#include "event/window-event.h"
+#include <xm/globalization.h>
+#include <vector>
+#include "event.h"
+#include "layer/layer.h"
+#include "native-window.h"
+
+namespace xm
 {
-    class Timestep
+    class Application
     {
     public:
-        Timestep(float time = 0.0f) : m_Time(time) {}
-
-        operator float() const { return m_Time; }
-
-        float GetSeconds() const { return m_Time; }
-        float GetMilliseconds() const { return m_Time * 1000.0f; }
-
+        void OnEvent(Event&);
+        bool WindowClose(WindowCloseEvent&);
+        bool WindowResize(WindowResizeEvent&);
+        void AddLayer(Layer&);
+        void StartEngine();
+        NativeWindow& GetWindow() { return *__window; }
     private:
-        float m_Time;
+        bool __Minimized = true;
+        bool ___Running = true;
+        v_scope<NativeWindow> __window;
     };
 }

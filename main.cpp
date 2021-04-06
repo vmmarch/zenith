@@ -24,11 +24,11 @@
 #define GLFW_DLL
 
 #include "application.h"
-#include <zenith.h>
+#include <xm.h>
 
 int main(int argc, char **argv)
 {
-    auto app = new zenith::Application();
+    auto app = new xm::Application();
     app->StartEngine();
     return 0;
 }

@@ -23,10 +23,10 @@
  */
 #pragma once
 #include <stdio.h>
-#include <zenith/globalization.h>
+#include <xm/globalization.h>
 
-#ifdef __ZENITH_ENABLE_ASSERT__
-    #define __ZENITH_ASSERT__(check, msg) if(check) printf("%s", msg)
+#ifdef __XM_ENABLE_ASSERT__
+    #define __XM_ASSERT__(check, msg) if(check) printf("%s", msg)
 #else
-    #define __ZENITH_ASSERT__(check, msg) {}
+    #define __XM_ASSERT__(check, msg) {}
 #endif

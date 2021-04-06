@@ -19,8 +19,23 @@
 /*! ===> Creates on 2021/4/3. <=== */
 
 /*!
- * zenith引擎支持的开发语言
- *
  * @author 2B键盘
  */
-#pragma once
+#include "native-window.h"
+
+#ifdef __XM_PLATFORM_WINDOWS__
+#include "platform/windows/window.h"
+#endif
+
+
+namespace xm
+{
+    v_scope<NativeWindow> NativeWindow::Create(const v_winprops &props)
+    {
+#ifdef __XM_PLATFORM_WINDOWS__
+        return CreateScope<platform::windows::Window>(props);
+#else
+        return nullptr;
+#endif
+    }
+}

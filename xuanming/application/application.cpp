@@ -24,14 +24,14 @@
 #include "application.h"
 #include "native-window.h"
 
-namespace zenith
+namespace xm
 {
 
     void Application::OnEvent(Event &event)
     {
         EventDispatcher dispatcher(event);
-        dispatcher.Dispatch<WindowCloseEvent>(__ZENITH_BIND_EVENT_FN__(Application::WindowClose));
-        dispatcher.Dispatch<WindowResizeEvent>(__ZENITH_BIND_EVENT_FN__(Application::WindowResize));
+        dispatcher.Dispatch<WindowCloseEvent>(__XM_BIND_EVENT_FN__(Application::WindowClose));
+        dispatcher.Dispatch<WindowResizeEvent>(__XM_BIND_EVENT_FN__(Application::WindowResize));
     }
 
     bool Application::WindowClose(WindowCloseEvent& event)
@@ -61,7 +61,7 @@ namespace zenith
         props.Width = 1200;
         props.Height = 900;
         __window = NativeWindow::Create(props);
-        __window->SetEventCallbackFn(__ZENITH_BIND_EVENT_FN__(Application::OnEvent));
+        __window->SetEventCallbackFn(__XM_BIND_EVENT_FN__(Application::OnEvent));
 
         while(___Running)
         {

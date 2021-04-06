@@ -26,7 +26,7 @@
 #include "event.h"
 #include "mouse-codes.h"
 
-namespace zenith
+namespace xm
 {
     class MouseMovedEvent : public Event
     {

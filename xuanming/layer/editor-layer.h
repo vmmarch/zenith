@@ -29,7 +29,7 @@
 #include "render/model/vec.h"
 #include "render/shader/shader.h"
 
-namespace zenith
+namespace xm
 {
     class EditorLayer : public Layer
     {

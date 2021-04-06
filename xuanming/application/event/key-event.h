@@ -29,7 +29,7 @@
 #define __PRESS__  0
 #define __REPEAT__ 1
 
-namespace zenith
+namespace xm
 {
 
     class KeyEvent : public Event

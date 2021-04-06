@@ -19,32 +19,8 @@
 /*! ===> Creates on 2021/4/3. <=== */
 
 /*!
+ * xm引擎支持的开发语言
+ *
  * @author 2B键盘
  */
 #pragma once
-
-namespace zenith
-{
-	using v_mousecode = char16_t;
-
-	namespace mouse
-	{
-		enum : v_mousecode
-		{
-			// From glfw3.h
-			Button0                = 0,
-			Button1                = 1,
-			Button2                = 2,
-			Button3                = 3,
-			Button4                = 4,
-			Button5                = 5,
-			Button6                = 6,
-			Button7                = 7,
-
-			ButtonLast             = Button7,
-			ButtonLeft             = Button0,
-			ButtonRight            = Button1,
-			ButtonMiddle           = Button2
-		};
-	}
-}

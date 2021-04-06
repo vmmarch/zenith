@@ -26,9 +26,9 @@
 #pragma ide diagnostic ignored "modernize-use-nodiscard"
 
 #include <sstream>
-#include <zenith.h>
+#include <xm.h>
 
-namespace zenith {
+namespace xm {
 
     // Events in Hazel are currently blocking, meaning when an event occurs it
     // immediately gets dispatched and must be dealt with right then an there.

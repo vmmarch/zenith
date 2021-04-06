@@ -24,7 +24,7 @@
 #include "editor-layer.h"
 #include <imgui-api.h>
 
-namespace zenith
+namespace xm
 {
 
     EditorLayer::EditorLayer()

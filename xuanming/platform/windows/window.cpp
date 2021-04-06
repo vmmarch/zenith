@@ -30,16 +30,16 @@
 #include "event/key-event.h"
 #include "event/mouse-event.h"
 
-namespace zenith::platform::windows
+namespace xm::platform::windows
 {
     static uint8_t s_GLFWwindowCount = 0;
 
     static void GLFWErrorCallback(int error, v_cc description)
     {
-        // __ZENITH_ERROR__("GLFW Error ({}): {}", error, description);
+        // __XM_ERROR__("GLFW Error ({}): {}", error, description);
     }
 
-    Window::Window(const zenith::v_winprops &props)
+    Window::Window(const xm::v_winprops &props)
     {
         Initialize(props);
     }
@@ -54,14 +54,14 @@ namespace zenith::platform::windows
         __Info.Height = props.Height;
 
         // TODO ADD LOGGER.;
-        // __ZENITH_INFO__("Create window {0} ({1}, {2})", __Info.Title, __Info.Width, __Info.Height);
+        // __XM_INFO__("Create window {0} ({1}, {2})", __Info.Title, __Info.Width, __Info.Height);
 
         if (s_GLFWwindowCount == 0)
         {
             int success = glfwInit();
 // TODO ADD LOGGER.;
 //            if (!success)
-//                __ZENITH_ERROR__("Could not initialize GLFW~");
+//                __XM_ERROR__("Could not initialize GLFW~");
 
             glfwSetErrorCallback(GLFWErrorCallback);
         }

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(zenith)
+project(xuanming)
 
 ################################################
 ### for vendor dir.
@@ -22,9 +22,9 @@ aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 set(CMAKE_CXX_STANDARD 20)
 
 add_definitions(
-		-D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
-		-D__ZENITH_IN_CHINA__							# 引擎语言为中文
-		-D__ZENITH_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
+		-D__XM_PLATFORM_WINDOWS__                   # 编译平台为Windows
+		-D__XM_IN_CHINA__							# 引擎语言为中文
+		-D__XM_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
 )
 
 link_libraries(imm32)
@@ -34,8 +34,8 @@ add_executable(
 		${PROJECT_NAME} main.cpp glad.c
 		### =================================================================================
 		### application
-		application/application.cpp
-		application/native-window.cpp
+		xuanming/application/application.cpp
+		xuanming/application/native-window.cpp
 
 		### =================================================================================
 		### render
@@ -54,7 +54,7 @@ add_executable(
 
         ### =================================================================================
 		### platform
-		platform/windows/window.cpp
+		xuanming/platform/windows/window.cpp
 
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp

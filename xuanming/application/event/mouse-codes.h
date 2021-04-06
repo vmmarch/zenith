@@ -21,21 +21,30 @@
 /*!
  * @author 2B键盘
  */
-#include "native-window.h"
+#pragma once
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-#include "platform/windows/window.h"
-#endif
-
-
-namespace zenith
+namespace xm
 {
-    v_scope<NativeWindow> NativeWindow::Create(const v_winprops &props)
-    {
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-        return CreateScope<platform::windows::Window>(props);
-#else
-        return nullptr;
-#endif
-    }
+	using v_mousecode = char16_t;
+
+	namespace mouse
+	{
+		enum : v_mousecode
+		{
+			// From glfw3.h
+			Button0                = 0,
+			Button1                = 1,
+			Button2                = 2,
+			Button3                = 3,
+			Button4                = 4,
+			Button5                = 5,
+			Button6                = 6,
+			Button7                = 7,
+
+			ButtonLast             = Button7,
+			ButtonLeft             = Button0,
+			ButtonRight            = Button1,
+			ButtonMiddle           = Button2
+		};
+	}
 }

@@ -23,7 +23,7 @@
  */
 #pragma once
 
-namespace zenith
+namespace xm
 {
 	using v_keycode = char16_t;
 	

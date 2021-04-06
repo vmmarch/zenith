@@ -21,8 +21,8 @@
 /*!
  * @author 2B键盘
  */
-#ifndef ZENITH_IMGUI_ENV_H
-#define ZENITH_IMGUI_ENV_H
+#ifndef XM_IMGUI_ENV_H
+#define XM_IMGUI_ENV_H
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dear ImGui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
@@ -81,4 +81,4 @@ static void glfw_error_callback(int error, const char *description)
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#endif // ===> ZENITH_IMGUI_ENV_H <===
+#endif // ===> XM_IMGUI_ENV_H <===

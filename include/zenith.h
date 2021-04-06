@@ -42,7 +42,7 @@ constexpr v_scope<T> CreateScope(Args&& ... args)
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
-namespace zenith
+namespace xm
 {
         template<typename T>
         using Ref = std::shared_ptr<T>;
@@ -53,21 +53,21 @@ namespace zenith
         }
 }
 
-#define __ZENITH_INFO__(...)
-#define __ZENITH_DEBUG__(...)
-#define __ZENITH_WARN__(...)
-#define __ZENITH_ERROR__(...)
+#define __XM_INFO__(...)
+#define __XM_DEBUG__(...)
+#define __XM_WARN__(...)
+#define __XM_ERROR__(...)
 
 #define __BIT__(x) (1 << x)
 
-#define __ZENITH_BIND_EVENT_FN__(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
+#define __XM_BIND_EVENT_FN__(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-    #ifdef __ZENITH_BUILD_DLL__
-        #define ZENITH_API __declspec(dllexport)
+#ifdef __XM_PLATFORM_WINDOWS__
+    #ifdef __XM_BUILD_DLL__
+        #define XM_API __declspec(dllexport)
     #else
-        #define ZENITH_API __declspec(dllimport)
+        #define XM_API __declspec(dllimport)
     #endif
 #else
-    #error Zenith only support Windows platform!
+    #error xm only support Windows platform!
 #endif
