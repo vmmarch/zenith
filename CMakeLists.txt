@@ -49,13 +49,25 @@ add_executable(
 
 		### render/model
 		render/model/buf.cpp
-		platform/opengl/opengl-veca.cpp
-		platform/opengl/opengl-buf.cpp
+
+		### render/shader
+		render/shader/shader.cpp
+
+		### =================================================================================
+		### layer
+		layer/editor-layer.cpp
+
+		### =================================================================================
+		### scene
+		scene/scene.cpp
 
 		### =================================================================================
 		### platform
 		platform/opengl/opengl-context.cpp
 		platform/opengl/render-impl-opengl.cpp
+		platform/opengl/opengl-shader.cpp
+		platform/opengl/opengl-veca.cpp
+		platform/opengl/opengl-buf.cpp
 		platform/windows/window.cpp
 
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp

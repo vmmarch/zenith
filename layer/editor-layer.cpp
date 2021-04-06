@@ -21,37 +21,4 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
-
-#include "layer.h"
-#include "event/key-event.h"
-#include "render/camera/ortho-graphics-camera-controller.h"
-#include "render/model/vec.h"
-
-namespace zenith
-{
-    class EditorLayer : public Layer
-    {
-    public:
-        EditorLayer();
-        virtual ~EditorLayer() = default;
-
-        virtual void OnAttach() override;
-        virtual void OnDetach() override;
-
-        void OnUpdate(Timestep timestep) override;
-        virtual void OnImGuiRender() override;
-        void OnEvent(Event&) override;
-
-    private:
-        OrthoGraphicsCameraController cameraController;
-
-        // temp
-        Ref<vec::VertexArray> __SquareVA;
-
-        void NewScene();
-        void OpenScene();
-        void SaveSceneAs();
-        bool OnKeyPressed(KeyPressedEvent&);
-    };
-}
+#include "editor-layer.h"

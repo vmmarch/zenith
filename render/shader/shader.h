@@ -16,42 +16,35 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/5. <=== */
+/*! ===> Creates on 2021/4/6. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-
-#include "layer.h"
-#include "event/key-event.h"
-#include "render/camera/ortho-graphics-camera-controller.h"
-#include "render/model/vec.h"
+#include <zenith.h>
+#include "api/opengl/glfw-api.h"
+#include <glm/glm.hpp>
 
 namespace zenith
 {
-    class EditorLayer : public Layer
+    class Shader
     {
-    public:
-        EditorLayer();
-        virtual ~EditorLayer() = default;
+        virtual ~Shader();
+        virtual void Bind() const = 0;
+        virtual void Unbind() const = 0;
 
-        virtual void OnAttach() override;
-        virtual void OnDetach() override;
+        virtual void SetInt(v_cc name, int value) = 0;
+        virtual void SetIntArray(v_cc name, int* values, v_uint32t count) = 0;
 
-        void OnUpdate(Timestep timestep) override;
-        virtual void OnImGuiRender() override;
-        void OnEvent(Event&) override;
+        virtual void SetFloat(v_cc name, float value) = 0;
+        virtual void SetFloat2(v_cc name, const glm::vec2& value) = 0;
+        virtual void SetFloat3(v_cc name, const glm::vec3& value) = 0;
+        virtual void SetFloat4(v_cc name, const glm::vec4& value) = 0;
 
-    private:
-        OrthoGraphicsCameraController cameraController;
+        virtual void SetMat4(v_cc name, const glm::mat4& value) = 0;
 
-        // temp
-        Ref<vec::VertexArray> __SquareVA;
-
-        void NewScene();
-        void OpenScene();
-        void SaveSceneAs();
-        bool OnKeyPressed(KeyPressedEvent&);
+        static Ref<Shader> Create(v_cc filepath);
+        static Ref<Shader> Create(v_cc name, v_cc vec_f,v_cc frgm_f);
     };
 }

@@ -25,10 +25,23 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-#define __glDeleteBuffer__(bufs)                         { glDeleteBuffers(1, &bufs); }
-#define __glCreateArrayBuffer__(bufs, size, data, usage) { glGenBuffers(1, &bufs); glBindBuffer(GL_ARRAY_BUFFER, bufs); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
-#define __glBindArrayBuffer__(bufs)                      { glBindBuffer(GL_ARRAY_BUFFER, bufs); }
-#define __glBindElemArrayBuffer__(bufs)                  { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufs); }
-#define __glUnbindElemArrayBuffer__()                    { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
-#define __glUnbindArrayBuffer__()                        { glBindBuffer(GL_ARRAY_BUFFER, 0); }
+#define __glDeleteBuffer__(buf)                                 { glDeleteBuffers(1, &buf); }
+#define __glCreateArrayBuffer__(buf, size, data, usage)         { glGenBuffers(1, &buf); glBindBuffer(GL_ARRAY_BUFFER, buf); \
+                                                                  glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
+#define __glBindArrayBuffer__(buf)                              { glBindBuffer(GL_ARRAY_BUFFER, buf); }
+#define __glBindElemArrayBuffer__(buf)                          { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
+#define __glUnbindElemArrayBuffer__()                           { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
+#define __glUnbindArrayBuffer__()                               { glBindBuffer(GL_ARRAY_BUFFER, 0); }
+#define __glBindProgram__(prog)                                 { glUseProgram(prog); }
+#define __glUnbindProgram__()                                   { glUseProgram(0); }
+#define __glUniform1i__(prog, name, value)                      { glUniform1i(glGetUniformLocation(prog, name), value); }
+#define __glUniformai__(prog, name, count, values)              { glUniform1iv(glGetUniformLocation(prog, name), count, values); } // int array
+#define __glUniform1f__(prog, name, value)                      { glUniform1f(glGetUniformLocation(prog, name), value); }
+#define __glUniform2f__(prog, name, x, y)                       { glUniform2f(glGetUniformLocation(prog, name), x, y); }
+#define __glUniform3f__(prog, name, x, y, z)                    { glUniform3f(glGetUniformLocation(prog, name), x, y, z); }
+#define __glUniform4f__(prog, name, x, y, z, w)                 { glUniform4f(glGetUniformLocation(prog, name), x, y, z, w); }
+#define __glUniformMatrix3fv__(prog, name, mat3)                { glUniformMatrix3fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat3)); }
+#define __glUniformMatrix4fv__(prog, name, mat4)                { glUniformMatrix4fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat4)); }

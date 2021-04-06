@@ -16,33 +16,13 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/6. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
-#include <zenith.h>
-#include "event.h"
-#include "tool/timestep.h"
+#include "scene.h"
 
-namespace zenith
+void f()
 {
-    class Layer
-    {
-    public:
-        Layer(v_cc name) : __DebugName(name) {}
-        virtual ~Layer() = default;
-
-        virtual void OnAttach();
-        virtual void OnDetach();
-        virtual void OnUpdate(Timestep timestep);
-        virtual void OnImGuiRender();
-        virtual void OnEvent(Event&);
-
-        v_cc GetName() const { return __DebugName; }
-
-    private:
-        v_cc __DebugName;
-    };
 }
