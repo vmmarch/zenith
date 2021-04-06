@@ -28,7 +28,7 @@
 namespace xm
 {
 
-    using v_keycode = v_ui16t;
+    using v_keycode = v_ui16;
 
     enum : v_keycode
     {

@@ -28,17 +28,32 @@
 
 typedef const char* v_cc;
 typedef unsigned char v_uc;
-typedef unsigned int v_ui;
-typedef uint8_t v_ui8t;
-typedef uint16_t v_ui16t;
-typedef uint32_t v_ui32t;
+typedef unsigned int v_ui1;
+typedef uint8_t v_ui8;
+typedef uint16_t v_ui16;
+typedef uint32_t v_ui32;
 typedef void* v_any;
+
+// =================================================================
+// vec2
+struct v_vec2
+{
+    v_ui16 x, y;
+    v_vec2(v_ui16 _x, v_ui16 _y) : x(_x), y(_y) {}
+};
+
+static v_vec2 c_vec2(v_ui16 x, v_ui16 y)
+{
+    return v_vec2(x, y);
+}
+
+static const v_vec2 empty_vec2 = c_vec2(0, 0);
 
 template<typename T>
 using v_scope = std::unique_ptr<T>;
 
 template<typename T, typename ... Args>
-constexpr v_scope<T> CreateScope(Args&& ... args)
+constexpr v_scope<T> create_scope(Args&& ... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
@@ -47,8 +62,9 @@ namespace xm
 {
         template<typename T>
         using Ref = std::shared_ptr<T>;
+
         template<typename T, typename... Args>
-        constexpr Ref<T> CreateRef(Args&&... args)
+        constexpr Ref<T> create_ref(Args&&... args)
         {
             return std::make_shared<T>(std::forward<Args>(args)...);
         }

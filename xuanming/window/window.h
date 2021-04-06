@@ -33,7 +33,7 @@ namespace xm
     struct Winprops
     {
         v_cc __Title;
-        v_ui32t __Width, __Height;
+        v_ui32 __Width, __Height;
     };
 
     /**
@@ -45,8 +45,8 @@ namespace xm
         virtual ~Window() = default;
         virtual void setTitle(v_cc) = 0;
         virtual v_cc getTitle() const = 0;
-        virtual v_ui32t getWidth() const = 0;
-        virtual v_ui32t getHeight() const = 0;
+        virtual v_ui32 getWidth() const = 0;
+        virtual v_ui32 getHeight() const = 0;
 
         virtual void on_event() = 0;
         virtual void on_update() = 0;

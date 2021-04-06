@@ -22,36 +22,137 @@
  * @author 2B键盘
  */
 #pragma once
+
 #include "event.h"
 
 namespace xm
 {
-    using mousecode = uint16_t;
+    using v_moucode = v_ui16;
 
-    namespace v_mousecode
+    namespace mouse
     {
-        enum : mousecode
+        enum : v_moucode
         {
             // From glfw3.h
-            Button0                = 0,
-            Button1                = 1,
-            Button2                = 2,
-            Button3                = 3,
-            Button4                = 4,
-            Button5                = 5,
-            Button6                = 6,
-            Button7                = 7,
+            Button0 = 0,
+            Button1 = 1,
+            Button2 = 2,
+            Button3 = 3,
+            Button4 = 4,
+            Button5 = 5,
+            Button6 = 6,
+            Button7 = 7,
 
-            ButtonLast             = Button7,
-            ButtonLeft             = Button0,
-            ButtonRight            = Button1,
-            ButtonMiddle           = Button2
+            ButtonLast = Button7,
+            ButtonLeft = Button0,
+            ButtonRight = Button1,
+            ButtonMiddle = Button2
         };
     }
 
-    class MosueEvent : Event
+    class MouseEvent : Event
     {
+    public:
+        MouseEvent(v_vec2 vec2) : __vec2(vec2)
+        {}
 
+        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(c_vec2(x, y))
+        {};
+
+        MouseEvent(v_moucode vcode) : __mousecode(vcode), __vec2(empty_vec2)
+        {}
+
+        MouseEvent(v_moucode vcode, v_vec2 vec2) : __mousecode(vcode), __vec2(vec2)
+        {}
+
+        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(c_vec2(x, y))
+        {};
+
+        v_ui16 getX()
+        { return __vec2.x; }
+
+        v_ui16 getY()
+        { return __vec2.y; }
+
+        v_vec2 getMouseCoordinate()
+        { return __vec2; };
+
+        v_moucode getMouseCode()
+        { return __mousecode; }
+
+        CLASSIF(event::MOUSE);
+    private:
+        v_vec2 __vec2;
+        v_moucode __mousecode;
+    };
+
+    /**
+     * 鼠标移动
+     */
+    class MouseMovedEvent : public MouseEvent
+    {
+    public:
+        MouseMovedEvent(v_moucode vcode) : MouseEvent(vcode)
+        {}
+
+        MouseMovedEvent(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
+        {}
+
+        MouseMovedEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
+        {}
+
+        TYPE(event::type::MOUSE_MOVED);
+    };
+
+    /**
+     * 鼠标按钮按下
+     */
+    class MouseButtonPressed : public MouseEvent
+    {
+    public:
+        MouseButtonPressed(v_moucode vcode) : MouseEvent(vcode)
+        {}
+
+        MouseButtonPressed(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
+        {}
+
+        MouseButtonPressed(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
+        {}
+
+        TYPE(event::type::MOUSE_PRESSED);
+    };
+
+    /**
+     * 鼠标按钮释放
+     */
+    class MouseButtonReleased : public MouseEvent
+    {
+    public:
+        MouseButtonReleased(v_moucode vcode) : MouseEvent(vcode)
+        {}
+
+        MouseButtonReleased(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
+        {}
+
+        MouseButtonReleased(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
+        {}
+
+        TYPE(event::type::MOUSE_RELEASED);
+    };
+
+    /**
+     * 鼠标按钮释放
+     */
+    class MouseButtonScrolled : public MouseEvent
+    {
+    public:
+        MouseButtonScrolled(v_vec2 vec2) : MouseEvent(vec2)
+        {}
+
+        MouseButtonScrolled(v_ui16 x, v_ui16 y) : MouseEvent(x, y)
+        {}
+
+        TYPE(event::type::MOUSE_SCROLLED);
     };
 
 }

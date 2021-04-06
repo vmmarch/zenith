@@ -34,8 +34,5 @@ namespace xm
         App();
         ~App();
         void startEngine();
-
-    private:
-        Window __window;
     };
 }
