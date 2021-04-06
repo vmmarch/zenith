@@ -23,7 +23,6 @@
  */
 #include "application.h"
 #include "native-window.h"
-#include "render/renderer.h"
 
 namespace zenith
 {
@@ -37,7 +36,7 @@ namespace zenith
 
     bool Application::WindowClose(WindowCloseEvent& event)
     {
-        this->m_Running = false;
+        this->___Running = false;
         return true;
     }
 
@@ -47,13 +46,11 @@ namespace zenith
         event.GetSize(&width, &height);
         if(width == 0 || height == 0)
         {
-            m_Minimized = true;
+            __Minimized = true;
             return false;
         }
 
-        m_Minimized = false;
-        Renderer::OnWindowResize(width, height);
-
+        __Minimized = false;
         return false;
     }
 
@@ -63,16 +60,15 @@ namespace zenith
         props.Title = __ENGINE_NAME__;
         props.Width = 1200;
         props.Height = 900;
-        auto window = NativeWindow::Create(props);
+        __window = NativeWindow::Create(props);
+        __window->SetEventCallbackFn(__ZENITH_BIND_EVENT_FN__(Application::OnEvent));
 
-        window->SetEventCallbackFn(__ZENITH_BIND_EVENT_FN__(Application::OnEvent));
-
-        while(m_Running)
+        while(___Running)
         {
-            window->OnUpdate();
+            __window->OnUpdate();
         }
 
-        window->CloseWindow();
+        __window->CloseWindow();
 
     }
 }

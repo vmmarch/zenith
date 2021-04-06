@@ -24,7 +24,6 @@
 #pragma once
 
 #include "native-window.h"
-#include "render/graphics-context.h"
 
 namespace zenith::platform::windows
 {
@@ -41,6 +40,7 @@ namespace zenith::platform::windows
         bool GetVSync() override;
         void CloseWindow() override;
         bool IsClose() const override;
+        void* GetWindowHandle() const { return __Window; };
 
     private:
         struct WindowInfo
@@ -53,8 +53,7 @@ namespace zenith::platform::windows
         };
         typedef WindowInfo v_info;
 
-        v_info m_Info;
-        GLFWwindow *m_Window;
-        v_scope<GraphicsContext> m_Context;
+        v_info __Info;
+        GLFWwindow *__Window;
     };
 }

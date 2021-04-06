@@ -42,7 +42,7 @@ namespace zenith
 
         v_cc GetName() const { return __DebugName; }
 
-    private:
+    protected:
         v_cc __DebugName;
     };
 }

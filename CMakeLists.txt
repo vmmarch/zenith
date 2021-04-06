@@ -11,6 +11,7 @@ include_directories(SYSTEM vendor/imgui/backends)
 ### for include dir.
 #################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/api)
 include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/application)
 
 ################################################
@@ -38,37 +39,21 @@ add_executable(
 
 		### =================================================================================
 		### render
-		render/graphics-context.cpp
-		render/render-api.cpp
-		render/renderer.cpp
-		render/render-command.cpp
 
 		### render/camera
-		render/camera/ortho-graphics-camera.cpp
-		render/camera/ortho-graphics-camera-controller.cpp
 
 		### render/model
-		render/model/buf.cpp
 
 		### render/shader
-		render/shader/shader.cpp
 
 		### =================================================================================
 		### layer
-		layer/editor-layer.cpp
 
 		### =================================================================================
 		### scene
-		scene/scene.cpp
 
-		### =================================================================================
+        ### =================================================================================
 		### platform
-		platform/opengl/opengl-context.cpp
-		platform/opengl/render-impl-opengl.cpp
-		platform/opengl/opengl-shader.cpp
-		platform/opengl/opengl-veca.cpp
-		platform/opengl/opengl-framebuf.cpp
-		platform/opengl/opengl-buf.cpp
 		platform/windows/window.cpp
 
 		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp

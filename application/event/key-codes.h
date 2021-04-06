@@ -25,7 +25,7 @@
 
 namespace zenith
 {
-	using v_keycode = uint16_t;
+	using v_keycode = char16_t;
 	
 	namespace key
 	{

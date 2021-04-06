@@ -26,7 +26,10 @@
 #include <zenith.h>
 #include "event/window-event.h"
 #include <zenith/globalization.h>
+#include <vector>
 #include "event.h"
+#include "layer/layer.h"
+#include "native-window.h"
 
 namespace zenith
 {
@@ -36,10 +39,12 @@ namespace zenith
         void OnEvent(Event&);
         bool WindowClose(WindowCloseEvent&);
         bool WindowResize(WindowResizeEvent&);
+        void AddLayer(Layer&);
         void StartEngine();
-
+        NativeWindow& GetWindow() { return *__window; }
     private:
-        bool m_Minimized = true;
-        bool m_Running = true;
+        bool __Minimized = true;
+        bool ___Running = true;
+        v_scope<NativeWindow> __window;
     };
 }

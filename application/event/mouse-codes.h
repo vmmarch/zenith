@@ -25,7 +25,7 @@
 
 namespace zenith
 {
-	using v_mousecode = uint16_t;
+	using v_mousecode = char16_t;
 
 	namespace mouse
 	{

@@ -51,6 +51,7 @@ namespace zenith
         virtual bool GetVSync() = 0;
         virtual void CloseWindow()  = 0;
         virtual bool IsClose() const = 0;
+        virtual void* GetWindowHandle() const = 0;
         static v_scope<NativeWindow> Create(const WindowProps &);
     };
 

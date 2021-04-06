@@ -49,12 +49,12 @@ namespace zenith::platform::windows
 
     void Window::Initialize(const v_winprops &props)
     {
-        m_Info.Title = props.Title;
-        m_Info.Width = props.Width;
-        m_Info.Height = props.Height;
+        __Info.Title = props.Title;
+        __Info.Width = props.Width;
+        __Info.Height = props.Height;
 
         // TODO ADD LOGGER.;
-        // __ZENITH_INFO__("Create window {0} ({1}, {2})", m_Info.Title, m_Info.Width, m_Info.Height);
+        // __ZENITH_INFO__("Create window {0} ({1}, {2})", __Info.Title, __Info.Width, __Info.Height);
 
         if (s_GLFWwindowCount == 0)
         {
@@ -66,19 +66,17 @@ namespace zenith::platform::windows
             glfwSetErrorCallback(GLFWErrorCallback);
         }
 
-        m_Window = glfwCreateWindow((int) props.Width, (int) props.Height, props.Title, NULL, NULL);
+        __Window = glfwCreateWindow((int) props.Width, (int) props.Height, props.Title, NULL, NULL);
         s_GLFWwindowCount++;
 
         // Create context.
-        m_Context = GraphicsContext::Create(m_Window);
-        m_Context->Initialize();
 
         // set user pointer
-        glfwSetWindowUserPointer(m_Window, &m_Info);
+        glfwSetWindowUserPointer(__Window, &__Info);
         SetVSync(true);
 
         // set glfw callback
-        glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height)
+        glfwSetWindowSizeCallback(__Window, [](GLFWwindow *window, int width, int height)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
             info.Width = width;
@@ -88,7 +86,7 @@ namespace zenith::platform::windows
             info.EventCallback(event);
         });
 
-        glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window)
+        glfwSetWindowCloseCallback(__Window, [](GLFWwindow *window)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
@@ -96,7 +94,7 @@ namespace zenith::platform::windows
             info.EventCallback(event);
         });
 
-        glfwSetKeyCallback(m_Window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
+        glfwSetKeyCallback(__Window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
@@ -125,7 +123,7 @@ namespace zenith::platform::windows
             }
         });
 
-        glfwSetCharCallback(m_Window, [](GLFWwindow *window, v_uint keycode)
+        glfwSetCharCallback(__Window, [](GLFWwindow *window, v_uint keycode)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
@@ -133,7 +131,7 @@ namespace zenith::platform::windows
             info.EventCallback(event);
         });
 
-        glfwSetMouseButtonCallback(m_Window, [](GLFWwindow *window, int button, int action, int mods)
+        glfwSetMouseButtonCallback(__Window, [](GLFWwindow *window, int button, int action, int mods)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
             switch (action)
@@ -154,7 +152,7 @@ namespace zenith::platform::windows
             }
         });
 
-        glfwSetScrollCallback(m_Window, [](GLFWwindow *window, double x_offset, double y_offset)
+        glfwSetScrollCallback(__Window, [](GLFWwindow *window, double x_offset, double y_offset)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
@@ -162,7 +160,7 @@ namespace zenith::platform::windows
             info.EventCallback(event);
         });
 
-        glfwSetCursorPosCallback(m_Window, [](GLFWwindow *window, double x_pos, double y_pos)
+        glfwSetCursorPosCallback(__Window, [](GLFWwindow *window, double x_pos, double y_pos)
         {
             v_info &info = *(v_info *) glfwGetWindowUserPointer(window);
 
@@ -175,7 +173,6 @@ namespace zenith::platform::windows
     void Window::OnUpdate()
     {
         glfwPollEvents();
-        m_Context->SwapBuffers();
     }
 
     void Window::GetSize(int &w, int &h) const
@@ -185,20 +182,20 @@ namespace zenith::platform::windows
 
     void Window::SetEventCallbackFn(const f_EventCallbackFn &f)
     {
-        m_Info.EventCallback = f;
+        __Info.EventCallback = f;
     }
 
     void Window::SetVSync(bool v_sync)
     {
-        m_Info.VSync = v_sync;
+        __Info.VSync = v_sync;
     }
 
     bool Window::GetVSync()
-    { return m_Info.VSync; }
+    { return __Info.VSync; }
 
     void Window::CloseWindow()
     {
-        glfwDestroyWindow(m_Window);
+        glfwDestroyWindow(__Window);
         s_GLFWwindowCount--;
 
         if (s_GLFWwindowCount == 0)
@@ -206,7 +203,7 @@ namespace zenith::platform::windows
     }
 
     bool Window::IsClose() const
-    { return glfwWindowShouldClose(m_Window); }
+    { return glfwWindowShouldClose(__Window); }
 }
 
 #pragma clang diagnostic pop
