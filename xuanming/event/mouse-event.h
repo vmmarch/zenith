@@ -16,17 +16,42 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/6. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <stdio.h>
-#include <globalization.h>
+#include "event.h"
 
-#ifdef __XM_ENABLE_ASSERT__
-    #define __XM_ASSERT__(check, msg) if(check) printf("%s", msg)
-#else
-    #define __XM_ASSERT__(check, msg) {}
-#endif
+namespace xm
+{
+    using mousecode = uint16_t;
+
+    namespace v_mousecode
+    {
+        enum : mousecode
+        {
+            // From glfw3.h
+            Button0                = 0,
+            Button1                = 1,
+            Button2                = 2,
+            Button3                = 3,
+            Button4                = 4,
+            Button5                = 5,
+            Button6                = 6,
+            Button7                = 7,
+
+            ButtonLast             = Button7,
+            ButtonLeft             = Button0,
+            ButtonRight            = Button1,
+            ButtonMiddle           = Button2
+        };
+    }
+
+    class MosueEvent : Event
+    {
+
+    };
+
+}

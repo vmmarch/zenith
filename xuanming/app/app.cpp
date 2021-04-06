@@ -16,16 +16,29 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/6. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "app/app.h"
-int main(int argc, char **argv)
+#include "app.h"
+
+namespace xm
 {
-    auto __app = new xm::App();
-    __app->startEngine();
-    return 0;
+
+    App::App()
+    {
+
+    }
+
+    App::~App()
+    {
+
+    }
+
+    void App::startEngine()
+    {
+
+    }
+
 }

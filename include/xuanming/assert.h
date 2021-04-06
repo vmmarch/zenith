@@ -16,16 +16,17 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "app/app.h"
-int main(int argc, char **argv)
-{
-    auto __app = new xm::App();
-    __app->startEngine();
-    return 0;
-}
+#pragma once
+#include <stdio.h>
+#include <xm/globalization.h>
+
+#ifdef __XM_ENABLE_ASSERT__
+    #define __XM_ASSERT__(check, msg) if(check) printf("%s", msg)
+#else
+    #define __XM_ASSERT__(check, msg) {}
+#endif

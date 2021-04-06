@@ -27,11 +27,12 @@
 #include <iostream>
 
 typedef const char* v_cc;
-typedef unsigned char v_uchar;
-typedef unsigned int v_uint;
-typedef uint8_t v_uint8t;
-typedef uint16_t v_uint16t;
-typedef uint32_t v_uint32t;
+typedef unsigned char v_uc;
+typedef unsigned int v_ui;
+typedef uint8_t v_ui8t;
+typedef uint16_t v_ui16t;
+typedef uint32_t v_ui32t;
+typedef void* v_any;
 
 template<typename T>
 using v_scope = std::unique_ptr<T>;
