@@ -1,18 +1,20 @@
 cmake_minimum_required(VERSION 3.17)
 project(xuanming)
 
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/xuanming SOURCE)
+
 ################################################
 ### for vendor dir.
 ################################################
-include_directories(SYSTEM vendor/imgui)
-include_directories(SYSTEM vendor/imgui/backends)
+include_directories(SYSTEM dependencies/imgui)
+include_directories(SYSTEM dependencies/imgui/backends)
 
 ################################################
 ### for include dir.
 #################################################
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/api)
-include_directories(${PROJECT_NAME} ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/application)
+include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/project-include)
 
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
@@ -30,39 +32,15 @@ add_definitions(
 link_libraries(imm32)
 link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
-add_executable(
-		${PROJECT_NAME} main.cpp glad.c
-		### =================================================================================
-		### application
-		xuanming/application/application.cpp
-		xuanming/application/native-window.cpp
-
-		### =================================================================================
-		### render
-
-		### render/camera
-
-		### render/model
-
-		### render/shader
-
-		### =================================================================================
-		### layer
-
-		### =================================================================================
-		### scene
-
-        ### =================================================================================
-		### platform
-		xuanming/platform/windows/window.cpp
-
-		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui.cpp
-		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_draw.cpp
-		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_demo.cpp
-		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_widgets.cpp
-		${CMAKE_SOURCE_DIR}/vendor/imgui/imgui_tables.cpp
-		${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_glfw.cpp
-		${CMAKE_SOURCE_DIR}/vendor/imgui/backends/imgui_impl_opengl3.cpp
+add_executable( ${PROJECT_NAME}
+		${SOURCE}
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/imgui.cpp
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/imgui_draw.cpp
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/imgui_demo.cpp
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/imgui_widgets.cpp
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/imgui_tables.cpp
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/backends/imgui_impl_glfw.cpp
+		${CMAKE_SOURCE_DIR}/dependencies/imgui/backends/imgui_impl_opengl3.cpp
 )
 
 install(

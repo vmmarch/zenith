@@ -16,24 +16,17 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/4. <=== */
 
 /*!
- * @author mmc1234
+ * @author 2B键盘
  */
-template <typename T>
-class CircularQueue {
-	public:
-		void Add(T &t);
-		void Poll(T &t);
-		CircularQueue(int maxSizeIn) {
-			dataArray = new T*[maxSizeIn];
-			// TODO CHECK MAX_SIZE_IN
-			maxSize = readPos = maxSizeIn;
-			writePos = 0;
-		}
-	private:
-		int maxSize;
-		T **dataArray;
-		int readPos, writePos;
-};
+#pragma once
+#include <stdio.h>
+#include <globalization.h>
+
+#ifdef __XM_ENABLE_ASSERT__
+    #define __XM_ASSERT__(check, msg) if(check) printf("%s", msg)
+#else
+    #define __XM_ASSERT__(check, msg) {}
+#endif

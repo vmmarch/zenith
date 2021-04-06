@@ -1,3 +1,3 @@
 cd ..
-cd vendor/imgui
+cd dependencies/imgui
 git checkout docking

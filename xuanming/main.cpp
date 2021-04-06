@@ -16,9 +16,15 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/3. <=== */
+/*! ===> Creates on 2021/4/1. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
+#include <iostream>
+
+int main(int argc, char **argv)
+{
+    std::cout << "Hello World" << std::endl;
+    return 0;
+}
