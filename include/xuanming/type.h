@@ -42,12 +42,12 @@ struct v_vec2
     v_vec2(v_ui16 _x, v_ui16 _y) : x(_x), y(_y) {}
 };
 
-static v_vec2 c_vec2(v_ui16 x, v_ui16 y)
+static v_vec2 create_vec2(v_ui16 x, v_ui16 y)
 {
     return v_vec2(x, y);
 }
 
-static const v_vec2 empty_vec2 = c_vec2(0, 0);
+static const v_vec2 empty_vec2 = create_vec2(0, 0);
 
 template<typename T>
 using v_scope = std::unique_ptr<T>;

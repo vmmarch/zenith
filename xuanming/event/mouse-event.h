@@ -56,7 +56,7 @@ namespace xm
         MouseEvent(v_vec2 vec2) : __vec2(vec2)
         {}
 
-        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(c_vec2(x, y))
+        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(create_vec2(x, y))
         {};
 
         MouseEvent(v_moucode vcode) : __mousecode(vcode), __vec2(empty_vec2)
@@ -65,7 +65,7 @@ namespace xm
         MouseEvent(v_moucode vcode, v_vec2 vec2) : __mousecode(vcode), __vec2(vec2)
         {}
 
-        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(c_vec2(x, y))
+        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(create_vec2(x, y))
         {};
 
         v_ui16 getX()
