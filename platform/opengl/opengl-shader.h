@@ -33,7 +33,7 @@ namespace zenith
     public:
         OpenGLShader(v_cc filepaht);
         OpenGLShader(v_cc name, v_cc vec_f, v_cc frgm_f);
-        virtual ~OpenGLShader();
+        virtual ~OpenGLShader() override;
         void Bind() const override;
         void Unbind() const override;
 

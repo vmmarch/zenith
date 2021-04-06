@@ -175,5 +175,63 @@ namespace zenith
             static Ref<VertexBuffer> Create(v_uint32t size);
             static Ref<VertexBuffer> Create(float* vertices, v_uint32t size);
         };
+
+        enum class FramebufTextureFormat
+        {
+            None = 0,
+
+            // Color
+            RGBA8,
+
+            // Depth/stencil
+            DEPTH24STENCIL8,
+
+            // Defaults
+            Depth = DEPTH24STENCIL8
+        };
+
+        struct FramebufTextureSpecification
+        {
+            FramebufTextureSpecification() = default;
+            FramebufTextureSpecification(FramebufTextureFormat format)
+            : TextureFormat(format) {}
+
+            FramebufTextureFormat TextureFormat = FramebufTextureFormat::None;
+            // TODO: filtering/wrap
+        };
+
+        struct FramebufAttachmentSpecification
+        {
+            FramebufAttachmentSpecification() = default;
+            FramebufAttachmentSpecification(std::initializer_list<FramebufTextureSpecification> attachments) : __Attachments(attachments)
+            {
+            }
+
+            std::vector<FramebufTextureSpecification> __Attachments;
+        };
+
+        struct FramebufSpecification
+        {
+            v_uint32t __Width = 0, __Height = 0;
+            FramebufAttachmentSpecification __Attachments;
+            v_uint32t __Samples = 1;
+
+            bool __SwapChainTarget = false;
+        };
+
+        class Framebuf
+        {
+        public:
+            virtual ~Framebuf() = default;
+            virtual void Bind() = 0;
+            virtual void Unbind() = 0;
+
+            virtual void Resize(v_uint32t width, v_uint32t height) = 0;
+            virtual v_uint32t GetColorAttachmentRendererId(v_uint32t index = 0) const = 0;
+            virtual const FramebufSpecification& GetSpecification() const = 0;
+
+            static Ref<Framebuf> Create(const FramebufSpecification& spec);
+        };
+
     }
 }

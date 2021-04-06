@@ -155,8 +155,9 @@ namespace zenith
                     (pos == std::string::npos) ? source.substr(nextLinePos).c_str()
                                                : source.substr(nextLinePos, pos - nextLinePos).c_str();
 
-            return shaderSources;
         }
+
+        return shaderSources;
     }
 
     void OpenGLShader::Compile(std::unordered_map<GLenum, v_cc> &shaderSources)

@@ -67,6 +67,7 @@ add_executable(
 		platform/opengl/render-impl-opengl.cpp
 		platform/opengl/opengl-shader.cpp
 		platform/opengl/opengl-veca.cpp
+		platform/opengl/opengl-framebuf.cpp
 		platform/opengl/opengl-buf.cpp
 		platform/windows/window.cpp
 

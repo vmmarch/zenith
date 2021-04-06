@@ -27,6 +27,7 @@
 #include "event/key-event.h"
 #include "render/camera/ortho-graphics-camera-controller.h"
 #include "render/model/vec.h"
+#include "render/shader/shader.h"
 
 namespace zenith
 {
@@ -48,6 +49,8 @@ namespace zenith
 
         // temp
         Ref<vec::VertexArray> __SquareVA;
+        Ref<Shader> __FlatColorShader;
+        Ref<buf::Framebuf> __Framebuf;
 
         void NewScene();
         void OpenScene();

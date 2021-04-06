@@ -45,3 +45,8 @@
 #define __glUniform4f__(prog, name, x, y, z, w)                 { glUniform4f(glGetUniformLocation(prog, name), x, y, z, w); }
 #define __glUniformMatrix3fv__(prog, name, mat3)                { glUniformMatrix3fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat3)); }
 #define __glUniformMatrix4fv__(prog, name, mat4)                { glUniformMatrix4fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat4)); }
+#define __glDelFramebuf__(buf)                                  { glDeleteFramebuffers(1, &buf); }
+#define __glDelTexture__(tex)                                   { glDeleteTextures(1, &tex); }
+#define __glCreateFramebuf__(buf)                               { glCreateFramebuffers(1, &buf); }
+#define __glCreateAndBindFramebuf__(buf, tar)                   {  __glCreateFramebuf__(buf); glBindFramebuffer(GL_FRAMEBUFFER, buf); }
+#define __glTextureGLenum__(ms)                                 ( ms ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D )
