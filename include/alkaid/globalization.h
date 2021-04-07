@@ -60,14 +60,14 @@
 #define __OPENGL_SUPPORT_VERSION__ "Zenith3D引擎需要使用4.5以上的OpenGL版本"
 
 // ERROR MESSAGE
-#define __STARTUP_ERROR__ __ENGINE_NAME__ "启动失败"
+#define __STARTUP_ERROR__ __ENGINE_NAME__##"启动失败"
 #define __CREATE_OPENGL_CONTEXT_ERROR__ __ERROR__##"创建OpenGLContext失败。原因：window == NULL"
 #define __INIT_GLAD_ERROR__ __ERROR__##"初始化GLAD失败。"
 #define __APPLY_FONT_ERROR__ __ENGINE_NAME__ __ERROR__##"应用字体失败：未获取到字体信息【%s】" // %s font name
 #define __PLEASE_CHOOSE_RENDER_API__ __ERROR__##"请选择渲染API。"
 #define __NOT_SUPPORT_DIRECTX_API__ __ERROR__##"暂不支持DirectX。"
 #define __UNKNOWN_SHADER_TYPE__ __ERROR__##"位置着色器类型"
-
+#define __LOAD_GLAD_FAILED__ __ERROR__##"加载GLAD失败"
 ///////////////////////////////////////////////////////////
 #else
 #error error message not support other country

@@ -26,7 +26,7 @@
 
 namespace alkaid
 {
-    v_scope<GraphicsContext> GraphicsContext::__create(v_any context)
+    v_scope<GraphicsContext> GraphicsContext::__create(v_any window)
     {
         return nullptr;
     }

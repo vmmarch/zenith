@@ -22,17 +22,18 @@
  * @author 2B键盘
  */
 #pragma once
-#include <alkaid/type.h>
+#include "render/graphics-context.h"
+#include <api/glfw-api.h>
 
 namespace alkaid
 {
-    /**
-     * 渲染图形上下文管理
-     */
-    class GraphicsContext
+    class OpenGLGraphicsContext : GraphicsContext
     {
     public:
-        virtual void swap_buffers(); // 交换缓冲区
-        static v_scope<GraphicsContext> __create(v_any window);
+        OpenGLGraphicsContext(GLFWwindow* window);
+        void initialize();
+        void swap_buffers() override;
+    private:
+        GLFWwindow* window;
     };
 }

@@ -21,18 +21,33 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
-#include <alkaid/type.h>
+#include "opengl-graphics-context.h"
 
 namespace alkaid
 {
-    /**
-     * 渲染图形上下文管理
-     */
-    class GraphicsContext
+
+    OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow* window)
     {
-    public:
-        virtual void swap_buffers(); // 交换缓冲区
-        static v_scope<GraphicsContext> __create(v_any window);
-    };
+        this->window = window;
+        initialize();
+    }
+
+    void OpenGLGraphicsContext::initialize()
+    {
+        glfwMakeContextCurrent(this->window);
+        v_suc success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+        if(!success)
+            __ALKAID_ERROR(__LOAD_GLAD_FAILED__);
+
+        __ALKAID_INFO(__OPENGL_INFO__);
+        __ALKAID_INFO(__VENDOR_INFO__, __glGetVendor());
+        __ALKAID_INFO(__RENDER_INFO__, __glGetRender());
+        __ALKAID_INFO(__VERSION_INFO__, __glGetVersion());
+    }
+
+    void OpenGLGraphicsContext::swap_buffers()
+    {
+        glfwSwapBuffers(this->window);
+    }
+
 }

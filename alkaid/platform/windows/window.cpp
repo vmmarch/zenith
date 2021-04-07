@@ -32,6 +32,7 @@ namespace alkaid::win
 
     WinWindow::~WinWindow()
     {
+        glfwTerminate();
     }
 
     /**
@@ -58,8 +59,23 @@ namespace alkaid::win
             glfwTerminate();
         }
 
-        glfwMakeContextCurrent(this->window);
+        graphics_context = GraphicsContext::__create(this->window);
+    }
 
+    void WinWindow::callback()
+    {
+
+    }
+
+    void WinWindow::close_window()
+    {
+        glfwDestroyWindow(window);
+    }
+
+    void WinWindow::on_update()
+    {
+        glfwPollEvents();
+        graphics_context->swap_buffers();
     }
 
 }
