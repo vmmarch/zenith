@@ -34,5 +34,9 @@ namespace alkaid
         App();
         ~App();
         void start_engine();
+
+    private:
+        v_suc running = true;
+        v_scope<Window> window;
     };
 }

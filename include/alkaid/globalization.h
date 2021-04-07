@@ -68,6 +68,7 @@
 #define __NOT_SUPPORT_DIRECTX_API__ __ERROR__##"暂不支持DirectX。"
 #define __UNKNOWN_SHADER_TYPE__ __ERROR__##"位置着色器类型"
 #define __LOAD_GLAD_FAILED__ __ERROR__##"加载GLAD失败"
+#define __ONLY_SUPPORT_WINDOWS__ __ERROR__##"目前仅支持Windows平台"
 
 ///////////////////////////////////////////////////////////
 #else

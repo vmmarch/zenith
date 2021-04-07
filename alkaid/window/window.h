@@ -33,8 +33,11 @@ namespace alkaid
      */
     struct v_winprops
     {
-        v_uc* title;
-        v_ui16 width, height;
+        v_cc title;
+        v_ui32 width, height;
+
+        v_winprops(v_cc title, v_ui32 width, v_ui32 height)
+            : title(title), width(width), height(height) {}
     };
 
     /**
@@ -44,16 +47,16 @@ namespace alkaid
     {
     public:
         virtual ~Window() = default;
-        virtual void setTitle(v_uc*) = 0;
-        virtual v_uc* getTitle() const = 0;
-        virtual v_ui16 getWidth() const = 0;
-        virtual v_ui16 getHeight() const = 0;
+        virtual void setTitle(v_cc) = 0;
+        virtual v_cc getTitle() const = 0;
+        virtual v_ui32 getWidth() const = 0;
+        virtual v_ui32 getHeight() const = 0;
 
         virtual bool is_close();
         virtual void on_update() = 0;
         virtual void close_window() = 0;
 
         // 创建Window
-        static v_scope<Window> create(v_winprops);
+        static v_scope<Window> __create(const v_winprops&);
     };
 }

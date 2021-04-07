@@ -38,4 +38,5 @@ namespace alkaid
     private:
         static render::api render_api;
     };
+
 }

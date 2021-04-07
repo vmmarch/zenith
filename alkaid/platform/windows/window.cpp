@@ -28,7 +28,7 @@ namespace alkaid::win
 
     static v_ui1 window_count_of_create = 0;
 
-    WinWindow::WinWindow(v_winprops &winprops)
+    WinWindow::WinWindow(const v_winprops &winprops)
     {
         initialize(winprops);
     }
@@ -42,7 +42,7 @@ namespace alkaid::win
      * 创建窗口并初始化GLFW
      * @param winprops 窗口基本信息（标题、宽度、高度）
      */
-    void WinWindow::initialize(v_winprops &winprops)
+    void WinWindow::initialize(const v_winprops &winprops)
     {
 
         info.title = winprops.title;

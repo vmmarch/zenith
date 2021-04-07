@@ -38,7 +38,12 @@ namespace alkaid
 
     void App::start_engine()
     {
-
+        v_winprops winprops("瑶光引擎", 1400, 900);
+        this->window = Window::__create(winprops);
+        while(running)
+        {
+            this->window->on_update();
+        }
     }
 
 }

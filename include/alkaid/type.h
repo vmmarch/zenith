@@ -36,6 +36,11 @@ typedef uint32_t v_ui32;
 typedef void* v_any;
 typedef int v_suc;
 
+typedef void (*alkaid_noparam_fn)();
+
+template<typename T>
+using v_scope = std::unique_ptr<T>;
+
 // =================================================================
 // vec2
 struct v_vec2
@@ -51,11 +56,8 @@ static v_vec2 create_vec2(v_ui16 x, v_ui16 y)
 
 static const v_vec2 empty_vec2 = create_vec2(0, 0);
 
-template<typename T>
-using v_scope = std::unique_ptr<T>;
-
 template<typename T, typename ... Args>
-constexpr v_scope<T> create_scope(Args&& ... args)
+constexpr v_scope<T> __create_scope(Args&& ... args)
 {
     return std::make_unique<T>(std::forward<Args>(args)...);
 }

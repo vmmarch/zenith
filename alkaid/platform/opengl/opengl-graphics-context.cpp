@@ -30,7 +30,6 @@ namespace alkaid
     {
         this->window = window;
         initialize();
-        callback();
     }
 
     void OpenGLGraphicsContext::initialize()

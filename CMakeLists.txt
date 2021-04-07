@@ -9,6 +9,7 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform SOURCE_PLATFORM
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/windows SOURCE_PLATFORM_WINDOWS)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/opengl SOURCE_PLATFORM_OPENGL)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render SOURCE_RENDER)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/tool SOURCE_TOOL)
 
 ################################################
 ### for dependencies dir.
@@ -47,6 +48,7 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE}
 		${SOURCE_APP} ${SOURCE_WIN} ${SOURCE_EVENT} ${SOURCE_PLATFORM}
 		${SOURCE_PLATFORM_WINDOWS} ${SOURCE_PLATFORM_OPENGL} ${SOURCE_RENDER}
+		${SOURCE_TOOL}
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_demo.cpp

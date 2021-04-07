@@ -29,19 +29,16 @@
 namespace alkaid::win
 {
 
-    class WinWindow : Window
+    class WinWindow : public Window
     {
     public:
-        WinWindow(v_winprops&);
-        ~WinWindow();
+        WinWindow(const v_winprops&);
+        virtual ~WinWindow();
 
-        void initialize(v_winprops&);
-        void callback();
-
-        void setTitle(v_uc* title) override { info.title = title; }
-        v_uc* getTitle() const override { return info.title; }
-        v_ui16 getWidth() const override { return info.width; }
-        v_ui16 getHeight() const override { return info.height; }
+        void setTitle(v_cc title) override { info.title = title; }
+        v_cc getTitle() const override { return info.title; }
+        v_ui32 getWidth() const override { return info.width; }
+        v_ui32 getHeight() const override { return info.height; }
         bool is_close() override;
         void close_window() override;
         void on_update() override;
@@ -49,13 +46,16 @@ namespace alkaid::win
     private:
         struct v_info
         {
-            v_uc* title;
-            v_ui16 width, height;
+            v_cc title;
+            v_ui32 width, height;
         };
 
         v_info info;
         GLFWwindow* window;
         v_scope<GraphicsContext> graphics_context;
+
+        void initialize(const v_winprops&);
+        void callback();
     };
 
 }

@@ -39,4 +39,9 @@ namespace alkaid
         return render_api;
     }
 
+    v_scope<Renderer> Renderer::__create()
+    {
+        return nullptr;
+    }
+
 }
