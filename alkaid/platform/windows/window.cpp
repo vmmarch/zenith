@@ -25,6 +25,9 @@
 
 namespace alkaid::win
 {
+
+    static v_ui1 window_count_of_create = 0;
+
     WinWindow::WinWindow(v_winprops &winprops)
     {
         initialize(winprops);
@@ -52,8 +55,11 @@ namespace alkaid::win
         if (!success)
                 __ALKAID_ERROR(__GLFW_INIT_FAILED__);
 
-        this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title), nullptr, nullptr);
-        if(window == nullptr)
+        this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title),
+                                        nullptr, nullptr);
+        window_count_of_create++; // 窗口计数+1
+
+        if (window == nullptr)
         {
             __ALKAID_ERROR(__CREATE_WINDOW_FAILED__);
             glfwTerminate();
@@ -64,12 +70,67 @@ namespace alkaid::win
 
     void WinWindow::callback()
     {
+        // set framebuffer callback
+        glfwSetFramebufferSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
+        {
+            glViewport(0, 0, width, height);
+        });
 
+        // window resize callback
+        glfwSetWindowSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
+        {
+
+        });
+
+        // window close callback.
+        glfwSetWindowCloseCallback(this->window, [](GLFWwindow *window)
+        {
+
+        });
+
+        // key callback
+        glfwSetKeyCallback(this->window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
+        {
+
+        });
+
+        // window char callback
+        glfwSetCharCallback(this->window, [](GLFWwindow *window, v_ui1 keycode)
+        {
+
+        });
+
+        // mouse button callback
+        glfwSetMouseButtonCallback(this->window, [](GLFWwindow *window, int button, int action, int mods)
+        {
+
+        });
+
+        // mouse scrolled callback
+        glfwSetScrollCallback(this->window, [](GLFWwindow *window, double x_offset, double y_offset)
+        {
+
+        });
+
+        glfwSetCursorPosCallback(this->window, [](GLFWwindow *window, double x_pos, double y_pos)
+        {
+
+        });
+
+    }
+
+    bool WinWindow::is_close()
+    {
+        return glfwWindowShouldClose(this->window);
     }
 
     void WinWindow::close_window()
     {
         glfwDestroyWindow(window);
+
+        // 如果窗口数量为0就释放窗口占用的内存
+        if(window_count_of_create == 0)
+            glfwTerminate();
     }
 
     void WinWindow::on_update()

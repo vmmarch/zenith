@@ -53,7 +53,7 @@
 #define __GLFW_INIT_FAILED__ "GLFW初始化失败"
 #define __OPENGL_INFO__ "OpenGL创建信息: "
 #define __VENDOR_INFO__ "VENDOR: {}"
-#define __RENDER_INFO__ "RENDER: {}"
+#define __RENDER_INFO__ "RENDER: {}"sss
 #define __VERSION_INFO__ "VERSION: {}"
 
 // WARN MESSAGE
@@ -68,6 +68,7 @@
 #define __NOT_SUPPORT_DIRECTX_API__ __ERROR__##"暂不支持DirectX。"
 #define __UNKNOWN_SHADER_TYPE__ __ERROR__##"位置着色器类型"
 #define __LOAD_GLAD_FAILED__ __ERROR__##"加载GLAD失败"
+
 ///////////////////////////////////////////////////////////
 #else
 #error error message not support other country

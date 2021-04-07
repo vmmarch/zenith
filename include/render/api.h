@@ -21,34 +21,12 @@
 /*!
  * @author 2B键盘
  */
-#include "opengl-graphics-context.h"
+#pragma once
 
-namespace alkaid
+namespace render
 {
-
-    OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow* window)
-    {
-        this->window = window;
-        initialize();
-        callback();
-    }
-
-    void OpenGLGraphicsContext::initialize()
-    {
-        glfwMakeContextCurrent(this->window);
-        v_suc success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        if(!success)
-            __ALKAID_ERROR(__LOAD_GLAD_FAILED__);
-
-        __ALKAID_INFO(__OPENGL_INFO__);
-        __ALKAID_INFO(__VENDOR_INFO__, __glGetVendor());
-        __ALKAID_INFO(__RENDER_INFO__, __glGetRender());
-        __ALKAID_INFO(__VERSION_INFO__, __glGetVersion());
-    }
-
-    void OpenGLGraphicsContext::swap_buffers()
-    {
-        glfwSwapBuffers(this->window);
-    }
-
+    /**
+     * 渲染API
+     */
+    enum api { NONE, GL, DX };
 }

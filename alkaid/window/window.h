@@ -49,8 +49,8 @@ namespace alkaid
         virtual v_ui16 getWidth() const = 0;
         virtual v_ui16 getHeight() const = 0;
 
+        virtual bool is_close();
         virtual void on_update() = 0;
-
         virtual void close_window() = 0;
 
         // 创建Window

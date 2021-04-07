@@ -22,40 +22,13 @@
  * @author 2B键盘
  */
 #pragma once
-#include "window/window.h"
-#include <api/glfw-api.h>
-#include "render/graphics-context.h"
+#include "render/renderer.h"
 
-namespace alkaid::win
+namespace alkaid
 {
-
-    class WinWindow : Window
+    class OpenGLRenderer : public Renderer
     {
-    public:
-        WinWindow(v_winprops&);
-        ~WinWindow();
-
-        void initialize(v_winprops&);
-        void callback();
-
-        void setTitle(v_uc* title) override { info.title = title; }
-        v_uc* getTitle() const override { return info.title; }
-        v_ui16 getWidth() const override { return info.width; }
-        v_ui16 getHeight() const override { return info.height; }
-        bool is_close() override;
-        void close_window() override;
-        void on_update() override;
-
-    private:
-        struct v_info
-        {
-            v_uc* title;
-            v_ui16 width, height;
-        };
-
-        v_info info;
-        GLFWwindow* window;
-        v_scope<GraphicsContext> graphics_context;
+        void disable_depth_test() override;
+        void enable_depth_test() override;
     };
-
 }

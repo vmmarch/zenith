@@ -22,12 +22,20 @@
  * @author 2B键盘
  */
 #pragma once
+#include <alkaid/type.h>
+#include <render/renderer-config.h>
 
 namespace alkaid
 {
     class Renderer
     {
-        virtual void __disable_depth_test();     // 禁用深度测试
-        virtual void __enable_depth_test();      // 开启深度测试
+    public:
+        virtual void disable_depth_test();     // 禁用深度测试
+        virtual void enable_depth_test();      // 开启深度测试
+
+        static v_scope<Renderer> __create();   // 创建渲染器
+        static render::api __get_render_api();
+    private:
+        static render::api render_api;
     };
 }

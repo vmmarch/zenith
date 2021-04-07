@@ -21,34 +21,22 @@
 /*!
  * @author 2B键盘
  */
-#include "opengl-graphics-context.h"
+#include "renderer.h"
 
 namespace alkaid
 {
 
-    OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow* window)
-    {
-        this->window = window;
-        initialize();
-        callback();
-    }
+#ifdef __GLAPI
+    render::api Renderer::render_api = render::api::GL;
+#elif __DXAPI
+    #error ##__NOT_SUPPORT_DIRECTX_API__
+#else
+    #error ##__PLEASE_CHOOSE_RENDER_API__
+#endif
 
-    void OpenGLGraphicsContext::initialize()
+    render::api Renderer::__get_render_api()
     {
-        glfwMakeContextCurrent(this->window);
-        v_suc success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        if(!success)
-            __ALKAID_ERROR(__LOAD_GLAD_FAILED__);
-
-        __ALKAID_INFO(__OPENGL_INFO__);
-        __ALKAID_INFO(__VENDOR_INFO__, __glGetVendor());
-        __ALKAID_INFO(__RENDER_INFO__, __glGetRender());
-        __ALKAID_INFO(__VERSION_INFO__, __glGetVersion());
-    }
-
-    void OpenGLGraphicsContext::swap_buffers()
-    {
-        glfwSwapBuffers(this->window);
+        return render_api;
     }
 
 }
