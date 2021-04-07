@@ -16,42 +16,17 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/1. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
-#include <xuanming/type.h>
+#include <iostream>
+#include "app/app.h"
 
-namespace xm
+int main(int argc, char **argv)
 {
-
-    /**
-     * 窗口基础信息。
-     */
-    struct Winprops
-    {
-        v_cc __Title;
-        v_ui32 __Width, __Height;
-    };
-
-    /**
-     * 窗户基类，根据不同的API实现不同的窗口创建
-     */
-    class Window
-    {
-    public:
-        virtual ~Window() = default;
-        virtual void setTitle(v_cc) = 0;
-        virtual v_cc getTitle() const = 0;
-        virtual v_ui32 getWidth() const = 0;
-        virtual v_ui32 getHeight() const = 0;
-
-        virtual void on_event() = 0;
-        virtual void on_update() = 0;
-
-        // 创建Window
-        static v_scope<Window> create(Winprops);
-    };
+    auto app = new alkaid::App();
+    app->start_engine();
+    return 0;
 }

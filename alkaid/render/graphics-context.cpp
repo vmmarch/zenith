@@ -16,29 +16,18 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/7. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "app.h"
+#include "graphics-context.h"
+#include <api/glfw-api.h>
 
-namespace xm
+namespace alkaid
 {
-
-    App::App()
+    v_scope<GraphicsContext> GraphicsContext::__create(v_any context)
     {
-
+        return nullptr;
     }
-
-    App::~App()
-    {
-
-    }
-
-    void App::startEngine()
-    {
-
-    }
-
 }

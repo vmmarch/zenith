@@ -1,6 +1,6 @@
-# 玄冥3D游戏引擎
+# 瑶光3D游戏引擎
 
-![LOGO](https://github.com/orvals/xm/blob/master/resources/zlogo.png)
+![LOGO](https://github.com/orvals/alkaid/blob/master/resources/zlogo.png)
 
 
 玄冥3D游戏引擎

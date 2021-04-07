@@ -21,8 +21,24 @@
 /*!
  * @author 2B键盘
  */
-#include "window.h"
+#include "app.h"
 
-namespace xm
+namespace alkaid
 {
+
+    App::App()
+    {
+
+    }
+
+    App::~App()
+    {
+
+    }
+
+    void App::start_engine()
+    {
+
+    }
+
 }

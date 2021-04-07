@@ -22,17 +22,37 @@
  * @author 2B键盘
  */
 #pragma once
+#include <alkaid/type.h>
+#include "event/event.h"
 
-#include <xuanming/type.h>
-#include "window/window.h"
-
-namespace xm
+namespace alkaid
 {
-    class App
+
+    /**
+     * 窗口基础信息。
+     */
+    struct v_winprops
+    {
+        v_uc* title;
+        v_ui1 width, height;
+    };
+
+    /**
+     * 窗户基类，根据不同的API实现不同的窗口创建
+     */
+    class Window
     {
     public:
-        App();
-        ~App();
-        void startEngine();
+        virtual ~Window() = default;
+        virtual void setTitle(v_uc*) = 0;
+        virtual v_uc* getTitle() const = 0;
+        virtual v_ui1 getWidth() const = 0;
+        virtual v_ui1 getHeight() const = 0;
+
+        virtual void on_event(Event&) = 0;
+        virtual void on_update() = 0;
+
+        // 创建Window
+        static v_scope<Window> create(v_winprops);
     };
 }

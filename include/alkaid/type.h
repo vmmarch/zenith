@@ -25,6 +25,7 @@
 
 #include <memory>
 #include <iostream>
+#include <alkaid/globalization.h>
 
 typedef const char* v_cc;
 typedef unsigned char v_uc;
@@ -33,6 +34,7 @@ typedef uint8_t v_ui8;
 typedef uint16_t v_ui16;
 typedef uint32_t v_ui32;
 typedef void* v_any;
+typedef int v_suc;
 
 // =================================================================
 // vec2
@@ -58,7 +60,7 @@ constexpr v_scope<T> create_scope(Args&& ... args)
     return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
-namespace xm
+namespace alkaid
 {
         template<typename T>
         using Ref = std::shared_ptr<T>;
@@ -70,21 +72,21 @@ namespace xm
         }
 }
 
-#define __XM_INFO__(...)
-#define __XM_DEBUG__(...)
-#define __XM_WARN__(...)
-#define __XM_ERROR__(...)
+#define __ALKAID_INFO(...)
+#define __ALKAID_DEBUG(...)
+#define __ALKAID_WARN(...)
+#define __ALKAID_ERROR(...)
 
 #define __BIT__(x) (1 << x)
 
-#define __XM_BIND_EVENT_FN__(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
+#define __ALKAID_BIND_EVENT_FN__(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
 
-#ifdef __XM_PLATFORM_WINDOWS__
-    #ifdef __XM_BUILD_DLL__
+#ifdef __ALKAID_PLATFORM_WINDOWS__
+    #ifdef __ALKAID_BUILD_DLL__
         #define XM_API __declspec(dllexport)
     #else
         #define XM_API __declspec(dllimport)
     #endif
 #else
-    #error xm only support Windows platform!
+    #error alkaid only support Windows platform!
 #endif

@@ -16,11 +16,22 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/7. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "event.h"
-#include "key-event.h"
-#include "mouse-event.h"
+#pragma once
+#include <alkaid/type.h>
+
+namespace alkaid
+{
+    /**
+     * 渲染图形上下文管理
+     */
+    class GraphicsContext
+    {
+        virtual void swap_buffers(); // 交换缓冲区
+        static v_scope<GraphicsContext> __create(v_any context);
+    };
+}

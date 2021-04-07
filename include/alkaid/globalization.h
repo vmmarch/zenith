@@ -29,9 +29,9 @@
 
 #define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
 
-#ifdef __XM_IN_CHINA__
+#ifdef __ALKAID_IN_CHINA__
 ///////////////////////////////////////////////////////////
-// __XM_IN_CHINA__
+// __ALKAID_IN_CHINA__
 #define __ERROR__ "错误："
 
 // MENU MESSAGE
@@ -48,10 +48,13 @@
 #define __GUI_TEXT_EXIT__ "退出引擎"
 
 // INFO MESSAGE
+#define __CREATE_WINDOW_INFO__ "创建窗口信息：{}, {}, {}"
+#define __CREATE_WINDOW_FAILED__ "窗口创建失败"
+#define __GLFW_INIT_FAILED__ "GLFW初始化失败"
 #define __OPENGL_INFO__ "OpenGL创建信息: "
-#define __VENDOR_INFO__ "VENDOR: {0}"
-#define __RENDER_INFO__ "RENDER: {0}"
-#define __VERSION_INFO__ "VERSION: {0}"
+#define __VENDOR_INFO__ "VENDOR: {}"
+#define __RENDER_INFO__ "RENDER: {}"
+#define __VERSION_INFO__ "VERSION: {}"
 
 // WARN MESSAGE
 #define __OPENGL_SUPPORT_VERSION__ "Zenith3D引擎需要使用4.5以上的OpenGL版本"

@@ -23,9 +23,9 @@
  */
 #pragma once
 
-#include <xuanming/type.h>
+#include <alkaid/type.h>
 
-namespace xm
+namespace alkaid
 {
 
     namespace event

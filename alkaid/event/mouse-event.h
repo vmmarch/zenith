@@ -25,7 +25,7 @@
 
 #include "event.h"
 
-namespace xm
+namespace alkaid
 {
     using v_moucode = v_ui16;
 

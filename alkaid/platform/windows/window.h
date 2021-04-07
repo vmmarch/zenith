@@ -16,17 +16,43 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/7. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <stdio.h>
-#include <xm/globalization.h>
+#include "window/window.h"
+#include <api/glfw-api.h>
 
-#ifdef __XM_ENABLE_ASSERT__
-    #define __XM_ASSERT__(check, msg) if(check) printf("%s", msg)
-#else
-    #define __XM_ASSERT__(check, msg) {}
-#endif
+namespace alkaid::win
+{
+
+    class WinWindow : Window
+    {
+    public:
+        WinWindow(v_winprops&);
+        ~WinWindow();
+
+        void initialize(v_winprops&);
+
+        void setTitle(v_uc*) override;
+        v_uc* getTitle() const override;
+        v_ui1 getWidth() const override;
+        v_ui1 getHeight() const override;
+
+        void on_event(Event&) override;
+        void on_update() override;
+
+    private:
+        struct v_info
+        {
+            v_uc* title;
+            v_ui1 width, height;
+        };
+
+        v_info info;
+        GLFWwindow* window;
+    };
+
+}

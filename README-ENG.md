@@ -1,5 +1,5 @@
-# xm ENGINE
-xm game engine for 3D.
+# ALKAID ENGINE.
+alkaid game engine for 3D.
 
 # Code Style
 
