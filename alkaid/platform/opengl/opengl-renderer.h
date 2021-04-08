@@ -22,12 +22,15 @@
  * @author 2B键盘
  */
 #pragma once
+#include <api/glfw-api.h>
 #include "render/renderer.h"
 
 namespace alkaid
 {
     class OpenGLRenderer : public Renderer
     {
+    public:
+        virtual ~OpenGLRenderer() {}
         void disable_depth_test() override;
         void enable_depth_test() override;
     };

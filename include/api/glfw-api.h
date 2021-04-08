@@ -53,3 +53,5 @@
 #define __glGetVendor()                                       { glGetString(GL_VENDOR); }
 #define __glGetRenderer()                                     { glGetString(GL_RENDERER); }
 #define __glGetVersion()                                      { glGetString(GL_VERSION); }
+#define __glEnableDepthTest()                                 { glEnable(GL_DEPTH_TEST); }
+#define __glDisableDepthTest()                                { glDisable(GL_DEPTH_TEST); }

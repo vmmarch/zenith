@@ -23,11 +23,10 @@
  */
 #pragma once
 #include "render/graphics-context.h"
-#include <api/glfw-api.h>
 
 namespace alkaid
 {
-    class OpenGLGraphicsContext : GraphicsContext
+    class OpenGLGraphicsContext : public GraphicsContext
     {
     public:
         OpenGLGraphicsContext(GLFWwindow* window);

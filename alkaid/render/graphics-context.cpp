@@ -22,12 +22,23 @@
  * @author 2B键盘
  */
 #include "graphics-context.h"
-#include <api/glfw-api.h>
+#include "render/renderer.h"
+#include "platform/opengl/opengl-graphics-context.h"
 
 namespace alkaid
 {
     v_scope<GraphicsContext> GraphicsContext::__create(v_any window)
     {
+        switch (Renderer::__get_render_api())
+        {
+            case render::NONE:
+                break;
+            case render::GL:
+                return __create_scope<OpenGLGraphicsContext>(static_cast<GLFWwindow*>(window));
+            case render::DX:
+                break;
+        }
+
         return nullptr;
     }
 }

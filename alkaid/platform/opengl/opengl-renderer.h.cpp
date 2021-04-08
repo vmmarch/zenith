@@ -21,23 +21,19 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
-#include <alkaid/type.h>
-#include <render/renderer-config.h>
+#include "opengl-renderer.h"
 
 namespace alkaid
 {
-    class Renderer
-    {
-    public:
-        virtual ~Renderer() = default;
-        virtual void disable_depth_test() = 0;     // 禁用深度测试
-        virtual void enable_depth_test() = 0;      // 开启深度测试
 
-        static v_scope<Renderer> __create();   // 创建渲染器
-        static render::api __get_render_api();
-    private:
-        static render::api render_api;
-    };
+    void OpenGLRenderer::disable_depth_test()
+    {
+        __glDisableDepthTest();
+    }
+
+    void OpenGLRenderer::enable_depth_test()
+    {
+        __glEnableDepthTest();
+    }
 
 }

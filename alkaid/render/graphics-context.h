@@ -23,6 +23,7 @@
  */
 #pragma once
 #include <alkaid/type.h>
+#include <api/glfw-api.h>
 
 namespace alkaid
 {
@@ -32,7 +33,7 @@ namespace alkaid
     class GraphicsContext
     {
     public:
-        virtual void swap_buffers(); // 交换缓冲区
+        virtual void swap_buffers() = 0; // 交换缓冲区
         static v_scope<GraphicsContext> __create(v_any window);
     };
 }

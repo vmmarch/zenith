@@ -52,7 +52,7 @@ namespace alkaid
         virtual v_ui32 getWidth() const = 0;
         virtual v_ui32 getHeight() const = 0;
 
-        virtual bool is_close();
+        virtual bool is_close() = 0;
         virtual void on_update() = 0;
         virtual void close_window() = 0;
 
