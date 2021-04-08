@@ -22,17 +22,13 @@
  * @author 2B键盘
  */
 #include "window.h"
-#include "platform/windows/window.h"
+#include "tool/create-scope.h"
 
 namespace alkaid
 {
     v_scope<Window> Window::__create(const v_winprops &winprops)
     {
-#ifdef __ALKAID_PLATFORM_WINDOWS__
-        return __create_scope<win::WinWindow>(winprops);
-#else
-        __ALKAID_ERROR(__ONLY_SUPPORT_WINDOWS__); return nullptr;
-#endif
+        return __create_window(winprops);
     }
 
 }

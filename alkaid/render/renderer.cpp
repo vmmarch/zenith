@@ -22,7 +22,7 @@
  * @author 2B键盘
  */
 #include "renderer.h"
-#include "platform/opengl/opengl-renderer.h"
+#include "tool/create-scope.h"
 
 namespace alkaid
 {
@@ -42,16 +42,7 @@ namespace alkaid
 
     v_scope<Renderer> Renderer::__create()
     {
-        switch (Renderer::render_api)
-        {
-            case render::NONE:
-                break;
-            case render::GL: __create_scope<OpenGLRenderer>();
-            case render::DX:
-                break;
-        }
-
-        return nullptr;
+        return __create_renderer();
     }
 
 }

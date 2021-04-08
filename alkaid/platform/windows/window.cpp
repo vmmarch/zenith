@@ -22,6 +22,8 @@
  * @author 2B键盘
  */
 #include "window.h"
+#include "event/mouse-event.h"
+#include "event/key-event.h"
 
 namespace alkaid::win
 {

@@ -188,7 +188,7 @@ namespace alkaid
         KeyPressedEvent(v_keycode keycode, int repeat)
             : KeyEvent(keycode), __repeat(repeat) {}
 
-        TYPE(event::type::KEY_PRESSED);
+        TYPE(event::type::EVENT_KEY_PRESSED);
     private:
         int __repeat;
     };
@@ -202,7 +202,7 @@ namespace alkaid
         KeyReleaseEvent(v_keycode keycode, int repeat)
             : KeyEvent(keycode), __repeat(repeat) {}
 
-        TYPE(event::type::KEY_RELEASED);
+        TYPE(event::type::EVENT_KEY_RELEASED);
     private:
         int __repeat;
     };

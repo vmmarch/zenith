@@ -35,21 +35,21 @@ namespace alkaid
          */
         enum class type
         {
-            NONE = 0,
+            EVENT_NONE = 0,
 
-            WINDOW_RESIZE,
-            WINDOW_CLOSE,
-            WINDOW_FOCUS,
-            WINDOW_LOST_FOCUS,
-            WINDOW_MOVED,
+            EVENT_WINDOW_RESIZE,
+            EVENT_WINDOW_CLOSE,
+            EVENT_WINDOW_FOCUS,
+            EVENT_WINDOW_LOST_FOCUS,
+            EVENT_WINDOW_MOVED,
 
-            KEY_PRESSED,
-            KEY_RELEASED,
+            EVENT_KEY_PRESSED,
+            EVENT_KEY_RELEASED,
 
-            MOUSE_PRESSED,
-            MOUSE_RELEASED,
-            MOUSE_SCROLLED,
-            MOUSE_MOVED
+            EVENT_MOUSE_PRESSED,
+            EVENT_MOUSE_RELEASED,
+            EVENT_MOUSE_SCROLLED,
+            EVENT_MOUSE_MOVED
         };
 
         enum classif
@@ -63,11 +63,11 @@ namespace alkaid
 
     }
 
-#define TYPE(__type) static event::type getStaticEventType() { return __type; } \
-                         virtual event::type getEventType() { return getStaticEventType(); }
+#define TYPE(__e_type) static event::type getStaticEventType() { return __e_type; } \
+                   virtual event::type getEventType() { return getStaticEventType(); }
 
 #define CLASSIF(__classif) static event::classif getStaticEventClassif() { return __classif; } \
-                         virtual event::classif getEventClassif() { return getStaticEventClassif(); }
+                           virtual event::classif getEventClassif() { return getStaticEventClassif(); }
 
     class Event
     {
@@ -76,10 +76,10 @@ namespace alkaid
 
         virtual bool isHandle() const = 0; // return false表示事件未处理，需要处理该事件。
         virtual bool handled() const = 0;  // 调用该方法表示事件已被处理
-        virtual event::type getEventType() const = 0;
+        virtual event::type getEventType() const { return this->type; }
 
     private:
         bool handle = false;
-        event::type __type;
+        event::type type;
     };
 }

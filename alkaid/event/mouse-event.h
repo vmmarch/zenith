@@ -53,20 +53,11 @@ namespace alkaid
     class MouseEvent : Event
     {
     public:
-        MouseEvent(v_vec2 vec2) : __vec2(vec2)
-        {}
-
-        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(create_vec2(x, y))
-        {};
-
-        MouseEvent(v_moucode vcode) : __mousecode(vcode), __vec2(empty_vec2)
-        {}
-
-        MouseEvent(v_moucode vcode, v_vec2 vec2) : __mousecode(vcode), __vec2(vec2)
-        {}
-
-        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(create_vec2(x, y))
-        {};
+        MouseEvent(v_vec2 vec2) : __vec2(vec2) {}
+        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(create_vec2(x, y)) {};
+        MouseEvent(v_moucode vcode) : __mousecode(vcode), __vec2(empty_vec2) {}
+        MouseEvent(v_moucode vcode, v_vec2 vec2) : __mousecode(vcode), __vec2(vec2) {}
+        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(create_vec2(x, y)) {};
 
         v_ui16 getX()
         { return __vec2.x; }
@@ -101,7 +92,7 @@ namespace alkaid
         MouseMovedEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
         {}
 
-        TYPE(event::type::MOUSE_MOVED);
+        TYPE(event::type::EVENT_MOUSE_MOVED);
     };
 
     /**
@@ -119,7 +110,7 @@ namespace alkaid
         MouseButtonPressed(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
         {}
 
-        TYPE(event::type::MOUSE_PRESSED);
+        TYPE(event::type::EVENT_MOUSE_PRESSED);
     };
 
     /**
@@ -137,7 +128,7 @@ namespace alkaid
         MouseButtonReleased(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
         {}
 
-        TYPE(event::type::MOUSE_RELEASED);
+        TYPE(event::type::EVENT_MOUSE_RELEASED);
     };
 
     /**
@@ -152,7 +143,7 @@ namespace alkaid
         MouseButtonScrolled(v_ui16 x, v_ui16 y) : MouseEvent(x, y)
         {}
 
-        TYPE(event::type::MOUSE_SCROLLED);
+        TYPE(event::type::EVENT_MOUSE_SCROLLED);
     };
 
 }
