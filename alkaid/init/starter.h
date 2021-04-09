@@ -21,29 +21,25 @@
 /*!
  * @author 2B键盘
  */
-#include "app.h"
+#pragma once
+
+#include <alkaid/type.h>
+#include "window/window.h"
+#include "event/event.h"
 
 namespace alkaid
 {
-
-    App::App()
+    class Starter
     {
+    public:
+        Starter();
+        ~Starter();
+        void init_window(v_cc, int, int);
+        void on_event(Event&); // 事件处理
+        void start_engine();
 
-    }
-
-    App::~App()
-    {
-
-    }
-
-    void App::start_engine()
-    {
-        v_winprops winprops("瑶光引擎", 1400, 900);
-        this->window = Window::__create(winprops);
-        while(running)
-        {
-            this->window->on_update();
-        }
-    }
-
+    private:
+        v_suc running = true;
+        v_scope<Window> window;
+    };
 }

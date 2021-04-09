@@ -39,6 +39,9 @@ namespace alkaid::win
         v_cc getTitle() const override { return info.title; }
         v_ui32 getWidth() const override { return info.width; }
         v_ui32 getHeight() const override { return info.height; }
+
+        void set_event_callback(const f_callback&);
+
         bool is_close() override;
         void close_window() override;
         void on_update() override;
@@ -49,7 +52,7 @@ namespace alkaid::win
             v_cc title;
             v_ui32 width, height;
 
-            event_callbackfn fn;
+            f_callback fn;
         };
 
         v_info info;

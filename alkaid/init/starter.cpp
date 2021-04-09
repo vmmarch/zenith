@@ -16,17 +16,47 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/6. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "app/app.h"
+#include "starter.h"
 
-int main(int argc, char **argv)
+#define __enums(x) #x
+
+namespace alkaid
 {
-    auto app = new alkaid::App();
-    app->start_engine();
-    return 0;
+
+    Starter::Starter()
+    {
+
+    }
+
+    Starter::~Starter()
+    {
+        delete &window;
+    }
+
+    void Starter::init_window(v_cc title, int width, int height)
+    {
+        v_winprops winprops(title, width, height);
+        this->window = Window::__create(winprops);
+        this->window->set_event_callback(__ALKAID_BIND_EVENT_FN(Starter::on_event));
+    }
+
+    void Starter::on_event(Event& event)
+    {
+
+        std::cout << __enums(event.getEventType()) << std::endl;
+    }
+
+    void Starter::start_engine()
+    {
+        while(running)
+        {
+            this->window->on_update();
+        }
+    }
+
 }

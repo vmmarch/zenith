@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.17)
 project(alkaid)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid SOURCE)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/app SOURCE_APP)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/init SOURCE_INIT)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/window SOURCE_WIN)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/event SOURCE_EVENT)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform SOURCE_PLATFORM)
@@ -46,7 +46,7 @@ link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
 
 add_executable( ${PROJECT_NAME}
 		${SOURCE}
-		${SOURCE_APP} ${SOURCE_WIN} ${SOURCE_EVENT} ${SOURCE_PLATFORM}
+		${SOURCE_INIT} ${SOURCE_WIN} ${SOURCE_EVENT} ${SOURCE_PLATFORM}
 		${SOURCE_PLATFORM_WINDOWS} ${SOURCE_PLATFORM_OPENGL} ${SOURCE_RENDER}
 		${SOURCE_TOOL}
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui.cpp

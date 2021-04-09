@@ -34,6 +34,7 @@ namespace alkaid::win
     WinWindow::WinWindow(const v_winprops &winprops)
     {
         initialize(winprops);
+        callback();
     }
 
     WinWindow::~WinWindow()
@@ -177,6 +178,11 @@ namespace alkaid::win
             info.fn(event);
         });
 
+    }
+
+    void WinWindow::set_event_callback(const f_callback &fn)
+    {
+        info.fn = fn;
     }
 
     bool WinWindow::is_close()

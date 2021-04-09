@@ -49,7 +49,7 @@ namespace alkaid
     {
     public:
 
-        using event_callbackfn = std::function<void(Event&)>;
+        using f_callback = std::function<void(Event&)>;
 
         virtual ~Window() = default;
         virtual void setTitle(v_cc) = 0;
@@ -57,6 +57,7 @@ namespace alkaid
         virtual v_ui32 getWidth() const = 0;
         virtual v_ui32 getHeight() const = 0;
 
+        virtual void set_event_callback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;
         virtual void on_update() = 0;
         virtual void close_window() = 0;

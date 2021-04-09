@@ -16,27 +16,18 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/1. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
+#include <iostream>
+#include "init/starter.h"
 
-#include <alkaid/type.h>
-#include "window/window.h"
-
-namespace alkaid
+int main(int argc, char **argv)
 {
-    class App
-    {
-    public:
-        App();
-        ~App();
-        void start_engine();
-
-    private:
-        v_suc running = true;
-        v_scope<Window> window;
-    };
+    auto app = new alkaid::Starter();
+    app->init_window("瑶光引擎", 1400, 900);
+    app->start_engine();
+    return 0;
 }
