@@ -24,6 +24,7 @@
 #include "window.h"
 #include "event/mouse-event.h"
 #include "event/key-event.h"
+#include "event/window-event.h"
 
 namespace alkaid::win
 {
@@ -68,6 +69,7 @@ namespace alkaid::win
         }
 
         graphics_context = GraphicsContext::__create(this->window);
+        glfwSetWindowUserPointer(this->window, &this->info);
     }
 
     void WinWindow::callback()
@@ -81,42 +83,98 @@ namespace alkaid::win
         // window resize callback
         glfwSetWindowSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+            info.width = width;
+            info.height = height;
 
+            WindowResizeEvent event(width, height);
+            info.fn(event);
         });
 
         // window close callback.
         glfwSetWindowCloseCallback(this->window, [](GLFWwindow *window)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
+            WindowCloseEvent event;
+            info.fn(event);
         });
 
         // key callback
         glfwSetKeyCallback(this->window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+
+            switch(action)
+            {
+                case GLFW_PRESS:
+                {
+                    KeyPressedEvent event(key, 0);
+                    info.fn(event);
+                    break;
+                }
+
+                case GLFW_RELEASE:
+                {
+                    KeyReleasedEvent event(key);
+                    info.fn(event);
+                    break;
+                }
+
+                case GLFW_REPEAT:
+                {
+                    KeyPressedEvent event(key, 1);
+                    info.fn(event);
+                    break;
+                }
+            }
 
         });
 
         // window char callback
         glfwSetCharCallback(this->window, [](GLFWwindow *window, v_ui1 keycode)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
+            KeyTypeEvent event(keycode);
+            info.fn(event);
         });
 
         // mouse button callback
         glfwSetMouseButtonCallback(this->window, [](GLFWwindow *window, int button, int action, int mods)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+            switch(action)
+            {
+                case GLFW_PRESS:
+                {
+                    MouseButtonPressedEvent event(button);
+                    info.fn(event);
+                }
 
+                case GLFW_RELEASE:
+                {
+                    MouseButtonReleasedEvent event(button);
+                    info.fn(event);
+                }
+            }
         });
 
         // mouse scrolled callback
         glfwSetScrollCallback(this->window, [](GLFWwindow *window, double x_offset, double y_offset)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
+            MouseButtonScrolledEvent event(__create_vec2(x_offset, y_offset));
+            info.fn(event);
         });
 
         glfwSetCursorPosCallback(this->window, [](GLFWwindow *window, double x_pos, double y_pos)
         {
+            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
+            MouseMovedEvent event(__create_vec2(x_pos, y_pos));
+            info.fn(event);
         });
 
     }

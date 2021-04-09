@@ -43,6 +43,7 @@ namespace alkaid
             EVENT_WINDOW_LOST_FOCUS,
             EVENT_WINDOW_MOVED,
 
+            KEY_TYPE,
             EVENT_KEY_PRESSED,
             EVENT_KEY_RELEASED,
 
@@ -74,8 +75,8 @@ namespace alkaid
     public:
         virtual ~Event();
 
-        virtual bool isHandle() const = 0; // return false表示事件未处理，需要处理该事件。
-        virtual bool handled() const = 0;  // 调用该方法表示事件已被处理
+        bool isHandle() const { return this->handle; } // return false表示事件未处理，需要处理该事件。
+        void handled() { this->handle = true; }  // 调用该方法表示事件已被处理
         virtual event::type getEventType() const { return this->type; }
 
     private:

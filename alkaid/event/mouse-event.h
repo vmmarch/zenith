@@ -50,14 +50,14 @@ namespace alkaid
         };
     }
 
-    class MouseEvent : Event
+    class MouseEvent : public Event
     {
     public:
         MouseEvent(v_vec2 vec2) : __vec2(vec2) {}
-        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(create_vec2(x, y)) {};
+        MouseEvent(v_ui16 x, v_ui16 y) : __vec2(__create_vec2(x, y)) {};
         MouseEvent(v_moucode vcode) : __mousecode(vcode), __vec2(empty_vec2) {}
         MouseEvent(v_moucode vcode, v_vec2 vec2) : __mousecode(vcode), __vec2(vec2) {}
-        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(create_vec2(x, y)) {};
+        MouseEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : __mousecode(vcode), __vec2(__create_vec2(x, y)) {};
 
         v_ui16 getX()
         { return __vec2.x; }
@@ -83,13 +83,11 @@ namespace alkaid
     class MouseMovedEvent : public MouseEvent
     {
     public:
-        MouseMovedEvent(v_moucode vcode) : MouseEvent(vcode)
+
+        MouseMovedEvent(v_vec2 vec2) : MouseEvent(vec2)
         {}
 
-        MouseMovedEvent(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
-        {}
-
-        MouseMovedEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
+        MouseMovedEvent(v_ui16 x, v_ui16 y) : MouseEvent(x, y)
         {}
 
         TYPE(event::type::EVENT_MOUSE_MOVED);
@@ -98,16 +96,16 @@ namespace alkaid
     /**
      * 鼠标按钮按下
      */
-    class MouseButtonPressed : public MouseEvent
+    class MouseButtonPressedEvent : public MouseEvent
     {
     public:
-        MouseButtonPressed(v_moucode vcode) : MouseEvent(vcode)
+        MouseButtonPressedEvent(v_moucode vcode) : MouseEvent(vcode)
         {}
 
-        MouseButtonPressed(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
+        MouseButtonPressedEvent(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
         {}
 
-        MouseButtonPressed(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
+        MouseButtonPressedEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
         {}
 
         TYPE(event::type::EVENT_MOUSE_PRESSED);
@@ -116,16 +114,16 @@ namespace alkaid
     /**
      * 鼠标按钮释放
      */
-    class MouseButtonReleased : public MouseEvent
+    class MouseButtonReleasedEvent : public MouseEvent
     {
     public:
-        MouseButtonReleased(v_moucode vcode) : MouseEvent(vcode)
+        MouseButtonReleasedEvent(v_moucode vcode) : MouseEvent(vcode)
         {}
 
-        MouseButtonReleased(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
+        MouseButtonReleasedEvent(v_moucode vcode, v_vec2 vec2) : MouseEvent(vcode, vec2)
         {}
 
-        MouseButtonReleased(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
+        MouseButtonReleasedEvent(v_moucode vcode, v_ui16 x, v_ui16 y) : MouseEvent(vcode, x, y)
         {}
 
         TYPE(event::type::EVENT_MOUSE_RELEASED);
@@ -134,13 +132,13 @@ namespace alkaid
     /**
      * 鼠标按钮释放
      */
-    class MouseButtonScrolled : public MouseEvent
+    class MouseButtonScrolledEvent : public MouseEvent
     {
     public:
-        MouseButtonScrolled(v_vec2 vec2) : MouseEvent(vec2)
+        MouseButtonScrolledEvent(v_vec2 vec2) : MouseEvent(vec2)
         {}
 
-        MouseButtonScrolled(v_ui16 x, v_ui16 y) : MouseEvent(x, y)
+        MouseButtonScrolledEvent(v_ui16 x, v_ui16 y) : MouseEvent(x, y)
         {}
 
         TYPE(event::type::EVENT_MOUSE_SCROLLED);

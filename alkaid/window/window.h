@@ -22,6 +22,8 @@
  * @author 2B键盘
  */
 #pragma once
+
+#include <functional>
 #include <alkaid/type.h>
 #include "event/event.h"
 
@@ -46,6 +48,9 @@ namespace alkaid
     class Window
     {
     public:
+
+        using event_callbackfn = std::function<void(Event&)>;
+
         virtual ~Window() = default;
         virtual void setTitle(v_cc) = 0;
         virtual v_cc getTitle() const = 0;

@@ -48,6 +48,8 @@ namespace alkaid::win
         {
             v_cc title;
             v_ui32 width, height;
+
+            event_callbackfn fn;
         };
 
         v_info info;

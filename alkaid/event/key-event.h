@@ -165,7 +165,7 @@ namespace alkaid
         Menu = 348
     };
 
-    class KeyEvent : Event
+    class KeyEvent : public Event
     {
     public:
         KeyEvent(v_keycode keycode) : __keycode(keycode)
@@ -196,15 +196,20 @@ namespace alkaid
     /**
      * 键盘释放事件处理
      */
-    class KeyReleaseEvent : public KeyEvent
+    class KeyReleasedEvent : public KeyEvent
     {
     public:
-        KeyReleaseEvent(v_keycode keycode, int repeat)
-            : KeyEvent(keycode), __repeat(repeat) {}
+        KeyReleasedEvent(v_keycode keycode) : KeyEvent(keycode) {}
 
         TYPE(event::type::EVENT_KEY_RELEASED);
-    private:
-        int __repeat;
+    };
+
+    class KeyTypeEvent : public KeyEvent
+    {
+    public:
+        KeyTypeEvent(const v_keycode keycode) : KeyEvent(keycode) {}
+
+        TYPE(event::type::KEY_TYPE);
     };
 
 }

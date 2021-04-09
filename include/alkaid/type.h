@@ -49,12 +49,12 @@ struct v_vec2
     v_vec2(v_ui16 _x, v_ui16 _y) : x(_x), y(_y) {}
 };
 
-static v_vec2 create_vec2(v_ui16 x, v_ui16 y)
+static v_vec2 __create_vec2(v_ui16 x, v_ui16 y)
 {
     return v_vec2(x, y);
 }
 
-static const v_vec2 empty_vec2 = create_vec2(0, 0);
+static const v_vec2 empty_vec2 = __create_vec2(0, 0);
 
 template<typename T, typename ... Args>
 constexpr v_scope<T> __create_scope(Args&& ... args)
@@ -68,7 +68,7 @@ namespace alkaid
         using Ref = std::shared_ptr<T>;
 
         template<typename T, typename... Args>
-        constexpr Ref<T> create_ref(Args&&... args)
+        constexpr Ref<T> __create_ref(Args&&... args)
         {
             return std::make_shared<T>(std::forward<Args>(args)...);
         }
