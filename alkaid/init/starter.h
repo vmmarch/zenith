@@ -27,6 +27,8 @@
 #include "window/window.h"
 #include "event/event.h"
 
+#define __std_cout(x) { std::cout << x << std::endl; }
+
 namespace alkaid
 {
     class Starter
@@ -37,6 +39,11 @@ namespace alkaid
         void init_window(v_cc, int, int);
         void on_event(Event&); // 事件处理
         void start_engine();
+
+        // ===========================================================
+        // event
+        void on_close();
+        void on_update();
 
     private:
         v_suc running = true;

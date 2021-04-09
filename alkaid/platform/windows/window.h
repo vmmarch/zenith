@@ -40,7 +40,7 @@ namespace alkaid::win
         v_ui32 getWidth() const override { return info.width; }
         v_ui32 getHeight() const override { return info.height; }
 
-        void set_event_callback(const f_callback&);
+        void set_event_callback(const f_callback&) override;
 
         bool is_close() override;
         void close_window() override;
@@ -61,6 +61,7 @@ namespace alkaid::win
 
         void initialize(const v_winprops&);
         void callback();
+        void destroy(GLFWwindow* window);
     };
 
 }

@@ -192,8 +192,7 @@ namespace alkaid::win
 
     void WinWindow::close_window()
     {
-        glfwDestroyWindow(window);
-
+        destroy(this->window);
         // 如果窗口数量为0就释放窗口占用的内存
         if(window_count_of_create == 0)
             glfwTerminate();
@@ -203,6 +202,12 @@ namespace alkaid::win
     {
         glfwPollEvents();
         graphics_context->swap_buffers();
+    }
+
+    void WinWindow::destroy(GLFWwindow *window)
+    {
+        glfwDestroyWindow(window);
+        window_count_of_create--;
     }
 
 }

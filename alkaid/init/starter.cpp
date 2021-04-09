@@ -23,8 +23,6 @@
  */
 #include "starter.h"
 
-#define __enums(x) #x
-
 namespace alkaid
 {
 
@@ -45,10 +43,16 @@ namespace alkaid
         this->window->set_event_callback(__ALKAID_BIND_EVENT_FN(Starter::on_event));
     }
 
+    void Starter::on_close()
+    {
+        this->window->close_window();
+    }
+
     void Starter::on_event(Event& event)
     {
-
-        std::cout << __enums(event.getEventType()) << std::endl;
+        event::type type = event.get_event_type();
+        if(type == event::type::EVENT_WINDOW_CLOSE)
+            on_close();
     }
 
     void Starter::start_engine()

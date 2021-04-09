@@ -65,10 +65,10 @@ namespace alkaid
     }
 
 #define TYPE(__e_type) static event::type getStaticEventType() { return __e_type; } \
-                   virtual event::type getEventType() const { return getStaticEventType(); }
+                       virtual event::type get_event_type() const override { return getStaticEventType(); }
 
 #define CLASSIF(__classif) static event::classif getStaticEventClassif() { return __classif; } \
-                           virtual event::classif getEventClassif() { return getStaticEventClassif(); }
+                           virtual event::classif get_event_clssif() const override { return getStaticEventClassif(); }
 
     class Event
     {
@@ -77,7 +77,8 @@ namespace alkaid
 
         bool isHandle() const { return this->handle; } // return false表示事件未处理，需要处理该事件。
         void handled() { this->handle = true; }        // 调用该方法表示事件已被处理
-
+        virtual event::type get_event_type() const = 0;
+        virtual event::classif get_event_clssif() const = 0;
     private:
         bool handle = false;
     };
