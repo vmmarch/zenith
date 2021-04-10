@@ -16,13 +16,28 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/9. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "event/event.h"
+
+namespace alkaid
+{
+    class Layer
+    {
+    public:
+        Layer(const v_cc name = "layer");
+        virtual ~Layer() = default;
+        virtual void on_render() = 0;
+        virtual void on_update() = 0;
+        virtual void on_event(Event&) = 0;
+        virtual void on_close() = 0;
+
+    protected:
+        const v_cc debug_name;
+    };
+}

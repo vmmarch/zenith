@@ -16,13 +16,43 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/10. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "layer/layer.h"
+#include <api/imgui-api.h>
+#include <api/glfw-api.h>
+#include <map>
+
+namespace alkaid
+{
+
+    struct v_font
+    {
+        v_cc name;
+        float size;
+        v_cc ttf;
+    };
+
+    class ImGuiLayer
+    {
+    public:
+        ImGuiLayer();
+        ~ImGuiLayer() = default;
+
+        void add_font(v_font);
+        void apply_font(v_cc);
+
+        void begin();
+        void end();
+
+        void on_close();
+    private:
+        std::map<v_cc, ImFont*> font_libs;
+        void initialize();
+    };
+}

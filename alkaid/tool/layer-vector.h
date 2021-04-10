@@ -16,13 +16,47 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/10. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "layer/layer.h"
+#include <vector>
+
+namespace alkaid
+{
+    class LayerStack
+    {
+    public:
+
+        LayerStack() = default;
+
+        ~LayerStack() = default;
+
+        void push(Layer *layer)
+        {
+            layers_vector.push_back(layer);
+            // layers_vector.emplace(layers_vector.begin() + insert_index, layer);
+            insert_index++;
+        }
+
+        void update()
+        {
+            for (auto layer : layers_vector)
+                layer->on_update();
+        }
+
+        void render()
+        {
+            for (auto layer : layers_vector)
+                layer->on_render();
+        }
+
+    private:
+        v_ui1 insert_index = 0;
+        std::vector<Layer *> layers_vector;
+    };
+}

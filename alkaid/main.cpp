@@ -29,5 +29,6 @@ int main(int argc, char **argv)
     auto app = new alkaid::Starter();
     app->init_window("瑶光引擎", 1400, 900);
     app->start_engine();
+
     return 0;
 }

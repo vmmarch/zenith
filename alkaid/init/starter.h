@@ -26,8 +26,8 @@
 #include <alkaid/type.h>
 #include "window/window.h"
 #include "event/event.h"
-
-#define __std_cout(x) { std::cout << x << std::endl; }
+#include "tool/layer-vector.h"
+#include "layer/imgui/imgui-layer.h"
 
 namespace alkaid
 {
@@ -40,13 +40,27 @@ namespace alkaid
         void on_event(Event&); // 事件处理
         void start_engine();
 
+        Window& get_window()
+        {
+            return *window;
+        }
+
         // ===========================================================
         // event
         void on_close();
         void on_update();
 
+        static Starter& get_instance()
+        {
+            return *instance;
+        }
+
     private:
         v_suc running = true;
         v_scope<Window> window;
+        LayerStack layer_stack;
+        ImGuiLayer* imlayer;
+
+        static Starter* instance;
     };
 }

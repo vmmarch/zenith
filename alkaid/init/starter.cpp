@@ -26,9 +26,11 @@
 namespace alkaid
 {
 
+    Starter* Starter::instance = nullptr;
+
     Starter::Starter()
     {
-
+        instance = this;
     }
 
     Starter::~Starter()
@@ -41,6 +43,8 @@ namespace alkaid
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);
         this->window->set_event_callback(__ALKAID_BIND_EVENT_FN(Starter::on_event));
+
+        this->imlayer = new ImGuiLayer();
     }
 
     void Starter::on_close()
@@ -59,6 +63,11 @@ namespace alkaid
     {
         while(running)
         {
+            imlayer->begin();
+            {
+                ImGui::ShowDemoWindow();
+            }
+            imlayer->end();
             this->window->on_update();
         }
     }

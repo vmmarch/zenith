@@ -10,6 +10,8 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/windows SOURCE_
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/opengl SOURCE_PLATFORM_OPENGL)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render SOURCE_RENDER)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/tool SOURCE_TOOL)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/layer SOURCE_LAYER)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/layer/imgui SOURCE_IMGUI_LAYER)
 
 ################################################
 ### for dependencies dir.
@@ -42,13 +44,13 @@ add_definitions(
 )
 
 link_libraries(imm32)
-link_libraries(${CMAKE_SOURCE_DIR}/library/glfw3.dll)
+link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/library/glfw3.dll)
 
 add_executable( ${PROJECT_NAME}
 		${SOURCE}
 		${SOURCE_INIT} ${SOURCE_WIN} ${SOURCE_EVENT} ${SOURCE_PLATFORM}
 		${SOURCE_PLATFORM_WINDOWS} ${SOURCE_PLATFORM_OPENGL} ${SOURCE_RENDER}
-		${SOURCE_TOOL}
+		${SOURCE_TOOL} ${SOURCE_LAYER} ${SOURCE_IMGUI_LAYER}
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_demo.cpp

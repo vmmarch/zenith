@@ -37,14 +37,16 @@ namespace alkaid::win
 
         void setTitle(v_cc title) override { info.title = title; }
         v_cc getTitle() const override { return info.title; }
-        v_ui32 getWidth() const override { return info.width; }
-        v_ui32 getHeight() const override { return info.height; }
+        v_ui32 get_width() const override { return info.width; }
+        v_ui32 get_height() const override { return info.height; }
 
         void set_event_callback(const f_callback&) override;
 
         bool is_close() override;
         void close_window() override;
         void on_update() override;
+
+        void* get_handle() const override;
 
     private:
         struct v_info

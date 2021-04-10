@@ -210,4 +210,9 @@ namespace alkaid::win
         window_count_of_create--;
     }
 
+    void* WinWindow::get_handle() const
+    {
+        return this->window;
+    }
+
 }

@@ -16,13 +16,16 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/10. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
+#include "layer.h"
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+namespace alkaid
+{
+    Layer::Layer(v_cc name) : debug_name(name)
+    {
+    }
+}
