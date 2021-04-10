@@ -22,8 +22,10 @@
  * @author 2B键盘
  */
 #pragma once
+
 #include <alkaid/type.h>
 #include <render/renderer-config.h>
+#include "api/glfw-api.h"
 
 namespace alkaid
 {
@@ -31,11 +33,24 @@ namespace alkaid
     {
     public:
         virtual ~Renderer() = default;
-        virtual void disable_depth_test() = 0;     // 禁用深度测试
-        virtual void enable_depth_test() = 0;      // 开启深度测试
 
-        static v_scope<Renderer> __create();   // 创建渲染器
+        // 设置清屏颜色
+        virtual void clear_color(const glm::vec4& color) = 0;
+
+        // 清屏
+        virtual void clear() = 0;
+
+        // 禁用深度测试
+        virtual void disable_depth_test() = 0;
+
+        // 开启深度测试
+        virtual void enable_depth_test() = 0;
+
+        // 创建渲染器
+        static v_scope<Renderer> __create();
+
         static render::api __get_render_api();
+
     private:
         static render::api render_api;
     };

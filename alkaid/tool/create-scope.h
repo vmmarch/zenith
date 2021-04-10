@@ -66,7 +66,7 @@ static v_scope<alkaid::Renderer> __create_renderer()
     {
         case render::NONE:
             break;
-        case render::GL: __create_scope<alkaid::OpenGLRenderer>();
+        case render::GL: return __create_scope<alkaid::OpenGLRenderer>();
         case render::DX:
             break;
     }

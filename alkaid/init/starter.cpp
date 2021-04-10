@@ -22,6 +22,7 @@
  * @author 2B键盘
  */
 #include "starter.h"
+#include "render/renderer.h"
 
 namespace alkaid
 {
@@ -61,12 +62,17 @@ namespace alkaid
 
     void Starter::start_engine()
     {
+
+        v_scope<Renderer> render = Renderer::__create();
+        render->clear_color({ 0.1f, 0.1f, 0.1f, 1 });
+
         while(running)
         {
             imlayer->begin();
             {
                 ImGui::ShowDemoWindow();
             }
+            render->clear();
             imlayer->end();
             this->window->on_update();
         }

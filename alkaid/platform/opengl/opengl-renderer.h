@@ -22,7 +22,6 @@
  * @author 2B键盘
  */
 #pragma once
-#include <api/glfw-api.h>
 #include "render/renderer.h"
 
 namespace alkaid
@@ -31,6 +30,8 @@ namespace alkaid
     {
     public:
         virtual ~OpenGLRenderer() {}
+        void clear_color(const glm::vec4&) override;
+        void clear() override;
         void disable_depth_test() override;
         void enable_depth_test() override;
     };
