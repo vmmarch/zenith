@@ -16,13 +16,22 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/11. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+/**
+ * 属性面板配置
+ */
+static void __properties()
+{
+    ImGui::Begin(GUI_TEXT_PROPERTIES);
+    if(ImGui::TreeNode("camera"))
+    {
+        ImGui::TreePop();
+    }
+    ImGui::End();
+}

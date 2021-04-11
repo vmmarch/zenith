@@ -16,13 +16,25 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/11. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "layer/layer.h"
+#include <api/imgui-api.h>
+
+namespace alkaid
+{
+    class HomeLayer : public Layer
+    {
+    public:
+        HomeLayer() : Layer("Hoem Layer") {}
+        void on_render() override;
+        void on_update() override;
+        void on_event(Event&) override;
+        void on_close() override;
+    };
+}

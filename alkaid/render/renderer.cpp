@@ -30,9 +30,9 @@ namespace alkaid
 #ifdef __GLAPI
     render::api Renderer::render_api = render::api::GL;
 #elif __DXAPI
-    #error ##__NOT_SUPPORT_DIRECTX_API__
+    #error ##NOT_SUPPORT_DIRECTX_API
 #else
-    #error ##__PLEASE_CHOOSE_RENDER_API__
+    #error ##PLEASE_CHOOSE_RENDER_API
 #endif
 
     render::api Renderer::__get_render_api()

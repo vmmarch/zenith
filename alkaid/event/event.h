@@ -75,7 +75,7 @@ namespace alkaid
     public:
         virtual ~Event() = default;
 
-        bool isHandle() const { return this->handle; } // return false表示事件未处理，需要处理该事件。
+        bool is_handle() const { return this->handle; } // return false表示事件未处理，需要处理该事件。
         void handled() { this->handle = true; }        // 调用该方法表示事件已被处理
         virtual event::type get_event_type() const = 0;
         virtual event::classif get_event_clssif() const = 0;

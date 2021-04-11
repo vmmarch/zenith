@@ -76,7 +76,7 @@ namespace alkaid
     {
         ImGuiIO &io = ImGui::GetIO();
         (void) io;
-        font_libs[font.name] = io.Fonts->AddFontFromFileTTF(font.ttf, font.size);
+        font_libs[font.name] = io.Fonts->AddFontFromFileTTF(font.ttf, font.size, NULL, io.Fonts->GetGlyphRangesChineseFull());
     }
 
     void ImGuiLayer::apply_font(v_cc name)
@@ -87,8 +87,7 @@ namespace alkaid
         } else
         {
             ImFont *font = font_libs.at(name);
-            ImGuiIO &io = ImGui::GetIO();
-            (void) io;
+            ImGuiIO &io = ImGui::GetIO(); (void) io;
             io.FontDefault = font;
         }
     }
