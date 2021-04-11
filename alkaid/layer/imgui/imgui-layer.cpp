@@ -54,8 +54,7 @@ namespace alkaid
         apply_font(font.name);
 
         // Setup Dear ImGui style
-        // ImGui::StyleColorsDark();
-        ImGui::StyleColorsClassic();
+        ImGui::StyleColorsDark();
 
         // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
         ImGuiStyle &style = ImGui::GetStyle();

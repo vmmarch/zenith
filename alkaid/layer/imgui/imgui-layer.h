@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include "layer/layer.h"
+#include <alkaid/type.h>
 #include <api/imgui-api.h>
 #include <api/glfw-api.h>
 #include <map>

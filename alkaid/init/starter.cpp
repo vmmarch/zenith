@@ -64,7 +64,7 @@ namespace alkaid
     {
 
         v_scope<Renderer> render = Renderer::__create();
-        render->clear_color({ 0.1f, 0.1f, 0.1f, 1 });
+        render->clear_color(color::BLACK);
 
         while(running)
         {
