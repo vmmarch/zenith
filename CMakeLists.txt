@@ -11,7 +11,6 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/opengl SOURCE_P
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render SOURCE_RENDER)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/tool SOURCE_TOOL)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/layer SOURCE_LAYER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/layer/imgui SOURCE_IMGUI_LAYER)
 
 ################################################
 ### for dependencies dir.
@@ -57,7 +56,6 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_RENDER}
 		${SOURCE_TOOL}
 		${SOURCE_LAYER}
-		${SOURCE_IMGUI_LAYER}
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_demo.cpp

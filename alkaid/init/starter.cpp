@@ -70,13 +70,13 @@ namespace alkaid
 
         while(running)
         {
-            layer_stack.update();
+            renderer->clear();
 
+            layer_stack.update();
             imlayer->begin();
             {
                 layer_stack.render();
             }
-            renderer->clear();
             imlayer->end();
             this->window->on_update();
         }
