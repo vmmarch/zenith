@@ -48,6 +48,7 @@
 #define GUI_TEXT_EXIT "退出引擎 "
 
 #define GUI_TEXT_PROPERTIES "属性"
+#define GUI_TEXT_RESOURCE_MANAGER "资源管理器"
 
 // INFO MESSAGE
 #define CREATE_WINDOW_INFO "创建窗口信息：{}, {}, {} "

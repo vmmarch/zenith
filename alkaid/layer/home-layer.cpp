@@ -24,7 +24,8 @@
 #include "home-layer.h"
 #include "init/starter.h"
 #include <alkaid/globalization.h>
-#include "properties-plane.h"
+#include "layer/plane/properties.h"
+#include "layer/plane/resource-manager.h"
 
 namespace alkaid
 {
@@ -126,6 +127,7 @@ namespace alkaid
         ImGui::ShowDemoWindow();
 
         __properties();
+        __resource_manager();
     }
 
     void HomeLayer::on_close()
