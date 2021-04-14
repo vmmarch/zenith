@@ -23,6 +23,7 @@
  */
 #pragma once
 
+#include "platform/opengl/opengl-shader.h"
 #include "platform/windows/window.h"
 #include "platform/opengl/opengl-renderer.h"
 #include "platform/opengl/opengl-graphics-context.h"
@@ -67,6 +68,20 @@ static v_scope<alkaid::Renderer> __create_renderer()
         case render::NONE:
             break;
         case render::GL: return __create_scope<alkaid::OpenGLRenderer>();
+        case render::DX:
+            break;
+    }
+
+    return nullptr;
+}
+
+static v_scope<alkaid::Shader> __create_shader(v_cc vertex_path, v_cc fragment_path)
+{
+    switch (alkaid::Renderer::__get_render_api())
+    {
+        case render::NONE:
+            break;
+        case render::GL: return __create_scope<alkaid::OpenGLShader>(vertex_path, fragment_path);
         case render::DX:
             break;
     }

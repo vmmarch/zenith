@@ -73,6 +73,7 @@
 #define LOAD_GLAD_FAILED ERROR##"加载GLAD失败"
 #define ONLY_SUPPORT_WINDOWS ERROR##"目前仅支持Windows平台"
 #define CANNOT_READ_FONT ERROR##"未获取到{}字体"
+#define SHADER_FILE_READ_NOT_SUCCESS ERROR##"着色器文件读取失败"
 
 ///////////////////////////////////////////////////////////
 #else
