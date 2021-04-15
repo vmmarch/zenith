@@ -23,6 +23,7 @@
  */
 #pragma once
 
+#include "platform/opengl/opengl-camera.h"
 #include "platform/opengl/opengl-shader.h"
 #include "platform/windows/window.h"
 #include "platform/opengl/opengl-renderer.h"
@@ -75,6 +76,9 @@ static v_scope<alkaid::Renderer> __create_renderer()
     return nullptr;
 }
 
+/**
+ * @return 着色器实例
+ */
 static v_scope<alkaid::Shader> __create_shader(v_cc vertex_path, v_cc fragment_path)
 {
     switch (alkaid::Renderer::__get_render_api())
@@ -87,4 +91,17 @@ static v_scope<alkaid::Shader> __create_shader(v_cc vertex_path, v_cc fragment_p
     }
 
     return nullptr;
+}
+
+/*
+ * @return 相机
+ */
+static v_scope<Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
+{
+	switch(alkaid::Renderer::__get_render_api())
+	{
+		case render::NONE: break;
+		case render::GL: return __create_scope<OpenGLCamera>(pos, upvec, target);
+		case render::DX: break;
+	}
 }

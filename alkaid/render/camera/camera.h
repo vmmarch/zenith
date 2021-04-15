@@ -16,7 +16,7 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/14. <=== */
+/*! ===> Creates on 2021/4/15. <=== */
 
 /*!
  * 相机系统
@@ -33,13 +33,43 @@
 namespace alkaid
 {
 
-    struct lookAt
+    class Camera
     {
-	v_cc name;
-	float x = 0.0f, y = 0.0f, z = 0.0f;
+    public:
+	Camera();
+	virtual ~Camera() = default;
+	
+	virtual on_move(glm::vec3 pos) const = 0;
+	virtual on_ratal(float, float) const = 0;
+	virtual refresh() = 0;
+
+	virtual glm::vec3 get_pos() const = 0;
+	virtual glm::vec3 get_target() const = 0;
+	virtual glm::vec3 get_direction() const = 0;
+	virtual glm::vec3 get_upvec() const = 0;
+	virtual glm::vec3 get_camera_up() const = 0;
+	virtual glm::vec3 get_camera_right() const = 0;
+	virtual glm::vec3 get_camera_front() const = 0;
+
+	virtual glm::vec3 get_delta_time() const = 0;
+	virtual glm::vec3 get_last_time() const = 0;
+
+	virtual void set_delta_time(float);
+	virtual void set_last_frame(float);
+
+	virtual float get_last_xoffset() const = 0;
+	virtual float get_last_yoffset() const = 0;
+
+	virtual float get_speed() const = 0;
+
+	virtual v_scope<Shader> get_shader();
+
+	// 创建相机
+	v_scope<Camera> __create(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target);
+
     }
 
-    class Camera
+    class OpenGLCamera : public Camera
     {
     public:
 	Camera(glm::vec3 __pos, glm::vec3 __upvec, glm::vec3 __target) 
@@ -50,10 +80,10 @@ namespace alkaid
 		this->camera_up = glm::cross(direction, right);
 	}	
 
-	void on_move(glm::vec3 pos) { this->pos = pos; } // 移动相机
+	void on_move(glm::vec3 pos) override { this->pos = pos; } // 移动相机
 	
 	// 旋转相机
-	void on_rotal(float x, float y) 
+	void on_rotal(float x, float y) override
 	{
 		float xoffset = x - last_xoffset;
 		float yoffset = y - last_yoffset;
@@ -82,7 +112,7 @@ namespace alkaid
 	}
 
 	// 每帧都需要调用，需要刷新相机的一些参数信息
-	void refresh() 
+	void refresh() override
 	{
 		// 计算与上一帧相差的时间
 		float currframe = glfwGetTime();
@@ -92,24 +122,24 @@ namespace alkaid
 
 	// -----------------------------------
 	// 获取相机各项参数
-	glm::vec3 get_pos() const { return this->pos; }
-	glm::vec3 get_target() const { return this->target; }
-	glm::vec3 get_direction() const { return this->direction; }
-	glm::vec3 get_upvec() const { return this->upvec; }
-	glm::vec3 get_camera_up() const { return this->camera_up; }
-	glm::vec3 get_camera_right() const { return this->camera_right; }
-	glm::vec3 get_camera_front() const { return this->camera_front; }
+	glm::vec3 get_pos() const override { return this->pos; }
+	glm::vec3 get_target() const override { return this->target; }
+	glm::vec3 get_direction() const override { return this->direction; }
+	glm::vec3 get_upvec() const override { return this->upvec; }
+	glm::vec3 get_camera_up() const override { return this->camera_up; }
+	glm::vec3 get_camera_right() const override { return this->camera_right; }
+	glm::vec3 get_camera_front() const override { return this->camera_front; }
 
-	float get_delta_time() const { return this->delta_time; }
-	float get_last_frame() const { return this->last_frame; }
+	float get_delta_time() const override { return this->delta_time; }
+	float get_last_frame() const override { return this->last_frame; }
 
-	void set_delta_time(float time) { this->delta_time = time; }
-	void set_last_frame(float frame) { this->last_frame = frame; }
+	void set_delta_time(float time) override { this->delta_time = time; }
+	void set_last_frame(float frame) override { this->last_frame = frame; }
 
 	/*! 获取相机的移动速度 */
-	void get_speed() { return this->speed * this->delta_time; } 
+	void get_speed() override { return this->speed * this->delta_time; } 
 
-	v_scope<Shader> get_shader() const { return this->shader; }
+	v_scope<Shader> get_shader() const override { return this->shader; }
 
     private:
 	glm::vec3 pos;
