@@ -5,6 +5,6 @@ namespace alkaid
 {
 	v_scope<Camera> Camera::__create(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
 	{
-		return __create_camera(pos, upvec, target);
+		return __create_camera<Camera>(pos, upvec, target);
 	}
 }
