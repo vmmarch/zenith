@@ -14,6 +14,7 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/layer SOURCE_LAYER)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render/texture SOURCE_TEXTURE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render/shader SOURCE_SHADER)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/models SOURCE_MODELS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/camera SOURCE_CAMERA)
 
 ################################################
 ### for dependencies dir.
@@ -62,6 +63,7 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_TEXTURE}
 		${SOURCE_SHADER}
 		${SOURCE_MODELS}
+		${SOURCE_CAMERA}
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_demo.cpp
