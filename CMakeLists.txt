@@ -45,7 +45,7 @@ add_definitions(
 )
 
 link_libraries(imm32)
-link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/library/glfw3.dll)
+link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3.dll)
 
 add_executable( ${PROJECT_NAME}
 		${SOURCE}

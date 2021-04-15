@@ -105,6 +105,29 @@ namespace alkaid
         __glUniform1f(shader_id, name, value);
     }
 
+    void OpenGLShader::setFloat2(v_cc name, glm::vec2 value)
+    {
+        __glUniform2f(shader_id, name, value.x, value.y);
+    }
+
+    void OpenGLShader::setFloat3(v_cc name, glm::vec3 value)
+   {
+	   __glUniform3f(shader_id, name, value.x, value.y, value.w);
+   }
+
+   void OpenGLShader::setFloat4(v_cc name, glm::vec4 value)
+   {
+	__glUniform4f(shader_id, name, value.x, value.y, value.w, value.a);
+   }
+
+   void OpenGLShader::setMat3(v_cc name, glm::mat3 value) {
+	__glUniformMatrix3f(shader_id, name, value);
+   }
+
+   void OpenGLShader::setMat4(v_cc name, glm::mat4 value) {
+	__glUniformMatrix4f(shader_id, name, value);
+   }
+
     void OpenGLShader::checkCompileErrors(unsigned int shader, std::string type)
     {
         int success;
