@@ -5,6 +5,6 @@ namespace alkaid
 {
 	static v_scope<Texture2D> __create()
 	{
-		return __create_texture();
+		return __create_texture2D();
 	}
 }

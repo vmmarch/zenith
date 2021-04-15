@@ -97,25 +97,29 @@ static v_scope<alkaid::Shader> __create_shader(v_cc vertex_path, v_cc fragment_p
 /**
  * @return 相机
  */
-static v_scope<Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
+static v_scope<alkaid::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
 {
 	switch(alkaid::Renderer::__get_render_api())
 	{
 		case render::NONE: break;
-		case render::GL: return __create_scope<OpenGLCamera>(pos, upvec, target);
+		case render::GL: return __create_scope<alkaid::OpenGLCamera>(pos, upvec, target);
 		case render::DX: break;
 	}
+
+	return nullptr;
 }
 
 /**
  * @return 纹理
  */
-static v_scope<Texture2D> __create_texture2D()
+static v_scope<alkaid::Texture2D> __create_texture2D()
 {
 	switch(alkaid::Renderer::__get_render_api())
 	{
 		case render::NONE: break;
-		case render::GL: return __create_scope<OpenGLTexture2D>();
+		case render::GL: return __create_scope<alkaid::OpenGLTexture2D>();
 		case render::DX: break;
 	}
+
+    return nullptr;
 }

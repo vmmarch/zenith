@@ -32,41 +32,24 @@
 
 namespace alkaid
 {
-
     class Camera
     {
     public:
-	Camera();
-	virtual ~Camera() = default;
-	
-	virtual on_move(glm::vec3 pos) const = 0;
-	virtual on_ratal(float, float) const = 0;
-	virtual refresh() = 0;
+        virtual ~Camera() = default;
+        virtual void on_move(glm::vec3 pos) = 0;
+        virtual void on_rotate(float, float) = 0;
+        virtual void refresh() = 0;
+        virtual glm::vec3 get_pos() const = 0;
+        virtual glm::vec3 get_target() const = 0;
+        virtual glm::vec3 get_direction() const = 0;
+        virtual glm::vec3 get_upvec() const = 0;
+        virtual glm::vec3 get_camera_up() const = 0;
+        virtual glm::vec3 get_camera_right() const = 0;
+        virtual glm::vec3 get_camera_front() const = 0;
+        virtual float get_speed() const = 0;
 
-	virtual glm::vec3 get_pos() const = 0;
-	virtual glm::vec3 get_target() const = 0;
-	virtual glm::vec3 get_direction() const = 0;
-	virtual glm::vec3 get_upvec() const = 0;
-	virtual glm::vec3 get_camera_up() const = 0;
-	virtual glm::vec3 get_camera_right() const = 0;
-	virtual glm::vec3 get_camera_front() const = 0;
+        // 创建相机
+        static v_scope<Camera> __create(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target);
+    };
 
-	virtual glm::vec3 get_delta_time() const = 0;
-	virtual glm::vec3 get_last_time() const = 0;
-
-	virtual void set_delta_time(float);
-	virtual void set_last_frame(float);
-
-	virtual float get_last_xoffset() const = 0;
-	virtual float get_last_yoffset() const = 0;
-
-	virtual float get_speed() const = 0;
-
-	virtual v_scope<Shader> get_shader();
-
-	// 创建相机
-	v_scope<Camera> __create(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target);
-
-    }
-	
 }

@@ -11,5 +11,5 @@ namespace alkaid
 		void unbind() override;
 		void set_mod(surrmod, int, float* = NULL) override;
 		void set_filter(int, filtermod) override;
-	}
+	};
 }

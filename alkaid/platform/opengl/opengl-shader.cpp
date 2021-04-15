@@ -55,7 +55,7 @@ namespace alkaid
             // 流转成string字符串
             vcode = __vstream.str().c_str();
             fcode = __fstream.str().c_str();
-        } catch(std::ifstream::failure& e)
+        } catch (std::ifstream::failure &e)
         {
             __ALKAID_ERROR(SHADER_FILE_READ_NOT_SUCCESS)
         }
@@ -105,28 +105,30 @@ namespace alkaid
         __glUniform1f(shader_id, name, value);
     }
 
-    void OpenGLShader::setFloat2(v_cc name, glm::vec2 value)
+    void OpenGLShader::setFloat2(v_cc name, glm::vec2 value) const
     {
         __glUniform2f(shader_id, name, value.x, value.y);
     }
 
-    void OpenGLShader::setFloat3(v_cc name, glm::vec3 value)
-   {
-	   __glUniform3f(shader_id, name, value.x, value.y, value.w);
-   }
+    void OpenGLShader::setFloat3(v_cc name, glm::vec3 value) const
+    {
+        __glUniform3f(shader_id, name, value.x, value.y, value.z);
+    }
 
-   void OpenGLShader::setFloat4(v_cc name, glm::vec4 value)
-   {
-	__glUniform4f(shader_id, name, value.x, value.y, value.w, value.a);
-   }
+    void OpenGLShader::setFloat4(v_cc name, glm::vec4 value) const
+    {
+        __glUniform4f(shader_id, name, value.x, value.y, value.w, value.a);
+    }
 
-   void OpenGLShader::setMat3(v_cc name, glm::mat3 value) {
-	__glUniformMatrix3f(shader_id, name, value);
-   }
+    void OpenGLShader::setMat3(v_cc name, glm::mat3 value) const
+    {
+        __glUniformMatrix3fv(shader_id, name, value);
+    }
 
-   void OpenGLShader::setMat4(v_cc name, glm::mat4 value) {
-	__glUniformMatrix4f(shader_id, name, value);
-   }
+    void OpenGLShader::setMat4(v_cc name, glm::mat4 value) const
+    {
+        __glUniformMatrix4fv(shader_id, name, value);
+    }
 
     void OpenGLShader::checkCompileErrors(unsigned int shader, std::string type)
     {
@@ -138,16 +140,17 @@ namespace alkaid
             if (!success)
             {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog
+                          << "\n -- --------------------------------------------------- -- " << std::endl;
             }
-        }
-        else
+        } else
         {
             glGetProgramiv(shader, GL_LINK_STATUS, &success);
             if (!success)
             {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
+                std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog
+                          << "\n -- --------------------------------------------------- -- " << std::endl;
             }
         }
     }
