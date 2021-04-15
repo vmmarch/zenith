@@ -23,6 +23,7 @@
  */
 #pragma once
 
+#include "platform/opengl/opengl-texture2D.h"
 #include "platform/opengl/opengl-camera.h"
 #include "platform/opengl/opengl-shader.h"
 #include "platform/windows/window.h"
@@ -93,7 +94,7 @@ static v_scope<alkaid::Shader> __create_shader(v_cc vertex_path, v_cc fragment_p
     return nullptr;
 }
 
-/*
+/**
  * @return 相机
  */
 static v_scope<Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
@@ -102,6 +103,19 @@ static v_scope<Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3
 	{
 		case render::NONE: break;
 		case render::GL: return __create_scope<OpenGLCamera>(pos, upvec, target);
+		case render::DX: break;
+	}
+}
+
+/**
+ * @return 纹理
+ */
+static v_scope<Texture2D> __create_texture2D()
+{
+	switch(alkaid::Renderer::__get_render_api())
+	{
+		case render::NONE: break;
+		case render::GL: return __create_scope<OpenGLTexture2D>();
 		case render::DX: break;
 	}
 }
