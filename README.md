@@ -1,11 +1,11 @@
 # 瑶光3D游戏引擎
 
-![LOGO](https://github.com/orvals/alkaid/blob/master/resources/zlogo.png)
+![LOGO](https://github.com/orvals/alkaid/blob/master/assets/zlogo.png)
 
 
-玄冥3D游戏引擎
+瑶光3D游戏引擎
 
-# GIT Clone
+# 代码克隆
 
     git clone --recursive <url>
 
