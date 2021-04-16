@@ -59,6 +59,7 @@ namespace alkaid
         glm::vec3 get_camera_front() const override { return this->camera_front; }
 
         /*! 获取相机的移动速度 */
+	void set_speed(float __speed) override { this->speed = __speed; }
         float get_speed() const override { return this->speed * this->delta_time; }
 
     private:

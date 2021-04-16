@@ -46,6 +46,7 @@ namespace alkaid
         virtual glm::vec3 get_camera_up() const = 0;
         virtual glm::vec3 get_camera_right() const = 0;
         virtual glm::vec3 get_camera_front() const = 0;
+	virtual void set_speed(float __speed) = 0;
         virtual float get_speed() const = 0;
 
         // 创建相机
