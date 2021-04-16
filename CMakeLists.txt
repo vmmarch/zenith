@@ -1,21 +1,21 @@
 cmake_minimum_required(VERSION 3.17)
-project(alkaid)
+project(zenith)
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid SOURCE)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/init SOURCE_INIT)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/window SOURCE_WIN)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/event SOURCE_EVENT)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform SOURCE_PLATFORM)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/windows SOURCE_PLATFORM_WINDOWS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/platform/opengl SOURCE_PLATFORM_OPENGL)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render SOURCE_RENDER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/tool SOURCE_TOOL)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/layer SOURCE_LAYER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render/texture SOURCE_TEXTURE)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render/shader SOURCE_SHADER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/models SOURCE_MODELS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/scene/3d/camera SOURCE_SCENE_3D_CAMERA)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/alkaid/render/2d/texture SOURCE_RENDER_2D_CAMERA)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/init SOURCE_INIT)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/window SOURCE_WIN)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/event SOURCE_EVENT)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform SOURCE_PLATFORM)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform/windows SOURCE_PLATFORM_WINDOWS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform/opengl SOURCE_PLATFORM_OPENGL)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render SOURCE_RENDER)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/tool SOURCE_TOOL)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/layer SOURCE_LAYER)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/texture SOURCE_TEXTURE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/shader SOURCE_SHADER)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/models SOURCE_MODELS)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_SCENE_3D_CAMERA)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
 
 ################################################
 ### for dependencies dir.
@@ -32,7 +32,7 @@ include_directories(SYSTEM include/api)
 ################################################
 ### for src dir.
 #################################################
-include_directories(alkaid)
+include_directories(zenith)
 
 ################################################
 ### 配置源码目录 SOURCEALL_DIR
@@ -42,9 +42,9 @@ aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 set(CMAKE_CXX_STANDARD 20)
 
 add_definitions(
-		-D__ALKAID_PLATFORM_WINDOWS__                   # 编译平台为Windows
-		-D__ALKAID_IN_CHINA__							# 引擎语言为中文
-		-D__ALKAID_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
+		-D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
+		-D__ZENITH_IN_CHINA__							# 引擎语言为中文
+		-D__ZENITH_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
 )
 
 link_libraries(imm32)

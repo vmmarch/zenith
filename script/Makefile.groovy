@@ -6,7 +6,7 @@ def curdir = new File(new File(getClass().protectionDomain.codeSource.location.p
 def CXX = "g++"
 def INCLUDE = "-I${curdir.parent}/include -I."
 def LIB = "-L${curdir.parent}/library"
-def DEFINE = "-D__ALKAID_PLATFORM_WINDOWS__ -D__IN_CHINA__"
+def DEFINE = "-D__ZENITH_PLATFORM_WINDOWS__ -D__IN_CHINA__"
 def BUILD_OUTPUT = "../build-debug"
 def BUILD_NAME = "application.dll"
 

@@ -1,5 +1,5 @@
-# ALKAID ENGINE.
-alkaid game engine for 3D.
+# ZENITH ENGINE.
+zenith game engine for 3D.
 
 # Code Style
 

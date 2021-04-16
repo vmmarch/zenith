@@ -361,14 +361,15 @@ namespace texture
 // ----------------------------------------------------
 // enable and disable
 
-/** 启用光源 */
+/** 光照计算 */
 #define __glEnableLight() { glEnable(GL_LIGHTING); }
-
-/** 启用光源 */
 #define __glDisableLight() { glDisable(GL_LIGHTING); }
 
-/** 启用深度测试 */
-#define __glEnableDepthTest() { glEnable(GL_DEPTH_TEST); }
+/** 颜色追踪 */
+#define __glEnableColorMaterial() { glEnable(GL_COLOR_MATERIAL); }
+#define __glDisableColorMaterial() { glDisable(GL_COLOR_MATERIAL); }
 
-/** 禁用深度测试 */
+/** 深度测试 */
+#define __glEnableDepthTest() { glEnable(GL_DEPTH_TEST); }
 #define __glDisableDepthTest() { glDisable(GL_DEPTH_TEST); }
+
