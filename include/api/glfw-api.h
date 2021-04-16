@@ -288,6 +288,12 @@ namespace texture
 { __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, texture); }
 
 /**
+ * 解除纹理绑定
+ */
+#define __glUnbindTexture2D()
+{ __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, 0); }
+
+/**
  * 加载纹理图片到已绑定的纹理对象上
  *
  * @param [i] mipmap_level 多级渐远纹理级别，默认为0

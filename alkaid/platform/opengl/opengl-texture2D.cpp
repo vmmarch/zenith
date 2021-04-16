@@ -25,6 +25,7 @@ namespace alkaid
 	
 	void OpenGLTexture2D::unbind()
 	{
+	    __glUnbindTexture2D();
 	}
 	
 	void OpenGLTexture2D::set_mod(surrmod mod, int coor, float* color)
