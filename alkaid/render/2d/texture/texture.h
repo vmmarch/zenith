@@ -66,7 +66,6 @@ namespace alkaid
     class Texture2D
     {
     public:
-
         virtual ~Texture2D() = default;
 
         /** 读取纹理图片 */
@@ -98,11 +97,8 @@ namespace alkaid
         /** 获取纹理ID */
         virtual v_ui1 getId() const { return texture_id; }
 
+        // 创建纹理
         static v_scope<Texture2D> __create();
-
-    private:
-        v_ui1 texture_id;
-
     };
 
 }
