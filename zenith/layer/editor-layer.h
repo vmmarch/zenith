@@ -24,6 +24,7 @@
 #pragma once
 
 #include "layer/layer.h"
+#include <api/imgui-api.h>
 #include "event/key-event.h"
 
 namespace zenith
@@ -33,10 +34,10 @@ namespace zenith
     public:
         EditorLayer() : Layer("editor layer") {}
 
-        void on_render() override;
-        void on_update() override;
-        void on_event(Event&) override;
-        void on_close() override;
+        void render() override;
+        void update() override;
+        void event(Event&) override;
+        void close() override;
 
     private:
         void initialize();

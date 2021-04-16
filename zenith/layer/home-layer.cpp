@@ -89,7 +89,7 @@ namespace zenith
         ImGui::End();
     }
 
-    void HomeLayer::on_render()
+    void HomeLayer::render()
     {
         __begin_menu();
         {
@@ -115,7 +115,7 @@ namespace zenith
 
                     // 退出引擎
                     if (ImGui::MenuItem(GUI_TEXT_EXIT))
-                        Starter::get_instance().on_close();
+                        Starter::get_instance().close();
 
                     ImGui::EndMenu();
                 }
@@ -130,10 +130,10 @@ namespace zenith
         __resource_manager();
     }
 
-    void HomeLayer::on_close()
+    void HomeLayer::close()
     {}
 
-    void HomeLayer::on_update()
+    void HomeLayer::update()
     {
         static bool no_titlebar = false;
         static bool no_scrollbar = false;
@@ -160,7 +160,7 @@ namespace zenith
         if (no_docking)         window_flags |= ImGuiWindowFlags_NoDocking;
     }
 
-    void HomeLayer::on_event(Event &)
+    void HomeLayer::event(Event &)
     {}
 
 }

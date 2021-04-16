@@ -119,7 +119,7 @@ namespace zenith
         }
     }
 
-    void ImGuiLayer::on_close()
+    void ImGuiLayer::close()
     {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();

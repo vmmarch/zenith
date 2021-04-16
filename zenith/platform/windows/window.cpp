@@ -198,7 +198,7 @@ namespace zenith::win
             glfwTerminate();
     }
 
-    void WinWindow::on_update()
+    void WinWindow::update()
     {
         glfwPollEvents();
         graphics_context->swap_buffers();

@@ -32,9 +32,9 @@ namespace zenith
     {
     public:
         HomeLayer() : Layer("Hoem Layer") {}
-        void on_render() override;
-        void on_update() override;
-        void on_event(Event&) override;
-        void on_close() override;
+        void render() override;
+        void update() override;
+        void event(Event&) override;
+        void close() override;
     };
 }

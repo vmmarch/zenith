@@ -59,7 +59,7 @@ namespace zenith
 
         virtual void set_event_callback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;
-        virtual void on_update() = 0;
+        virtual void update() = 0;
         virtual void close_window() = 0;
 
         virtual void* get_handle() const = 0;

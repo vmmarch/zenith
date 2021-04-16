@@ -22,30 +22,32 @@
  * @author 2B键盘
  */
 #include "editor-layer.h"
+#include "init/starter.h"
 
 namespace zenith
 {
-    void EditorLayer::on_render()
-    {
-
-    }
 
     void EditorLayer::initialize()
     {
 
     }
 
-    void EditorLayer::on_update()
+    void EditorLayer::render()
     {
 
     }
 
-    void EditorLayer::on_close()
+    void EditorLayer::update()
     {
 
     }
 
-    void EditorLayer::on_event(Event &)
+    void EditorLayer::close()
+    {
+
+    }
+
+    void EditorLayer::event(Event &)
     {
     }
 

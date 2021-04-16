@@ -37,7 +37,7 @@ namespace zenith
         Starter();
         ~Starter();
         void init_window(v_cc, int, int);
-        void on_event(Event&); // 事件处理
+        void event(Event&); // 事件处理
         void start_engine();
 
         Window& get_window()
@@ -47,8 +47,8 @@ namespace zenith
 
         // ===========================================================
         // event
-        void on_close();
-        void on_update();
+        void close();
+        void update();
 
         static Starter& get_instance()
         {

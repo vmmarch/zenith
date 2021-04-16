@@ -46,13 +46,13 @@ namespace zenith
         void update()
         {
             for (auto layer : layers_vector)
-                layer->on_update();
+                layer->update();
         }
 
         void render()
         {
             for (auto layer : layers_vector)
-                layer->on_render();
+                layer->render();
         }
 
     private:

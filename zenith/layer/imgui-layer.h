@@ -50,7 +50,7 @@ namespace zenith
         void begin();
         void end();
 
-        void on_close();
+        void close();
     private:
         std::map<v_cc, ImFont*> font_libs;
         void initialize();

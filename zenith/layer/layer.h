@@ -32,10 +32,10 @@ namespace zenith
     public:
         Layer(const v_cc name = "layer");
         virtual ~Layer() = default;
-        virtual void on_render() = 0;
-        virtual void on_update() = 0;
-        virtual void on_event(Event&) = 0;
-        virtual void on_close() = 0;
+        virtual void render() = 0;
+        virtual void update() = 0;
+        virtual void event(Event&) = 0;
+        virtual void close() = 0;
 
     protected:
         const v_cc debug_name;

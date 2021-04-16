@@ -44,7 +44,7 @@ namespace zenith::win
 
         bool is_close() override;
         void close_window() override;
-        void on_update() override;
+        void update() override;
 
         void* get_handle() const override;
 

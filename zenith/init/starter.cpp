@@ -24,6 +24,7 @@
 #include "starter.h"
 #include "render/renderer.h"
 #include "layer/home-layer.h"
+#include "layer/editor-layer.h"
 
 namespace zenith
 {
@@ -43,23 +44,23 @@ namespace zenith
     {
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);
-        this->window->set_event_callback(__ZENITH_BIND_EVENT_FN(Starter::on_event));
+        this->window->set_event_callback(__ZENITH_BIND_EVENT_FN(Starter::event));
 
         this->imlayer = new ImGuiLayer();
 
         layer_stack.push(new HomeLayer());
     }
 
-    void Starter::on_close()
+    void Starter::close()
     {
         this->window->close_window();
     }
 
-    void Starter::on_event(Event& event)
+    void Starter::event(Event& event)
     {
         event::type type = event.get_event_type();
         if(type == event::type::EVENT_WINDOW_CLOSE)
-            on_close();
+            close();
     }
 
     void Starter::start_engine()
@@ -78,7 +79,7 @@ namespace zenith
                 layer_stack.render();
             }
             imlayer->end();
-            this->window->on_update();
+            this->window->update();
         }
     }
 
