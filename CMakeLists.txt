@@ -18,10 +18,10 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_S
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
 
 ################################################
-### for dependencies dir.
+### for modules dir.
 ################################################
-include_directories(SYSTEM dependencies/imgui)
-include_directories(SYSTEM dependencies/imgui/backends)
+include_directories(SYSTEM modules/imgui)
+include_directories(SYSTEM modules/imgui/backends)
 
 ################################################
 ### for include dir.
@@ -66,13 +66,13 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_MODELS}
 		${SOURCE_SCENE_3D_CAMERA}
 		${SOURCE_RENDER_2D_CAMERA}
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_draw.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_demo.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_widgets.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/imgui_tables.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/backends/imgui_impl_glfw.cpp
-		${CMAKE_CURRENT_SOURCE_DIR}/dependencies/imgui/backends/imgui_impl_opengl3.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_draw.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_demo.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_widgets.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_tables.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp
+		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp
 )
 
 install(

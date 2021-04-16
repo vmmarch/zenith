@@ -26,6 +26,7 @@
 
 #include <windows.h>
 #include <commdlg.h>
+#include <zenith/type.h>
 
 /**
  * 打开文件选择窗口
@@ -62,4 +63,21 @@ static void __open_folder(v_cc& code)
 
 namespace zenith
 {
+
+    class ModelObject
+    {
+     public:
+        ModelObject(v_cc path);
+        ~ModelObject() = default;
+
+        /**
+         * 渲染模型
+         *
+         * @param [i] x x坐标
+         * @param [i] y y坐标
+         * @param [i] z z坐标
+         */
+        void draw(int, int, int);
+    }
+
 }
