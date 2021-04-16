@@ -51,9 +51,7 @@ namespace zenith
         // -----------------------------------
         // 获取相机各项参数
         glm::vec3 get_pos() const override { return this->pos; }
-        glm::vec3 get_target() const override { return this->target; }
         glm::vec3 get_direction() const override { return this->direction; }
-        glm::vec3 get_upvec() const override { return this->upvec; }
         glm::vec3 get_camera_up() const override { return this->camera_up; }
         glm::vec3 get_camera_right() const override { return this->camera_right; }
         glm::vec3 get_camera_front() const override { return this->camera_front; }

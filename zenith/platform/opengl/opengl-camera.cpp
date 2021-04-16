@@ -27,7 +27,7 @@ namespace zenith
 {
 
     // 旋转相机
-    void OpenGLCamera::on_rotate(float x, float y)
+    void OpenGLCamera::rotate(float x, float y)
     {
         float xoffset = x - last_xoffset;
         float yoffset = y - last_yoffset;

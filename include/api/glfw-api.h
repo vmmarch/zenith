@@ -29,61 +29,45 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace texture
-{
+// ----------------------------------------------------
+// 纹理环绕方式
 
-    /**
-     * 环绕方式
-     */
-    namespace wrapping
-    {
-        // ----------------------------------------------------
-        // 纹理环绕方式
+// 默认环绕方式，重复纹理图像
+#define REPEAT GL_REPEAT
 
-        // 默认环绕方式，重复纹理图像
-        #define REPEAT GL_REPEAT
+// 和上面那个相同，只是每次纹理是镜像放置的。
+#define MIRRORED_REPEAT GL_MIRRORED_REPEAT
 
-        // 和上面那个相同，只是每次纹理是镜像放置的。
-        #define MIRRORED_REPEAT GL_MIRRORED_REPEAT
+// 纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。
+#define CLMAP_TO_EDGE GL_CLAMP_TO_EDGE
 
-        // 纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。
-        #define CLMAP_TO_EDGE GL_CLAMP_TO_EDGE
+// 超出的坐标为用户指定的边缘颜色
+#define CLMAP_TO_BORDER GL_CLAMP_TO_BORDER
 
-        // 超出的坐标为用户指定的边缘颜色
-        #define CLMAP_TO_BORDER GL_CLAMP_TO_BORDER
+// ----------------------------------------------------
+// 多级渐远纹理环绕
 
-        // ----------------------------------------------------
-        // 多级渐远纹理环绕
+// 使用最邻近的多级渐远纹理来匹配像素大小，并使用邻近插值进行纹理采样
+#define NEAREST_MIPMAP_NEAREST GL_NEAREST_MIPMAP_NEAREST
 
-        // 使用最邻近的多级渐远纹理来匹配像素大小，并使用邻近插值进行纹理采样
-        #define NEAREST_MIPMAP_NEAREST GL_NEAREST_MIPMAP_NEAREST
+// 使用最邻近的多级渐远纹理级别，并使用线性插值进行采样
+#define LINEAR_MIPMAP_NEAREST GL_LINEAR_MIPMAP_NEAREST
 
-        // 使用最邻近的多级渐远纹理级别，并使用线性插值进行采样
-        #define LINEAR_MIPMAP_NEAREST GL_LINEAR_MIPMAP_NEAREST
+// 在两个最匹配像素大小的多级渐远纹理之间进行线性插值，使用邻近插值进行采样
+#define NEAREST_MIPMAP_LINEAR GL_NEAREST_MIPMAP_LINEAR
 
-        // 在两个最匹配像素大小的多级渐远纹理之间进行线性插值，使用邻近插值进行采样
-        #define NEAREST_MIPMAP_LINEAR GL_NEAREST_MIPMAP_LINEAR
+// 在两个邻近的多级渐远纹理之间使用线性插值，并使用线性插值进行采样
+#define LINEAR_MIPMAP_LINEAR GL_LINEAR_MIPMAP_LINEAR
 
-        // 在两个邻近的多级渐远纹理之间使用线性插值，并使用线性插值进行采样
-        #define LINEAR_MIPMAP_LINEAR GL_LINEAR_MIPMAP_LINEAR
-    }
+// ----------------------------------------------------
+// 纹理过滤方式
 
-    /**
-     * 过滤方式
-     */
-    namespace filter
-    {
-        // ----------------------------------------------------
-        // 纹理过滤方式
+// 邻近过滤
+#define TEXTURE_NEAREST GL_NEAREST
 
-        // 邻近过滤
-        #define TEXTURE_NEAREST GL_NEAREST
+// 线性过滤
+#define TEXTURE_LINEAR GL_LINEAR
 
-        // 线性过滤
-        #define TEXTURE_LINEAR GL_LINEAR
-    }
-
-}
 // ----------------------------------------------------
 // glfw api
 #define __glTextureGLenum(ms) ( ms ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D )
@@ -91,49 +75,49 @@ namespace texture
 /**
  * 删除Buffer
  */
-#define __glDeleteBuffer(buf)
+#define __glDeleteBuffer(buf) \
 { glDeleteBuffers(1, &buf); }
 
 /**
  * 创建ArrayBuffer
  */
-#define __glCreateArrayBuffer(buf, size, data, usage)
+#define __glCreateArrayBuffer(buf, size, data, usage) \
 { glGenBuffers(1, &buf); glBindBuffer(GL_ARRAY_BUFFER, buf); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
 
 /**
  * 绑定ArrayBuffer
  */
-#define __glBindArrayBuffer(buf)
+#define __glBindArrayBuffer(buf) \
 { glBindBuffer(GL_ARRAY_BUFFER, buf); }
 
 /**
  * 绑定ElementArrayBuffer
  */
-#define __glBindElemArrayBuffer(buf)
+#define __glBindElemArrayBuffer(buf) \
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
 
 /**
  * 解绑ElementArrayBuffer
  */
-#define __glUnbindElemArrayBuffer()
+#define __glUnbindElemArrayBuffer() \
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 /**
  * 解绑ArrayBuffer
  */
-#define __glUnbindArrayBuffer()
+#define __glUnbindArrayBuffer() \
 { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 /**
  * 绑定着色器程序
  */
-#define __glBindProgram(prog)
+#define __glBindProgram(prog) \
 { glUseProgram(prog); }
 
 /**
  * 解绑着色器程序
  */
-#define __glUnbindProgram()
+#define __glUnbindProgram() \
 { glUseProgram(0); }
 
 /**
@@ -141,7 +125,7 @@ namespace texture
  *
  * @param [i] values int值
  */
-#define __glUniform1i(prog, name, value)
+#define __glUniform1i(prog, name, value) \
 {glUniform1i(glGetUniformLocation(prog, name), value); }
 
 /**
@@ -150,7 +134,7 @@ namespace texture
  * @param [i] count 数组大小
  * @param [i] values int数组
  */
-#define __glUniformai(prog, name, count, values)
+#define __glUniformai(prog, name, count, values) \
 { glUniform1iv(glGetUniformLocation(prog, name), count, values); }
 
 /**
@@ -160,7 +144,7 @@ namespace texture
  * @param [i] name 着色器属性名称
  * @param [i] value 单个float值
  */
-#define __glUniform1f(prog, name, value)
+#define __glUniform1f(prog, name, value) \
 { glUniform1f(glGetUniformLocation(prog, name), value); }
 
 /**
@@ -171,7 +155,7 @@ namespace texture
  * @param [i] x x float参数
  * @param [i] y y float参数
  */
-#define __glUniform2f(prog, name, x, y)
+#define __glUniform2f(prog, name, x, y) \
 { glUniform2f(glGetUniformLocation(prog, name), x, y); }
 
 /**
@@ -183,7 +167,7 @@ namespace texture
  * @param [i] y y float参数
  * @param [i] z z float参数
  */
-#define __glUniform3f(prog, name, x, y, z)
+#define __glUniform3f(prog, name, x, y, z) \
 { glUniform3f(glGetUniformLocation(prog, name), x, y, z); }
 
 /**
@@ -196,7 +180,7 @@ namespace texture
  * @param [i] z z float参数
  * @param [i] w w float参数
  */
-#define __glUniform4f(prog, name, x, y, z, w)
+#define __glUniform4f(prog, name, x, y, z, w) \
 { glUniform4f(glGetUniformLocation(prog, name), x, y, z, w); }
 
 /**
@@ -206,7 +190,7 @@ namespace texture
  * @param [i] name 着色器属性名称
  * @param [i] mat3 float类型矩阵，3fv : x,y,z
  */
-#define __glUniformMatrix3fv(prog, name, mat3)
+#define __glUniformMatrix3fv(prog, name, mat3) \
 { glUniformMatrix3fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat3)); }
 
 /**
@@ -216,7 +200,7 @@ namespace texture
  * @param [i] name 着色器属性名称
  * @param [i] mat4 float类型矩阵，4fv : x,y,z,w
  */
-#define __glUniformMatrix4fv(prog, name, mat4)
+#define __glUniformMatrix4fv(prog, name, mat4) \
 { glUniformMatrix4fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat4)); }
 
 /**
@@ -224,7 +208,7 @@ namespace texture
  *
  * @param [i] buf framebuffer id
  */
-#define __glDelFramebuf(buf)
+#define __glDelFramebuf(buf) \
 { glDeleteFramebuffers(1, &buf); }
 
 /**
@@ -232,7 +216,7 @@ namespace texture
  *
  * @param [i] tex 纹理id
  */
-#define __glDelTexture(tex)
+#define __glDelTexture(tex) \
 { glDeleteTextures(1, &tex); }
 
 /**
@@ -240,7 +224,7 @@ namespace texture
  *
  * @param [i] buf framebuffer id
  */
-#define __glCreateFramebuf(buf)
+#define __glCreateFramebuf(buf) \
 { glCreateFramebuffers(1, &buf); }
 
 /**
@@ -248,19 +232,19 @@ namespace texture
  *
  * @param [i] buf framebuffer id
  */
-#define __glCreateAndBindFramebuf(buf)
+#define __glCreateAndBindFramebuf(buf) \
 {  __glCreateFramebuf(buf); glBindFramebuffer(GL_FRAMEBUFFER, buf); }
 
 /** 获取GLFW Vendor */
-#define __glGetVendor()
+#define __glGetVendor() \
 { glGetString(GL_VENDOR); }
 
 /** 获取GLFW渲染信息 */
-#define __glGetRenderer()
+#define __glGetRenderer() \
 { glGetString(GL_RENDERER); }
 
 /** 获取GLFW版本 */
-#define __glGetVersion()
+#define __glGetVersion() \
 { glGetString(GL_VERSION); }
 
 /**
@@ -268,7 +252,7 @@ namespace texture
  *
  * @param [i] tex 纹理ID引用
  */
-#define __glCreateTexture2D(tex)
+#define __glCreateTexture2D(tex) \
 { glGenTextures(1, &tex); }
 
 /**
@@ -276,14 +260,14 @@ namespace texture
  *
  * @param [i] tex 纹理ID引用
  */
-#define __glCreateAndBindTexture2D(tex)
-{ __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, texture); }
+#define __glCreateAndBindTexture2D(tex) \
+{ __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, tex); }
 
 /**
  * 解除纹理绑定
  */
-#define __glUnbindTexture2D()
-{ __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, 0); }
+#define __glUnbindTexture2D() \
+{ glBindTexture(GL_TEXTURE_2D, 0); }
 
 /**
  * 加载纹理图片到已绑定的纹理对象上
@@ -294,7 +278,7 @@ namespace texture
  * @param [i] imgformat 图片以何种格式储存，例如：GL_UNSIGNED_BYTE
  * @param [i] data 图片数据
  */
-#define __glLoadTexture2DImage(mipmap_level, width, height, imgformat, data)
+#define __glLoadTexture2DImage(mipmap_level, width, height, imgformat, data) \
 { glTexImage2D(GL_TEXTURE_2D, mipmap_level, GL_RGB, width, height, 0, GL_RGB, imgformat, data); }
 
 /**
@@ -313,7 +297,7 @@ namespace texture
  *
  * @param [i] mod 环绕方式
  */
-#define __glTexture2D_WRAP_S_Parameteri(mod)
+#define __glTexture2D_WRAP_S_Parameteri(mod) \
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod); }
 
 /**
@@ -321,33 +305,23 @@ namespace texture
  *
  * @param [i] mod 环绕方式
  */
-#define __glTexture2D_WRAP_T_Parameteri(mod)
+#define __glTexture2D_WRAP_T_Parameteri(mod) \
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod); }
 
 /**
- * 设置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ * 设置BORDER_COLOR
  *
- * @param [i] mod 环绕方式
  * @param [i] color 设置边缘颜色
  */
-#define __glTexture2D_WRAP_T_Parameterfv(mod, color)
-{  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod, color); }
-
-/**
- * 设置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
- *
- * @param [i] mod 环绕方式
- * @param [i] color 设置边缘颜色
- */
-#define __glTexture2D_WRAP_T_Parameterfv(mod, color)
-{  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod, color); }
+#define __glTexture2DBorderColor(color) \
+{  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color); }
 
 /**
  * 设置2D纹理缩小过滤方式
  *
  * @param [i] filter 过滤方式
  */
-#define __glTexture2D_Min_Filter_Parameteriv(filtermod)
+#define __glTexture2D_Min_Filter_Parameteriv(filtermod) \
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filtermod); }
 
 /**
@@ -355,7 +329,7 @@ namespace texture
  *
  * @param [i] filter 过滤方式
  */
-#define __glTexture2D_Mag_Filter_Parameteriv(filtermod)
+#define __glTexture2D_Mag_Filter_Parameteriv(filtermod) \
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
 
 // ----------------------------------------------------
