@@ -263,14 +263,6 @@ namespace texture
 #define __glGetVersion()
 { glGetString(GL_VERSION); }
 
-/** 启用深度测试 */
-#define __glEnableDepthTest()
-{ glEnable(GL_DEPTH_TEST); }
-
-/** 禁用深度测试 */
-#define __glDisableDepthTest()
-{ glDisable(GL_DEPTH_TEST); }
-
 /**
  * 创建纹理
  *
@@ -365,3 +357,18 @@ namespace texture
  */
 #define __glTexture2D_Mag_Filter_Parameteriv(filtermod)
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
+
+// ----------------------------------------------------
+// enable and disable
+
+/** 启用光源 */
+#define __glEnableLight() { glEnable(GL_LIGHTING); }
+
+/** 启用光源 */
+#define __glDisableLight() { glDisable(GL_LIGHTING); }
+
+/** 启用深度测试 */
+#define __glEnableDepthTest() { glEnable(GL_DEPTH_TEST); }
+
+/** 禁用深度测试 */
+#define __glDisableDepthTest() { glDisable(GL_DEPTH_TEST); }
