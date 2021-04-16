@@ -50,7 +50,7 @@ namespace alkaid
 
     void OpenGLCamera::look_at()
     {
-        glm::mat4 view = glm::mat4(1.0f);
+            glm::mat4 view = glm::mat4(1.0f);
         view = glm::lookAt(pos, camera_front, camera_up);
         shader->setMat4("view", view);
     }

@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include "render/camera/camera.h"
+#include "scene/3d/camera/camera.h"
 
 namespace alkaid
 {
@@ -38,10 +38,10 @@ namespace alkaid
             this->camera_up = glm::cross(direction, camera_right);
         }
 
-        void on_move(glm::vec3 __pos) override { this->pos = __pos; } // 移动相机
+        void move(glm::vec3 __pos) override { this->pos = __pos; } // 移动相机
 
         // 旋转相机
-        void on_rotate(float x, float y) override;
+        void rotate(float x, float y) override;
 
         void look_at();
 

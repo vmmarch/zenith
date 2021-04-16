@@ -36,17 +36,42 @@ namespace alkaid
     {
     public:
         virtual ~Camera() = default;
-        virtual void on_move(glm::vec3 pos) = 0;
-        virtual void on_rotate(float, float) = 0;
+
+        /**
+         * 移动相机
+         */
+        virtual void move(glm::vec3 pos) = 0;
+
+        /**
+         * 旋转相机
+         *
+         * @param [i] x x坐标
+         * @param [i] y y坐标
+         */
+        virtual void rotate(float, float) = 0;
+
+        /**
+         * 每一帧都需要调用这个方法去刷新相机属性
+         */
         virtual void refresh() = 0;
+
+        /** 相机位置 */
         virtual glm::vec3 get_pos() const = 0;
-        virtual glm::vec3 get_target() const = 0;
+
+        /** 相机当前方向 */
         virtual glm::vec3 get_direction() const = 0;
-        virtual glm::vec3 get_upvec() const = 0;
+
+        /** 相机竖向角度 */
         virtual glm::vec3 get_camera_up() const = 0;
+
+        /** 相机横向角度 */
         virtual glm::vec3 get_camera_right() const = 0;
+
+        /** 相机纵向角度 */
         virtual glm::vec3 get_camera_front() const = 0;
-	virtual void set_speed(float __speed) = 0;
+
+        /** 相机移动速度 */
+	    virtual void set_speed(float __speed) = 0;
         virtual float get_speed() const = 0;
 
         // 创建相机
