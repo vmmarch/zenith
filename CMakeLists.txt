@@ -20,6 +20,7 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE
 ################################################
 ### for modules dir.
 ################################################
+include_directories(SYSTEM modules)
 include_directories(SYSTEM modules/imgui)
 include_directories(SYSTEM modules/imgui/backends)
 
