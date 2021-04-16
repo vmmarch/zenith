@@ -12,7 +12,7 @@ namespace alkaid
 	
 	void OpenGLTexture2D::bind()
 	{
-
+        __glCreateAndBindTexture(texture_id);
 	}
 	
 	void OpenGLTexture2D::unbind()
