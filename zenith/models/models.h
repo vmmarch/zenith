@@ -69,15 +69,6 @@ namespace zenith
      public:
         ModelObject(v_cc path);
         ~ModelObject() = default;
-
-        /**
-         * 渲染模型
-         *
-         * @param [i] x x坐标
-         * @param [i] y y坐标
-         * @param [i] z z坐标
-         */
-        void draw(int, int, int);
     }
 
 }
