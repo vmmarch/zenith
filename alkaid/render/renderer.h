@@ -55,6 +55,7 @@ namespace alkaid
         // 创建渲染器
         static v_scope<Renderer> __create();
 
+        // 获取当前API
         static render::api __get_render_api();
 
     private:
