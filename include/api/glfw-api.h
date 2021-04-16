@@ -29,6 +29,63 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+namespace texture
+{
+
+    /**
+     * 环绕方式
+     */
+    namespace wrapping
+    {
+        // ----------------------------------------------------
+        // 纹理环绕方式
+
+        // 默认环绕方式，重复纹理图像
+        #define REPEAT GL_REPEAT
+
+        // 和上面那个相同，只是每次纹理是镜像放置的。
+        #define MIRRORED_REPEAT GL_MIRRORED_REPEAT
+
+        // 纹理坐标会被约束在0到1之间，超出的部分会重复纹理坐标的边缘，产生一种边缘被拉伸的效果。
+        #define CLMAP_TO_EDGE GL_CLAMP_TO_EDGE
+
+        // 超出的坐标为用户指定的边缘颜色
+        #define CLMAP_TO_BORDER GL_CLAMP_TO_BORDER
+
+        // ----------------------------------------------------
+        // 多级渐远纹理环绕
+
+        // 使用最邻近的多级渐远纹理来匹配像素大小，并使用邻近插值进行纹理采样
+        #define NEAREST_MIPMAP_NEAREST GL_NEAREST_MIPMAP_NEAREST
+
+        // 使用最邻近的多级渐远纹理级别，并使用线性插值进行采样
+        #define LINEAR_MIPMAP_NEAREST GL_LINEAR_MIPMAP_NEAREST
+
+        // 在两个最匹配像素大小的多级渐远纹理之间进行线性插值，使用邻近插值进行采样
+        #define NEAREST_MIPMAP_LINEAR GL_NEAREST_MIPMAP_LINEAR
+
+        // 在两个邻近的多级渐远纹理之间使用线性插值，并使用线性插值进行采样
+        #define LINEAR_MIPMAP_LINEAR GL_LINEAR_MIPMAP_LINEAR
+    }
+
+    /**
+     * 过滤方式
+     */
+    namespace filter
+    {
+        // ----------------------------------------------------
+        // 纹理过滤方式
+
+        // 邻近过滤
+        #define TEXTURE_NEAREST GL_NEAREST
+
+        // 线性过滤
+        #define TEXTURE_LINEAR GL_LINEAR
+    }
+
+}
+// ----------------------------------------------------
+// glfw api
 #define __glTextureGLenum(ms) ( ms ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D )
 
 /**
@@ -231,7 +288,7 @@
 { __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, texture); }
 
 /**
- * 加载纹理图片到已绑定的纹理上
+ * 加载纹理图片到已绑定的纹理对象上
  *
  * @param [i] mipmap_level 多级渐远纹理级别，默认为0
  * @param [i] width  图片宽度
@@ -241,3 +298,48 @@
  */
 #define __glLoadTexture2DImage(mipmap_level, width, height, imgformat, data)
 { glTexImage2D(GL_TEXTURE_2D, mipmap_level, GL_RGB, width, height, 0, GL_RGB, imgformat, data); }
+
+/**
+ * 如果要使用多级渐远纹理必须手动设置所有不同的图像（不断递增__glLoadTexture2DImage的第一个参数）
+ * 或者直接在生成纹理之后调用glGenerateMipmap。这会为当前绑定的纹理自动生成多级渐远纹理。
+ *
+ * <code>
+ *     __glLoadTexture2DImage(0, width, height, GL_UNSIGNED_BYTE, data);
+ *     __glGenMipmap2D();
+ * </code>
+ */
+#define __glGenMipmap2D() { glGenerateMipmap(GL_TEXTURE_2D); }
+
+/**
+ * 配置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ *
+ * @param [i] mod 环绕方式
+ */
+#define __glTexture2D_WRAP_S_Parameteri(mod)
+{  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod); }
+
+/**
+ * 配置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ *
+ * @param [i] mod 环绕方式
+ */
+#define __glTexture2D_WRAP_T_Parameteri(mod)
+{  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod); }
+
+/**
+ * 配置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ *
+ * @param [i] mod 环绕方式
+ * @param [i] color 设置边缘颜色
+ */
+#define __glTexture2D_WRAP_T_Parameterfv(mod, color)
+{  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod, color); }
+
+/**
+ * 配置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ *
+ * @param [i] mod 环绕方式
+ * @param [i] color 设置边缘颜色
+ */
+#define __glTexture2D_WRAP_T_Parameterfv(mod, color)
+{  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod, color); }
