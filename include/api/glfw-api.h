@@ -311,7 +311,7 @@ namespace texture
 #define __glGenMipmap2D() { glGenerateMipmap(GL_TEXTURE_2D); }
 
 /**
- * 配置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ * 设置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
  *
  * @param [i] mod 环绕方式
  */
@@ -319,7 +319,7 @@ namespace texture
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod); }
 
 /**
- * 配置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ * 设置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
  *
  * @param [i] mod 环绕方式
  */
@@ -327,7 +327,7 @@ namespace texture
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod); }
 
 /**
- * 配置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ * 设置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
  *
  * @param [i] mod 环绕方式
  * @param [i] color 设置边缘颜色
@@ -336,10 +336,26 @@ namespace texture
 {  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod, color); }
 
 /**
- * 配置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
+ * 设置T坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
  *
  * @param [i] mod 环绕方式
  * @param [i] color 设置边缘颜色
  */
 #define __glTexture2D_WRAP_T_Parameterfv(mod, color)
 {  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod, color); }
+
+/**
+ * 设置2D纹理缩小过滤方式
+ *
+ * @param [i] filter 过滤方式
+ */
+#define __glTexture2D_Min_Filter_Parameteriv(filtermod)
+{  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filtermod); }
+
+/**
+ * 设置2D纹理放大过滤方式
+ *
+ * @param [i] filter 过滤方式
+ */
+#define __glTexture2D_Mag_Filter_Parameteriv(filtermod)
+{ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }

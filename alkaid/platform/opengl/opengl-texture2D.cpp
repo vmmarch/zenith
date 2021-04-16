@@ -46,8 +46,12 @@ namespace alkaid
             set_wrap_mod(coor, texture::wrapping::CLMAP_TO_BORDER, color);
 	}
 	
-	void OpenGLTexture2D::set_filter(int zoom, 	filtermod filter)
+	void OpenGLTexture2D::set_filter(int zoom, filtermod filter)
 	{
+	    if(zoom == MIN_FILTER)
+	        __glTexture2D_Min_Filter_Parameteriv(filter == filtermod::NEAREST ? texture::filter::NEAREST : texture::filter::LINEAR);
+	    else(zoom == MAG_FILTER)
+	        __glTexture2D_Mag_Filter_Parameteriv(filter == filtermod::NEAREST ? texture::filter::NEAREST : texture::filter::LINEAR);
 	}
 
 	static void set_wrap_mod(int coor, void* mod, float* color)
