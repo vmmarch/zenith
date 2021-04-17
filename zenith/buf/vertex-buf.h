@@ -16,19 +16,17 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/17. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "init/starter.h"
+#pragma once
 
-int main(int argc, char **argv)
+namespace zenith
 {
-    auto app = new zenith::Starter();
-    app->init_window("zenith", 1400, 900);
-    app->start_engine();
+    class VertexBuf
+    {
 
-    return 0;
+    };
 }

@@ -34,8 +34,6 @@ namespace zenith
     Starter::Starter()
     {
         instance = this;
-
-
     }
 
     Starter::~Starter()
