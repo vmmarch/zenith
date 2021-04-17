@@ -1,4 +1,4 @@
-# 瑶光3D游戏引擎
+# 天顶3D游戏引擎
 
 ![LOGO](https://github.com/orvals/zenith/blob/master/assets/zlogo.png)
 
