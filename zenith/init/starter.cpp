@@ -25,6 +25,7 @@
 #include "render/renderer.h"
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
+#include "render/orthographic-camera.h"
 
 namespace zenith
 {
@@ -33,6 +34,8 @@ namespace zenith
     Starter::Starter()
     {
         instance = this;
+
+
     }
 
     Starter::~Starter()

@@ -32,6 +32,8 @@ namespace zenith
     public:
         OpenGLShader(v_cc vertex_path, v_cc fragment_path);
 
+        ~OpenGLShader() override;
+
         void bind() override;
 
         void setBool(v_cc, bool) const override;

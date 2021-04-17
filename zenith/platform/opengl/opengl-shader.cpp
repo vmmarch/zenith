@@ -85,6 +85,11 @@ namespace zenith
         glDeleteShader(fragment);
     }
 
+    OpenGLShader::~OpenGLShader()
+    {
+        glDeleteShader(shader_id);
+    }
+
     void OpenGLShader::bind()
     {
         glUseProgram(shader_id);
