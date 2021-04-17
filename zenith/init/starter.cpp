@@ -69,8 +69,17 @@ namespace zenith
         v_scope<Renderer> renderer = Renderer::__create();
         renderer->clear_color(color::BLACK);
 
+        float last_frame_time = 0.0f;
+        int render_count = 0;
+
         while(running)
         {
+            float time = (float) glfwGetTime();
+            float timestep = time - last_frame_time;
+            last_frame_time = timestep;
+
+            std::cout << timestep << std::endl;
+
             renderer->clear();
 
             layer_stack.update();
