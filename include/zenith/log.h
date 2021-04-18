@@ -37,10 +37,9 @@ enum level
 template<typename FMT, typename... Args>
 void log(FMT &__fmt, level lev, Args &&... args)
 {
-    std::string out = stringf(OUT_MESSAGE, "2029990", "lev", "aaa");
-    std::cout << out << std::endl;
-//    out += __fmt;
-//    std::cout << out.c_str() << std::endl;
+    std::string out = __format(OUT_MESSAGE, "2020", "lev", "aaa");
+    std::string fmt = __format(__fmt, std::forward<Args>(args)...); out.append(fmt);
+    std::cout << out.c_str() << std::endl;
 }
 
 template<typename FMT, typename... Args>

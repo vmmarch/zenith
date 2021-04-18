@@ -29,15 +29,12 @@
 #include <vector>
 
 template<typename... Args>
-std::string stringf(const char *fmt, ...)
+std::string __format(const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
 
-    char brackets[2] = {0, 0};
     bool s_bracket = false;
-
-    std::vector<int> indexes;
 
     int charlen = strlen(fmt);
     int append_v_len = 0;
@@ -52,6 +49,7 @@ std::string stringf(const char *fmt, ...)
             if (c == '}')
             {
                 process.replace((append_v_len + i - 1), 2, "");
+                // FIXED int转string异常
                 const char *append_v = va_arg(args, const char*);
                 process.append(append_v);
                 append_v_len += strlen(append_v) - 2;

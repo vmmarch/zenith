@@ -50,7 +50,7 @@
 #define GUI_TEXT_RESOURCE_MANAGER "资源管理器"
 
 // INFO MESSAGE
-#define CREATE_WINDOW_INFO "创建窗口信息：{}, {}, {} "
+#define CREATE_WINDOW_INFO "创建窗口信息：{}, {}, {}"
 #define CREATE_WINDOW_FAILED "窗口创建失败 "
 #define GLFW_INIT_FAILED "GLFW初始化失败 "
 #define OPENGL_INFO "OpenGL创建信息: "
