@@ -57,7 +57,7 @@ namespace zenith::win
 
         v_suc success = glfwInit();
         if (!success)
-                ZENITH_ERROR(__GLFW_INIT_FAILED__);
+                ZENITH_ERROR(GLFW_INIT_FAILED);
 
         this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title),
                                         nullptr, nullptr);
@@ -65,7 +65,7 @@ namespace zenith::win
 
         if (window == nullptr)
         {
-            ZENITH_ERROR(__CREATE_WINDOW_FAILED__);
+            ZENITH_ERROR(CREATE_WINDOW_FAILED);
             glfwTerminate();
         }
 

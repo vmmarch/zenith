@@ -32,7 +32,6 @@
 #ifdef __ZENITH_IN_CHINA__
 ///////////////////////////////////////////////////////////
 // ZENITH_IN_CHINA
-#define ERROR "错误: "
 
 // MENU MESSAGE
 #define GUI_TEXT_FILE "文件"
@@ -64,16 +63,16 @@
 
 // ERROR MESSAGE
 #define STARTUP_ERROR ENGINE_NAME##"启动失败"
-#define CREATE_OPENGL_CONTEXT_ERROR ERROR##"创建OpenGLContext失败。原因：window == NULL"
-#define INIT_GLAD_ERROR ERROR##"初始化GLAD失败。 "
-#define APPLY_FONT_ERROR ENGINE_NAME ERROR##"应用字体失败：未获取到字体信息【%s】." // %s font name
-#define PLEASE_CHOOSE_RENDER_API ERROR##"请选择渲染API"
-#define NOT_SUPPORT_DIRECTX_API ERROR##"暂不支持DirectX"
-#define UNKNOWN_SHADER_TYPE ERROR##"位置着色器类型"
-#define LOAD_GLAD_FAILED ERROR##"加载GLAD失败"
-#define ONLY_SUPPORT_WINDOWS ERROR##"目前仅支持Windows平台"
-#define CANNOT_READ_FONT ERROR##"未获取到{}字体"
-#define SHADER_FILE_READ_NOT_SUCCESS ERROR##"着色器文件读取失败"
+#define CREATE_OPENGL_CONTEXT_ERROR "错误：创建OpenGLContext失败。原因：window == NULL"
+#define INIT_GLAD_ERROR "错误：初始化GLAD失败。 "
+#define APPLY_FONT_ERROR ENGINE_NAME "错误：应用字体失败：未获取到字体信息【%s】." // %s font name
+#define PLEASE_CHOOSE_RENDER_API "错误：请选择渲染API"
+#define NOT_SUPPORT_DIRECTX_API "错误：暂不支持DirectX"
+#define UNKNOWN_SHADER_TYPE "错误：位置着色器类型"
+#define LOAD_GLAD_FAILED "错误：加载GLAD失败"
+#define ONLY_SUPPORT_WINDOWS "错误：目前仅支持Windows平台"
+#define CANNOT_READ_FONT "错误：未获取到{}字体"
+#define SHADER_FILE_READ_NOT_SUCCESS "错误：着色器文件读取失败"
 
 ///////////////////////////////////////////////////////////
 #else

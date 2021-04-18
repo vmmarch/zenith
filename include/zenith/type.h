@@ -26,6 +26,9 @@
 #include <memory>
 #include <iostream>
 #include <zenith/globalization.h>
+#include <zenith/log.h>
+
+#define EXTAPI extern
 
 typedef const char* v_cc;
 typedef unsigned char v_uc;
@@ -73,10 +76,21 @@ constexpr Ref<T> __create_ref(Args&&... args)
     return std::make_shared<T>(std::forward<Args>(args)...);
 }
 
-#define ZENITH_INFO(...)
-#define ZENITH_DEBUG(...)
-#define ZENITH_WARN(...)
-#define ZENITH_ERROR(...)
+template<typename FMT, typename... Args>
+EXTAPI void ZENITHLOGGERINFO(FMT&, Args&&...);
+#define ZENITH_INFO(...) ZENITHLOGGERINFO(__VA_ARGS__)
+
+template<typename FMT, typename... Args>
+EXTAPI void ZENITHLOGGERDEBUG(FMT&, Args&&...);
+#define ZENITH_DEBUG(...) ZENITHLOGGERDEBUG(__VA_ARGS__)
+
+template<typename FMT, typename... Args>
+EXTAPI void ZENITHLOGGERWARN(FMT&, Args&&...);
+#define ZENITH_WARN(...) ZENITHLOGGERWARN(__VA_ARGS__)
+
+template<typename FMT, typename... Args>
+EXTAPI void ZENITHLOGGERERROR(FMT&, Args&&...);
+#define ZENITH_ERROR(...) ZENITHLOGGERERROR(__VA_ARGS__)
 
 #define __BIT__(x) (1 << x)
 

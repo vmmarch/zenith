@@ -37,7 +37,9 @@ namespace zenith
         glfwMakeContextCurrent(this->window);
         v_suc success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
         if(!success)
+        {
             ZENITH_ERROR(LOAD_GLAD_FAILED);
+        }
 
         ZENITH_INFO(OPENGL_INFO);
         ZENITH_INFO(VENDOR_INFO, GLAPI_GetVendor());

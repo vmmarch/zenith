@@ -23,6 +23,6 @@
  */
 #include <api/glfw-api.h>
 
-static const GLubyte* GLAPI_GetVendor() { return glGetString(GL_VENDOR); }
-static const GLubyte* GLAPI_GetRenderer() { return glGetString(GL_RENDERER); }
-static const GLubyte* GLAPI_GetVersion() { return glGetString(GL_VERSION); }
+const GLubyte* GLAPI_GetVendor() { return glGetString(GL_VENDOR); }
+const GLubyte* GLAPI_GetRenderer() { return glGetString(GL_RENDERER); }
+const GLubyte* GLAPI_GetVersion() { return glGetString(GL_VERSION); }

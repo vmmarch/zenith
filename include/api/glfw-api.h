@@ -336,10 +336,8 @@
 #define GLAPI_DisableDepthTest() { glDisable(GL_DEPTH_TEST); }
 
 /** 获取GLFW Vendor */
-static const GLubyte* GLAPI_GetVendor();
-
+const GLubyte* GLAPI_GetVendor();
 /** 获取GLFW渲染信息 */
-static const GLubyte* GLAPI_GetRenderer();
-
+const GLubyte* GLAPI_GetRenderer();
 /** 获取GLFW版本 */
-static const GLubyte* GLAPI_GetVersion();
+const GLubyte* GLAPI_GetVersion();
