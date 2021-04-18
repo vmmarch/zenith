@@ -38,7 +38,7 @@ static v_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     return __create_scope<zenith::win::WinWindow>(props);
 #else
-    __ZENITH_ERROR(__ONLY_SUPPORT_WINDOWS__); return nullptr;
+    ZENITH_ERROR(__ONLY_SUPPORT_WINDOWS__); return nullptr;
 #endif
 }
 
@@ -80,13 +80,13 @@ static v_scope<zenith::Renderer> __create_renderer()
 /**
  * @return 着色器实例
  */
-static v_scope<zenith::Shader> __create_shader(v_cc vertex_path, v_cc fragment_path)
+static v_scope<zenith::Shader> __create_shader(v_cc path)
 {
     switch (zenith::Renderer::__get_render_api())
     {
         case render::NONE:
             break;
-        case render::GL: return __create_scope<zenith::OpenGLShader>(vertex_path, fragment_path);
+        case render::GL: return __create_scope<zenith::OpenGLShader>(path);
         case render::DX:
             break;
     }

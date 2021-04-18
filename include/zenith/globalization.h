@@ -56,7 +56,7 @@
 #define GLFW_INIT_FAILED "GLFW初始化失败 "
 #define OPENGL_INFO "OpenGL创建信息: "
 #define VENDOR_INFO "VENDOR: {}"
-#define RENDER_INFO "RENDER: {}"sss
+#define RENDER_INFO "RENDER: {}"
 #define VERSION_INFO "VERSION: {}"
 
 // WARN MESSAGE

@@ -17,9 +17,9 @@ namespace zenith
 
     void OpenGLTexture2D::bind()
     {
-        __glCreateAndBindTexture2D(texture_id);
-        __glLoadTexture2DImage(0, width, height, GL_UNSIGNED_BYTE, image_data);
-        __glGenMipmap2D();
+        GLAPI_CreateAndBindTexture2D(texture_id);
+        GLAPI_LoadTexture2DImage(0, width, height, GL_UNSIGNED_BYTE, image_data);
+        GLAPI_GenMipmap2D();
 
         // 释放图像内存
         stbi_image_free(image_data);
@@ -27,7 +27,7 @@ namespace zenith
 
     void OpenGLTexture2D::unbind()
     {
-        __glUnbindTexture2D();
+        GLAPI_UnbindTexture2D();
     }
 
     void OpenGLTexture2D::set_mod(v_ui16 mod, int coor, float *color)
@@ -39,12 +39,12 @@ namespace zenith
     {
         if (zoom == MIN_FILTER)
         {
-            __glTexture2D_Min_Filter_Parameteriv(filter);
+            GLAPI_Texture2D_Min_Filter_Parameteriv(filter);
         }
 
         if (zoom == MAG_FILTER)
         {
-            __glTexture2D_Mag_Filter_Parameteriv(filter);
+            GLAPI_Texture2D_Mag_Filter_Parameteriv(filter);
         }
     }
 
@@ -54,21 +54,21 @@ namespace zenith
         {
             if (coor == WRAP_S)
             {
-                __glTexture2D_WRAP_S_Parameteri(mod);
+                GLAPI_Texture2D_WRAP_S_Parameteri(mod);
             } else
             {
-                __glTexture2D_WRAP_T_Parameteri(mod);
+                GLAPI_Texture2D_WRAP_T_Parameteri(mod);
             }
         } else
         {
             if (coor == WRAP_S)
             {
-                __glTexture2D_WRAP_S_Parameteri(mod);
-                __glTexture2DBorderColor(color);
+                GLAPI_Texture2D_WRAP_S_Parameteri(mod);
+                GLAPI_Texture2DBorderColor(color);
             } else
             {
-                __glTexture2D_WRAP_T_Parameteri(mod);
-                __glTexture2DBorderColor(color);
+                GLAPI_Texture2D_WRAP_T_Parameteri(mod);
+                GLAPI_Texture2DBorderColor(color);
             }
         }
     }

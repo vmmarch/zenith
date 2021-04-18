@@ -70,54 +70,54 @@
 
 // ----------------------------------------------------
 // glfw api
-#define __glTextureGLenum(ms) ( ms ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D )
+#define GLAPI_TextureGLenum(ms) ( ms ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D )
 
 /**
  * 删除Buffer
  */
-#define __glDeleteBuffer(buf) \
+#define GLAPI_DeleteBuffer(buf) \
 { glDeleteBuffers(1, &buf); }
 
 /**
  * 创建ArrayBuffer
  */
-#define __glCreateArrayBuffer(buf, size, data, usage) \
+#define GLAPI_CreateArrayBuffer(buf, size, data, usage) \
 { glGenBuffers(1, &buf); glBindBuffer(GL_ARRAY_BUFFER, buf); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
 
 /**
  * 绑定ArrayBuffer
  */
-#define __glBindArrayBuffer(buf) \
+#define GLAPI_BindArrayBuffer(buf) \
 { glBindBuffer(GL_ARRAY_BUFFER, buf); }
 
 /**
  * 绑定ElementArrayBuffer
  */
-#define __glBindElemArrayBuffer(buf) \
+#define GLAPI_BindElemArrayBuffer(buf) \
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
 
 /**
  * 解绑ElementArrayBuffer
  */
-#define __glUnbindElemArrayBuffer() \
+#define GLAPI_UnbindElemArrayBuffer() \
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 /**
  * 解绑ArrayBuffer
  */
-#define __glUnbindArrayBuffer() \
+#define GLAPI_UnbindArrayBuffer() \
 { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 /**
  * 绑定着色器程序
  */
-#define __glBindProgram(prog) \
+#define GLAPI_BindProgram(prog) \
 { glUseProgram(prog); }
 
 /**
  * 解绑着色器程序
  */
-#define __glUnbindProgram() \
+#define GLAPI_UnbindProgram() \
 { glUseProgram(0); }
 
 /**
@@ -125,7 +125,7 @@
  *
  * @param [i] values int值
  */
-#define __glUniform1i(prog, name, value) \
+#define GLAPI_Uniform1i(prog, name, value) \
 {glUniform1i(glGetUniformLocation(prog, name), value); }
 
 /**
@@ -134,7 +134,7 @@
  * @param [i] count 数组大小
  * @param [i] values int数组
  */
-#define __glUniformai(prog, name, count, values) \
+#define GLAPI_Uniformai(prog, name, count, values) \
 { glUniform1iv(glGetUniformLocation(prog, name), count, values); }
 
 /**
@@ -144,7 +144,7 @@
  * @param [i] name 着色器属性名称
  * @param [i] value 单个float值
  */
-#define __glUniform1f(prog, name, value) \
+#define GLAPI_Uniform1f(prog, name, value) \
 { glUniform1f(glGetUniformLocation(prog, name), value); }
 
 /**
@@ -155,7 +155,7 @@
  * @param [i] x x float参数
  * @param [i] y y float参数
  */
-#define __glUniform2f(prog, name, x, y) \
+#define GLAPI_Uniform2f(prog, name, x, y) \
 { glUniform2f(glGetUniformLocation(prog, name), x, y); }
 
 /**
@@ -167,7 +167,7 @@
  * @param [i] y y float参数
  * @param [i] z z float参数
  */
-#define __glUniform3f(prog, name, x, y, z) \
+#define GLAPI_Uniform3f(prog, name, x, y, z) \
 { glUniform3f(glGetUniformLocation(prog, name), x, y, z); }
 
 /**
@@ -180,7 +180,7 @@
  * @param [i] z z float参数
  * @param [i] w w float参数
  */
-#define __glUniform4f(prog, name, x, y, z, w) \
+#define GLAPI_Uniform4f(prog, name, x, y, z, w) \
 { glUniform4f(glGetUniformLocation(prog, name), x, y, z, w); }
 
 /**
@@ -190,7 +190,7 @@
  * @param [i] name 着色器属性名称
  * @param [i] mat3 float类型矩阵，3fv : x,y,z
  */
-#define __glUniformMatrix3fv(prog, name, mat3) \
+#define GLAPI_UniformMatrix3fv(prog, name, mat3) \
 { glUniformMatrix3fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat3)); }
 
 /**
@@ -200,7 +200,7 @@
  * @param [i] name 着色器属性名称
  * @param [i] mat4 float类型矩阵，4fv : x,y,z,w
  */
-#define __glUniformMatrix4fv(prog, name, mat4) \
+#define GLAPI_UniformMatrix4fv(prog, name, mat4) \
 { glUniformMatrix4fv(glGetUniformLocation(prog, name), 1, GL_FALSE, glm::value_ptr(mat4)); }
 
 /**
@@ -208,7 +208,7 @@
  *
  * @param [i] buf framebuffer id
  */
-#define __glDelFramebuf(buf) \
+#define GLAPI_DelFramebuf(buf) \
 { glDeleteFramebuffers(1, &buf); }
 
 /**
@@ -216,7 +216,7 @@
  *
  * @param [i] tex 纹理id
  */
-#define __glDelTexture(tex) \
+#define GLAPI_DelTexture(tex) \
 { glDeleteTextures(1, &tex); }
 
 /**
@@ -224,7 +224,7 @@
  *
  * @param [i] buf framebuffer id
  */
-#define __glCreateFramebuf(buf) \
+#define GLAPI_CreateFramebuf(buf) \
 { glCreateFramebuffers(1, &buf); }
 
 /**
@@ -232,27 +232,15 @@
  *
  * @param [i] buf framebuffer id
  */
-#define __glCreateAndBindFramebuf(buf) \
-{  __glCreateFramebuf(buf); glBindFramebuffer(GL_FRAMEBUFFER, buf); }
-
-/** 获取GLFW Vendor */
-#define __glGetVendor() \
-{ glGetString(GL_VENDOR); }
-
-/** 获取GLFW渲染信息 */
-#define __glGetRenderer() \
-{ glGetString(GL_RENDERER); }
-
-/** 获取GLFW版本 */
-#define __glGetVersion() \
-{ glGetString(GL_VERSION); }
+#define GLAPI_CreateAndBindFrameBuf(buf) \
+{  GLAPI_CreateFramebuf(buf); glBindFramebuffer(GL_FRAMEBUFFER, buf); }
 
 /**
  * 创建纹理
  *
  * @param [i] tex 纹理ID引用
  */
-#define __glCreateTexture2D(tex) \
+#define GLAPI_CreateTexture2D(tex) \
 { glGenTextures(1, &tex); }
 
 /**
@@ -260,13 +248,13 @@
  *
  * @param [i] tex 纹理ID引用
  */
-#define __glCreateAndBindTexture2D(tex) \
-{ __glCreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, tex); }
+#define GLAPI_CreateAndBindTexture2D(tex) \
+{ GLAPI_CreateTexture2D(tex); glBindTexture(GL_TEXTURE_2D, tex); }
 
 /**
  * 解除纹理绑定
  */
-#define __glUnbindTexture2D() \
+#define GLAPI_UnbindTexture2D() \
 { glBindTexture(GL_TEXTURE_2D, 0); }
 
 /**
@@ -278,26 +266,26 @@
  * @param [i] imgformat 图片以何种格式储存，例如：GL_UNSIGNED_BYTE
  * @param [i] data 图片数据
  */
-#define __glLoadTexture2DImage(mipmap_level, width, height, imgformat, data) \
+#define GLAPI_LoadTexture2DImage(mipmap_level, width, height, imgformat, data) \
 { glTexImage2D(GL_TEXTURE_2D, mipmap_level, GL_RGB, width, height, 0, GL_RGB, imgformat, data); }
 
 /**
- * 如果要使用多级渐远纹理必须手动设置所有不同的图像（不断递增__glLoadTexture2DImage的第一个参数）
+ * 如果要使用多级渐远纹理必须手动设置所有不同的图像（不断递增GLAPI_LoadTexture2DImage的第一个参数）
  * 或者直接在生成纹理之后调用glGenerateMipmap。这会为当前绑定的纹理自动生成多级渐远纹理。
  *
  * <code>
- *     __glLoadTexture2DImage(0, width, height, GL_UNSIGNED_BYTE, data);
- *     __glGenMipmap2D();
+ *     GLAPI_LoadTexture2DImage(0, width, height, GL_UNSIGNED_BYTE, data);
+ *     GLAPI_GenMipmap2D();
  * </code>
  */
-#define __glGenMipmap2D() { glGenerateMipmap(GL_TEXTURE_2D); }
+#define GLAPI_GenMipmap2D() { glGenerateMipmap(GL_TEXTURE_2D); }
 
 /**
  * 设置S坐标轴的环绕方式（2D纹理的坐标轴有ST，和3D的XY是一样的）
  *
  * @param [i] mod 环绕方式
  */
-#define __glTexture2D_WRAP_S_Parameteri(mod) \
+#define GLAPI_Texture2D_WRAP_S_Parameteri(mod) \
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, mod); }
 
 /**
@@ -305,7 +293,7 @@
  *
  * @param [i] mod 环绕方式
  */
-#define __glTexture2D_WRAP_T_Parameteri(mod) \
+#define GLAPI_Texture2D_WRAP_T_Parameteri(mod) \
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, mod); }
 
 /**
@@ -313,7 +301,7 @@
  *
  * @param [i] color 设置边缘颜色
  */
-#define __glTexture2DBorderColor(color) \
+#define GLAPI_Texture2DBorderColor(color) \
 {  glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, color); }
 
 /**
@@ -321,7 +309,7 @@
  *
  * @param [i] filter 过滤方式
  */
-#define __glTexture2D_Min_Filter_Parameteriv(filtermod) \
+#define GLAPI_Texture2D_Min_Filter_Parameteriv(filtermod) \
 {  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filtermod); }
 
 /**
@@ -329,21 +317,29 @@
  *
  * @param [i] filter 过滤方式
  */
-#define __glTexture2D_Mag_Filter_Parameteriv(filtermod) \
+#define GLAPI_Texture2D_Mag_Filter_Parameteriv(filtermod) \
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
 
 // ----------------------------------------------------
 // enable and disable
 
 /** 光照计算 */
-#define __glEnableLight() { glEnable(GL_LIGHTING); }
-#define __glDisableLight() { glDisable(GL_LIGHTING); }
+#define GLAPI_EnableLight() { glEnable(GL_LIGHTING); }
+#define GLAPI_DisableLight() { glDisable(GL_LIGHTING); }
 
 /** 颜色追踪 */
-#define __glEnableColorMaterial() { glEnable(GL_COLOR_MATERIAL); }
-#define __glDisableColorMaterial() { glDisable(GL_COLOR_MATERIAL); }
+#define GLAPI_EnableColorMaterial() { glEnable(GL_COLOR_MATERIAL); }
+#define GLAPI_DisableColorMaterial() { glDisable(GL_COLOR_MATERIAL); }
 
 /** 深度测试 */
-#define __glEnableDepthTest() { glEnable(GL_DEPTH_TEST); }
-#define __glDisableDepthTest() { glDisable(GL_DEPTH_TEST); }
+#define GLAPI_EnableDepthTest() { glEnable(GL_DEPTH_TEST); }
+#define GLAPI_DisableDepthTest() { glDisable(GL_DEPTH_TEST); }
 
+/** 获取GLFW Vendor */
+static const GLubyte* GLAPI_GetVendor();
+
+/** 获取GLFW渲染信息 */
+static const GLubyte* GLAPI_GetRenderer();
+
+/** 获取GLFW版本 */
+static const GLubyte* GLAPI_GetVersion();

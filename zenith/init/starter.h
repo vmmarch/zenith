@@ -59,7 +59,7 @@ namespace zenith
         v_suc running = true;
         v_scope<Window> window;
         LayerStack layer_stack;
-        ImGuiLayer* imlayer;
+        ImGuiLayer* imlayer {};
 
         static Starter* instance;
     };

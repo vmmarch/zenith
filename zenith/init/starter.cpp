@@ -26,10 +26,11 @@
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
 #include "render/orthographic-camera.h"
+#include "render/shader/shader.h"
 
 namespace zenith
 {
-    Starter* Starter::instance = nullptr;
+    Starter *Starter::instance = nullptr;
 
     Starter::Starter()
     {
@@ -45,7 +46,7 @@ namespace zenith
     {
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);
-        this->window->set_event_callback(__ZENITH_BIND_EVENT_FN(Starter::event));
+        this->window->set_event_callback(ZENITH_BIND_EVENT_FN(Starter::event));
 
         this->imlayer = new ImGuiLayer();
 
@@ -57,11 +58,15 @@ namespace zenith
         this->window->close_window();
     }
 
-    void Starter::event(Event& event)
+    void Starter::event(Event &event)
     {
         event::type type = event.get_event_type();
-        if(type == event::type::EVENT_WINDOW_CLOSE)
+        if (type == event::type::EVENT_WINDOW_CLOSE)
             close();
+    }
+
+    void Starter::update()
+    {
     }
 
     void Starter::start_engine()
@@ -73,13 +78,13 @@ namespace zenith
         float last_frame_time = 0.0f;
         int render_count = 0;
 
-        while(running)
+        v_scope<Shader> shader = Shader::__create(R"(sh\shader-vfs)");
+
+        while (running)
         {
             float time = (float) glfwGetTime();
             float timestep = time - last_frame_time;
             last_frame_time = timestep;
-
-            std::cout << timestep << std::endl;
 
             renderer->clear();
 

@@ -18,27 +18,27 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_S
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/buf SOURCE_BUF)
 
-################################################
-### for modules dir.
-################################################
+# ---------------------------------------------------------------------------------------
+# for modules dir.
+# ---------------------------------------------------------------------------------------
 include_directories(SYSTEM modules)
 include_directories(SYSTEM modules/imgui)
 include_directories(SYSTEM modules/imgui/backends)
 
-################################################
-### for include dir.
-#################################################
+# ---------------------------------------------------------------------------------------
+# for include dir.
+# ---------------------------------------------------------------------------------------
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(SYSTEM include/api)
 
-################################################
-### for src dir.
-#################################################
+# ---------------------------------------------------------------------------------------
+# for src dir.
+# ---------------------------------------------------------------------------------------
 include_directories(zenith)
 
-################################################
-### 配置源码目录 SOURCEALL_DIR
-################################################
+# ---------------------------------------------------------------------------------------
+# 配置源码目录 SOURCEALL_DIR
+# ---------------------------------------------------------------------------------------
 aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -47,6 +47,7 @@ add_definitions(
 		-D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
 		-D__ZENITH_IN_CHINA__							# 引擎语言为中文
 		-D__ZENITH_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
+		-D__ZENITH_DEBUG__		   		    		    # 开启DEBUG
 )
 
 link_libraries(imm32)

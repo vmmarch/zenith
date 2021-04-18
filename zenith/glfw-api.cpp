@@ -16,38 +16,13 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/15. <=== */
+/*! ===> Creates on 2021/4/18. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "opengl-graphics-context.h"
+#include <api/glfw-api.h>
 
-namespace zenith
-{
-
-    OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow* window)
-    {
-        this->window = window;
-        initialize();
-    }
-
-    void OpenGLGraphicsContext::initialize()
-    {
-        glfwMakeContextCurrent(this->window);
-        v_suc success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        if(!success)
-            ZENITH_ERROR(LOAD_GLAD_FAILED);
-
-        ZENITH_INFO(OPENGL_INFO);
-        ZENITH_INFO(VENDOR_INFO, GLAPI_GetVendor());
-        ZENITH_INFO(RENDER_INFO, GLAPI_GetRenderer());
-        ZENITH_INFO(VERSION_INFO, GLAPI_GetVersion());
-    }
-
-    void OpenGLGraphicsContext::swap_buffers()
-    {
-        glfwSwapBuffers(this->window);
-    }
-
-}
+static const GLubyte* GLAPI_GetVendor() { return glGetString(GL_VENDOR); }
+static const GLubyte* GLAPI_GetRenderer() { return glGetString(GL_RENDERER); }
+static const GLubyte* GLAPI_GetVersion() { return glGetString(GL_VERSION); }

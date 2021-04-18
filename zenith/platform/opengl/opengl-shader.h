@@ -30,7 +30,7 @@ namespace zenith
     class OpenGLShader : public Shader
     {
     public:
-        OpenGLShader(v_cc vertex_path, v_cc fragment_path);
+        OpenGLShader(v_cc path);
 
         ~OpenGLShader() override;
 

@@ -53,11 +53,11 @@ namespace zenith::win
         info.width = winprops.width;
         info.height = winprops.height;
 
-        __ZENITH_INFO(__CREATE_WINDOW_INFO__, info.title, info.width, info.height);
+        ZENITH_INFO(CREATE_WINDOW_INFO, info.title, info.width, info.height);
 
         v_suc success = glfwInit();
         if (!success)
-                __ZENITH_ERROR(__GLFW_INIT_FAILED__);
+                ZENITH_ERROR(__GLFW_INIT_FAILED__);
 
         this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title),
                                         nullptr, nullptr);
@@ -65,7 +65,7 @@ namespace zenith::win
 
         if (window == nullptr)
         {
-            __ZENITH_ERROR(__CREATE_WINDOW_FAILED__);
+            ZENITH_ERROR(__CREATE_WINDOW_FAILED__);
             glfwTerminate();
         }
 

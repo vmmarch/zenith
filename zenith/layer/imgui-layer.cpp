@@ -83,7 +83,7 @@ namespace zenith
     {
         if (font_libs.count(name) == 0)
         {
-            __ZENITH_ERROR(__CANNOT_READ_FONT__);
+            ZENITH_ERROR(__CANNOT_READ_FONT__);
         } else
         {
             ImFont *font = font_libs.at(name);

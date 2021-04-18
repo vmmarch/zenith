@@ -38,12 +38,12 @@ namespace zenith
 
     void OpenGLRenderer::disable_depth_test()
     {
-        __glDisableDepthTest();
+        GLAPI_DisableDepthTest();
     }
 
     void OpenGLRenderer::enable_depth_test()
     {
-        __glEnableDepthTest();
+        GLAPI_EnableDepthTest();
     }
 
 }

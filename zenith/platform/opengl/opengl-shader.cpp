@@ -27,38 +27,27 @@
 #include <fstream>
 #include <sstream>
 
+#define RD_NONE 0
+#define RD_VERTEX 1
+#define RD_FRAGMENT 2
+
+#define GLSL_VERSION "#version 330 core\n"
+
 namespace zenith
 {
-    OpenGLShader::OpenGLShader(v_cc vertex_path, v_cc fragment_path)
+    static void load_shader(v_cc path, std::string &vtext, std::string &ftext);
+
+    OpenGLShader::OpenGLShader(v_cc path)
     {
-        v_cc vcode;
-        v_cc fcode;
-        std::ifstream vshader;
-        std::ifstream fshader;
+        std::string v_str_code, f_str_code;
+        load_shader(path, v_str_code, f_str_code);
 
-        // 确保ifstream对象能够抛出异常信息
-        vshader.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        fshader.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-        try
-        {
-            vshader.open(vertex_path);
-            fshader.open(fragment_path);
-            std::stringstream __vstream, __fstream;
+        v_cc vcode = v_str_code.c_str(), fcode = f_str_code.c_str();
 
-            __vstream << vshader.rdbuf();
-            __fstream << fshader.rdbuf();
-
-            // 关闭流
-            vshader.close();
-            fshader.close();
-
-            // 流转成string字符串
-            vcode = __vstream.str().c_str();
-            fcode = __fstream.str().c_str();
-        } catch (std::ifstream::failure &e)
-        {
-            __ZENITH_ERROR(SHADER_FILE_READ_NOT_SUCCESS)
-        }
+#ifdef __ZENITH_DEBUG__
+        ZENITH_DEBUG("vertex shader:\n{}", vcode);
+        ZENITH_DEBUG("fragment shader:\n{}", fcode);
+#endif
 
         v_ui1 vertex, fragment;
         // 创建vertex shader
@@ -97,42 +86,42 @@ namespace zenith
 
     void OpenGLShader::setBool(v_cc name, bool value) const
     {
-        __glUniform1i(shader_id, name, value);
+        GLAPI_Uniform1i(shader_id, name, value);
     }
 
     void OpenGLShader::setInt(v_cc name, int value) const
     {
-        __glUniform1i(shader_id, name, value);
+        GLAPI_Uniform1i(shader_id, name, value);
     }
 
     void OpenGLShader::setFloat(v_cc name, float value) const
     {
-        __glUniform1f(shader_id, name, value);
+        GLAPI_Uniform1f(shader_id, name, value);
     }
 
     void OpenGLShader::setFloat2(v_cc name, glm::vec2 value) const
     {
-        __glUniform2f(shader_id, name, value.x, value.y);
+        GLAPI_Uniform2f(shader_id, name, value.x, value.y);
     }
 
     void OpenGLShader::setFloat3(v_cc name, glm::vec3 value) const
     {
-        __glUniform3f(shader_id, name, value.x, value.y, value.z);
+        GLAPI_Uniform3f(shader_id, name, value.x, value.y, value.z);
     }
 
     void OpenGLShader::setFloat4(v_cc name, glm::vec4 value) const
     {
-        __glUniform4f(shader_id, name, value.x, value.y, value.w, value.a);
+        GLAPI_Uniform4f(shader_id, name, value.x, value.y, value.w, value.a);
     }
 
     void OpenGLShader::setMat3(v_cc name, glm::mat3 value) const
     {
-        __glUniformMatrix3fv(shader_id, name, value);
+        GLAPI_UniformMatrix3fv(shader_id, name, value);
     }
 
     void OpenGLShader::setMat4(v_cc name, glm::mat4 value) const
     {
-        __glUniformMatrix4fv(shader_id, name, value);
+        GLAPI_UniformMatrix4fv(shader_id, name, value);
     }
 
     void OpenGLShader::checkCompileErrors(unsigned int shader, std::string type)
@@ -159,4 +148,53 @@ namespace zenith
             }
         }
     }
+
+    static void load_shader(v_cc path, std::string &vtext, std::string &ftext)
+    {
+        std::ifstream in(path);
+        int status = RD_NONE;
+        std::string line, vstr, fstr;
+
+        vstr.append(GLSL_VERSION);
+        fstr.append(GLSL_VERSION);
+
+        while (getline(in, line))
+        {
+            if (line == "// @vertex")
+            {
+                status = RD_VERTEX;
+                continue;
+            }
+
+            if (line == "// @fragment")
+            {
+                status = RD_FRAGMENT;
+                continue;
+            }
+
+            if (line == "// @end")
+            {
+                status = RD_NONE;
+                continue;
+            }
+
+            if (status == RD_VERTEX)
+            {
+                vstr.append(line).append("\n");
+                continue;
+            }
+
+            if (status == RD_FRAGMENT)
+            {
+                fstr.append(line).append("\n");
+                continue;
+            }
+        }
+
+        vtext = vstr;
+        ftext = fstr;
+
+        in.close();
+    }
+
 }

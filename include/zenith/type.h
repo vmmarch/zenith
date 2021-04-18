@@ -41,6 +41,8 @@ typedef void (*zenith_noparam_fn)();
 template<typename T>
 using v_scope = std::unique_ptr<T>;
 
+#define ZENAPI extern
+
 // =================================================================
 // vec2
 struct v_vec2
@@ -71,20 +73,20 @@ constexpr Ref<T> __create_ref(Args&&... args)
     return std::make_shared<T>(std::forward<Args>(args)...);
 }
 
-#define __ZENITH_INFO(...)
-#define __ZENITH_DEBUG(...)
-#define __ZENITH_WARN(...)
-#define __ZENITH_ERROR(...)
+#define ZENITH_INFO(...)
+#define ZENITH_DEBUG(...)
+#define ZENITH_WARN(...)
+#define ZENITH_ERROR(...)
 
 #define __BIT__(x) (1 << x)
 
-#define __ZENITH_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
+#define ZENITH_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     #ifdef __ZENITH_BUILD_DLL__
-        #define XM_API __declspec(dllexport)
+        #define ZENITHAPI __declspec(dllexport)
     #else
-        #define XM_API __declspec(dllimport)
+        #define ZENITHAPI __declspec(dllimport)
     #endif
 #else
     #error zenith only support Windows platform!

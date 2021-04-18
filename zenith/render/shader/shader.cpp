@@ -26,8 +26,9 @@
 
 namespace zenith
 {
-    v_scope<Shader> Shader::__create(v_cc vertex_path, v_cc fragment_path)
+
+    v_scope<Shader> Shader::__create(v_cc path)
     {
-        return __create_shader(vertex_path, fragment_path);
+        return __create_shader(path);
     }
 }
