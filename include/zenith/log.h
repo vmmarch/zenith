@@ -34,10 +34,21 @@ enum level
     INFO, DEBUG, WARN, ERR
 };
 
+const char* get_level_value(level lev)
+{
+    switch(lev)
+    {
+        case level::INFO:   return "INFO"    break;
+        case level::DEBUG:  return "DEBUG"   break;
+        case level::WARN:   return "WARN"    break;
+        case level::ERR:    return "ERROR"   break;
+    }
+}
+
 template<typename FMT, typename... Args>
 void log(FMT &__fmt, level lev, Args &&... args)
 {
-    std::string out = __format(OUT_MESSAGE, "2020", "lev", "aaa");
+    std::string out = __format(OUT_MESSAGE, "2020", get_level_value(lev), "aa");
     std::string fmt = __format(__fmt, std::forward<Args>(args)...); out.append(fmt);
     std::cout << out.c_str() << std::endl;
 }

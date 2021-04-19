@@ -50,7 +50,7 @@ std::string __format(const char *fmt, ...)
             {
                 process.replace((append_v_len + i - 1), 2, "");
                 // FIXED int转string异常
-                const char *append_v = va_arg(args, const char*);
+                const char* append_v = (const char*) va_arg(args, void*);
                 process.append(append_v);
                 append_v_len += strlen(append_v) - 2;
             }

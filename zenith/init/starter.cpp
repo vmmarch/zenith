@@ -25,7 +25,6 @@
 #include "render/renderer.h"
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
-#include "render/orthographic-camera.h"
 #include "render/shader/shader.h"
 
 namespace zenith
@@ -33,8 +32,21 @@ namespace zenith
     Starter *Starter::instance = nullptr;
 
     Starter::Starter()
+        : ocamera(new OrthographicCamera(0.0f, 0.0f, 0.0f, 0.1f))
     {
         instance = this;
+
+        float vertices[] = {
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f,  0.5f, 0.0f
+        };
+
+        v_scope<Shader> bulesh = Shader::__create(R"(sh/bule-vfs)");
+        bulesh->bind();
+        
+        v_scope<Shader> shader = Shader::__create(R"(sh/shader-vfs)");
+        shader->bind();
     }
 
     Starter::~Starter()
@@ -77,8 +89,6 @@ namespace zenith
 
         float last_frame_time = 0.0f;
         int render_count = 0;
-
-        v_scope<Shader> shader = Shader::__create(R"(sh\shader-vfs)");
 
         while (running)
         {

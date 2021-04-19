@@ -28,6 +28,7 @@
 #include "event/event.h"
 #include "tool/layer-vector.h"
 #include "layer/imgui-layer.h"
+#include "render/orthographic-camera.h"
 
 namespace zenith
 {
@@ -60,6 +61,8 @@ namespace zenith
         v_scope<Window> window;
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
+
+        OrthographicCamera* ocamera;
 
         static Starter* instance;
     };
