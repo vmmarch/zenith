@@ -53,10 +53,10 @@
 #define CREATE_WINDOW_INFO "创建窗口信息：{}, {}, {}"
 #define CREATE_WINDOW_FAILED "窗口创建失败 "
 #define GLFW_INIT_FAILED "GLFW初始化失败 "
-#define OPENGL_INFO "OpenGL创建信息: "
-#define VENDOR_INFO "VENDOR: {}"
-#define RENDER_INFO "RENDER: {}"
-#define VERSION_INFO "VERSION: {}"
+#define OPENGL_INFO "OpenGL创建信息："
+#define VENDOR_INFO "VENDOR: %s"
+#define RENDER_INFO "RENDER: %s"
+#define VERSION_INFO "VERSION: %s"
 
 // WARN MESSAGE
 #define OPENGL_SUPPORT_VERSION "Zenith3D引擎需要使用4.5以上的OpenGL版本"

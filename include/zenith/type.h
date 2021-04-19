@@ -30,13 +30,13 @@
 
 #define EXTAPI extern
 
-typedef const char* v_cc;
+typedef const char *v_cc;
 typedef unsigned char v_uc;
 typedef unsigned int v_ui1;
 typedef uint8_t v_ui8;
 typedef uint16_t v_ui16;
 typedef uint32_t v_ui32;
-typedef void* v_any;
+typedef void *v_any;
 typedef int v_suc;
 
 typedef void (*zenith_noparam_fn)();
@@ -46,62 +46,66 @@ using v_scope = std::unique_ptr<T>;
 
 #define ZENAPI extern
 
+namespace zenith
+{
 // =================================================================
 // vec2
-struct v_vec2
-{
-    v_ui16 x, y;
-    v_vec2(v_ui16 _x, v_ui16 _y) : x(_x), y(_y) {}
-};
+    struct v_vec2
+    {
+        v_ui16 x, y;
 
-static v_vec2 __create_vec2(v_ui16 x, v_ui16 y)
-{
-    return v_vec2(x, y);
+        v_vec2(v_ui16 _x, v_ui16 _y) : x(_x), y(_y)
+        {}
+    };
+
+    static v_vec2 __create_vec2(v_ui16 x, v_ui16 y)
+    {
+        return v_vec2(x, y);
+    }
+
+    static const v_vec2 empty_vec2 = __create_vec2(0, 0);
+
+    template<typename T, typename ... Args>
+    constexpr v_scope<T> __create_scope(Args &&... args)
+    {
+        return std::make_unique<T>(std::forward<Args>(args)...);
+    }
+
+    template<typename T>
+    using Ref = std::shared_ptr<T>;
+
+    template<typename T, typename... Args>
+    constexpr Ref<T> __create_ref(Args &&... args)
+    {
+        return std::make_shared<T>(std::forward<Args>(args)...);
+    }
+
+    template<typename FMT, typename... Args>
+    EXTAPI void ZENITHLOGGERINFO(FMT &, Args &&...);
+    template<typename FMT, typename... Args>
+    EXTAPI void ZENITHLOGGERDEBUG(FMT &, Args &&...);
+    template<typename FMT, typename... Args>
+    EXTAPI void ZENITHLOGGERWARN(FMT &, Args &&...);
+    template<typename FMT, typename... Args>
+    EXTAPI void ZENITHLOGGERERROR(FMT &, Args &&...);
 }
 
-static const v_vec2 empty_vec2 = __create_vec2(0, 0);
+#define ZENITH_INFO(...) zenith::ZENITHLOGGERINFO(__VA_ARGS__)
+#define ZENITH_DEBUG(...) zenith::ZENITHLOGGERDEBUG(__VA_ARGS__)
+#define ZENITH_WARN(...) zenith::ZENITHLOGGERWARN(__VA_ARGS__)
+#define ZENITH_ERROR(...) zenith::ZENITHLOGGERERROR(__VA_ARGS__)
 
-template<typename T, typename ... Args>
-constexpr v_scope<T> __create_scope(Args&& ... args)
-{
-    return std::make_unique<T>(std::forward<Args>(args)...);
-}
-
-template<typename T>
-using Ref = std::shared_ptr<T>;
-
-template<typename T, typename... Args>
-constexpr Ref<T> __create_ref(Args&&... args)
-{
-    return std::make_shared<T>(std::forward<Args>(args)...);
-}
-
-template<typename FMT, typename... Args>
-EXTAPI void ZENITHLOGGERINFO(FMT&, Args&&...);
-#define ZENITH_INFO(...) ZENITHLOGGERINFO(__VA_ARGS__)
-
-template<typename FMT, typename... Args>
-EXTAPI void ZENITHLOGGERDEBUG(FMT&, Args&&...);
-#define ZENITH_DEBUG(...) ZENITHLOGGERDEBUG(__VA_ARGS__)
-
-template<typename FMT, typename... Args>
-EXTAPI void ZENITHLOGGERWARN(FMT&, Args&&...);
-#define ZENITH_WARN(...) ZENITHLOGGERWARN(__VA_ARGS__)
-
-template<typename FMT, typename... Args>
-EXTAPI void ZENITHLOGGERERROR(FMT&, Args&&...);
-#define ZENITH_ERROR(...) ZENITHLOGGERERROR(__VA_ARGS__)
 
 #define __BIT__(x) (1 << x)
 
 #define ZENITH_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-    #ifdef __ZENITH_BUILD_DLL__
-        #define ZENITHAPI __declspec(dllexport)
-    #else
-        #define ZENITHAPI __declspec(dllimport)
-    #endif
+#ifdef __ZENITH_BUILD_DLL__
+#define ZENITHAPI __declspec(dllexport)
 #else
-    #error zenith only support Windows platform!
+#define ZENITHAPI __declspec(dllimport)
+#endif
+#else
+#error zenith only support Windows platform!
 #endif

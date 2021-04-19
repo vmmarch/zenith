@@ -45,8 +45,8 @@ namespace zenith
         v_cc vcode = v_str_code.c_str(), fcode = f_str_code.c_str();
 
 #ifdef __ZENITH_DEBUG__
-        ZENITH_DEBUG("vertex shader:\n{}", vcode);
-        ZENITH_DEBUG("fragment shader:\n{}", fcode);
+        ZENITH_DEBUG("vertex shader:\n%s", vcode);
+        ZENITH_DEBUG("fragment shader:\n%s", fcode);
 #endif
 
         v_ui1 vertex, fragment;

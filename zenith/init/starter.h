@@ -62,8 +62,6 @@ namespace zenith
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
 
-        OrthographicCamera* ocamera;
-
         static Starter* instance;
     };
 }

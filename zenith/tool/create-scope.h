@@ -36,7 +36,7 @@
 static v_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
 {
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-    return __create_scope<zenith::win::WinWindow>(props);
+    return zenith::__create_scope<zenith::win::WinWindow>(props);
 #else
     ZENITH_ERROR(__ONLY_SUPPORT_WINDOWS__); return nullptr;
 #endif
@@ -52,7 +52,7 @@ static v_scope<zenith::GraphicsContext> __create_graphics_context(v_any window)
         case render::NONE:
             break;
         case render::GL:
-            return __create_scope<zenith::OpenGLGraphicsContext>(static_cast<GLFWwindow*>(window));
+            return zenith::__create_scope<zenith::OpenGLGraphicsContext>(static_cast<GLFWwindow*>(window));
         case render::DX:
             break;
     }
@@ -69,7 +69,7 @@ static v_scope<zenith::Renderer> __create_renderer()
     {
         case render::NONE:
             break;
-        case render::GL: return __create_scope<zenith::OpenGLRenderer>();
+        case render::GL: return zenith::__create_scope<zenith::OpenGLRenderer>();
         case render::DX:
             break;
     }
@@ -86,7 +86,7 @@ static v_scope<zenith::Shader> __create_shader(v_cc path)
     {
         case render::NONE:
             break;
-        case render::GL: return __create_scope<zenith::OpenGLShader>(path);
+        case render::GL: return zenith::__create_scope<zenith::OpenGLShader>(path);
         case render::DX:
             break;
     }
@@ -102,7 +102,7 @@ static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, g
 	switch(zenith::Renderer::__get_render_api())
 	{
 		case render::NONE: break;
-		case render::GL: return __create_scope<zenith::OpenGLCamera>(pos, upvec, target);
+		case render::GL: return zenith::__create_scope<zenith::OpenGLCamera>(pos, upvec, target);
 		case render::DX: break;
 	}
 
@@ -117,7 +117,7 @@ static v_scope<zenith::Texture2D> __create_texture2D()
 	switch(zenith::Renderer::__get_render_api())
 	{
 		case render::NONE: break;
-		case render::GL: return __create_scope<zenith::OpenGLTexture2D>();
+		case render::GL: return zenith::__create_scope<zenith::OpenGLTexture2D>();
 		case render::DX: break;
 	}
 

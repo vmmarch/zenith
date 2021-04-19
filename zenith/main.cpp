@@ -26,6 +26,11 @@
 
 int main(int argc, char **argv)
 {
+
+#ifdef __ZENITH_PLATFORM_WINDOWS__
+    system("chcp 65001");
+#endif
+
     auto app = new zenith::Starter();
     app->init_window("zenith", 1400, 900);
     app->start_engine();

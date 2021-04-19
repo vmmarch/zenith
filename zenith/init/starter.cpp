@@ -32,21 +32,8 @@ namespace zenith
     Starter *Starter::instance = nullptr;
 
     Starter::Starter()
-        : ocamera(new OrthographicCamera(0.0f, 0.0f, 0.0f, 0.1f))
     {
         instance = this;
-
-        float vertices[] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f,  0.5f, 0.0f
-        };
-
-        v_scope<Shader> bulesh = Shader::__create(R"(sh/bule-vfs)");
-        bulesh->bind();
-        
-        v_scope<Shader> shader = Shader::__create(R"(sh/shader-vfs)");
-        shader->bind();
     }
 
     Starter::~Starter()
@@ -63,6 +50,18 @@ namespace zenith
         this->imlayer = new ImGuiLayer();
 
         layer_stack.push(new HomeLayer());
+
+        float vertices[] = {
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                0.0f,  0.5f, 0.0f
+        };
+
+        v_scope<Shader> bulesh = Shader::__create(R"(sh/bule-vfs)");
+        bulesh->bind();
+
+        v_scope<Shader> shader = Shader::__create(R"(sh/shader-vfs)");
+        shader->bind();
     }
 
     void Starter::close()
