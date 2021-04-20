@@ -37,16 +37,20 @@ namespace zenith
 {
     static void load_shader(v_cc path, std::string &vtext, std::string &ftext);
 
-    OpenGLShader::OpenGLShader(v_cc path)
+    OpenGLShader::OpenGLShader(v_cc path, v_cc debugname)
     {
+#ifdef __DEBUG__
+        ZENITH_DEBUG(IFSPLIT);
+#endif
+        ZENITH_INFO(CREATE_SHADER, path, debugname);
         std::string v_str_code, f_str_code;
         load_shader(path, v_str_code, f_str_code);
 
         v_cc vcode = v_str_code.c_str(), fcode = f_str_code.c_str();
 
-#ifdef __ZENITH_DEBUG__
-        ZENITH_DEBUG("vertex shader:\n%s", vcode);
-        ZENITH_DEBUG("fragment shader:\n%s", fcode);
+#ifdef __DEBUG__
+        ZENITH_DEBUG(VERTEX_SHADER_DEBUG, vcode);
+        ZENITH_DEBUG(FRAGMENT_SHADER_DEBUG, fcode);
 #endif
 
         v_ui1 vertex, fragment;
@@ -72,6 +76,10 @@ namespace zenith
         // 删除着色器，因为当前着色器已经链接到我们的程序中了。
         glDeleteShader(vertex);
         glDeleteShader(fragment);
+
+// #ifdef __DEBUG__
+//         ZENITH_DEBUG(ENDIFSPLIT);
+// #endif
     }
 
     OpenGLShader::~OpenGLShader()
@@ -134,8 +142,7 @@ namespace zenith
             if (!success)
             {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog
-                          << "\n -- --------------------------------------------------- -- " << std::endl;
+                ZENITH_ERROR(SHADER_COMPILATION_ERROR, type, infoLog);
             }
         } else
         {
@@ -143,8 +150,7 @@ namespace zenith
             if (!success)
             {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog
-                          << "\n -- --------------------------------------------------- -- " << std::endl;
+                ZENITH_ERROR(PROGRAM_LINKING_ERROR, type, infoLog);
             }
         }
     }
@@ -152,6 +158,12 @@ namespace zenith
     static void load_shader(v_cc path, std::string &vtext, std::string &ftext)
     {
         std::ifstream in(path);
+        if(!in.is_open())
+        {
+            ZENITH_ERROR(SHADER_FILE_NOT_EXIST, path);
+            return;
+        }
+
         int status = RD_NONE;
         std::string line, vstr, fstr;
 
@@ -191,6 +203,7 @@ namespace zenith
             }
         }
 
+        std::cout << vstr << "\n";
         vtext = vstr;
         ftext = fstr;
 

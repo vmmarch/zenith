@@ -81,19 +81,19 @@ namespace zenith
     }
 
     template<typename FMT, typename... Args>
-    EXTAPI void ZENITHLOGGERINFO(FMT &, Args &&...);
+    EXTAPI void zenithloggerinfo(FMT &, Args &&...);
     template<typename FMT, typename... Args>
-    EXTAPI void ZENITHLOGGERDEBUG(FMT &, Args &&...);
+    EXTAPI void zenithloggerdebug(FMT &, Args &&...);
     template<typename FMT, typename... Args>
-    EXTAPI void ZENITHLOGGERWARN(FMT &, Args &&...);
+    EXTAPI void zenithloggerwarn(FMT &, Args &&...);
     template<typename FMT, typename... Args>
-    EXTAPI void ZENITHLOGGERERROR(FMT &, Args &&...);
+    EXTAPI void zenithloggererror(FMT &, Args &&...);
 }
 
-#define ZENITH_INFO(...) zenith::ZENITHLOGGERINFO(__VA_ARGS__)
-#define ZENITH_DEBUG(...) zenith::ZENITHLOGGERDEBUG(__VA_ARGS__)
-#define ZENITH_WARN(...) zenith::ZENITHLOGGERWARN(__VA_ARGS__)
-#define ZENITH_ERROR(...) zenith::ZENITHLOGGERERROR(__VA_ARGS__)
+#define ZENITH_INFO(...) zenith::zenithloggerinfo(__VA_ARGS__)
+#define ZENITH_DEBUG(...) zenith::zenithloggerdebug(__VA_ARGS__)
+#define ZENITH_WARN(...) zenith::zenithloggerwarn(__VA_ARGS__)
+#define ZENITH_ERROR(...) zenith::zenithloggererror(__VA_ARGS__)
 
 
 #define __BIT__(x) (1 << x)

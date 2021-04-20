@@ -47,7 +47,7 @@ add_definitions(
 		-D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
 		-D__ZENITH_IN_CHINA__							# 引擎语言为中文
 		-D__ZENITH_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
-		-D__ZENITH_DEBUG__		   		    		    # 开启DEBUG
+		-D__DEBUG__		   		    		    # 开启DEBUG
 )
 
 link_libraries(imm32)

@@ -80,13 +80,13 @@ static v_scope<zenith::Renderer> __create_renderer()
 /**
  * @return 着色器实例
  */
-static v_scope<zenith::Shader> __create_shader(v_cc path)
+static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
 {
     switch (zenith::Renderer::__get_render_api())
     {
         case render::NONE:
             break;
-        case render::GL: return zenith::__create_scope<zenith::OpenGLShader>(path);
+        case render::GL: return zenith::__create_scope<zenith::OpenGLShader>(path, debugname);
         case render::DX:
             break;
     }

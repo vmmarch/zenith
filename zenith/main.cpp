@@ -28,7 +28,9 @@ int main(int argc, char **argv)
 {
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-    system("chcp 65001");
+    #ifdef __ZENITH_IN_CHINA__
+        system("chcp 65001");
+    #endif
 #endif
 
     auto app = new zenith::Starter();

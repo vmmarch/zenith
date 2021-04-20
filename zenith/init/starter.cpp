@@ -57,10 +57,10 @@ namespace zenith
                 0.0f,  0.5f, 0.0f
         };
 
-        v_scope<Shader> bulesh = Shader::__create(R"(sh/bule-vfs)");
-        bulesh->bind();
+        v_scope<Shader> bluesh = Shader::__create("sh/bule.vfs", "bluesh");
+        bluesh->bind();
 
-        v_scope<Shader> shader = Shader::__create(R"(sh/shader-vfs)");
+        v_scope<Shader> shader = Shader::__create("sh/shader.vfs", "vecsh");
         shader->bind();
     }
 

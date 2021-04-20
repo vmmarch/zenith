@@ -56,7 +56,7 @@ namespace zenith
         /*!
          * 创建着色器
          */
-        static v_scope<Shader> __create(v_cc path);
+        static v_scope<Shader> __create(v_cc path, v_cc debugname);
     };
 
 }

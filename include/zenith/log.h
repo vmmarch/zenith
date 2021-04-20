@@ -27,6 +27,7 @@
 #include <string>
 #include <cstring>
 #include <stdarg.h>
+#include <vector>
 
 namespace zenith
 {
@@ -53,43 +54,17 @@ namespace zenith
 
     static void __logc(const char *fmt, ...)
     {
-        va_list ap;
-        va_start(ap, fmt);
+        va_list args;
+        va_start(args, fmt);
 
-        // 1、计算得到长度
-        //---------------------------------------------------
-        // 返回 成功写入的字符个数
-        int count_write = snprintf(NULL, 0, fmt, ap);
-        va_end(ap);
-
-        // 长度为空
-        if (0 >= count_write)
-            return;
-
-        count_write++;
-
-        // 2、构造字符串再输出
-        //---------------------------------------------------
-        va_start(ap, fmt);
-
-        char *pbuf_out = NULL;
-        pbuf_out = (char *) malloc(count_write);
-        if (NULL == pbuf_out)
+        size_t len = _vscprintf(fmt, args) + 1;
+        std::vector<char> vbuf(len, '\0');
+        int nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, fmt, args);
+        if(nwrite > 0)
         {
-            va_end(ap);
-            return;
+            printf("%s\n", &vbuf[0]);
         }
-
-        // 构造输出
-        vsnprintf(pbuf_out, count_write, fmt, ap);
-        // 释放空间
-        va_end(ap);
-
-        std::cout << pbuf_out << "\n";
-
-        // 释放内存空间
-        free(pbuf_out);
-        pbuf_out = NULL;
+        va_end(args);
     }
 
     template<typename FMT, typename... Args>
@@ -101,25 +76,25 @@ namespace zenith
     }
 
     template<typename FMT, typename... Args>
-    void ZENITHLOGGERINFO(FMT &__fmt, Args &&... args)
+    void zenithloggerinfo(FMT &__fmt, Args &&... args)
     {
         log(__fmt, level::INFO, std::forward<Args>(args)...);
     }
 
     template<typename FMT, typename... Args>
-    void ZENITHLOGGERDEBUG(FMT &__fmt, Args &&... args)
+    void zenithloggerdebug(FMT &__fmt, Args &&... args)
     {
         log(__fmt, level::DEBUG, std::forward<Args>(args)...);
     }
 
     template<typename FMT, typename... Args>
-    void ZENITHLOGGERWARN(FMT &__fmt, Args &&... args)
+    void zenithloggerwarn(FMT &__fmt, Args &&... args)
     {
         log(__fmt, level::WARN, std::forward<Args>(args)...);
     }
 
     template<typename FMT, typename... Args>
-    void ZENITHLOGGERERROR(FMT &__fmt, Args &&... args)
+    void zenithloggererror(FMT &__fmt, Args &&... args)
     {
         log(__fmt, level::ERR, std::forward<Args>(args)...);
     }

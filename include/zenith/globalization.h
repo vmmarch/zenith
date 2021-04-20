@@ -50,13 +50,20 @@
 #define GUI_TEXT_RESOURCE_MANAGER "资源管理器"
 
 // INFO MESSAGE
-#define CREATE_WINDOW_INFO "创建窗口信息：{}, {}, {}"
+#define CREATE_WINDOW_INFO "创建窗口信息：%s, %d, %d"
 #define CREATE_WINDOW_FAILED "窗口创建失败 "
 #define GLFW_INIT_FAILED "GLFW初始化失败 "
 #define OPENGL_INFO "OpenGL创建信息："
 #define VENDOR_INFO "VENDOR: %s"
 #define RENDER_INFO "RENDER: %s"
 #define VERSION_INFO "VERSION: %s"
+
+// DEBUG MESSAGE
+#define IFSPLIT "----------------------------------------------"
+#define ENDIFSPLIT "----------------------------------------------\n"
+#define VERTEX_SHADER_DEBUG "顶点着色器源码:\n%s\n"
+#define FRAGMENT_SHADER_DEBUG "片段着色器源码:\n%s\n"
+#define CREATE_SHADER "创建着色器[%s]: %s"
 
 // WARN MESSAGE
 #define OPENGL_SUPPORT_VERSION "Zenith3D引擎需要使用4.5以上的OpenGL版本"
@@ -72,7 +79,9 @@
 #define LOAD_GLAD_FAILED "错误：加载GLAD失败"
 #define ONLY_SUPPORT_WINDOWS "错误：目前仅支持Windows平台"
 #define CANNOT_READ_FONT "错误：未获取到{}字体"
-#define SHADER_FILE_READ_NOT_SUCCESS "错误：着色器文件读取失败"
+#define SHADER_FILE_NOT_EXIST "Shader文件不存在: %s"
+#define SHADER_COMPILATION_ERROR "Shader编译错误，类型：%s, 信息：\n-------\n%s"
+#define PROGRAM_LINKING_ERROR "程序链接错误，类型：%s, 信息：\n-------\n%s"
 
 ///////////////////////////////////////////////////////////
 #else
