@@ -1,9 +1,6 @@
-# 天顶3D游戏引擎
+# 欢迎来到天顶3D游戏引擎
 
-![LOGO](https://github.com/orvals/zenith/blob/master/assets/zlogo.png)
-
-
-瑶光3D游戏引擎
+天顶引擎是由OpenGL做底层架构开发的一套3D游戏引擎。
 
 # 代码克隆
 
