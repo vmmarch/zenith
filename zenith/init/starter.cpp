@@ -26,6 +26,7 @@
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
 #include "render/shader/shader.h"
+#include "buf/vertex-buf.h"
 
 namespace zenith
 {
@@ -50,18 +51,6 @@ namespace zenith
         this->imlayer = new ImGuiLayer();
 
         layer_stack.push(new HomeLayer());
-
-        float vertices[] = {
-                -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f,
-                0.0f,  0.5f, 0.0f
-        };
-
-        v_scope<Shader> bluesh = Shader::__create("sh/blue-vfs", "bluesh");
-        bluesh->bind();
-
-        v_scope<Shader> shader = Shader::__create("sh/shader-vfs", "vecsh");
-        shader->bind();
     }
 
     void Starter::close()
@@ -103,6 +92,7 @@ namespace zenith
                 layer_stack.render();
             }
             imlayer->end();
+
             this->window->update();
         }
     }

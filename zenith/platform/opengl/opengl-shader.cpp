@@ -23,7 +23,6 @@
  */
 #include <zenith/globalization.h>
 #include "opengl-shader.h"
-#include <api/glfw-api.h>
 #include <fstream>
 #include <sstream>
 

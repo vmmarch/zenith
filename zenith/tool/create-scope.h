@@ -29,6 +29,7 @@
 #include "platform/windows/window.h"
 #include "platform/opengl/opengl-renderer.h"
 #include "platform/opengl/opengl-graphics-context.h"
+#include "platform/opengl/opengl-vertex-buf.h"
 
 /**
  * @return 窗口实例
@@ -52,7 +53,7 @@ static v_scope<zenith::GraphicsContext> __create_graphics_context(v_any window)
         case render::NONE:
             break;
         case render::GL:
-            return zenith::__create_scope<zenith::OpenGLGraphicsContext>(static_cast<GLFWwindow*>(window));
+            return zenith::__create_scope<zenith::OpenGLGraphicsContext>(static_cast<GLFWwindow *>(window));
         case render::DX:
             break;
     }
@@ -69,7 +70,8 @@ static v_scope<zenith::Renderer> __create_renderer()
     {
         case render::NONE:
             break;
-        case render::GL: return zenith::__create_scope<zenith::OpenGLRenderer>();
+        case render::GL:
+            return zenith::__create_scope<zenith::OpenGLRenderer>();
         case render::DX:
             break;
     }
@@ -86,7 +88,8 @@ static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
     {
         case render::NONE:
             break;
-        case render::GL: return zenith::__create_scope<zenith::OpenGLShader>(path, debugname);
+        case render::GL:
+            return zenith::__create_scope<zenith::OpenGLShader>(path, debugname);
         case render::DX:
             break;
     }
@@ -99,14 +102,17 @@ static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
  */
 static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
 {
-	switch(zenith::Renderer::__get_render_api())
-	{
-		case render::NONE: break;
-		case render::GL: return zenith::__create_scope<zenith::OpenGLCamera>(pos, upvec, target);
-		case render::DX: break;
-	}
+    switch (zenith::Renderer::__get_render_api())
+    {
+        case render::NONE:
+            break;
+        case render::GL:
+            return zenith::__create_scope<zenith::OpenGLCamera>(pos, upvec, target);
+        case render::DX:
+            break;
+    }
 
-	return nullptr;
+    return nullptr;
 }
 
 /**
@@ -114,12 +120,37 @@ static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, g
  */
 static v_scope<zenith::Texture2D> __create_texture2D()
 {
-	switch(zenith::Renderer::__get_render_api())
-	{
-		case render::NONE: break;
-		case render::GL: return zenith::__create_scope<zenith::OpenGLTexture2D>();
-		case render::DX: break;
-	}
+    switch (zenith::Renderer::__get_render_api())
+    {
+        case render::NONE:
+            break;
+        case render::GL:
+            return zenith::__create_scope<zenith::OpenGLTexture2D>();
+        case render::DX:
+            break;
+    }
+
+    return nullptr;
+}
+
+
+/**
+ * @return vertex buffer
+ */
+static v_scope<zenith::VertexBuf> __create_vertex_buf(float *buf, v_ui32 size)
+{
+    switch (zenith::Renderer::__get_render_api())
+    {
+        case render::NONE:
+            break;
+        case render::GL:
+            if(buf != NULL)
+                return zenith::__create_scope<zenith::OpenGLVertexBuf>(buf, size);
+            else
+                return zenith::__create_scope<zenith::OpenGLVertexBuf>(size);
+        case render::DX:
+            break;
+    }
 
     return nullptr;
 }

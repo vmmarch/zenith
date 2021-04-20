@@ -16,32 +16,23 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/17. <=== */
+/*! ===> Creates on 2021/4/20. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
-
-#include <zenith/type.h>
+#include "vertex-buf.h"
+#include "tool/create-scope.h"
 
 namespace zenith
 {
-
-    enum polygonMode
+    v_scope<VertexBuf> VertexBuf::__create(v_ui32 size)
     {
-        FILL, LINE
-    };
+        return __create_vertex_buf(NULL, size);
+    }
 
-    class VertexBuf
+    v_scope<VertexBuf> VertexBuf::__create(float *buf, v_ui32 size)
     {
-    public:
-        virtual void bind() = 0;
-        virtual void unbind() = 0;
-        virtual void set_data(float* vertex, v_ui32 size) = 0;
-
-        static v_scope<VertexBuf> __create(v_ui32);
-        static v_scope<VertexBuf> __create(float*, v_ui32);
-    };
-
+        return __create_vertex_buf(buf, size);
+    }
 }

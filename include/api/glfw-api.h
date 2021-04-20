@@ -73,6 +73,37 @@
 #define GLAPI_TextureGLenum(ms) ( ms ? GL_TEXTURE_2D_MULTISAMPLE : GL_TEXTURE_2D )
 
 /**
+ * 绑定ArrayBuffer
+ */
+#define GLAPI_BindArrayBuffer(id) \
+{ glBindBuffer(GL_ARRAY_BUFFER, id); }
+
+/**
+ * 解绑ArrayBuffer
+ */
+#define GLAPI_UnbindArrayBuffer() \
+{ glBindBuffer(GL_ARRAY_BUFFER, 0); }
+
+/**
+ * 创建并绑定ArrayBuffer, 动态渲染
+ *
+ * @param [i] id unsigned int
+ * @param [i] size 数组大小
+ */
+#define GLAPI_CreateDynamicVertexBufferAndBind(id, size) \
+{ glGenBuffers(1, &id); GLAPI_BindArrayBuffer(id); glBufferData(GL_ARRAY_BUFFER, size, NULL, GL_DYNAMIC_DRAW); }
+
+/**
+ * 创建并绑定ArrayBuffer, 静态渲染
+ *
+ * @param [i] id unsigned int
+ * @param [i] buf 顶点数据
+ * @param [i] size 数组大小
+ */
+#define GLAPI_CreateStaticVertexBufferAndBind(id, buf, size) \
+{ glGenBuffers(1, &id); GLAPI_BindArrayBuffer(id); glBufferData(GL_ARRAY_BUFFER, size, buf, GL_STATIC_DRAW); }
+
+/**
  * 删除Buffer
  */
 #define GLAPI_DeleteBuffer(buf) \
@@ -85,12 +116,6 @@
 { glGenBuffers(1, &buf); glBindBuffer(GL_ARRAY_BUFFER, buf); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
 
 /**
- * 绑定ArrayBuffer
- */
-#define GLAPI_BindArrayBuffer(buf) \
-{ glBindBuffer(GL_ARRAY_BUFFER, buf); }
-
-/**
  * 绑定ElementArrayBuffer
  */
 #define GLAPI_BindElemArrayBuffer(buf) \
@@ -101,12 +126,6 @@
  */
 #define GLAPI_UnbindElemArrayBuffer() \
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
-
-/**
- * 解绑ArrayBuffer
- */
-#define GLAPI_UnbindArrayBuffer() \
-{ glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 /**
  * 绑定着色器程序

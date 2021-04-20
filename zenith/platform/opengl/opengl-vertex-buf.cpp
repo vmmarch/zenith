@@ -16,32 +16,40 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/17. <=== */
+/*! ===> Creates on 2021/4/20. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
-
-#include <zenith/type.h>
+#include "opengl-vertex-buf.h"
+#include "api/glfw-api.h"
 
 namespace zenith
 {
-
-    enum polygonMode
+    OpenGLVertexBuf::OpenGLVertexBuf(v_ui32 size)
     {
-        FILL, LINE
-    };
+        GLAPI_CreateDynamicVertexBufferAndBind(render_id, size);
+    }
 
-    class VertexBuf
+    OpenGLVertexBuf::OpenGLVertexBuf(float *buf, v_ui32 size)
     {
-    public:
-        virtual void bind() = 0;
-        virtual void unbind() = 0;
-        virtual void set_data(float* vertex, v_ui32 size) = 0;
+        GLAPI_CreateStaticVertexBufferAndBind(render_id, buf, size);
+    }
 
-        static v_scope<VertexBuf> __create(v_ui32);
-        static v_scope<VertexBuf> __create(float*, v_ui32);
-    };
+    void OpenGLVertexBuf::bind()
+    {
+        GLAPI_BindArrayBuffer(render_id);
+    }
+
+    void OpenGLVertexBuf::unbind()
+    {
+        GLAPI_UnbindArrayBuffer();
+    }
+
+    void OpenGLVertexBuf::set_data(float *buf, v_ui32 size)
+    {
+        GLAPI_BindArrayBuffer(render_id);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, size, buf);
+    }
 
 }
