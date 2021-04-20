@@ -77,6 +77,9 @@ namespace zenith
         glDeleteShader(vertex);
         glDeleteShader(fragment);
 
+        if(error)
+            ZENITH_ERROR(CREATE_SHADER_FAILED, debugname);
+
 // #ifdef __DEBUG__
 //         ZENITH_DEBUG(ENDIFSPLIT);
 // #endif
@@ -136,13 +139,15 @@ namespace zenith
     {
         int success;
         char infoLog[1024];
+        if(!error)
+            error = success;
         if (type != "PROGRAM")
         {
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
             if (!success)
             {
                 glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-                ZENITH_ERROR(SHADER_COMPILATION_ERROR, type, infoLog);
+                ZENITH_ERROR(SHADER_COMPILATION_ERROR, type.c_str(), infoLog);
             }
         } else
         {
@@ -150,7 +155,7 @@ namespace zenith
             if (!success)
             {
                 glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-                ZENITH_ERROR(PROGRAM_LINKING_ERROR, type, infoLog);
+                ZENITH_ERROR(PROGRAM_LINKING_ERROR, type.c_str(), infoLog);
             }
         }
     }

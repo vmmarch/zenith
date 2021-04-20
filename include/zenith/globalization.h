@@ -82,6 +82,7 @@
 #define SHADER_FILE_NOT_EXIST "Shader文件不存在: %s"
 #define SHADER_COMPILATION_ERROR "Shader编译错误，类型：%s, 信息：\n-------\n%s"
 #define PROGRAM_LINKING_ERROR "程序链接错误，类型：%s, 信息：\n-------\n%s"
+#define CREATE_SHADER_FAILED "创建着色器失败：%s"
 
 ///////////////////////////////////////////////////////////
 #else

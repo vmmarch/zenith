@@ -58,6 +58,7 @@ namespace zenith
     private:
         // utility function for checking shader compilation/linking errors.
         // ------------------------------------------------------------------------
+        bool error = false;
         void checkCompileErrors(unsigned int shader, std::string type);
     };
 }
