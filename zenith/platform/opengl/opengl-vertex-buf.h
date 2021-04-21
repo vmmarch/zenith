@@ -27,12 +27,12 @@
 
 namespace zenith
 {
-    class OpenGLVertexBuf : public VertexBuf
+    class OpenGLVertexBuffer : public VertexBuffer
     {
     public:
-        OpenGLVertexBuf(v_ui32 size);
-        OpenGLVertexBuf(float* buf, v_ui32 size);
-        ~OpenGLVertexBuf() override;
+        OpenGLVertexBuffer(v_ui32 size);
+        OpenGLVertexBuffer(float* buf, v_ui32 size);
+        ~OpenGLVertexBuffer() override;
         void bind() override;
         void unbind() override;
         void __data(float* buf, v_ui32 size) override;

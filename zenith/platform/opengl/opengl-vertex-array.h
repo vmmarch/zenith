@@ -16,23 +16,32 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/20. <=== */
+/*! ===> Creates on 2021/4/21. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "buf.h"
-#include "tool/create-scope.h"
+#pragma once
+
+#include "buf/vertex-array.h"
 
 namespace zenith
 {
-    VertexBuffer* VertexBuffer::__create(v_ui32 size)
+    class OpenGLVertexArray : public VertexArray
     {
-        return __create_vertex_buf(NULL, size);
-    }
+    public:
+        OpenGLVertexArray();
+        ~OpenGLVertexArray() {}
+        void bind() const override;
+        void unbind() const override;
+        void add_vertex_buf(std::shared_ptr<VertexBuffer>&) override;
+        void __index_buffer(std::shared_ptr<IndexBuffer>&) override;
+        std::shared_ptr<IndexBuffer> __index_buffer() const override { return index_buf; }
+        std::vector<std::shared_ptr<VertexBuffer>> __vertex_buffers() const { return vertex_buffers; };
 
-    VertexBuffer* VertexBuffer::__create(float *buf, v_ui32 size)
-    {
-        return __create_vertex_buf(buf, size);
-    }
+    private:
+        v_ui32 array_id;
+        std::vector<std::shared_ptr<VertexBuffer>> vertex_buffers;
+        std::shared_ptr<IndexBuffer> index_buf;
+    };
 }

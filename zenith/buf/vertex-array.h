@@ -16,23 +16,30 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/20. <=== */
+/*! ===> Creates on 2021/4/21. <=== */
 
 /*!
  * @author 2B键盘
  */
+#pragma once
+
 #include "buf.h"
-#include "tool/create-scope.h"
 
 namespace zenith
 {
-    VertexBuffer* VertexBuffer::__create(v_ui32 size)
+    class VertexArray
     {
-        return __create_vertex_buf(NULL, size);
-    }
+    public:
+        virtual ~VertexArray() {}
+        virtual void bind() const = 0;
+        virtual void unbind() const = 0;
 
-    VertexBuffer* VertexBuffer::__create(float *buf, v_ui32 size)
-    {
-        return __create_vertex_buf(buf, size);
-    }
+        virtual void add_vertex_buf(std::shared_ptr<VertexBuffer>& vbuf) = 0;
+        virtual void __index_buffer(std::shared_ptr<IndexBuffer>& ibuf) = 0;
+        virtual std::shared_ptr<IndexBuffer> __index_buffer() const = 0;
+
+        virtual std::vector<std::shared_ptr<VertexBuffer>> __vertex_buffers() const = 0;
+
+        static VertexArray* __create();
+    };
 }

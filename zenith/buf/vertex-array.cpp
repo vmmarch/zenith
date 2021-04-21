@@ -16,23 +16,18 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/20. <=== */
+/*! ===> Creates on 2021/4/21. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "buf.h"
+#include "vertex-array.h"
 #include "tool/create-scope.h"
 
 namespace zenith
 {
-    VertexBuffer* VertexBuffer::__create(v_ui32 size)
+    VertexArray* VertexArray::__create()
     {
-        return __create_vertex_buf(NULL, size);
-    }
-
-    VertexBuffer* VertexBuffer::__create(float *buf, v_ui32 size)
-    {
-        return __create_vertex_buf(buf, size);
+        return __create_vertex_array();
     }
 }

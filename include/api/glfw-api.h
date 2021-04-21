@@ -102,6 +102,23 @@
 #define GLAPI_UnbindIndexArrayBuffer() \
 { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
+/**
+ * 创建VertexArray
+ */
+#define GLAPI_CreateVertexArray(id) \
+{ glCreateVertexArrays(1, &id); }
+
+/**
+ * 绑定VertexArray
+ */
+#define GLAPI_BindVertexArray(id) \
+{ glBindVertexArray(id); }
+
+/**
+ * 解绑VertexArray
+ */
+#define GLAPI_UnbindVertexArray() \
+{ glBindVertexArray(0); }
 
 /**
  * 创建并绑定ArrayBuffer, 动态渲染

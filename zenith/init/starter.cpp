@@ -26,6 +26,7 @@
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
 #include "buf/buf.h"
+#include "buf/vertex-array.h"
 
 namespace zenith
 {
@@ -81,33 +82,31 @@ namespace zenith
 
         // ----------------------------------------
         // 画三角形
+        std::shared_ptr<VertexArray> va_buf;
+        va_buf.reset(VertexArray::__create());
+
         float vertices[] = {
                 -0.5f, -0.5f, 0.0f,    0.0, 1.0, 0.0, 1.0,
                 0.5f, -0.5f, 0.0f,     1.0, 1.0, 0.0, 1.0,
                 0.0f, 0.5f, 0.0f,      1.0, 0.0, 1.0, 1.0
         };
-        std::unique_ptr<VertexBuf> vertex_buf;
-        vertex_buf.reset(VertexBuf::__create(vertices, sizeof(vertices)));
+        std::shared_ptr<VertexBuffer> vbuf;
+        vbuf.reset(VertexBuffer::__create(vertices, sizeof(vertices)));
 
         layout_t layout = {
-                { "position", shader_t::FLOAT3 },
-                { "color", shader_t::FLOAT4 }
+                {"position", shader_t::FLOAT3},
+                {"color",    shader_t::FLOAT4}
         };
+        vbuf->__layout(layout);
+        va_buf->add_vertex_buf(vbuf);
 
-        v_ui32 index = 0;
-        for(const auto& element : layout)
-        {
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, element.__size(), element.__type(),
-                                  element.normalized ? GL_TRUE : GL_FALSE,
-                                  layout.__stride(),
-                                  (const void*) element.offset);
-            index++;
-        }
-
+        // ------------------------------------------
+        // set index
         unsigned int indices[] = { 0, 1, 2 };
-        std::unique_ptr<IndexBuf> index_buf;
-        index_buf.reset(IndexBuf::__create(indices, sizeof(indices) / sizeof(v_ui1)));
+        std::shared_ptr<IndexBuffer> index_buf;
+
+        index_buf.reset(IndexBuffer::__create(indices, sizeof(indices) / sizeof(v_ui1)));
+        va_buf->__index_buffer(index_buf);
 
         while (running)
         {
@@ -127,7 +126,9 @@ namespace zenith
             // ----------------------------------------------------
             // GL render from there.
             shader->bind();
-            GLAPI_DrawIndexTriangles(index_buf->size(), GL_UNSIGNED_INT);
+            va_buf->bind();
+            GLAPI_DrawIndexTriangles(va_buf->__index_buffer()->size(), GL_UNSIGNED_INT);
+
             this->window->update();
         }
     }

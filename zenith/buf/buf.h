@@ -25,6 +25,7 @@
 
 #include <zenith/type.h>
 #include <api/glfw-api.h>
+#include <memory>
 
 #define SIZE_I4   4
 #define SIZE_I8   8
@@ -139,38 +140,40 @@ namespace zenith
         }
 
         inline const v_ui32 __stride() const { return stride; }
-        inline const std::vector<element_t>& __elements() { return elements; }
+        inline const std::vector<element_t>& __elements() const { return elements; }
 
         std::vector<element_t>::iterator begin() { return elements.begin(); }
         std::vector<element_t>::iterator end() { return elements.end(); }
+        std::vector<element_t>::const_iterator begin() const { return elements.begin(); }
+        std::vector<element_t>::const_iterator end() const { return elements.end(); }
     private:
         v_ui32 stride;
         std::vector<element_t> elements;
     };
 
-    class VertexBuf
+    class VertexBuffer
     {
     public:
-        virtual ~VertexBuf() {};
+        virtual ~VertexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual void __data(float* vertex, v_ui32 size) = 0;
         virtual void __layout(const layout_t&) = 0;
         virtual const layout_t& __layout() const = 0;
 
-        static VertexBuf* __create(v_ui32);
-        static VertexBuf* __create(float*, v_ui32);
+        static VertexBuffer* __create(v_ui32);
+        static VertexBuffer* __create(float*, v_ui32);
     };
 
-    class IndexBuf
+    class IndexBuffer
     {
     public:
-        virtual ~IndexBuf() {};
+        virtual ~IndexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual v_ui32 size() const = 0;
 
-        static IndexBuf* __create(v_ui32* indices, v_ui32 size);
+        static IndexBuffer* __create(v_ui32* indices, v_ui32 size);
     };
 
 }

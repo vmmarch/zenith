@@ -83,6 +83,7 @@
 #define SHADER_COMPILATION_ERROR "Shader编译错误，类型：%s, 信息：\n-------\n%s"
 #define PROGRAM_LINKING_ERROR "程序链接错误，类型：%s, 信息：\n-------\n%s"
 #define CREATE_SHADER_FAILED "创建着色器失败：%s"
+#define VERTEX_BUFFER_HAS_NOT_LAYOUT "顶点数组没有布局"
 
 ///////////////////////////////////////////////////////////
 #else

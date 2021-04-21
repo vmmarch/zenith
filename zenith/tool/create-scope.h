@@ -31,6 +31,7 @@
 #include "platform/opengl/opengl-graphics-context.h"
 #include "platform/opengl/opengl-vertex-buf.h"
 #include "platform/opengl/opengl-index-buf.h"
+#include "platform/opengl/opengl-vertex-array.h"
 
 /**
  * @return 窗口实例
@@ -138,7 +139,7 @@ static v_scope<zenith::Texture2D> __create_texture2D()
 /**
  * @return vertex buffer
  */
-static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
+static zenith::VertexBuffer* __create_vertex_buf(float *buf, v_ui32 size)
 {
     switch (zenith::Renderer::__render_api())
     {
@@ -146,9 +147,9 @@ static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
             break;
         case render::GL:
             if(buf != NULL)
-                return new zenith::OpenGLVertexBuf(buf, size);
+                return new zenith::OpenGLVertexBuffer(buf, size);
             else
-                return new zenith::OpenGLVertexBuf(size);
+                return new zenith::OpenGLVertexBuffer(size);
         case render::DX:
             break;
     }
@@ -159,14 +160,32 @@ static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
 /**
  * @return index buffer
  */
-static zenith::IndexBuf* __create_index_buf(v_ui32 *buf, v_ui32 size)
+static zenith::IndexBuffer* __create_index_buf(v_ui32 *buf, v_ui32 size)
 {
     switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
         case render::GL:
-                return new zenith::OpenGLIndexBuf(buf, size);
+                return new zenith::OpenGLIndexBuffer(buf, size);
+        case render::DX:
+            break;
+    }
+
+    return nullptr;
+}
+
+/**
+ * @return vertex array
+ */
+static zenith::VertexArray* __create_vertex_array()
+{
+    switch (zenith::Renderer::__render_api())
+    {
+        case render::NONE:
+            break;
+        case render::GL:
+            return new zenith::OpenGLVertexArray();
         case render::DX:
             break;
     }

@@ -302,8 +302,8 @@ PFNGLBINDTEXTUREUNITPROC glad_glBindTextureUnit = NULL;
 PFNGLBINDTEXTURESPROC glad_glBindTextures = NULL;
 PFNGLBINDTRANSFORMFEEDBACKPROC glad_glBindTransformFeedback = NULL;
 PFNGLBINDVERTEXARRAYPROC glad_glBindVertexArray = NULL;
-PFNGLBINDVERTEXBUFFERPROC glad_glBindVertexBuffer = NULL;
-PFNGLBINDVERTEXBUFFERSPROC glad_glBindVertexBuffers = NULL;
+PFNGLBINDVertexBufferFERPROC glad_glBindVertexBufferfer = NULL;
+PFNGLBINDVertexBufferFERSPROC glad_glBindVertexBufferfers = NULL;
 PFNGLBLENDCOLORPROC glad_glBlendColor = NULL;
 PFNGLBLENDEQUATIONPROC glad_glBlendEquation = NULL;
 PFNGLBLENDEQUATIONSEPARATEPROC glad_glBlendEquationSeparate = NULL;
@@ -880,8 +880,8 @@ PFNGLVERTEXARRAYATTRIBIFORMATPROC glad_glVertexArrayAttribIFormat = NULL;
 PFNGLVERTEXARRAYATTRIBLFORMATPROC glad_glVertexArrayAttribLFormat = NULL;
 PFNGLVERTEXARRAYBINDINGDIVISORPROC glad_glVertexArrayBindingDivisor = NULL;
 PFNGLVERTEXARRAYELEMENTBUFFERPROC glad_glVertexArrayElementBuffer = NULL;
-PFNGLVERTEXARRAYVERTEXBUFFERPROC glad_glVertexArrayVertexBuffer = NULL;
-PFNGLVERTEXARRAYVERTEXBUFFERSPROC glad_glVertexArrayVertexBuffers = NULL;
+PFNGLVERTEXARRAYVertexBufferFERPROC glad_glVertexArrayVertexBufferfer = NULL;
+PFNGLVERTEXARRAYVertexBufferFERSPROC glad_glVertexArrayVertexBufferfers = NULL;
 PFNGLVERTEXATTRIB1DPROC glad_glVertexAttrib1d = NULL;
 PFNGLVERTEXATTRIB1DVPROC glad_glVertexAttrib1dv = NULL;
 PFNGLVERTEXATTRIB1FPROC glad_glVertexAttrib1f = NULL;
@@ -1572,7 +1572,7 @@ static void load_GL_VERSION_4_3(GLADloadproc load) {
 	glad_glTexStorage2DMultisample = (PFNGLTEXSTORAGE2DMULTISAMPLEPROC)load("glTexStorage2DMultisample");
 	glad_glTexStorage3DMultisample = (PFNGLTEXSTORAGE3DMULTISAMPLEPROC)load("glTexStorage3DMultisample");
 	glad_glTextureView = (PFNGLTEXTUREVIEWPROC)load("glTextureView");
-	glad_glBindVertexBuffer = (PFNGLBINDVERTEXBUFFERPROC)load("glBindVertexBuffer");
+	glad_glBindVertexBufferfer = (PFNGLBINDVertexBufferFERPROC)load("glBindVertexBufferfer");
 	glad_glVertexAttribFormat = (PFNGLVERTEXATTRIBFORMATPROC)load("glVertexAttribFormat");
 	glad_glVertexAttribIFormat = (PFNGLVERTEXATTRIBIFORMATPROC)load("glVertexAttribIFormat");
 	glad_glVertexAttribLFormat = (PFNGLVERTEXATTRIBLFORMATPROC)load("glVertexAttribLFormat");
@@ -1600,7 +1600,7 @@ static void load_GL_VERSION_4_4(GLADloadproc load) {
 	glad_glBindTextures = (PFNGLBINDTEXTURESPROC)load("glBindTextures");
 	glad_glBindSamplers = (PFNGLBINDSAMPLERSPROC)load("glBindSamplers");
 	glad_glBindImageTextures = (PFNGLBINDIMAGETEXTURESPROC)load("glBindImageTextures");
-	glad_glBindVertexBuffers = (PFNGLBINDVERTEXBUFFERSPROC)load("glBindVertexBuffers");
+	glad_glBindVertexBufferfers = (PFNGLBINDVertexBufferFERSPROC)load("glBindVertexBufferfers");
 }
 static void load_GL_VERSION_4_5(GLADloadproc load) {
 	if(!GLAD_GL_VERSION_4_5) return;
@@ -1685,8 +1685,8 @@ static void load_GL_VERSION_4_5(GLADloadproc load) {
 	glad_glDisableVertexArrayAttrib = (PFNGLDISABLEVERTEXARRAYATTRIBPROC)load("glDisableVertexArrayAttrib");
 	glad_glEnableVertexArrayAttrib = (PFNGLENABLEVERTEXARRAYATTRIBPROC)load("glEnableVertexArrayAttrib");
 	glad_glVertexArrayElementBuffer = (PFNGLVERTEXARRAYELEMENTBUFFERPROC)load("glVertexArrayElementBuffer");
-	glad_glVertexArrayVertexBuffer = (PFNGLVERTEXARRAYVERTEXBUFFERPROC)load("glVertexArrayVertexBuffer");
-	glad_glVertexArrayVertexBuffers = (PFNGLVERTEXARRAYVERTEXBUFFERSPROC)load("glVertexArrayVertexBuffers");
+	glad_glVertexArrayVertexBufferfer = (PFNGLVERTEXARRAYVertexBufferFERPROC)load("glVertexArrayVertexBufferfer");
+	glad_glVertexArrayVertexBufferfers = (PFNGLVERTEXARRAYVertexBufferFERSPROC)load("glVertexArrayVertexBufferfers");
 	glad_glVertexArrayAttribBinding = (PFNGLVERTEXARRAYATTRIBBINDINGPROC)load("glVertexArrayAttribBinding");
 	glad_glVertexArrayAttribFormat = (PFNGLVERTEXARRAYATTRIBFORMATPROC)load("glVertexArrayAttribFormat");
 	glad_glVertexArrayAttribIFormat = (PFNGLVERTEXARRAYATTRIBIFORMATPROC)load("glVertexArrayAttribIFormat");
