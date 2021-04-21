@@ -82,15 +82,16 @@ namespace zenith
         // ----------------------------------------
         // 画三角形
         float vertices[] = {
-                -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f,
-                0.0f, 0.5f, 0.0f,
+                -0.5f, -0.5f, 0.0f,    0.0, 1.0, 0.0, 1.0,
+                0.5f, -0.5f, 0.0f,     1.0, 1.0, 0.0, 1.0,
+                0.0f, 0.5f, 0.0f,      1.0, 0.0, 1.0, 1.0
         };
         std::unique_ptr<VertexBuf> vertex_buf;
         vertex_buf.reset(VertexBuf::__create(vertices, sizeof(vertices)));
 
         layout_t layout = {
-                { "position", shader_t::FLOAT3 }
+                { "position", shader_t::FLOAT3 },
+                { "color", shader_t::FLOAT4 }
         };
 
         v_ui32 index = 0;

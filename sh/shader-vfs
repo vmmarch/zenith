@@ -1,21 +1,27 @@
 // @vertex
 layout(location = 0) in vec3 position;
+layout(location = 1) in vec4 color;
 
 out vec3 v_position;
+out vec4 v_color;
 
 void main()
 {
     v_position = position;
+    v_color = color;
     gl_Position  = vec4(position, 1.0);;
 }
 // @end
 
 // @fragment
-out vec4 v_color;
+out vec4 color;
+
+in vec4 v_color;
 in vec3 v_position;
 
 void main()
 {
-    v_color = vec4(v_position * 0.5 + 0.5, 1.0);
+    color = vec4(v_position * 0.5 + 0.5, 1.0);
+    color = v_color;
 }
 // @end
