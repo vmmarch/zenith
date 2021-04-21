@@ -31,7 +31,7 @@ namespace zenith
     {
     public:
         OpenGLVertexArray();
-        ~OpenGLVertexArray() {}
+        ~OpenGLVertexArray();
         void bind() const override;
         void unbind() const override;
         void add_vertex_buf(std::shared_ptr<VertexBuffer>&) override;

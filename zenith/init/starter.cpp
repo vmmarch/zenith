@@ -24,8 +24,6 @@
 #include "starter.h"
 #include "render/renderer.h"
 #include "layer/home-layer.h"
-#include "layer/editor-layer.h"
-#include "buf/buf.h"
 #include "buf/vertex-array.h"
 
 namespace zenith

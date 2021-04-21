@@ -30,7 +30,7 @@ namespace zenith
     class VertexArray
     {
     public:
-        virtual ~VertexArray() {}
+        virtual ~VertexArray();
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
 

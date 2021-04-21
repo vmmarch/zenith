@@ -109,6 +109,12 @@
 { glCreateVertexArrays(1, &id); }
 
 /**
+ * 删除VertexArray
+ */
+#define GLAPI_DeleteVertexArray(id) \
+{ glDeleteVertexArrays(1, &id); }
+
+/**
  * 绑定VertexArray
  */
 #define GLAPI_BindVertexArray(id) \

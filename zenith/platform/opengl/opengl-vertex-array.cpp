@@ -32,6 +32,11 @@ namespace zenith
         GLAPI_CreateVertexArray(array_id);
     }
 
+    OpenGLVertexArray::~OpenGLVertexArray()
+    {
+        GLAPI_DeleteVertexArray(array_id);
+    }
+
     void OpenGLVertexArray::bind() const
     {
         GLAPI_BindVertexArray(array_id);
