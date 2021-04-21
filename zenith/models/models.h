@@ -34,25 +34,25 @@
 static void __open_folder(v_cc& code)
 {
 
-	OPENFILENAME __ofn; // 对话框结构体
+	OPENFILENAME ofn; // 对话框结构体
 	TCHAR sizef[MAX_PATH]; // 保存获取文件名称的缓冲区
 
 	// 初始化选择文件对话框
-	ZeroMemory(&__ofn, sizeof(OPENFILENAME));
-	__ofn.lStructSize = sizeof(OPENFILENAME);
-	__ofn.hwndOwner = NULL;
+	ZeroMemory(&ofn, sizeof(OPENFILENAME));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = NULL;
 	__ofb.lpstrFile = sizef;
-	__ofn.lpstrFile[0] = '\0';
-	__ofn.nMaxFile = sizeof(sizef);
-	__ofn.lpstrFilter = "All(*.*)\0*.*\0Text(*.txt)\0*.TXT\0\0";
-	__ofn.nFilterIndex = 1;
-	__ofn.lpstrFileTitle = NULL;
-	__ofn.nMaxFileTitle = 0;
-	__ofn.lpstrInitialDir = NULL;
-	__ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(sizef);
+	ofn.lpstrFilter = "All(*.*)\0*.*\0Text(*.txt)\0*.TXT\0\0";
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
 	// 显示打开文件对话窗口
-	if(GetOpenFileName(&__ofn))
+	if(GetOpenFileName(&ofn))
 	{
 		// 显示选择的文件
 		OutputDebugString(sizef);
