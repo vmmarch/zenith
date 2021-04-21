@@ -35,7 +35,7 @@ namespace zenith
     #error ##PLEASE_CHOOSE_RENDER_API
 #endif
 
-    render::api Renderer::__get_render_api()
+    render::api Renderer::__render_api()
     {
         return render_api;
     }

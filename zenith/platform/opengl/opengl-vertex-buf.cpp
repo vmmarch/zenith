@@ -51,10 +51,20 @@ namespace zenith
         GLAPI_UnbindArrayBuffer();
     }
 
-    void OpenGLVertexBuf::set_data(float *buf, v_ui32 size)
+    void OpenGLVertexBuf::__data(float *buf, v_ui32 size)
     {
         GLAPI_BindArrayBuffer(render_id);
         glBufferSubData(GL_ARRAY_BUFFER, 0, size, buf);
+    }
+
+    void OpenGLVertexBuf::__layout(const layout_t &layout) const
+    {
+        this->layout = layout;
+    }
+
+    layout_t& OpenGLVertexBuf::__layout() const
+    {
+        return layout;
     }
 
 }

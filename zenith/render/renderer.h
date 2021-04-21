@@ -56,7 +56,7 @@ namespace zenith
         static v_scope<Renderer> __create();
 
         // 获取当前API
-        static render::api __get_render_api();
+        static render::api __render_api();
 
     private:
         static render::api render_api;

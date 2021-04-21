@@ -41,8 +41,8 @@ namespace zenith
     public:
         WindowResizeEvent(v_ui1 _width, v_ui1 _height) : width(_width), height(_height) {}
 
-        v_ui1 get_width() const { return width; }
-        v_ui1 get_height() const { return height; }
+        v_ui1 __width() const { return width; }
+        v_ui1 __height() const { return height; }
 
         TYPE(event::type::EVENT_WINDOW_RESIZE);
         CLASSIF(event::classif::MAIN);

@@ -54,15 +54,15 @@ namespace zenith
         virtual ~Window() = default;
         virtual void setTitle(v_cc) = 0;
         virtual v_cc getTitle() const = 0;
-        virtual v_ui32 get_width() const = 0;
-        virtual v_ui32 get_height() const = 0;
+        virtual v_ui32 __width() const = 0;
+        virtual v_ui32 __height() const = 0;
 
-        virtual void set_event_callback(const f_callback& callback) = 0;
+        virtual void __event_callback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;
         virtual void update() = 0;
         virtual void close_window() = 0;
 
-        virtual void* get_handle() const = 0;
+        virtual void* __handle() const = 0;
 
         // 创建Window
         static v_scope<Window> __create(const v_winprops&);

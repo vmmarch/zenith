@@ -180,7 +180,7 @@ namespace zenith::win
 
     }
 
-    void WinWindow::set_event_callback(const f_callback &fn)
+    void WinWindow::__event_callback(const f_callback &fn)
     {
         info.fn = fn;
     }
@@ -210,7 +210,7 @@ namespace zenith::win
         window_count_of_create--;
     }
 
-    void* WinWindow::get_handle() const
+    void* WinWindow::__handle() const
     {
         return this->window;
     }

@@ -43,7 +43,7 @@ namespace zenith
         void event(Event&); // 事件处理
         void start_engine();
 
-        Window& get_window()
+        Window& __window()
         {
             return *window;
         }
@@ -53,7 +53,7 @@ namespace zenith
         void close();
         void update();
 
-        static Starter& get_instance()
+        static Starter& __instance()
         {
             return *instance;
         }

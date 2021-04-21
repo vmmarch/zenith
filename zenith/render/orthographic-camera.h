@@ -33,14 +33,14 @@ namespace zenith
     public:
         OrthographicCamera(float left, float right, float bottom, float top);
 
-        const glm::vec3& get_position() { return this->position; }
-        void set_position(const glm::vec3& position) { this->position = position; recalculateViewMatrix(); }
-        const float get_rotation() const { return this->rotation; }
-        void set_rotation(float rotation) { this->rotation = rotation; recalculateViewMatrix(); }
+        const glm::vec3& __position() { return this->position; }
+        void __position(const glm::vec3& position) { this->position = position; recalculateViewMatrix(); }
+        const float __rotation() const { return this->rotation; }
+        void __rotation(float rotation) { this->rotation = rotation; recalculateViewMatrix(); }
 
-        const glm::mat4 get_projection_matrix() { return this->projection_matrix; }
-        const glm::mat4 get_view_matrix() { return this->view_matrix; }
-        const glm::mat4 get_view_projection_matrix() { return this->view_projection_matrix; }
+        const glm::mat4 __projection_matrix() { return this->projection_matrix; }
+        const glm::mat4 __view_matrix() { return this->view_matrix; }
+        const glm::mat4 __view_projection_matrix() { return this->view_projection_matrix; }
     private:
         glm::mat4 projection_matrix;
         glm::mat4 view_matrix;

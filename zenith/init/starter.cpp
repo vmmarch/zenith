@@ -45,7 +45,7 @@ namespace zenith
     {
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);
-        this->window->set_event_callback(ZENITH_BIND_EVENT_FN(Starter::event));
+        this->window->__event_callback(ZENITH_BIND_EVENT_FN(Starter::event));
 
         this->imlayer = new ImGuiLayer();
 
@@ -60,7 +60,7 @@ namespace zenith
 
     void Starter::event(Event &event)
     {
-        event::type type = event.get_event_type();
+        event::type type = event.__event_type();
         if (type == event::type::EVENT_WINDOW_CLOSE)
             close();
     }
@@ -89,12 +89,22 @@ namespace zenith
         std::unique_ptr<VertexBuf> vertex_buf;
         vertex_buf.reset(VertexBuf::__create(vertices, sizeof(vertices)));
 
+        layout_t layout = {
+                { "position", shader_t::FLOAT3 }
+        };
+
+        v_ui32 index = 0;
+        for(auto& element : layout)
+        {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index, element.__size(), element.__type(), GL_FALSE, 3 * sizeof(float),
+                                  NULL);
+            index++;
+        }
+
         unsigned int indices[] = { 0, 1, 2 };
         std::unique_ptr<IndexBuf> index_buf;
         index_buf.reset(IndexBuf::__create(indices, sizeof(indices) / sizeof(v_ui1)));
-
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
 
         while (running)
         {

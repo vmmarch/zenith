@@ -24,7 +24,7 @@
 #include <string.h>
 #include <glad/glad.h>
 
-static void* get_proc(const char *namez);
+static void* __proc(const char *namez);
 
 #if defined(_WIN32) || defined(__CYGWIN__)
 #include <windows.h>
@@ -122,7 +122,7 @@ void close_gl(void) {
 #endif
 
 static
-void* get_proc(const char *namez) {
+void* __proc(const char *namez) {
     void* result = NULL;
     if(libGL == NULL) return NULL;
 
@@ -146,7 +146,7 @@ int gladLoadGL(void) {
     int status = 0;
 
     if(open_gl()) {
-        status = gladLoadGLLoader(&get_proc);
+        status = gladLoadGLLoader(&__proc);
         close_gl();
     }
 
@@ -166,7 +166,7 @@ static const char *exts = NULL;
 static int num_exts_i = 0;
 static char **exts_i = NULL;
 
-static int get_exts(void) {
+static int __exts(void) {
 #ifdef _GLAD_IS_SOME_NEW_VERSION
     if(max_loaded_major < 3) {
 #endif
@@ -1735,7 +1735,7 @@ static void load_GL_VERSION_4_6(GLADloadproc load) {
 	glad_glPolygonOffsetClamp = (PFNGLPOLYGONOFFSETCLAMPPROC)load("glPolygonOffsetClamp");
 }
 static int find_extensionsGL(void) {
-	if (!get_exts()) return 0;
+	if (!__exts()) return 0;
 	(void)&has_ext;
 	free_exts();
 	return 1;

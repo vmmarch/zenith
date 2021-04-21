@@ -50,15 +50,15 @@ namespace zenith
 
         // -----------------------------------
         // 获取相机各项参数
-        glm::vec3 get_pos() const override { return this->pos; }
-        glm::vec3 get_direction() const override { return this->direction; }
-        glm::vec3 get_camera_up() const override { return this->camera_up; }
-        glm::vec3 get_camera_right() const override { return this->camera_right; }
-        glm::vec3 get_camera_front() const override { return this->camera_front; }
+        glm::vec3 __pos() const override { return this->pos; }
+        glm::vec3 __direction() const override { return this->direction; }
+        glm::vec3 __camera_up() const override { return this->camera_up; }
+        glm::vec3 __camera_right() const override { return this->camera_right; }
+        glm::vec3 __camera_front() const override { return this->camera_front; }
 
         /*! 获取相机的移动速度 */
-	void set_speed(float __speed) override { this->speed = __speed; }
-        float get_speed() const override { return this->speed * this->delta_time; }
+	void __speed(float __speed) override { this->speed = __speed; }
+        float __speed() const override { return this->speed * this->delta_time; }
 
     private:
         glm::vec3 pos;

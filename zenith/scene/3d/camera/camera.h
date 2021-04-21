@@ -56,23 +56,23 @@ namespace zenith
         virtual void refresh() = 0;
 
         /** 相机位置 */
-        virtual glm::vec3 get_pos() const = 0;
+        virtual glm::vec3 __pos() const = 0;
 
         /** 相机当前方向 */
-        virtual glm::vec3 get_direction() const = 0;
+        virtual glm::vec3 __direction() const = 0;
 
         /** 相机竖向角度 */
-        virtual glm::vec3 get_camera_up() const = 0;
+        virtual glm::vec3 __camera_up() const = 0;
 
         /** 相机横向角度 */
-        virtual glm::vec3 get_camera_right() const = 0;
+        virtual glm::vec3 __camera_right() const = 0;
 
         /** 相机纵向角度 */
-        virtual glm::vec3 get_camera_front() const = 0;
+        virtual glm::vec3 __camera_front() const = 0;
 
         /** 相机移动速度 */
-	    virtual void set_speed(float __speed) = 0;
-        virtual float get_speed() const = 0;
+	    virtual void __speed(float __speed) = 0;
+        virtual float __speed() const = 0;
 
         // 创建相机
         static v_scope<Camera> __create(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target);

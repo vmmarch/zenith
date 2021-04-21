@@ -65,10 +65,10 @@ namespace zenith
     }
 
 #define TYPE(__e_type) static event::type getStaticEventType() { return __e_type; } \
-                       virtual event::type get_event_type() const override { return getStaticEventType(); }
+                       virtual event::type __event_type() const override { return getStaticEventType(); }
 
 #define CLASSIF(__classif) static event::classif getStaticEventClassif() { return __classif; } \
-                           virtual event::classif get_event_clssif() const override { return getStaticEventClassif(); }
+                           virtual event::classif __event_clssif() const override { return getStaticEventClassif(); }
 
     class Event
     {
@@ -77,8 +77,8 @@ namespace zenith
 
         bool is_handle() const { return this->handle; } // return false表示事件未处理，需要处理该事件。
         void handled() { this->handle = true; }        // 调用该方法表示事件已被处理
-        virtual event::type get_event_type() const = 0;
-        virtual event::classif get_event_clssif() const = 0;
+        virtual event::type __event_type() const = 0;
+        virtual event::classif __event_clssif() const = 0;
     private:
         bool handle = false;
     };

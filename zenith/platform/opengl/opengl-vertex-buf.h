@@ -35,10 +35,13 @@ namespace zenith
         ~OpenGLVertexBuf() override;
         void bind() override;
         void unbind() override;
-        void set_data(float* buf, v_ui32 size) override;
+        void __data(float* buf, v_ui32 size) override;
+        void __layout(const layout_t&) const override;
+        layout_t& __layout() const override;
 
     private:
         v_ui32 render_id;
+        layout_t& layout;
     };
 
 }

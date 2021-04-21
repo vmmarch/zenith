@@ -49,7 +49,7 @@ static v_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
  */
 static v_scope<zenith::GraphicsContext> __create_graphics_context(v_any window)
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
@@ -67,7 +67,7 @@ static v_scope<zenith::GraphicsContext> __create_graphics_context(v_any window)
  */
 static v_scope<zenith::Renderer> __create_renderer()
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
@@ -85,7 +85,7 @@ static v_scope<zenith::Renderer> __create_renderer()
  */
 static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
@@ -103,7 +103,7 @@ static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
  */
 static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
@@ -121,7 +121,7 @@ static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, g
  */
 static v_scope<zenith::Texture2D> __create_texture2D()
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
@@ -140,7 +140,7 @@ static v_scope<zenith::Texture2D> __create_texture2D()
  */
 static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
@@ -161,7 +161,7 @@ static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
  */
 static zenith::IndexBuf* __create_index_buf(v_ui32 *buf, v_ui32 size)
 {
-    switch (zenith::Renderer::__get_render_api())
+    switch (zenith::Renderer::__render_api())
     {
         case render::NONE:
             break;
