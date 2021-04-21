@@ -57,14 +57,4 @@ namespace zenith
         glBufferSubData(GL_ARRAY_BUFFER, 0, size, buf);
     }
 
-    void OpenGLVertexBuf::__layout(const layout_t &layout) const
-    {
-        this->layout = layout;
-    }
-
-    layout_t& OpenGLVertexBuf::__layout() const
-    {
-        return layout;
-    }
-
 }

@@ -94,11 +94,13 @@ namespace zenith
         };
 
         v_ui32 index = 0;
-        for(auto& element : layout)
+        for(const auto& element : layout)
         {
             glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, element.__size(), element.__type(), GL_FALSE, 3 * sizeof(float),
-                                  NULL);
+            glVertexAttribPointer(index, element.__size(), element.__type(),
+                                  element.normalized ? GL_TRUE : GL_FALSE,
+                                  layout.__stride(),
+                                  (const void*) element.offset);
             index++;
         }
 

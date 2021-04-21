@@ -24,6 +24,7 @@
 #pragma once
 
 #include <zenith/type.h>
+#include <api/glfw-api.h>
 
 #define SIZE_I4   4
 #define SIZE_I8   8
@@ -60,20 +61,21 @@ namespace zenith
             case shader_t::INT4:     return SIZE_I16;
         }
 
-        return NULL; // NULL eq 0
+        return 0;
     }
 
     struct element_t
     {
         v_cc name;
-        v_ui32 offset;
+        size_t offset;
         v_ui32 size;
         shader_t type;
+        bool normalized;
 
-        element_t(v_cc name_, shader_t type_)
-            : name(name_), type(type_), size(__shader_t_size(type_)), offset(0) {}
+        element_t(v_cc name_, shader_t type_, bool normalized_ = false)
+            : name(name_), type(type_), size(__shader_t_size(type_)), offset(0), normalized(normalized_) {}
 
-        GLenum  __type() const
+        GLenum __type() const
         {
             switch (type)
             {
@@ -120,8 +122,10 @@ namespace zenith
      *      glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
      * </code>
      */
-    struct layout_t
+    class layout_t
     {
+    public:
+        layout_t() {}
         layout_t(const std::initializer_list<element_t>& e) : elements(e)
         {
             v_ui32 offset = 0;
@@ -134,6 +138,7 @@ namespace zenith
             }
         }
 
+        inline const v_ui32 __stride() const { return stride; }
         inline const std::vector<element_t>& __elements() { return elements; }
 
         std::vector<element_t>::iterator begin() { return elements.begin(); }
@@ -150,8 +155,8 @@ namespace zenith
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual void __data(float* vertex, v_ui32 size) = 0;
-        virtual void __layout(const layout_t&) const = 0;
-        virtual layout_t& __layout() const = 0;
+        virtual void __layout(const layout_t&) = 0;
+        virtual const layout_t& __layout() const = 0;
 
         static VertexBuf* __create(v_ui32);
         static VertexBuf* __create(float*, v_ui32);
