@@ -86,12 +86,17 @@ namespace zenith
 
     OpenGLShader::~OpenGLShader()
     {
-        glDeleteShader(shader_id);
+        glDeleteProgram(shader_id);
     }
 
     void OpenGLShader::bind()
     {
-        glUseProgram(shader_id);
+        GLAPI_BindProgram(shader_id);
+    }
+
+    void OpenGLShader::unbind()
+    {
+        GLAPI_UnbindProgram();
     }
 
     void OpenGLShader::setBool(v_cc name, bool value) const

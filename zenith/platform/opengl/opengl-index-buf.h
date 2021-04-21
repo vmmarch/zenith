@@ -16,32 +16,25 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/17. <=== */
+/*! ===> Creates on 2021/4/21. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <zenith/type.h>
+#include "buf/buf.h"
 
 namespace zenith
 {
-
-    enum polygonMode
-    {
-        FILL, LINE
-    };
-
-    class VertexBuf
+    class OpenGLIndexBuf : public IndexBuf
     {
     public:
-        virtual void bind() = 0;
-        virtual void unbind() = 0;
-        virtual void set_data(float* vertex, v_ui32 size) = 0;
-
-        static v_scope<VertexBuf> __create(v_ui32);
-        static v_scope<VertexBuf> __create(float*, v_ui32);
+        OpenGLIndexBuf(v_ui32* indices, v_ui32 size);
+        ~OpenGLIndexBuf() override;
+        void bind() override;
+        void unbind() override;
+    private:
+        v_ui32 index_id;
     };
-
 }

@@ -16,45 +16,17 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/20. <=== */
+/*! ===> Creates on 2021/4/21. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "opengl-vertex-buf.h"
-#include "api/glfw-api.h"
+#include "buf.h"
 
 namespace zenith
 {
-    OpenGLVertexBuf::OpenGLVertexBuf(v_ui32 size)
+    IndexBuf* IndexBuf::__create(v_ui32* indices, v_ui32 size)
     {
-        GLAPI_CreateDynamicVertexBufferAndBind(render_id, size);
+        return nullptr;
     }
-
-    OpenGLVertexBuf::OpenGLVertexBuf(float *buf, v_ui32 size)
-    {
-        GLAPI_CreateStaticVertexBufferAndBind(render_id, buf, size);
-    }
-
-    OpenGLVertexBuf::~OpenGLVertexBuf()
-    {
-        GLAPI_DeleteBuffer(render_id);
-    }
-
-    void OpenGLVertexBuf::bind()
-    {
-        GLAPI_BindArrayBuffer(render_id);
-    }
-
-    void OpenGLVertexBuf::unbind()
-    {
-        GLAPI_UnbindArrayBuffer();
-    }
-
-    void OpenGLVertexBuf::set_data(float *buf, v_ui32 size)
-    {
-        GLAPI_BindArrayBuffer(render_id);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, size, buf);
-    }
-
 }

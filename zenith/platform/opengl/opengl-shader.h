@@ -33,6 +33,7 @@ namespace zenith
         OpenGLShader(v_cc path, v_cc debugname);
         ~OpenGLShader() override;
         void bind() override;
+        void unbind() override;
         void setBool(v_cc, bool) const override;
         void setInt(v_cc, int) const override;
         void setFloat(v_cc, float) const override;

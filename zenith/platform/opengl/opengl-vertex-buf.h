@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include "buf/vertex-buf.h"
+#include "buf/buf.h"
 
 namespace zenith
 {
@@ -32,6 +32,7 @@ namespace zenith
     public:
         OpenGLVertexBuf(v_ui32 size);
         OpenGLVertexBuf(float* buf, v_ui32 size);
+        ~OpenGLVertexBuf() override;
         void bind() override;
         void unbind() override;
         void set_data(float* buf, v_ui32 size) override;

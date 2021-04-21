@@ -25,7 +25,7 @@
 #include "render/renderer.h"
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
-#include "buf/vertex-buf.h"
+#include "buf/buf.h"
 
 namespace zenith
 {
@@ -71,7 +71,6 @@ namespace zenith
 
     void Starter::start_engine()
     {
-
         v_scope<Renderer> renderer = Renderer::__create();
         renderer->clear_color(color::BLACK);
 
@@ -82,10 +81,7 @@ namespace zenith
 
         // ----------------------------------------
         // 画三角形
-        unsigned int verbuf, verarr, verindex;
-
-        glGenVertexArrays(1, &verarr);
-        glBindVertexArray(verarr);
+        unsigned int verbuf, verindex;
 
         glGenBuffers(1, &verbuf);
         glBindBuffer(GL_ARRAY_BUFFER, verbuf);
@@ -98,7 +94,7 @@ namespace zenith
                 0.5f, -0.5f, 0.0f,
                 0.0f, 0.5f, 0.0f,
         };
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        vertex_buf.reset(VertexBuf::__create(vertices, sizeof(vertices)));
 
         unsigned int indices[] = { 0, 1, 2 };
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);

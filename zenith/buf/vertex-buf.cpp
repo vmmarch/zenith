@@ -21,17 +21,17 @@
 /*!
  * @author 2B键盘
  */
-#include "vertex-buf.h"
+#include "buf.h"
 #include "tool/create-scope.h"
 
 namespace zenith
 {
-    v_scope<VertexBuf> VertexBuf::__create(v_ui32 size)
+    VertexBuf* VertexBuf::__create(v_ui32 size)
     {
         return __create_vertex_buf(NULL, size);
     }
 
-    v_scope<VertexBuf> VertexBuf::__create(float *buf, v_ui32 size)
+    VertexBuf* VertexBuf::__create(float *buf, v_ui32 size)
     {
         return __create_vertex_buf(buf, size);
     }

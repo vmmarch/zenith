@@ -30,6 +30,7 @@
 #include "layer/imgui-layer.h"
 #include "render/orthographic-camera.h"
 #include "render/shader/shader.h"
+#include "buf/buf.h"
 
 namespace zenith
 {
@@ -62,6 +63,8 @@ namespace zenith
         v_scope<Window> window;
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
+
+        std::unique_ptr<VertexBuf> vertex_buf;
 
         static Starter* instance;
     };

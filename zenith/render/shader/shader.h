@@ -35,6 +35,7 @@ namespace zenith
     public:
         virtual ~Shader() = default;
         virtual void bind() = 0;
+        virtual void unbind() = 0;
         virtual void setBool(v_cc name, bool value) const = 0;
         virtual void setInt(v_cc name, int value) const = 0;
         virtual void setFloat(v_cc name, float value) const = 0;

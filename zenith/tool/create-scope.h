@@ -137,7 +137,7 @@ static v_scope<zenith::Texture2D> __create_texture2D()
 /**
  * @return vertex buffer
  */
-static v_scope<zenith::VertexBuf> __create_vertex_buf(float *buf, v_ui32 size)
+static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
 {
     switch (zenith::Renderer::__get_render_api())
     {
@@ -145,9 +145,9 @@ static v_scope<zenith::VertexBuf> __create_vertex_buf(float *buf, v_ui32 size)
             break;
         case render::GL:
             if(buf != NULL)
-                return zenith::__create_scope<zenith::OpenGLVertexBuf>(buf, size);
+                return new zenith::OpenGLVertexBuf(buf, size);
             else
-                return zenith::__create_scope<zenith::OpenGLVertexBuf>(size);
+                return new zenith::OpenGLVertexBuf(size);
         case render::DX:
             break;
     }

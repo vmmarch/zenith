@@ -85,6 +85,25 @@
 { glBindBuffer(GL_ARRAY_BUFFER, 0); }
 
 /**
+ * 绑定ElementArrayBuffer
+ */
+#define GLAPI_CreateAndBindIndexArrayBuffer(buf) \
+{ glGenBuffers(1, &buf); glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
+
+/**
+ * 绑定ElementArrayBuffer
+ */
+#define GLAPI_BindIndexArrayBuffer(buf) \
+{ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
+
+/**
+ * 解绑ElementArrayBuffer
+ */
+#define GLAPI_UnbindIndexArrayBuffer() \
+{ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
+
+
+/**
  * 创建并绑定ArrayBuffer, 动态渲染
  *
  * @param [i] id unsigned int
@@ -114,18 +133,6 @@
  */
 #define GLAPI_CreateArrayBuffer(buf, size, data, usage) \
 { glGenBuffers(1, &buf); glBindBuffer(GL_ARRAY_BUFFER, buf); glBufferData(GL_ARRAY_BUFFER, size, data, usage); }
-
-/**
- * 绑定ElementArrayBuffer
- */
-#define GLAPI_BindElemArrayBuffer(buf) \
-{ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
-
-/**
- * 解绑ElementArrayBuffer
- */
-#define GLAPI_UnbindElemArrayBuffer() \
-{ glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 /**
  * 绑定着色器程序
