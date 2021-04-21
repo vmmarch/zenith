@@ -207,10 +207,8 @@ namespace zenith
             }
         }
 
-        std::cout << vstr << "\n";
         vtext = vstr;
         ftext = fstr;
-
         in.close();
     }
 

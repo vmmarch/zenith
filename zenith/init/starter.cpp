@@ -25,7 +25,6 @@
 #include "render/renderer.h"
 #include "layer/home-layer.h"
 #include "layer/editor-layer.h"
-#include "render/shader/shader.h"
 #include "buf/vertex-buf.h"
 
 namespace zenith
@@ -55,6 +54,7 @@ namespace zenith
 
     void Starter::close()
     {
+        this->running = false;
         this->window->close_window();
     }
 
@@ -77,6 +77,8 @@ namespace zenith
 
         float last_frame_time = 0.0f;
         int render_count = 0;
+
+        v_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
 
         // ----------------------------------------
         // 画三角形
@@ -121,7 +123,7 @@ namespace zenith
 
             // ----------------------------------------------------
             // GL render from there.
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            shader->bind();
             glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
             this->window->update();

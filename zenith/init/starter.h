@@ -29,6 +29,7 @@
 #include "tool/layer-vector.h"
 #include "layer/imgui-layer.h"
 #include "render/orthographic-camera.h"
+#include "render/shader/shader.h"
 
 namespace zenith
 {
