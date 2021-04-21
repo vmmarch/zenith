@@ -45,6 +45,7 @@ namespace zenith
         virtual ~IndexBuf() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
+        virtual v_ui32 size() const = 0;
 
         static IndexBuf* __create(v_ui32* indices, v_ui32 size);
     };

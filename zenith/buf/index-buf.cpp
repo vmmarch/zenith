@@ -22,11 +22,12 @@
  * @author 2B键盘
  */
 #include "buf.h"
+#include "tool/create-scope.h"
 
 namespace zenith
 {
     IndexBuf* IndexBuf::__create(v_ui32* indices, v_ui32 size)
     {
-        return nullptr;
+        return __create_index_buf(indices, size);
     }
 }

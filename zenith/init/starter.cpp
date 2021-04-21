@@ -81,23 +81,17 @@ namespace zenith
 
         // ----------------------------------------
         // 画三角形
-        unsigned int verbuf, verindex;
-
-        glGenBuffers(1, &verbuf);
-        glBindBuffer(GL_ARRAY_BUFFER, verbuf);
-
-        glGenBuffers(1, &verindex);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, verindex);
-
         float vertices[] = {
                 -0.5f, -0.5f, 0.0f,
                 0.5f, -0.5f, 0.0f,
                 0.0f, 0.5f, 0.0f,
         };
+        std::unique_ptr<VertexBuf> vertex_buf;
         vertex_buf.reset(VertexBuf::__create(vertices, sizeof(vertices)));
 
         unsigned int indices[] = { 0, 1, 2 };
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        std::unique_ptr<IndexBuf> index_buf;
+        index_buf.reset(IndexBuf::__create(indices, sizeof(indices) / sizeof(v_ui1)));
 
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), NULL);
@@ -120,8 +114,7 @@ namespace zenith
             // ----------------------------------------------------
             // GL render from there.
             shader->bind();
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
-
+            GLAPI_DrawIndexTriangles(index_buf->size(), GL_UNSIGNED_INT);
             this->window->update();
         }
     }

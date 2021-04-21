@@ -27,9 +27,10 @@
 namespace zenith
 {
     OpenGLIndexBuf::OpenGLIndexBuf(v_ui32* indices, v_ui32 size)
+        : v_size(size)
     {
         GLAPI_CreateAndBindIndexArrayBuffer(index_id);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * sizeof(v_ui32), indices, GL_STATIC_DRAW);
     }
 
     OpenGLIndexBuf::~OpenGLIndexBuf()
@@ -46,4 +47,10 @@ namespace zenith
     {
         GLAPI_UnbindIndexArrayBuffer();
     }
+
+    v_ui32 OpenGLIndexBuf::size() const
+    {
+        return v_size;
+    }
+
 }

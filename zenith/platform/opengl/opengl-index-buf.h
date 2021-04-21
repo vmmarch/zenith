@@ -34,7 +34,8 @@ namespace zenith
         ~OpenGLIndexBuf() override;
         void bind() override;
         void unbind() override;
+        v_ui32 size() const override;
     private:
-        v_ui32 index_id;
+        v_ui32 index_id, v_size;
     };
 }

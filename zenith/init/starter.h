@@ -64,8 +64,6 @@ namespace zenith
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
 
-        std::unique_ptr<VertexBuf> vertex_buf;
-
         static Starter* instance;
     };
 }

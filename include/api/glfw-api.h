@@ -346,6 +346,12 @@
 #define GLAPI_Texture2D_Mag_Filter_Parameteriv(filtermod) \
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
 
+/**
+ * 通过索引画三角形
+ */
+#define GLAPI_DrawIndexTriangles(size, type) \
+{ glDrawElements(GL_TRIANGLES, size, type, NULL); }
+
 // ----------------------------------------------------
 // enable and disable
 

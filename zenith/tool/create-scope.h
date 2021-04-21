@@ -30,6 +30,7 @@
 #include "platform/opengl/opengl-renderer.h"
 #include "platform/opengl/opengl-graphics-context.h"
 #include "platform/opengl/opengl-vertex-buf.h"
+#include "platform/opengl/opengl-index-buf.h"
 
 /**
  * @return 窗口实例
@@ -148,6 +149,24 @@ static zenith::VertexBuf* __create_vertex_buf(float *buf, v_ui32 size)
                 return new zenith::OpenGLVertexBuf(buf, size);
             else
                 return new zenith::OpenGLVertexBuf(size);
+        case render::DX:
+            break;
+    }
+
+    return nullptr;
+}
+
+/**
+ * @return index buffer
+ */
+static zenith::IndexBuf* __create_index_buf(v_ui32 *buf, v_ui32 size)
+{
+    switch (zenith::Renderer::__get_render_api())
+    {
+        case render::NONE:
+            break;
+        case render::GL:
+                return new zenith::OpenGLIndexBuf(buf, size);
         case render::DX:
             break;
     }
