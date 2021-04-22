@@ -24,6 +24,7 @@
 #pragma once
 
 #include "buf/vertex-array.h"
+#include <memory>
 
 namespace zenith
 {
@@ -35,6 +36,7 @@ namespace zenith
         void bind() const override;
         void unbind() const override;
         void add_vertex_buf(std::shared_ptr<VertexBuffer>&) override;
+        void __index_buffer(v_ui32* buf, v_ui32 size) override;
         void __index_buffer(std::shared_ptr<IndexBuffer>&) override;
         std::shared_ptr<IndexBuffer> __index_buffer() const override { return index_buf; }
         std::vector<std::shared_ptr<VertexBuffer>> __vertex_buffers() const { return vertex_buffers; };

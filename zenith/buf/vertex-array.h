@@ -35,6 +35,7 @@ namespace zenith
         virtual void unbind() const = 0;
 
         virtual void add_vertex_buf(std::shared_ptr<VertexBuffer>& vbuf) = 0;
+        virtual void __index_buffer(v_ui32* buf, v_ui32 size) = 0;
         virtual void __index_buffer(std::shared_ptr<IndexBuffer>& ibuf) = 0;
         virtual std::shared_ptr<IndexBuffer> __index_buffer() const = 0;
 

@@ -16,25 +16,26 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/22. <=== */
 
 /*!
  * @author 2B键盘
  */
 #include <iostream>
-#include "init/starter.h"
 
-int main(int argc, char **argv)
+int main()
 {
+    std::cout << "char = "              << sizeof(char) << "\n";
+    std::cout << "int = "               << sizeof(int) << "\n";
+    std::cout << "short = "             << sizeof(short) << "\n";
+    std::cout << "short int = "         << sizeof(short int) << "\n";
+    std::cout << "unsigned int = "      << sizeof(unsigned int) << "\n";
+    std::cout << "long = "              << sizeof(long) << "\n";
+    std::cout << "float = "             << sizeof(float) << "\n";
+    std::cout << "uint8_t = "           << sizeof(uint8_t) << "\n";
+    std::cout << "uint16_t = "          << sizeof(uint8_t) << "\n";
+    std::cout << "uint32_t = "          << sizeof(uint8_t) << "\n";
+    std::cout << "void* = "             << sizeof(void*) << "\n";
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-    #ifdef __ZENITH_IN_CHINA__
-        system("chcp 65001");
-    #endif
-#endif
-
-    auto app = new zenith::Starter();
-    app->init_window("zenith", 1400, 900);
-    app->start_engine();
-
+    return 0;
 }

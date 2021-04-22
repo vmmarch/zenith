@@ -71,7 +71,7 @@ namespace zenith
     void Starter::start_engine()
     {
         v_scope<Renderer> renderer = Renderer::__create();
-        renderer->clear_color(color::BLACK);
+        renderer->__clear_color(color::BLACK);
 
         float last_frame_time = 0.0f;
         int render_count = 0;
@@ -101,10 +101,7 @@ namespace zenith
         // ------------------------------------------
         // set index
         unsigned int indices[] = { 0, 1, 2 };
-        std::shared_ptr<IndexBuffer> index_buf;
-
-        index_buf.reset(IndexBuffer::__create(indices, sizeof(indices) / sizeof(v_ui1)));
-        va_buf->__index_buffer(index_buf);
+        va_buf->__index_buffer(indices, sizeof(indices) / ZENITH_UNSIGNED_INT);
 
         while (running)
         {
@@ -124,8 +121,7 @@ namespace zenith
             // ----------------------------------------------------
             // GL render from there.
             shader->bind();
-            va_buf->bind();
-            GLAPI_DrawIndexTriangles(va_buf->__index_buffer()->size(), GL_UNSIGNED_INT);
+            renderer->draw_indexed(*va_buf);
 
             this->window->update();
         }

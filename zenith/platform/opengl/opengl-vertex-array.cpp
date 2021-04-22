@@ -70,6 +70,14 @@ namespace zenith
         vertex_buffers.push_back(buf);
     }
 
+    void OpenGLVertexArray::__index_buffer(v_ui32* buf, v_ui32 size)
+    {
+        std::shared_ptr<IndexBuffer> index_buf;
+        index_buf.reset(IndexBuffer::__create(buf, size));
+
+        __index_buffer(index_buf);
+    }
+
     void OpenGLVertexArray::__index_buffer(std::shared_ptr<IndexBuffer> &buf)
     {
         GLAPI_BindVertexArray(array_id);

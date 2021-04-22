@@ -30,9 +30,11 @@ namespace zenith
     {
     public:
         virtual ~OpenGLRenderer() {}
-        void clear_color(const glm::vec4&) override;
+        void __clear_color(const glm::vec4&) override;
         void clear() override;
         void disable_depth_test() override;
         void enable_depth_test() override;
+        void draw_indexed(const VertexArray&) override;
+        void draw_indexed(const std::vector<VertexArray>&) override;
     };
 }

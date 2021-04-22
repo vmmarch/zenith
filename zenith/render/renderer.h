@@ -25,7 +25,8 @@
 
 #include <zenith/type.h>
 #include <render/renderer-config.h>
-#include "api/glfw-api.h"
+#include <api/glfw-api.h>
+#include "buf/vertex-array.h"
 
 namespace zenith
 {
@@ -41,7 +42,7 @@ namespace zenith
         virtual ~Renderer() = default;
 
         // 设置清屏颜色
-        virtual void clear_color(const glm::vec4& color) = 0;
+        virtual void __clear_color(const glm::vec4& color) = 0;
 
         // 清屏
         virtual void clear() = 0;
@@ -51,6 +52,13 @@ namespace zenith
 
         // 开启深度测试
         virtual void enable_depth_test() = 0;
+
+        // 渲染顶点数组
+        virtual void draw_indexed(const VertexArray&) = 0;
+        virtual void draw_indexed(const std::vector<VertexArray>&) = 0;
+
+        // --------------------------------------------------
+        // static
 
         // 创建渲染器
         static v_scope<Renderer> __create();

@@ -30,6 +30,18 @@
 
 #define EXTAPI extern
 
+#define ZENITH_CHAR             1
+#define ZENITH_INT              4
+#define ZENITH_SHORT            2
+#define ZENITH_SHORT_INT        2
+#define ZENITH_UNSIGNED_INT     4
+#define ZENITH_LONG             4
+#define ZENITH_FLOAT            4
+#define ZENITH_UINT8_T          1
+#define ZENITH_UINT16_T         1
+#define ZENITH_UINT32_T         1
+#define ZENITH_VOID             8
+
 typedef const char *v_cc;
 typedef unsigned char v_uc;
 typedef unsigned int v_ui1;

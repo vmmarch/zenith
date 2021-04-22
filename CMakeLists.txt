@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
 project(zenith)
 
+if(UNIT_TEST)
+	add_subdirectory(test/typesize)
+endif()
+
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/init SOURCE_INIT)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/window SOURCE_WIN)

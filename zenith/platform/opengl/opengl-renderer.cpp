@@ -26,7 +26,7 @@
 namespace zenith
 {
 
-    void OpenGLRenderer::clear_color(const glm::vec4& color)
+    void OpenGLRenderer::__clear_color(const glm::vec4& color)
     {
         glClearColor(color.r, color.g, color.b, color.a);
     }
@@ -44,6 +44,20 @@ namespace zenith
     void OpenGLRenderer::enable_depth_test()
     {
         GLAPI_EnableDepthTest();
+    }
+
+    void OpenGLRenderer::draw_indexed(const VertexArray& vertex)
+    {
+        vertex.bind();
+        GLAPI_DrawIndexTriangles(vertex.__index_buffer()->size(), GL_UNSIGNED_INT);
+    }
+
+    void OpenGLRenderer::draw_indexed(const std::vector<VertexArray>& vertex_arrays)
+    {
+        for (auto &vertex : vertex_arrays)
+        {
+            draw_indexed(vertex);
+        }
     }
 
 }
