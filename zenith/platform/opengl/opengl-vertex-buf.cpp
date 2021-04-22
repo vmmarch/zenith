@@ -28,12 +28,12 @@ namespace zenith
 {
     OpenGLVertexBuffer::OpenGLVertexBuffer(v_ui32 size)
     {
-        GLAPI_CreateDynamicVertexBufferferAndBind(render_id, size);
+        GLAPI_CreateDynamicVertexBufferAndBind(render_id, size);
     }
 
     OpenGLVertexBuffer::OpenGLVertexBuffer(float *buf, v_ui32 size)
     {
-        GLAPI_CreateStaticVertexBufferferAndBind(render_id, buf, size);
+        GLAPI_CreateStaticVertexBufferAndBind(render_id, buf, size);
     }
 
     OpenGLVertexBuffer::~OpenGLVertexBuffer()

@@ -106,7 +106,7 @@
  * 创建VertexArray
  */
 #define GLAPI_CreateVertexArray(id) \
-{ glCreateVertexArrays(1, &id); }
+{ glGenVertexArrays(1, &id); }
 
 /**
  * 删除VertexArray
