@@ -84,16 +84,15 @@ namespace zenith
         va_buf.reset(VertexArray::__create());
 
         float vertices[] = {
-                -0.5f, -0.5f, 0.0f,    0.0, 1.0, 0.0, 1.0,
-                0.5f, -0.5f, 0.0f,     1.0, 1.0, 0.0, 1.0,
-                0.0f, 0.5f, 0.0f,      1.0, 0.0, 1.0, 1.0
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                0.0f, 0.5f, 0.0f
         };
         std::shared_ptr<VertexBuffer> vbuf;
         vbuf.reset(VertexBuffer::__create(vertices, sizeof(vertices)));
 
         layout_t layout = {
                 {"position", shader_t::FLOAT3},
-                {"color",    shader_t::FLOAT4}
         };
         vbuf->__layout(layout);
         va_buf->add_vertex_buf(vbuf);
