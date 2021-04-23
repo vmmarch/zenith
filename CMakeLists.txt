@@ -21,6 +21,7 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/models SOURCE_MODELS)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_SCENE_3D_CAMERA)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/buf SOURCE_BUF)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
 
 # ---------------------------------------------------------------------------------------
 # for modules dir.
@@ -74,6 +75,7 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_SCENE_3D_CAMERA}
 		${SOURCE_RENDER_2D_CAMERA}
 		${SOURCE_BUF}
+		${SOURCE_SANDBOX}
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_demo.cpp

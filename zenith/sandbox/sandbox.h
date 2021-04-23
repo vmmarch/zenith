@@ -16,53 +16,41 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/23. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <zenith/type.h>
-#include "window/window.h"
-#include "event/event.h"
-#include "render/orthographic-camera.h"
-#include "render/shader/shader.h"
-#include "buf/buf.h"
-#include "event/mouse-event.h"
-#include "sandbox/sandbox.h"
+#include "layer/layer.h"
+#include "render/renderer.h"
+#include <vector>
+#include "layer/home-layer.h"
+#include "layer/imgui-layer.h"
+#include "tool/layer-vector.h"
 
 namespace zenith
 {
-    class Starter
+
+    class SandBox : public Layer
     {
     public:
-        Starter();
-        ~Starter();
-        void init_window(v_cc, int, int);
-        void event(Event&); // 事件处理
-        void start_engine();
+        SandBox();
+        void render() override;
+        void update() override;
+        void event(Event&) override;
+        void close() override;
 
-        Window& __window()
-        {
-            return *window;
-        }
-
-        // ===========================================================
-        // event
-        void close();
-        void update();
-
-        static Starter& __instance()
-        {
-            return *instance;
-        }
+        void submit(RenderModel &model) { models.push_back(model); }
+        void clear_color(glm::vec4& color) { renderer->clear_color(color); }
 
     private:
-        v_suc running = true;
-        v_scope<Window> window;
-        SandBox* sandbox;
-
-        static Starter* instance;
+        LayerStack layer_stack;
+        ImGuiLayer* imlayer {};
+        OrthographicCamera* camera;
+        std::vector<RenderModel> models;
+        v_scope<Renderer> renderer;
     };
+
 }

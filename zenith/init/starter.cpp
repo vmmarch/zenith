@@ -22,10 +22,7 @@
  * @author 2B键盘
  */
 #include "starter.h"
-#include "render/renderer.h"
-#include "layer/home-layer.h"
 #include "render/graphics-context.h"
-#include "settings.h"
 
 namespace zenith
 {
@@ -34,7 +31,6 @@ namespace zenith
     Starter::Starter()
     {
         instance = this;
-        camera = new OrthographicCamera(-1.0f, 1.0f, -1.0f, 1.0f);
     }
 
     Starter::~Starter()
@@ -48,9 +44,7 @@ namespace zenith
         this->window = Window::__create(winprops);
         this->window->__event_callback(ZENITH_BIND_EVENT_FN(Starter::event));
 
-        this->imlayer = new ImGuiLayer();
-
-        layer_stack.push(new HomeLayer());
+        sandbox = new SandBox();
     }
 
     void Starter::close()
@@ -63,33 +57,22 @@ namespace zenith
     {
         event::type type = event.__event_type();
         if (type == event::type::EVENT_WINDOW_CLOSE)
+        {
             close();
-
-        if(type == event::type::EVENT_MOUSE_SCROLLED)
-            scroll(dynamic_cast<MouseButtonScrolledEvent &>(event));
-    }
-
-    void Starter::scroll(MouseButtonScrolledEvent& event)
-    {
-        ZENITH_INFO("X: %d, Y: %d", event.getX(), event.getY());
-        if(event.getY() == DIRECTION_UP)
-        {
-        } else
-        {
+            return;
         }
+
+        sandbox->event(event);
     }
 
     void Starter::update()
     {
+        sandbox->update();
     }
 
     void Starter::start_engine()
     {
-        v_scope<Renderer> renderer = Renderer::__create();
-        renderer->__clear_color(color::BLACK);
-
-        float last_frame_time = 0.0f;
-        int render_count = 0;
+        sandbox->clear_color(color::BLACK);
 
         v_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
 
@@ -118,35 +101,16 @@ namespace zenith
         vertexArray->__index_buffer(indices, sizeof(indices) / ZENITH_UNSIGNED_INT);
 
         RenderModel model(vertexArray, std::move(shader));
+
+        sandbox->submit(model);
         GraphicsContext::instance()->__curr_model(model);
 
         // ------------------------------------------
         // game loop.
         while (running)
         {
-            float time = (float) glfwGetTime();
-            float timestep = time - last_frame_time;
-            last_frame_time = timestep;
-
-            // ----------------------------------------
-            // reload settings
-            reload_settings();
-
-            renderer->clear();
-
-            renderer->begin(camera);
-
-            layer_stack.update();
-            imlayer->begin();
-            {
-                layer_stack.render();
-            }
-            imlayer->end();
-
-            // ----------------------------------------------------
-            // GL render from there.
-            renderer->draw_vertex_array(model);
-
+            update();
+            sandbox->render();
             this->window->update();
         }
     }

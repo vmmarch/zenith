@@ -44,7 +44,7 @@ namespace zenith
         virtual ~Renderer() = default;
 
         // 设置清屏颜色
-        virtual void __clear_color(const glm::vec4& color) = 0;
+        virtual void clear_color(const glm::vec4& color) = 0;
 
         virtual void begin(OrthographicCamera*) = 0;
 

@@ -28,7 +28,7 @@
 namespace zenith
 {
 
-    void OpenGLRenderer::__clear_color(const glm::vec4& color)
+    void OpenGLRenderer::clear_color(const glm::vec4& color)
     {
         glClearColor(color.r, color.g, color.b, color.a);
     }

@@ -30,7 +30,7 @@ namespace zenith
     {
     public:
         virtual ~OpenGLRenderer() {}
-        void __clear_color(const glm::vec4&) override;
+        void clear_color(const glm::vec4&) override;
         void clear() override;
         void begin(OrthographicCamera*) override;
         void disable_depth_test() override;
