@@ -59,6 +59,7 @@ namespace zenith::win
         if (!success)
                 ZENITH_ERROR(GLFW_INIT_FAILED);
 
+        glfwWindowHint(GL_SAMPLES, 4); // 开启多样本缓冲
         this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title),
                                         nullptr, nullptr);
         window_count_of_create++; // 窗口计数+1

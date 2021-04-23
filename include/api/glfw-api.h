@@ -378,6 +378,10 @@
 // ----------------------------------------------------
 // enable and disable
 
+/** 多重采样抗锯齿 */
+#define GLAPI_EnableMultisample() { glEnable(GL_MULTISAMPLE); }
+#define GLAPI_DisableMultisample() { glDisable(GL_MULTISAMPLE); }
+
 /** 光照计算 */
 #define GLAPI_EnableLight() { glEnable(GL_LIGHTING); }
 #define GLAPI_DisableLight() { glDisable(GL_LIGHTING); }

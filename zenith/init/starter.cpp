@@ -25,6 +25,7 @@
 #include "render/renderer.h"
 #include "layer/home-layer.h"
 #include "render/graphics-context.h"
+#include "settings.h"
 
 namespace zenith
 {
@@ -105,11 +106,17 @@ namespace zenith
         RenderModel model(vertexArray, std::move(shader));
         GraphicsContext::instance()->__curr_model(model);
 
+        // ------------------------------------------
+        // game loop.
         while (running)
         {
             float time = (float) glfwGetTime();
             float timestep = time - last_frame_time;
             last_frame_time = timestep;
+
+            // ----------------------------------------
+            // reload settings
+            reload_settings();
 
             renderer->clear();
 

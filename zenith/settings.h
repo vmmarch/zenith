@@ -21,11 +21,33 @@
 /*!
  * @author 2B键盘
  */
-#pragma once
+#ifndef ZENITH_SETTINGS_H
+#define ZENITH_SETTINGS_H
+
 #include <zenith/glob.h>
 #include <zenith/type.h>
+#include <api/glfw-api.h>
+
+#define V_TRUE true
+#define V_FALSE false
+
+const static int KEY_MULTISAMPLE        = 0;        // 多重采样抗锯齿
+const static int KEY_DEPTHTEST          = 1;        // 深度测试
 
 namespace zenith
 {
-    static bool multisample_anti_aliasing = false; // 多重采样抗锯齿
+    /**
+     * 设置配置参数
+     *
+     * @param k KEY_XXX
+     * @param v V_XXX
+     */
+    EXTAPI void __value(int k, bool v);
+
+    /**
+     * 重新加载配置
+     */
+    EXTAPI void reload_settings();
 }
+
+#endif
