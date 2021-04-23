@@ -28,9 +28,12 @@ namespace zenith
 {
     Starter *Starter::instance = nullptr;
 
-    Starter::Starter()
+    Starter::Starter(v_cc title, int width, int height)
     {
         instance = this;
+        init_window(title, width, height);
+
+        sandbox = new SandBox();
     }
 
     Starter::~Starter()
@@ -43,8 +46,6 @@ namespace zenith
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);
         this->window->__event_callback(ZENITH_BIND_EVENT_FN(Starter::event));
-
-        sandbox = new SandBox();
     }
 
     void Starter::close()

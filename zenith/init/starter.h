@@ -37,26 +37,21 @@ namespace zenith
     class Starter
     {
     public:
-        Starter();
+        Starter(v_cc, int, int);
         ~Starter();
-        void init_window(v_cc, int, int);
         void event(Event&); // 事件处理
         void start_engine();
 
-        Window& __window()
-        {
-            return *window;
-        }
+        Window& __window() { return *window; }
 
         // ===========================================================
         // event
         void close();
         void update();
 
-        static Starter& __instance()
-        {
-            return *instance;
-        }
+        static Starter& __instance() { return *instance; }
+    private:
+        void init_window(v_cc, int, int);
 
     private:
         v_suc running = true;
