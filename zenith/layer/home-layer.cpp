@@ -23,7 +23,7 @@
  */
 #include "home-layer.h"
 #include "init/starter.h"
-#include <zenith/globalization.h>
+#include <zenith/glob.h>
 #include "layer/plane/properties.h"
 #include "layer/plane/resource-manager.h"
 

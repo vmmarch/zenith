@@ -25,7 +25,7 @@
 
 #include <memory>
 #include <iostream>
-#include <zenith/globalization.h>
+#include <zenith/glob.h>
 #include <zenith/log.h>
 
 #define EXTAPI extern

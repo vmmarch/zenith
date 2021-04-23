@@ -16,17 +16,16 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/4. <=== */
+/*! ===> Creates on 2021/4/23. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include <stdio.h>
 #include <zenith/glob.h>
+#include <zenith/type.h>
 
-#ifdef __ZENITH_ENABLE_ASSERT__
-    #define __ZENITH_ASSERT__(check, msg) if(check) printf("%s", msg)
-#else
-    #define __ZENITH_ASSERT__(check, msg) {}
-#endif
+namespace zenith
+{
+    static bool multisample_anti_aliasing = false; // 多重采样抗锯齿
+}
