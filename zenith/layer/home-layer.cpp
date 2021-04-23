@@ -54,7 +54,7 @@ namespace zenith
 
                 // 退出引擎
                 if (ImGui::MenuItem(GUI_TEXT_EXIT))
-                    Starter::__instance().close();
+                    Starter::instance().close();
 
                 ImGui::EndMenu();
             }

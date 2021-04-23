@@ -51,6 +51,8 @@ typedef uint32_t v_ui32;
 typedef void *v_any;
 typedef int v_suc;
 
+typedef v_ui16 v_keycode;
+
 typedef void (*zenith_noparam_fn)();
 
 template<typename T>

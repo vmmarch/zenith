@@ -24,10 +24,10 @@
 #pragma once
 
 #include <zenith/type.h>
+#include "event.h"
 
 namespace zenith
 {
-
     namespace event
     {
         /**
@@ -82,4 +82,5 @@ namespace zenith
     private:
         bool handle = false;
     };
+
 }

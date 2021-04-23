@@ -23,14 +23,15 @@
  */
 #include "starter.h"
 #include "render/graphics-context.h"
+#include "event/key-event.h"
 
 namespace zenith
 {
-    Starter *Starter::instance = nullptr;
+    Starter *Starter::__instance = nullptr;
 
     Starter::Starter(v_cc title, int width, int height)
     {
-        instance = this;
+        __instance = this;
         init_window(title, width, height);
 
         sandbox = new SandBox();
@@ -57,13 +58,14 @@ namespace zenith
     void Starter::event(Event &event)
     {
         event::type type = event.__event_type();
-        if (type == event::type::EVENT_WINDOW_CLOSE)
+        switch (type)
         {
-            close();
-            return;
-        }
+            case event::type::EVENT_WINDOW_CLOSE:
+                close();
+                return;
 
-        sandbox->event(event);
+            default: return;
+        }
     }
 
     void Starter::update(Timestep timestep)

@@ -64,7 +64,7 @@ namespace zenith
             style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         }
 
-        Starter &starter = Starter::__instance();
+        Starter &starter = Starter::instance();
         GLFWwindow *window = static_cast<GLFWwindow *>(starter.__window().__handle());
 
         // Setup Platform/Renderer bindings
@@ -156,7 +156,7 @@ namespace zenith
         ImGui::End();
 
         ImGuiIO &io = ImGui::GetIO();
-        Starter &starter = Starter::__instance();
+        Starter &starter = Starter::instance();
         io.DisplaySize = ImVec2((float) starter.__window().__width(), (float) starter.__window().__height());
 
         // Rendering

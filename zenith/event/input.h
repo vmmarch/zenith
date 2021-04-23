@@ -16,7 +16,7 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/6. <=== */
+/*! ===> Creates on 2021/4/24. <=== */
 
 /*!
  * @author 2B键盘
@@ -24,41 +24,12 @@
 #pragma once
 
 #include <zenith/type.h>
-#include "window/window.h"
-#include "event/event.h"
-#include "render/orthographic-camera.h"
-#include "render/shader/shader.h"
-#include "buf/buf.h"
-#include "event/mouse-event.h"
-#include "sandbox/sandbox.h"
 
 namespace zenith
 {
-    class Starter
+    class Input
     {
     public:
-        Starter(v_cc, int, int);
-        ~Starter();
-        void event(Event&); // 事件处理
-        void start_engine();
-
-        Window& __window() { return *window; }
-
-        // ===========================================================
-        // event
-        void close();
-        void update(Timestep timestep);
-
-        static Starter& instance() { return *__instance; }
-    private:
-        void init_window(v_cc, int, int);
-
-    private:
-        v_suc running = true;
-        v_scope<Window> window;
-        SandBox* sandbox;
-        float last_frame_time = 0.0f;
-
-        static Starter* __instance;
+        static bool is_pressed(v_keycode);
     };
 }

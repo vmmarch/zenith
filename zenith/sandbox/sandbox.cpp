@@ -23,6 +23,8 @@
  */
 #include "sandbox.h"
 #include "settings.h"
+#include "event/key-event.h"
+#include "event/input.h"
 
 namespace zenith
 {
@@ -34,6 +36,18 @@ namespace zenith
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
         camera = new OrthographicCamera(-1.0f, 1.0f, -1.0f, 1.0f);
+    }
+
+    void SandBox::update(Timestep timestep)
+    {
+        // ----------------------------------------
+        // reload settings
+        reload_settings();
+
+        layer_stack.update(timestep);
+
+        if(Input::is_pressed(ZN_KEY_UP))
+            camera->__position().y -= move_speed * timestep;
     }
 
     void SandBox::render()
@@ -53,20 +67,8 @@ namespace zenith
             renderer->draw_vertex_array(model);
     }
 
-    void SandBox::update(Timestep timestep)
-    {
-        ZENITH_INFO("Delta time: %fs (%fms)", timestep.seconds(), timestep.milliseconds());
-
-        // ----------------------------------------
-        // reload settings
-        reload_settings();
-
-        layer_stack.update(timestep);
-    }
-
     void SandBox::event(Event& ev)
     {
-
     }
 
     void SandBox::close()

@@ -56,11 +56,15 @@ namespace zenith
           */
          void state_modify() const;
 
+        glm::mat4 __transform() const { return transform; }
+        void __transform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
+
     private:
         bool modify = false;
         v_shared<Shader> shader;
         v_shared<VertexArray> vertex_array;
         render::type_t render_type_t;
         GLenum render_type = GL_FILL;
+        glm::mat4 transform;
     };
 }

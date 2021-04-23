@@ -25,10 +25,12 @@
 
 #include "layer/layer.h"
 #include "render/renderer.h"
-#include <vector>
 #include "layer/home-layer.h"
 #include "layer/imgui-layer.h"
 #include "tool/layer-vector.h"
+#include "render/graphics-context.h"
+
+#include <vector>
 
 namespace zenith
 {
@@ -56,6 +58,8 @@ namespace zenith
         OrthographicCamera* camera;
         std::vector<RenderModel> models;
         v_scope<Renderer> renderer;
+
+        float move_speed = 1.0f;
     };
 
 }

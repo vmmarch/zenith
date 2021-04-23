@@ -33,7 +33,7 @@ namespace zenith
     public:
         OrthographicCamera(float left, float right, float bottom, float top);
 
-        const glm::vec3& __position() { return this->position; }
+        glm::vec3& __position() { return this->position; }
         void __position(const glm::vec3& position) { this->position = position; recalculateViewMatrix(); }
         const float __rotation() const { return this->rotation; }
         void __rotation(float rotation) { this->rotation = rotation; recalculateViewMatrix(); }

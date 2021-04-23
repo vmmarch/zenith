@@ -58,6 +58,7 @@ namespace zenith
         model.state_modify();
         model.__shader()->bind();
         model.__shader()->setMat4("u_viewProjectionMatrix", view_projection_matrix);
+        model.__shader()->setMat4("u_transform", model.__transform());
         draw_vertex_array(*model.__vertex_array());
     }
 
