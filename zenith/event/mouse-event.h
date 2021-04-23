@@ -25,6 +25,8 @@
 
 #include "event.h"
 
+#define DIRECTION_UP 1
+
 namespace zenith
 {
     using v_moucode = v_ui16;
@@ -130,7 +132,7 @@ namespace zenith
     };
 
     /**
-     * 鼠标按钮释放
+     * 鼠标滚动
      */
     class MouseButtonScrolledEvent : public MouseEvent
     {

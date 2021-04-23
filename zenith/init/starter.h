@@ -31,6 +31,7 @@
 #include "render/orthographic-camera.h"
 #include "render/shader/shader.h"
 #include "buf/buf.h"
+#include "event/mouse-event.h"
 
 namespace zenith
 {
@@ -51,6 +52,7 @@ namespace zenith
         // ===========================================================
         // event
         void close();
+        void scroll(MouseButtonScrolledEvent&);
         void update();
 
         static Starter& __instance()
@@ -63,6 +65,7 @@ namespace zenith
         v_scope<Window> window;
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
+        OrthographicCamera *camera;
 
         static Starter* instance;
     };

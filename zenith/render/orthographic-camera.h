@@ -37,7 +37,6 @@ namespace zenith
         void __position(const glm::vec3& position) { this->position = position; recalculateViewMatrix(); }
         const float __rotation() const { return this->rotation; }
         void __rotation(float rotation) { this->rotation = rotation; recalculateViewMatrix(); }
-
         const glm::mat4 __projection_matrix() { return this->projection_matrix; }
         const glm::mat4 __view_matrix() { return this->view_matrix; }
         const glm::mat4 __view_projection_matrix() { return this->view_projection_matrix; }
@@ -46,7 +45,7 @@ namespace zenith
         glm::mat4 view_matrix;
         glm::mat4 view_projection_matrix;
 
-        glm::vec3 position;
+        glm::vec3 position = { 0.0f, 0.0f, 0.0f };
         float rotation = 0.0f;
 
         void recalculateViewMatrix();

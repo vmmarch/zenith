@@ -34,6 +34,7 @@ namespace zenith
     Starter::Starter()
     {
         instance = this;
+        camera = new OrthographicCamera(-1.0f, 1.0f, -1.0f, 1.0f);
     }
 
     Starter::~Starter()
@@ -63,6 +64,19 @@ namespace zenith
         event::type type = event.__event_type();
         if (type == event::type::EVENT_WINDOW_CLOSE)
             close();
+
+        if(type == event::type::EVENT_MOUSE_SCROLLED)
+            scroll(dynamic_cast<MouseButtonScrolledEvent &>(event));
+    }
+
+    void Starter::scroll(MouseButtonScrolledEvent& event)
+    {
+        ZENITH_INFO("X: %d, Y: %d", event.getX(), event.getY());
+        if(event.getY() == DIRECTION_UP)
+        {
+        } else
+        {
+        }
     }
 
     void Starter::update()
@@ -78,8 +92,6 @@ namespace zenith
         int render_count = 0;
 
         v_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
-
-        OrthographicCamera *camera = new OrthographicCamera(-1.0f, 1.0f, -1.0f, 1.0f);
 
         // ----------------------------------------
         // 画三角形
@@ -116,12 +128,13 @@ namespace zenith
             float timestep = time - last_frame_time;
             last_frame_time = timestep;
 
-            model.__shader()->setMat4("u_viewProjectionMatrix", camera->__projection_matrix());
             // ----------------------------------------
             // reload settings
             reload_settings();
 
             renderer->clear();
+
+            renderer->begin(camera);
 
             layer_stack.update();
             imlayer->begin();

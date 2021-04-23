@@ -34,7 +34,7 @@ namespace zenith
     void OrthographicCamera::recalculateViewMatrix()
     {
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), this->position) *
-                              glm::rotate(glm::mat4(1.0f), this->rotation, glm::vec3(0, 0, 1));
+                              glm::rotate(glm::mat4(1.0f), glm::radians(this->rotation), glm::vec3(0, 0, 1));
 
         view_matrix = glm::inverse(transform);
         view_projection_matrix = projection_matrix * view_matrix;

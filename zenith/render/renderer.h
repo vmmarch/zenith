@@ -28,6 +28,7 @@
 #include <api/glfw-api.h>
 #include "buf/vertex-array.h"
 #include "models/model.h"
+#include "render/orthographic-camera.h"
 
 namespace zenith
 {
@@ -44,6 +45,8 @@ namespace zenith
 
         // 设置清屏颜色
         virtual void __clear_color(const glm::vec4& color) = 0;
+
+        virtual void begin(OrthographicCamera*) = 0;
 
         // 清屏
         virtual void clear() = 0;

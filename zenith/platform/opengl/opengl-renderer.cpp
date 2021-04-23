@@ -23,6 +23,8 @@
  */
 #include "opengl-renderer.h"
 
+#define U_VIEW_PROJECTION_MATRIX "u_viewProjectionMatrix"
+
 namespace zenith
 {
 
@@ -34,6 +36,11 @@ namespace zenith
     void OpenGLRenderer::clear()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    void OpenGLRenderer::begin(OrthographicCamera *camera)
+    {
+        view_projection_matrix = camera->__view_projection_matrix();
     }
 
     void OpenGLRenderer::disable_depth_test()
@@ -50,6 +57,7 @@ namespace zenith
     {
         model.state_modify();
         model.__shader()->bind();
+        model.__shader()->setMat4("u_viewProjectionMatrix", view_projection_matrix);
         draw_vertex_array(*model.__vertex_array());
     }
 
