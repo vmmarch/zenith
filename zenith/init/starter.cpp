@@ -102,6 +102,7 @@ namespace zenith
 
         RenderModel model(vertexArray, std::move(shader));
 
+        // 提交渲染模型
         sandbox->submit(model);
         GraphicsContext::instance()->__curr_model(model);
 

@@ -42,6 +42,11 @@ namespace zenith
         void event(Event&) override;
         void close() override;
 
+        /**
+         * 提交要渲染的模型对象
+         *
+         * @param model 渲染模型
+         */
         void submit(RenderModel &model) { models.push_back(model); }
         void clear_color(glm::vec4& color) { renderer->clear_color(color); }
 
