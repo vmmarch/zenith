@@ -79,6 +79,8 @@ namespace zenith
 
         v_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
 
+        OrthographicCamera *camera = new OrthographicCamera(-1.0f, 1.0f, -1.0f, 1.0f);
+
         // ----------------------------------------
         // 画三角形
         std::shared_ptr<VertexArray> vertexArray;
@@ -114,6 +116,7 @@ namespace zenith
             float timestep = time - last_frame_time;
             last_frame_time = timestep;
 
+            model.__shader()->setMat4("u_viewProjectionMatrix", camera->__projection_matrix());
             // ----------------------------------------
             // reload settings
             reload_settings();
