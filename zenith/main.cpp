@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 #endif
 
     auto app = new zenith::Starter();
-    app->init_window("zenith", 1400, 900);
+    app->init_window("zenith", 1940, 1290);
     app->start_engine();
 
 }

@@ -46,17 +46,24 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::draw_indexed(const VertexArray& vertex)
+    void OpenGLRenderer::draw_vertex_array(const RenderModel& model)
+    {
+        model.state_modify();
+        model.__shader()->bind();
+        draw_vertex_array(*model.__vertex_array());
+    }
+
+    void OpenGLRenderer::draw_vertex_array(const VertexArray& vertex)
     {
         vertex.bind();
         GLAPI_DrawIndexTriangles(vertex.__index_buffer()->size(), GL_UNSIGNED_INT);
     }
 
-    void OpenGLRenderer::draw_indexed(const std::vector<VertexArray>& vertex_arrays)
+    void OpenGLRenderer::draw_vertex_array(const std::vector<VertexArray>& vertex_arrays)
     {
         for (auto &vertex : vertex_arrays)
         {
-            draw_indexed(vertex);
+            draw_vertex_array(vertex);
         }
     }
 

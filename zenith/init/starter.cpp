@@ -24,7 +24,7 @@
 #include "starter.h"
 #include "render/renderer.h"
 #include "layer/home-layer.h"
-#include "buf/vertex-array.h"
+#include "render/graphics-context.h"
 
 namespace zenith
 {
@@ -80,8 +80,8 @@ namespace zenith
 
         // ----------------------------------------
         // 画三角形
-        std::shared_ptr<VertexArray> va_buf;
-        va_buf.reset(VertexArray::__create());
+        std::shared_ptr<VertexArray> vertexArray;
+        vertexArray.reset(VertexArray::__create());
 
         float vertices[] = {
                 -0.5f, -0.5f, 0.0f,
@@ -95,12 +95,15 @@ namespace zenith
                 {"position", shader_t::FLOAT3},
         };
         vbuf->__layout(layout);
-        va_buf->add_vertex_buf(vbuf);
+        vertexArray->add_vertex_buf(vbuf);
 
         // ------------------------------------------
         // set index
         unsigned int indices[] = { 0, 1, 2 };
-        va_buf->__index_buffer(indices, sizeof(indices) / ZENITH_UNSIGNED_INT);
+        vertexArray->__index_buffer(indices, sizeof(indices) / ZENITH_UNSIGNED_INT);
+
+        RenderModel model(vertexArray, std::move(shader));
+        GraphicsContext::instance()->__curr_model(model);
 
         while (running)
         {
@@ -119,8 +122,7 @@ namespace zenith
 
             // ----------------------------------------------------
             // GL render from there.
-            shader->bind();
-            renderer->draw_indexed(*va_buf);
+            renderer->draw_vertex_array(model);
 
             this->window->update();
         }

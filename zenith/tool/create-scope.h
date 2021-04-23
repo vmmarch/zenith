@@ -48,15 +48,15 @@ static v_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
 /**
  * @return 图形上下文
  */
-static v_scope<zenith::GraphicsContext> __create_graphics_context(v_any window)
+static zenith::GraphicsContext* __create_graphics_context(v_any window)
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
-            return zenith::__create_scope<zenith::OpenGLGraphicsContext>(static_cast<GLFWwindow *>(window));
-        case render::DX:
+        case zenith::render::api::GL:
+            return new zenith::OpenGLGraphicsContext(static_cast<GLFWwindow *>(window));
+        case zenith::render::api::DX:
             break;
     }
 
@@ -70,11 +70,11 @@ static v_scope<zenith::Renderer> __create_renderer()
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
             return zenith::__create_scope<zenith::OpenGLRenderer>();
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 
@@ -88,11 +88,11 @@ static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
             return zenith::__create_scope<zenith::OpenGLShader>(path, debugname);
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 
@@ -106,11 +106,11 @@ static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, g
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
             return zenith::__create_scope<zenith::OpenGLCamera>(pos, upvec, target);
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 
@@ -124,11 +124,11 @@ static v_scope<zenith::Texture2D> __create_texture2D()
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
             return zenith::__create_scope<zenith::OpenGLTexture2D>();
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 
@@ -143,14 +143,14 @@ static zenith::VertexBuffer* __create_vertex_buf(float *buf, v_ui32 size)
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
             if(buf != NULL)
                 return new zenith::OpenGLVertexBuffer(buf, size);
             else
                 return new zenith::OpenGLVertexBuffer(size);
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 
@@ -164,11 +164,11 @@ static zenith::IndexBuffer* __create_index_buf(v_ui32 *buf, v_ui32 size)
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
                 return new zenith::OpenGLIndexBuffer(buf, size);
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 
@@ -182,11 +182,11 @@ static zenith::VertexArray* __create_vertex_array()
 {
     switch (zenith::Renderer::__render_api())
     {
-        case render::NONE:
+        case zenith::render::api::NONE:
             break;
-        case render::GL:
+        case zenith::render::api::GL:
             return new zenith::OpenGLVertexArray();
-        case render::DX:
+        case zenith::render::api::DX:
             break;
     }
 

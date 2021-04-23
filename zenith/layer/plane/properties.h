@@ -23,15 +23,39 @@
  */
 #pragma once
 
+#include "render/graphics-context.h"
+
+static bool check = false;
+
 /**
  * 属性面板配置
  */
 static void __properties()
 {
     ImGui::Begin(GUI_TEXT_PROPERTIES);
-    if(ImGui::TreeNode("camera"))
+    if (ImGui::TreeNode("camera"))
     {
         ImGui::TreePop();
     }
+
+    if (ImGui::CollapsingHeader("模型选项"))
+    {
+        if (ImGui::BeginTable("split", 3))
+        {
+            ImGui::TableNextColumn();
+
+            ImGui::Checkbox("启用线性渲染模式", &check);
+            if (check)
+            {
+                zenith::GraphicsContext::instance()->__curr_model()->__render_type(zenith::render::type_t::LINE);
+            } else
+            {
+                zenith::GraphicsContext::instance()->__curr_model()->__render_type(zenith::render::type_t::FILL);
+            }
+
+            ImGui::EndTable();
+        }
+    }
+
     ImGui::End();
 }

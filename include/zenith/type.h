@@ -56,12 +56,30 @@ typedef void (*zenith_noparam_fn)();
 template<typename T>
 using v_scope = std::unique_ptr<T>;
 
+template<typename T>
+using v_shared = std::shared_ptr<T>;
+
 #define ZENAPI extern
 
 namespace zenith
 {
-// =================================================================
-// vec2
+    namespace render
+    {
+
+        /**
+         * 渲染API
+         */
+        enum api { NONE, GL, DX };
+
+        /*!
+         * @enum [i] TYPE_FILL 默认模式
+         * @enum [i] TYPE_LINE 使用线来绘制
+         */
+        enum type_t { FILL, LINE };
+    }
+
+    // =================================================================
+    // vec2
     struct v_vec2
     {
         v_ui16 x, y;

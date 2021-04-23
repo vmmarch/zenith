@@ -34,7 +34,8 @@ namespace zenith
         void clear() override;
         void disable_depth_test() override;
         void enable_depth_test() override;
-        void draw_indexed(const VertexArray&) override;
-        void draw_indexed(const std::vector<VertexArray>&) override;
+        void draw_vertex_array(const RenderModel&) override;
+        void draw_vertex_array(const VertexArray&) override;
+        void draw_vertex_array(const std::vector<VertexArray>&) override;
     };
 }

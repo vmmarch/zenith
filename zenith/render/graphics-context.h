@@ -22,8 +22,11 @@
  * @author 2B键盘
  */
 #pragma once
+
 #include <zenith/type.h>
 #include <api/glfw-api.h>
+#include "models/model.h"
+#include <vector>
 
 namespace zenith
 {
@@ -34,6 +37,25 @@ namespace zenith
     {
     public:
         virtual void swap_buffers() = 0; // 交换缓冲区
-        static v_scope<GraphicsContext> __create(v_any window);
+
+        /*! 获取当前选择的模型 */
+        void __curr_model(RenderModel &model)
+        {
+            curr_model.reset(&model);
+        }
+
+        v_shared<RenderModel> __curr_model()
+        {
+            return curr_model;
+        }
+
+        static GraphicsContext* instance()
+        { return context; }
+
+        static GraphicsContext* __create(v_any window);
+
+    private:
+        v_shared<RenderModel> curr_model;
+        static GraphicsContext* context;
     };
 }

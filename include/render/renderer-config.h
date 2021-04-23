@@ -22,7 +22,6 @@
  * @author 2B键盘
  */
 #pragma once
-#include "api.h"
 
 #define __GLAPI
 // #define __DXAPI

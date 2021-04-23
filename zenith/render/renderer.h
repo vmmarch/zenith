@@ -27,6 +27,7 @@
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
 #include "buf/vertex-array.h"
+#include "models/model.h"
 
 namespace zenith
 {
@@ -54,8 +55,9 @@ namespace zenith
         virtual void enable_depth_test() = 0;
 
         // 渲染顶点数组
-        virtual void draw_indexed(const VertexArray&) = 0;
-        virtual void draw_indexed(const std::vector<VertexArray>&) = 0;
+        virtual void draw_vertex_array(const RenderModel&) = 0;
+        virtual void draw_vertex_array(const VertexArray&) = 0;
+        virtual void draw_vertex_array(const std::vector<VertexArray>&) = 0;
 
         // --------------------------------------------------
         // static

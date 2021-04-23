@@ -59,7 +59,7 @@ namespace zenith::win
 
         v_info info;
         GLFWwindow* window;
-        v_scope<GraphicsContext> graphics_context;
+        GraphicsContext* graphics_context;
 
         void initialize(const v_winprops&);
         void callback();
