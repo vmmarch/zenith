@@ -16,25 +16,24 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/11. <=== */
+/*! ===> Creates on 2021/4/23. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include "layer/layer.h"
-#include <api/imgui-api.h>
-
 namespace zenith
 {
-    class HomeLayer : public Layer
+    class Timestep
     {
     public:
-        HomeLayer() : Layer("Hoem Layer") {}
-        void render() override;
-        void update(Timestep) override;
-        void event(Event&) override;
-        void close() override;
+        Timestep(float time_ = 0.0f) : time(time_) {}
+        operator float() const { return time; }
+        float seconds() { return time; }
+        float milliseconds() const { return time * 1000.0f; }
+
+    private:
+        float time;
     };
 }

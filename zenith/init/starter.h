@@ -47,7 +47,7 @@ namespace zenith
         // ===========================================================
         // event
         void close();
-        void update();
+        void update(Timestep timestep);
 
         static Starter& __instance() { return *instance; }
     private:
@@ -57,6 +57,7 @@ namespace zenith
         v_suc running = true;
         v_scope<Window> window;
         SandBox* sandbox;
+        float last_frame_time = 0.0f;
 
         static Starter* instance;
     };

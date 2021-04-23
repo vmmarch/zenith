@@ -70,7 +70,7 @@ namespace zenith
     void HomeLayer::close()
     {}
 
-    void HomeLayer::update()
+    void HomeLayer::update(Timestep timestep)
     {
         static bool no_titlebar = false;
         static bool no_scrollbar = false;

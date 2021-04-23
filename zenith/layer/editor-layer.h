@@ -35,7 +35,7 @@ namespace zenith
         EditorLayer() : Layer("editor layer") {}
 
         void render() override;
-        void update() override;
+        void update(Timestep) override;
         void event(Event&) override;
         void close() override;
 

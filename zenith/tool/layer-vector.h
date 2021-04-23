@@ -43,10 +43,10 @@ namespace zenith
             insert_index++;
         }
 
-        void update()
+        void update(Timestep timestep)
         {
             for (auto layer : layers_vector)
-                layer->update();
+                layer->update(timestep);
         }
 
         void render()

@@ -24,6 +24,7 @@
 #pragma once
 
 #include "event/event.h"
+#include "tool/timestep.h"
 
 namespace zenith
 {
@@ -33,7 +34,7 @@ namespace zenith
         Layer(const v_cc name = "layer");
         virtual ~Layer() = default;
         virtual void render() = 0;
-        virtual void update() = 0;
+        virtual void update(Timestep timestep) = 0;
         virtual void event(Event&) = 0;
         virtual void close() = 0;
 

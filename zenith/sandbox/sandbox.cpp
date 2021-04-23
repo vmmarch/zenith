@@ -53,13 +53,15 @@ namespace zenith
             renderer->draw_vertex_array(model);
     }
 
-    void SandBox::update()
+    void SandBox::update(Timestep timestep)
     {
+        ZENITH_INFO("Delta time: %fs (%fms)", timestep.seconds(), timestep.milliseconds());
+
         // ----------------------------------------
         // reload settings
         reload_settings();
 
-        layer_stack.update();
+        layer_stack.update(timestep);
     }
 
     void SandBox::event(Event& ev)

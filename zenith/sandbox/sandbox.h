@@ -38,7 +38,7 @@ namespace zenith
     public:
         SandBox();
         void render() override;
-        void update() override;
+        void update(Timestep timestep) override;
         void event(Event&) override;
         void close() override;
 

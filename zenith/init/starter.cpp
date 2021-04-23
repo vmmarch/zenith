@@ -66,9 +66,9 @@ namespace zenith
         sandbox->event(event);
     }
 
-    void Starter::update()
+    void Starter::update(Timestep timestep)
     {
-        sandbox->update();
+        sandbox->update(timestep);
     }
 
     void Starter::start_engine()
@@ -111,7 +111,11 @@ namespace zenith
         // game loop.
         while (running)
         {
-            update();
+            float time = (float) glfwGetTime(); // FIXME: get time from different platform. And now use GLFW.
+            Timestep timestep = time - last_frame_time;
+            last_frame_time = time;
+
+            update(timestep);
             sandbox->render();
             this->window->update();
         }
