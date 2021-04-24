@@ -22,8 +22,6 @@
  * @author 2B键盘
  */
 #include "starter.h"
-#include "render/graphics-context.h"
-#include "event/key-event.h"
 
 namespace zenith
 {
@@ -34,7 +32,7 @@ namespace zenith
         __instance = this;
         init_window(title, width, height);
 
-        sandbox = new SandBox();
+        sandbox = new SandBox(window->__width(), window->__height());
     }
 
     Starter::~Starter()
@@ -64,7 +62,7 @@ namespace zenith
                 close();
                 return;
 
-            default: return;
+            default: sandbox->event(event);
         }
     }
 

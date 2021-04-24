@@ -38,9 +38,9 @@ namespace zenith
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void OpenGLRenderer::begin(OrthographicCamera *camera)
+    void OpenGLRenderer::begin(Camera &camera)
     {
-        view_projection_matrix = camera->__view_projection_matrix();
+        view_projection_matrix = camera.__view_projection_matrix();
     }
 
     void OpenGLRenderer::disable_depth_test()
@@ -55,9 +55,10 @@ namespace zenith
 
     void OpenGLRenderer::draw_render_model(RenderModel& model)
     {
-        model.__shader()->bind();
+        v_shared<Shader> shader = model.__shader();
+        shader->bind();
         model.__shader()->setMat4("u_viewProjectionMatrix", view_projection_matrix);
-        model.__shader()->setMat4("u_transform", model.__def_transform());
+//        model.__shader()->setMat4("u_transform", model.__def_transform());
         draw_vertex_array(*model.__vertex_array());
     }
 
@@ -70,9 +71,7 @@ namespace zenith
     void OpenGLRenderer::draw_vertex_array(const std::vector<VertexArray>& vertex_arrays)
     {
         for (auto &vertex : vertex_arrays)
-        {
             draw_vertex_array(vertex);
-        }
     }
 
 }

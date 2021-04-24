@@ -21,22 +21,33 @@
 /*!
  * @author 2B键盘
  */
-#include "orthographic-camera.h"
+#include "camera.h"
 
 namespace zenith
 {
-    OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-            : projection_matrix(glm::ortho(left, right, bottom, top)), view_matrix(1.0f  )
+    Camera::Camera(float left, float right, float bottom, float top)
+            : projection_matrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), view_matrix(1.0f)
     {
-        this->view_projection_matrix = projection_matrix * view_matrix;
+        recalculateViewProjectionMatrix();
     }
 
-    void OrthographicCamera::recalculateViewMatrix()
+    void Camera::__projection(float left, float right, float bottom, float top)
     {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), this->position) *
-                              glm::rotate(glm::mat4(1.0f), glm::radians(this->rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+        projection_matrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
+        recalculateViewProjectionMatrix();
+    }
+
+    void Camera::recalculateViewProjectionMatrix()
+    {
+        view_projection_matrix = projection_matrix * view_matrix;
+    }
+
+    void Camera::recalculateViewMatrix()
+    {
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
+                              glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0, 0, 1));
 
         view_matrix = glm::inverse(transform);
-        view_projection_matrix = projection_matrix * view_matrix;
+        recalculateViewProjectionMatrix();
     }
 }

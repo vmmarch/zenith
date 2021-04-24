@@ -23,21 +23,19 @@
  */
 #include "sandbox.h"
 #include "settings.h"
-#include "event/key-event.h"
-#include "event/input.h"
 #include "layer/editor-layer.h"
 
 namespace zenith
 {
 
-    SandBox::SandBox() : Layer("sandbox layer")
+    SandBox::SandBox(int width, int height)
+        : Layer("sandbox layer"), camera_control((float) width / (float) height)
     {
         this->renderer = Renderer::__create();
 
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
         layer_stack.push(new EditorLayer());
-        camera = new OrthographicCamera(-1.0f, 1.0f, -1.0f, 1.0f);
     }
 
     void SandBox::update(Timestep timestep)
@@ -45,31 +43,15 @@ namespace zenith
         // ----------------------------------------
         // reload settings
         reload_settings();
-
+        camera_control.update(timestep);
         layer_stack.update(timestep);
-
-        if(Input::pressed(ZN_KEY_LEFT))
-            position.x -= move_speed * timestep;
-        if(Input::pressed(ZN_KEY_RIGHT))
-            position.x += move_speed * timestep;
-        if(Input::pressed(ZN_KEY_UP))
-            position.y -= move_speed * timestep;
-        if(Input::pressed(ZN_KEY_DOWN))
-            position.y += move_speed * timestep;
-
-        if(Input::pressed(ZN_KEY_A))
-            camera->__rotation((rotation += rotation_speed));
-        if(Input::pressed(ZN_KEY_D))
-            camera->__rotation((rotation -= rotation_speed));
-
     }
 
     void SandBox::render()
     {
         renderer->clear();
 
-//        camera->__position(position);
-        renderer->begin(camera);
+        renderer->begin(camera_control.__camera());
 
         imlayer->begin();
         {
@@ -83,11 +65,9 @@ namespace zenith
             renderer->draw_render_model(model);
     }
 
-    void SandBox::event(Event& ev)
+    void SandBox::event(Event& e)
     {
+        camera_control.event(e);
     }
 
-    void SandBox::close()
-    {
-    }
-}
+ }

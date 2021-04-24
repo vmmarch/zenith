@@ -26,7 +26,7 @@
 #include <zenith/type.h>
 #include "window/window.h"
 #include "event/event.h"
-#include "render/orthographic-camera.h"
+#include "render/camera.h"
 #include "render/shader/shader.h"
 #include "buf/buf.h"
 #include "event/mouse-event.h"

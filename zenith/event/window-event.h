@@ -39,15 +39,15 @@ namespace zenith
     class WindowResizeEvent : public Event
     {
     public:
-        WindowResizeEvent(v_ui1 _width, v_ui1 _height) : width(_width), height(_height) {}
+        WindowResizeEvent(int _width, int _height) : width(_width), height(_height) {}
 
-        v_ui1 __width() const { return width; }
-        v_ui1 __height() const { return height; }
+        int __width() const { return width; }
+        int __height() const { return height; }
 
         TYPE(event::type::EVENT_WINDOW_RESIZE);
         CLASSIF(event::classif::MAIN);
     private:
-        v_ui1 width, height;
+        int width, height;
     };
 
 }

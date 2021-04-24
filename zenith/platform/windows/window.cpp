@@ -167,7 +167,7 @@ namespace zenith::win
         {
             v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
-            MouseButtonScrolledEvent event(__create_vec2(x_offset, y_offset));
+            MouseButtonScrolledEvent event((float) x_offset, (float) y_offset);
             info.fn(event);
         });
 
@@ -175,7 +175,7 @@ namespace zenith::win
         {
             v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
-            MouseMovedEvent event(__create_vec2(x_pos, y_pos));
+            MouseMovedEvent event((float) x_pos, (float) y_pos);
             info.fn(event);
         });
 

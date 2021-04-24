@@ -29,6 +29,9 @@
 #include "layer/imgui-layer.h"
 #include "tool/layer-vector.h"
 #include "render/graphics-context.h"
+#include "render/camera-controller.h"
+#include "render/camera.h"
+#include "render/renderer.h"
 
 #include <vector>
 
@@ -38,11 +41,11 @@ namespace zenith
     class SandBox : public Layer
     {
     public:
-        SandBox();
+        SandBox(int width, int height);
         void render() override;
         void update(Timestep timestep) override;
         void event(Event&) override;
-        void close() override;
+        void close() override {};
 
         /**
          * 提交要渲染的模型对象
@@ -55,15 +58,9 @@ namespace zenith
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
-        OrthographicCamera* camera;
         std::vector<RenderModel> models;
         v_scope<Renderer> renderer;
-
-        float rotation = 0.0f;
-        glm::vec3 position = { 0.0f, 0.0f, 0.0f };
-
-        float rotation_speed = 0.5f;
-        float move_speed = 1.0f;
+        CameraController camera_control;
     };
 
 }

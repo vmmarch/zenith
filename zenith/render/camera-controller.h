@@ -16,31 +16,45 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/7. <=== */
+/*! ===> Creates on 2021/4/24. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-#include "render/renderer.h"
+
+#include "tool/timestep.h"
+#include "event/event.h"
+#include "event/mouse-event.h"
+#include "event/key-event.h"
+#include "event/window-event.h"
+#include "camera.h"
 
 namespace zenith
 {
-    class OpenGLRenderer : public Renderer
+    class CameraController
     {
     public:
-        virtual ~OpenGLRenderer() {}
-        void clear_color(const glm::vec4&) override;
-        void clear() override;
-        void begin(Camera&) override;
-        void disable_depth_test() override;
-        void enable_depth_test() override;
-        void draw_render_model(RenderModel&) override;
-        void draw_vertex_array(const VertexArray&) override;
-        void draw_vertex_array(const std::vector<VertexArray>&) override;
+        explicit CameraController(float aspect_ratio);
+
+        void event(Event&);
+        void update(Timestep timestep);
+
+        Camera& __camera() { return camera; }
+        [[nodiscard]] const Camera& __camera() const { return camera; }
 
     private:
-        glm::mat4 projection;
-        glm::mat4 view_projection_matrix;
+        void mouse_scrolled(MouseButtonScrolledEvent&);
+        void window_resize(WindowResizeEvent&);
+
+    private:
+        float aspect_ratio{};
+        float zoomlevel = 1.0f;
+
+        float camera_rotation = 0.0f;
+        float camera_rotation_speed = 1.0f;
+        float camera_translation_speed = 1.0f;
+        glm::vec3 position = { 0.0f, 0.0f, 0.0f };
+        Camera camera;
     };
 }

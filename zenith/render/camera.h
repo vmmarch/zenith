@@ -28,15 +28,16 @@
 
 namespace zenith
 {
-    class OrthographicCamera
+    class Camera
     {
     public:
-        OrthographicCamera(float left, float right, float bottom, float top);
+        Camera(float left, float right, float bottom, float top);
 
         glm::vec3& __position() { return this->position; }
         void __position(const glm::vec3& position) { this->position = position; recalculateViewMatrix(); }
         const float __rotation() const { return this->rotation; }
         void __rotation(float rotation) { this->rotation = rotation; recalculateViewMatrix(); }
+        void __projection(float left, float right, float bottom, float top);
         const glm::mat4 __projection_matrix() { return this->projection_matrix; }
         const glm::mat4 __view_matrix() { return this->view_matrix; }
         const glm::mat4 __view_projection_matrix() { return this->view_projection_matrix; }
@@ -48,6 +49,7 @@ namespace zenith
         glm::vec3 position = { 0.0f, 0.0f, 0.0f };
         float rotation = 0.0f;
 
+        void recalculateViewProjectionMatrix();
         void recalculateViewMatrix();
     };
 }
