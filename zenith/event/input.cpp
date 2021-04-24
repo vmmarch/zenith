@@ -26,12 +26,10 @@
 
 namespace zenith
 {
-
-    bool Input::is_pressed(v_keycode key)
+    bool Input::pressed(v_keycode key)
     {
         auto* window = static_cast<GLFWwindow*>(Starter::instance().__window().__handle());
         auto state = glfwGetKey(window, static_cast<int32_t>(key));
         return state == GLFW_PRESS || state == GLFW_REPEAT;
-
     }
 }

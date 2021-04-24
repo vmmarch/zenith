@@ -25,11 +25,16 @@
 
 #include <zenith/type.h>
 
+#define NOT_SCROLLED        0
+#define SCROLLED_UP         1
+#define SCROLLED_DOWN       2
+
 namespace zenith
 {
     class Input
     {
     public:
-        static bool is_pressed(v_keycode);
+        static bool pressed(v_keycode);
+        static v_ui1 scrolled();
     };
 }

@@ -34,7 +34,6 @@ namespace zenith
 
     void EditorLayer::render()
     {
-
     }
 
     void EditorLayer::update(Timestep)
