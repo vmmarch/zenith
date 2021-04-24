@@ -52,26 +52,18 @@ namespace zenith
         {
             render_type = GL_LINE;
             render_type_t = render::type_t::LINE;
+            glPolygonMode(GL_FRONT_AND_BACK, render_type);
         } else
         {
             render_type = GL_FILL;
             render_type_t = render::type_t::FILL;
+            glPolygonMode(GL_FRONT_AND_BACK, render_type);
         }
-
-        modify = true;
     }
 
     render::type_t RenderModel::__render_type() const
     {
         return render_type_t;
-    }
-
-    void RenderModel::state_modify() const
-    {
-        if(modify)
-        {
-            glPolygonMode(GL_FRONT_AND_BACK, render_type);
-        }
     }
 
 }

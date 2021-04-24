@@ -58,7 +58,7 @@ namespace zenith
         virtual void enable_depth_test() = 0;
 
         // 渲染顶点数组
-        virtual void draw_vertex_array(RenderModel&) = 0;
+        virtual void draw_render_model(RenderModel&) = 0;
         virtual void draw_vertex_array(const VertexArray&) = 0;
         virtual void draw_vertex_array(const std::vector<VertexArray>&) = 0;
 

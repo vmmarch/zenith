@@ -51,11 +51,6 @@ namespace zenith
          void __render_type(render::type_t = render::type_t::FILL);
          render::type_t __render_type() const;
 
-         /**
-          * 判断是否有东西改变
-          */
-         void state_modify() const;
-
         void __transform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
         glm::mat4 __def_transform() { return transform; }
 

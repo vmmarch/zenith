@@ -56,9 +56,9 @@ namespace zenith
             position.y += move_speed * timestep;
 
         if(Input::is_pressed(ZN_KEY_A))
-            rotation += rotation_speed * timestep;
+            rotation += rotation_speed;
         if(Input::is_pressed(ZN_KEY_D))
-            rotation -= rotation_speed * timestep;
+            rotation -= rotation_speed;
     }
 
     void SandBox::render()
@@ -79,7 +79,7 @@ namespace zenith
         // GL render from there.
         for(auto model : models)
         {
-            renderer->draw_vertex_array(model);
+            renderer->draw_render_model(model);
         }
     }
 

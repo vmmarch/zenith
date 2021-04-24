@@ -24,7 +24,6 @@
 #pragma once
 
 #include "platform/opengl/opengl-texture2D.h"
-#include "platform/opengl/opengl-camera.h"
 #include "platform/opengl/opengl-shader.h"
 #include "platform/windows/window.h"
 #include "platform/opengl/opengl-renderer.h"
@@ -92,24 +91,6 @@ static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
             break;
         case zenith::render::api::GL:
             return zenith::__create_scope<zenith::OpenGLShader>(path, debugname);
-        case zenith::render::api::DX:
-            break;
-    }
-
-    return nullptr;
-}
-
-/**
- * @return 相机
- */
-static v_scope<zenith::Camera> __create_camera(glm::vec3 pos, glm::vec3 upvec, glm::vec3 target)
-{
-    switch (zenith::Renderer::__render_api())
-    {
-        case zenith::render::api::NONE:
-            break;
-        case zenith::render::api::GL:
-            return zenith::__create_scope<zenith::OpenGLCamera>(pos, upvec, target);
         case zenith::render::api::DX:
             break;
     }

@@ -62,7 +62,7 @@ namespace zenith
         float rotation = 0.0f;
         glm::vec3 position = { 0.0f, 0.0f, 0.0f };
 
-        float rotation_speed = 30.0f;
+        float rotation_speed = 0.5f;
         float move_speed = 1.0f;
     };
 
