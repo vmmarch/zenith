@@ -59,6 +59,10 @@ namespace zenith
         std::vector<RenderModel> models;
         v_scope<Renderer> renderer;
 
+        float rotation = 0.0f;
+        glm::vec3 position = { 0.0f, 0.0f, 0.0f };
+
+        float rotation_speed = 30.0f;
         float move_speed = 1.0f;
     };
 

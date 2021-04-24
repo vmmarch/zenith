@@ -46,13 +46,27 @@ namespace zenith
 
         layer_stack.update(timestep);
 
+        if(Input::is_pressed(ZN_KEY_LEFT))
+            position.x += move_speed * timestep;
+        if(Input::is_pressed(ZN_KEY_RIGHT))
+            position.x -= move_speed * timestep;
         if(Input::is_pressed(ZN_KEY_UP))
-            camera->__position().y -= move_speed * timestep;
+            position.y -= move_speed * timestep;
+        if(Input::is_pressed(ZN_KEY_DOWN))
+            position.y += move_speed * timestep;
+
+        if(Input::is_pressed(ZN_KEY_A))
+            rotation += rotation_speed * timestep;
+        if(Input::is_pressed(ZN_KEY_D))
+            rotation -= rotation_speed * timestep;
     }
 
     void SandBox::render()
     {
         renderer->clear();
+
+        camera->__rotation(rotation);
+        camera->__position(position);
         renderer->begin(camera);
 
         imlayer->begin();
@@ -64,7 +78,9 @@ namespace zenith
         // ----------------------------------------------------
         // GL render from there.
         for(auto model : models)
+        {
             renderer->draw_vertex_array(model);
+        }
     }
 
     void SandBox::event(Event& ev)

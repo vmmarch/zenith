@@ -34,14 +34,14 @@ namespace zenith
         ~OpenGLShader() override;
         void bind() override;
         void unbind() override;
-        void setBool(v_cc, bool) const override;
-        void setInt(v_cc, int) const override;
-        void setFloat(v_cc, float) const override;
-        void setFloat2(v_cc, glm::vec2) const override;
-        void setFloat3(v_cc, glm::vec3) const override;
-        void setFloat4(v_cc, glm::vec4) const override;
-        void setMat3(v_cc, glm::mat3) const override;
-        void setMat4(v_cc, glm::mat4) const override;
+        void setBool(v_cc, bool) override;
+        void setInt(v_cc, int) override;
+        void setFloat(v_cc, float) override;
+        void setFloat2(v_cc, glm::vec2) override;
+        void setFloat3(v_cc, glm::vec3) override;
+        void setFloat4(v_cc, glm::vec4) override;
+        void setMat3(v_cc, glm::mat3) override;
+        void setMat4(v_cc, glm::mat4) override;
 
     private:
         v_ui1 shader_id;

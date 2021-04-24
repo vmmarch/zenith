@@ -53,12 +53,12 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::draw_vertex_array(const RenderModel& model)
+    void OpenGLRenderer::draw_vertex_array(RenderModel& model)
     {
         model.state_modify();
         model.__shader()->bind();
         model.__shader()->setMat4("u_viewProjectionMatrix", view_projection_matrix);
-        model.__shader()->setMat4("u_transform", model.__transform());
+        model.__shader()->setMat4("u_transform", model.__def_transform());
         draw_vertex_array(*model.__vertex_array());
     }
 

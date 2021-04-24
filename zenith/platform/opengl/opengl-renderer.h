@@ -35,7 +35,7 @@ namespace zenith
         void begin(OrthographicCamera*) override;
         void disable_depth_test() override;
         void enable_depth_test() override;
-        void draw_vertex_array(const RenderModel&) override;
+        void draw_vertex_array(RenderModel&) override;
         void draw_vertex_array(const VertexArray&) override;
         void draw_vertex_array(const std::vector<VertexArray>&) override;
 

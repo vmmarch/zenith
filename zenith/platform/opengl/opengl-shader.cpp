@@ -99,42 +99,42 @@ namespace zenith
         GLAPI_UnbindProgram();
     }
 
-    void OpenGLShader::setBool(v_cc name, bool value) const
+    void OpenGLShader::setBool(v_cc name, bool value)
     {
         GLAPI_Uniform1i(shader_id, name, value);
     }
 
-    void OpenGLShader::setInt(v_cc name, int value) const
+    void OpenGLShader::setInt(v_cc name, int value)
     {
         GLAPI_Uniform1i(shader_id, name, value);
     }
 
-    void OpenGLShader::setFloat(v_cc name, float value) const
+    void OpenGLShader::setFloat(v_cc name, float value)
     {
         GLAPI_Uniform1f(shader_id, name, value);
     }
 
-    void OpenGLShader::setFloat2(v_cc name, glm::vec2 value) const
+    void OpenGLShader::setFloat2(v_cc name, glm::vec2 value)
     {
         GLAPI_Uniform2f(shader_id, name, value.x, value.y);
     }
 
-    void OpenGLShader::setFloat3(v_cc name, glm::vec3 value) const
+    void OpenGLShader::setFloat3(v_cc name, glm::vec3 value)
     {
         GLAPI_Uniform3f(shader_id, name, value.x, value.y, value.z);
     }
 
-    void OpenGLShader::setFloat4(v_cc name, glm::vec4 value) const
+    void OpenGLShader::setFloat4(v_cc name, glm::vec4 value)
     {
         GLAPI_Uniform4f(shader_id, name, value.x, value.y, value.w, value.a);
     }
 
-    void OpenGLShader::setMat3(v_cc name, glm::mat3 value) const
+    void OpenGLShader::setMat3(v_cc name, glm::mat3 value)
     {
         GLAPI_UniformMatrix3fv(shader_id, name, value);
     }
 
-    void OpenGLShader::setMat4(v_cc name, glm::mat4 value) const
+    void OpenGLShader::setMat4(v_cc name, glm::mat4 value)
     {
         GLAPI_UniformMatrix4fv(shader_id, name, value);
     }
