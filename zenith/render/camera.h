@@ -19,37 +19,92 @@
 /*! ===> Creates on 2021/4/17. <=== */
 
 /*!
- * 正交投影相机
  * @author 2B键盘
  */
 #pragma once
 
 #include <api/glfw-api.h>
 
+#define YAW -90.0f
+#define PITCH 0.0f
+#define SPEED 3.0f
+#define MOUSE_SENS 0.25f
+#define ZOOM 45.0f
+#define CONSTRAINT_PITCH 89.0f
+
 namespace zenith
 {
+
+    enum camera_movement
+    {
+        FORWARD, BACKWARD, LEFT, RIGHT
+    };
+
     class Camera
     {
     public:
-        Camera(float left, float right, float bottom, float top);
+        Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 0.1f, 0.0f), float yaw = YAW, float pitch = PITCH);
 
-        glm::vec3& __position() { return this->position; }
-        void __position(const glm::vec3& position) { this->position = position; recalculateViewMatrix(); }
-        const float __rotation() const { return this->rotation; }
-        void __rotation(float rotation) { this->rotation = rotation; recalculateViewMatrix(); }
-        void __projection(float left, float right, float bottom, float top);
-        const glm::mat4 __projection_matrix() { return this->projection_matrix; }
-        const glm::mat4 __view_matrix() { return this->view_matrix; }
-        const glm::mat4 __view_projection_matrix() { return this->view_projection_matrix; }
+        /**
+         * 移动相机
+         *
+         * @param movement 方向枚举
+         * @param delta_time 上一帧相差时间
+         */
+        void direction(camera_movement movement);
+
+        /**
+         * 移动视角
+         *
+         * @param x 鼠标X坐标
+         * @param y 鼠标Y坐标
+         * @param constraint_pitch 是否限制角度
+         */
+        void perspective(float x, float y, bool constraint_pitch = true);
+
+        /**
+         * 缩放
+         * @param value
+         */
+        void zoom(float value);
+
+        /**
+         * @return 视图矩阵
+         */
+        glm::mat4 __view_matrix();
+
+        float __camera_zoom();
+
+        float __screen_width() { return screen_w; }
+        float __screen_height() { return screen_h; }
+        float __screen_aspect_radio() { return screen_w / screen_h; }
+
+        void update(float _screen_w, float _screen_h, float _delta_time)
+        {
+            this->screen_w = _screen_w;
+            this->screen_h = _screen_h;
+            this->delta_time = _delta_time;
+        }
+
     private:
-        glm::mat4 projection_matrix;
-        glm::mat4 view_matrix;
-        glm::mat4 view_projection_matrix;
+        void update_camera_vector();
 
-        glm::vec3 position = { 0.0f, 0.0f, 0.0f };
-        float rotation = 0.0f;
+    private:
+        glm::vec3 pos;
+        glm::vec3 front;
+        glm::vec3 up;
+        glm::vec3 right;
+        glm::vec3 worldup;
 
-        void recalculateViewProjectionMatrix();
-        void recalculateViewMatrix();
+        // 欧拉角
+        float yaw, pitch;
+
+        // update
+        float screen_w, screen_h, delta_time;
+
+        // 相机参数
+        float move_speed;   // 相机移动速度
+        float mouse_sens;   // 鼠标灵敏度
+        float camera_zoom;  // 缩放
     };
 }

@@ -34,7 +34,7 @@ namespace zenith
 
     settings_t *settings = new settings_t();
 
-    void __value(int k, bool v)
+    void SetValue(int k, bool v)
     {
         switch (k)
         {

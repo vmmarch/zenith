@@ -35,12 +35,20 @@ namespace zenith
         void begin(Camera&) override;
         void disable_depth_test() override;
         void enable_depth_test() override;
+        RenderModel& __render_model0() override { return models.at(0); }
+        void submit(RenderModel& model) { models.push_back(model); }
+        std::vector<RenderModel> __models() override { return models; }
+        void draw_render_models() override;
         void draw_render_model(RenderModel&) override;
-        void draw_vertex_array(const VertexArray&) override;
-        void draw_vertex_array(const std::vector<VertexArray>&) override;
+        void draw_array(const VertexArray&) override;
+        void draw_array(const std::vector<VertexArray>&) override;
+        void draw_indexed(const VertexArray&) override;
+        void draw_indexed(const std::vector<VertexArray>&) override;
 
     private:
         glm::mat4 projection;
-        glm::mat4 view_projection_matrix;
+        glm::mat4 view_matrix;
+
+        std::vector<RenderModel> models;
     };
 }

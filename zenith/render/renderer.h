@@ -58,9 +58,16 @@ namespace zenith
         virtual void enable_depth_test() = 0;
 
         // 渲染顶点数组
+        virtual void draw_render_models() = 0;
         virtual void draw_render_model(RenderModel&) = 0;
-        virtual void draw_vertex_array(const VertexArray&) = 0;
-        virtual void draw_vertex_array(const std::vector<VertexArray>&) = 0;
+        virtual void draw_array(const VertexArray&) = 0;
+        virtual void draw_array(const std::vector<VertexArray>&) = 0;
+        virtual void draw_indexed(const VertexArray&) = 0;
+        virtual void draw_indexed(const std::vector<VertexArray>&) = 0;
+        virtual std::vector<RenderModel> __models() = 0;
+
+        virtual RenderModel& __render_model0() = 0;
+        virtual void submit(RenderModel&) = 0;
 
         // --------------------------------------------------
         // static
@@ -72,6 +79,7 @@ namespace zenith
         static render::api __render_api();
 
     private:
+        std::vector<RenderModel> models;
         static render::api render_api;
     };
 

@@ -57,7 +57,7 @@ namespace zenith
         virtual v_ui32 __width() const = 0;
         virtual v_ui32 __height() const = 0;
 
-        virtual void __event_callback(const f_callback& callback) = 0;
+        virtual void SetEventCallback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;
         virtual void update() = 0;
         virtual void close_window() = 0;

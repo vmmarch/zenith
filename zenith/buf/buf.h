@@ -44,7 +44,7 @@ namespace zenith
         INT, INT2, INT3, INT4
     };
 
-    static v_ui32 __shader_t_size(shader_t type)
+    static v_ui32 GetShader_t_size(shader_t type)
     {
         switch(type)
         {
@@ -74,7 +74,7 @@ namespace zenith
         bool normalized;
 
         element_t(v_cc name_, shader_t type_, bool normalized_ = false)
-            : name(name_), type(type_), size(__shader_t_size(type_)), offset(0), normalized(normalized_) {}
+            : name(name_), type(type_), size(GetShader_t_size(type_)), offset(0), normalized(normalized_) {}
 
         GLenum __type() const
         {
@@ -157,9 +157,16 @@ namespace zenith
         virtual ~VertexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual void __data(float* vertex, v_ui32 size) = 0;
-        virtual void __layout(const layout_t&) = 0;
-        virtual const layout_t& __layout() const = 0;
+        virtual void SetData(float* vertex, v_ui32 size) = 0;
+        virtual void SetLayout(const layout_t&) = 0;
+        virtual const layout_t& GetLayout() const = 0;
+
+        /**
+         * 如果是画顶点数组的画就需要设置顶点大小，例如我们画个三角形。
+         * 每个顶点的大小是3，那么这个值就设置为3
+         */
+        virtual void SetVertexSize(int) = 0;
+        virtual int GetVertexSize() const = 0;
 
         static VertexBuffer* __create(v_ui32);
         static VertexBuffer* __create(float*, v_ui32);

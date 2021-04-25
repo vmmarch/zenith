@@ -26,27 +26,27 @@
 namespace zenith
 {
 
-    void RenderModel::__vertex_array(v_shared<VertexArray>& vertex)
+    void RenderModel::SetVertexArray(v_shared<VertexArray>& vertex)
     {
         this->vertex_array = vertex;
     }
 
-    v_shared<VertexArray> RenderModel::__vertex_array() const
+    v_shared<VertexArray> RenderModel::GetVertexArray() const
     {
         return this->vertex_array;
     }
 
-    void RenderModel::__shader(v_shared<Shader>& shader)
+    void RenderModel::SetShader(v_shared<Shader>& shader)
     {
         this->shader = shader;
     }
 
-    const v_shared<Shader> RenderModel::__shader() const
+    const v_shared<Shader> RenderModel::GetShader() const
     {
         return this->shader;
     }
 
-    void RenderModel::__render_type(render::type_t type)
+    void RenderModel::SetRendertype(render::type_t type)
     {
         if(type == render::type_t::LINE)
         {
@@ -61,7 +61,7 @@ namespace zenith
         }
     }
 
-    render::type_t RenderModel::__render_type() const
+    render::type_t RenderModel::GetRendertype() const
     {
         return render_type_t;
     }

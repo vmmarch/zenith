@@ -370,9 +370,15 @@
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
 
 /**
- * 通过索引画三角形
+ * 通过索引画
  */
-#define GLAPI_DrawIndexTriangles(size, type) \
+#define GLAPI_DrawArrays(begin, end) \
+{ glDrawArrays(GL_TRIANGLES, begin, end); }
+
+/**
+ * 通过索引画
+ */
+#define GLAPI_DrawIndex(size, type) \
 { glDrawElements(GL_TRIANGLES, size, type, NULL); }
 
 // ----------------------------------------------------

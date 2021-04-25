@@ -40,7 +40,7 @@ namespace zenith::win
         v_ui32 __width() const override { return info.width; }
         v_ui32 __height() const override { return info.height; }
 
-        void __event_callback(const f_callback&) override;
+        void SetEventCallback(const f_callback&) override;
 
         bool is_close() override;
         void close_window() override;

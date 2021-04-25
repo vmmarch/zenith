@@ -47,22 +47,22 @@ namespace zenith
         GLAPI_UnbindVertexArray();
     }
 
-    void OpenGLVertexArray::add_vertex_buf(std::shared_ptr<VertexBuffer> &buf)
+    void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> &buf)
     {
         GLAPI_BindVertexArray(array_id);
         buf->bind();
 
-        if(buf->__layout().__elements().size() == 0)
+        if(buf->GetLayout().__elements().size() == 0)
             ZENITH_ERROR(VERTEX_BUFFER_HAS_NOT_LAYOUT);
 
         v_ui32 index = 0;
-        const auto& layout = buf->__layout();
+        const auto& layout = buf->GetLayout();
         for(const auto& element : layout)
         {
             glEnableVertexAttribArray(index);
             glVertexAttribPointer(index, element.__size(), element.__type(),
                                   element.normalized ? GL_TRUE : GL_FALSE,
-                                  buf->__layout().__stride(),
+                                  buf->GetLayout().__stride(),
                                   (const void*) element.offset);
             index++;
         }
@@ -70,15 +70,17 @@ namespace zenith
         vertex_buffers.push_back(buf);
     }
 
-    void OpenGLVertexArray::__index_buffer(v_ui32* buf, v_ui32 size)
+    void OpenGLVertexArray::SetIndexBuffer(v_ui32* buf, v_ui32 size)
     {
         std::shared_ptr<IndexBuffer> index_buf;
         index_buf.reset(IndexBuffer::__create(buf, size));
 
-        __index_buffer(index_buf);
+        SetIndexBuffer(index_buf);
+
+        mod = drawmod::INDEX;
     }
 
-    void OpenGLVertexArray::__index_buffer(std::shared_ptr<IndexBuffer> &buf)
+    void OpenGLVertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer> &buf)
     {
         GLAPI_BindVertexArray(array_id);
         buf->bind();

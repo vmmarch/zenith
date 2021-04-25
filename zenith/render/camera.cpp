@@ -25,29 +25,75 @@
 
 namespace zenith
 {
-    Camera::Camera(float left, float right, float bottom, float top)
-            : projection_matrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f)), view_matrix(1.0f)
+    Camera::Camera(glm::vec3 pos, glm::vec3 up, float yaw, float pitch)
+        : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
     {
-        recalculateViewProjectionMatrix();
+        this->pos = pos;
+        this->worldup = up;
+        this->yaw = yaw;
+        this->pitch = pitch;
+
+        update_camera_vector();
     }
 
-    void Camera::__projection(float left, float right, float bottom, float top)
+    void Camera::direction(camera_movement movement)
     {
-        projection_matrix = glm::ortho(left, right, bottom, top, -1.0f, 1.0f);
-        recalculateViewProjectionMatrix();
+        float velocity = move_speed * delta_time;
+        if(movement == FORWARD)
+            pos += front * velocity;
+        if(movement == BACKWARD)
+            pos -= front * velocity;
+        if(movement == LEFT)
+            pos -= right * velocity;
+        if(movement == RIGHT)
+            pos += right * velocity;
     }
 
-    void Camera::recalculateViewProjectionMatrix()
+    void Camera::perspective(float x, float y, bool constraint_pitch)
     {
-        view_projection_matrix = projection_matrix * view_matrix;
+        x *= mouse_sens;
+        y *= mouse_sens;
+
+        yaw = x;
+        pitch = y;
+
+        if(constraint_pitch)
+        {
+            if(pitch > CONSTRAINT_PITCH) pitch = CONSTRAINT_PITCH;
+            if(pitch < -CONSTRAINT_PITCH) pitch = -CONSTRAINT_PITCH;
+        }
+
+        update_camera_vector();
     }
 
-    void Camera::recalculateViewMatrix()
+    void Camera::zoom(float value)
     {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
-                              glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0, 0, 1));
-
-        view_matrix = glm::inverse(transform);
-        recalculateViewProjectionMatrix();
+        if (this->camera_zoom >= 1.0f && this->camera_zoom <= 45.0f)
+            this->camera_zoom -= value;
+        if (this->camera_zoom <= 1.0f)
+            this->camera_zoom = 1.0f;
+        if (this->camera_zoom >= 45.0f)
+            this->camera_zoom = 45.0f;
     }
+
+    glm::mat4 Camera::__view_matrix()
+    {
+        return glm::lookAt(pos, (pos + front), up);
+    }
+
+    void Camera::update_camera_vector()
+    {
+        front.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
+        front.y = sin(glm::radians(this->pitch));
+        front.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
+
+        this->right = glm::normalize(glm::cross(this->front, this->worldup));
+        this->up = glm::normalize(glm::cross(this->right, this->front));
+    }
+
+    float Camera::__camera_zoom()
+    {
+        return camera_zoom;;
+    }
+
 }

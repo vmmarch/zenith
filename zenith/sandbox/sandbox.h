@@ -29,9 +29,9 @@
 #include "layer/imgui-layer.h"
 #include "tool/layer-vector.h"
 #include "render/graphics-context.h"
-#include "render/camera-controller.h"
 #include "render/camera.h"
 #include "render/renderer.h"
+#include "window/window.h"
 
 #include <vector>
 
@@ -41,26 +41,21 @@ namespace zenith
     class SandBox : public Layer
     {
     public:
-        SandBox(int width, int height);
+        SandBox(Window* window);
         void render() override;
         void update(Timestep timestep) override;
         void event(Event&) override;
         void close() override {};
 
-        /**
-         * 提交要渲染的模型对象
-         *
-         * @param model 渲染模型
-         */
-        void submit(RenderModel &model) { models.push_back(model); }
         void clear_color(glm::vec4& color) { renderer->clear_color(color); }
-
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
-        std::vector<RenderModel> models;
         v_scope<Renderer> renderer;
-        CameraController camera_control;
+        Camera camera;
+        Window* window;
+
+        Layer* main_layer;
     };
 
 }

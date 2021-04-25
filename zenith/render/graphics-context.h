@@ -39,12 +39,12 @@ namespace zenith
         virtual void swap_buffers() = 0; // 交换缓冲区
 
         /*! 获取当前选择的模型 */
-        void __curr_model(RenderModel &model)
+        void SetCurrModel(RenderModel &model)
         {
             curr_model.reset(&model);
         }
 
-        v_shared<RenderModel> __curr_model()
+        v_shared<RenderModel> GetCurrModel()
         {
             return curr_model;
         }

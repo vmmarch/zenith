@@ -42,7 +42,7 @@ namespace zenith
      * @param k KEY_XXX
      * @param v V_XXX
      */
-    EXTAPI void __value(int k, bool v);
+    EXTAPI void SetValue(int k, bool v);
 
     /**
      * 重新加载配置

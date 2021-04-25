@@ -27,6 +27,12 @@
 
 namespace zenith
 {
+
+    enum drawmod
+    {
+        ARRAY, INDEX
+    };
+
     class VertexArray
     {
     public:
@@ -34,11 +40,11 @@ namespace zenith
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
 
-        virtual void add_vertex_buf(std::shared_ptr<VertexBuffer>& vbuf) = 0;
-        virtual void __index_buffer(v_ui32* buf, v_ui32 size) = 0;
-        virtual void __index_buffer(std::shared_ptr<IndexBuffer>& ibuf) = 0;
+        virtual void AddVertexBuffer(std::shared_ptr<VertexBuffer>& vbuf) = 0;
+        virtual void SetIndexBuffer(v_ui32* buf, v_ui32 size) = 0;
+        virtual void SetIndexBuffer(std::shared_ptr<IndexBuffer>& ibuf) = 0;
         virtual std::shared_ptr<IndexBuffer> __index_buffer() const = 0;
-
+        virtual drawmod GetMod() const = 0;
         virtual std::vector<std::shared_ptr<VertexBuffer>> __vertex_buffers() const = 0;
 
         static VertexArray* __create();

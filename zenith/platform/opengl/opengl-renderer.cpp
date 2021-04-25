@@ -40,7 +40,8 @@ namespace zenith
 
     void OpenGLRenderer::begin(Camera &camera)
     {
-        view_projection_matrix = camera.__view_projection_matrix();
+        view_matrix = camera.__view_matrix();
+        projection = glm::perspective(camera.__camera_zoom(), camera.__screen_aspect_radio(), -1.0f, 1.0f);
     }
 
     void OpenGLRenderer::disable_depth_test()
@@ -53,25 +54,58 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
+    void OpenGLRenderer::draw_render_models()
+    {
+        for(auto& model : models)
+            draw_render_model(model);
+    }
+
     void OpenGLRenderer::draw_render_model(RenderModel& model)
     {
-        v_shared<Shader> shader = model.__shader();
+        v_shared<Shader> shader = model.GetShader();
         shader->bind();
-        model.__shader()->setMat4("u_viewProjectionMatrix", view_projection_matrix);
-//        model.__shader()->setMat4("u_transform", model.__def_transform());
-        draw_vertex_array(*model.__vertex_array());
+
+        glm::mat4 modloc = glm::mat4(1.0f);
+        modloc = glm::translate(modloc, model.GetLocation());
+
+        model.GetShader()->setMat4("u_model_location", modloc);
+        model.GetShader()->setMat4("u_projection", projection);
+        model.GetShader()->setMat4("u_view_matrix", view_matrix);
+
+        if(model.GetMod() == drawmod::INDEX)
+        {
+            draw_indexed(*model.GetVertexArray());
+        } else
+        {
+            draw_array(*model.GetVertexArray());
+        }
     }
 
-    void OpenGLRenderer::draw_vertex_array(const VertexArray& vertex)
+    void OpenGLRenderer::draw_array(const VertexArray &vertex)
     {
         vertex.bind();
-        GLAPI_DrawIndexTriangles(vertex.__index_buffer()->size(), GL_UNSIGNED_INT);
+        for(auto& array : vertex.__vertex_buffers())
+        {
+            GLAPI_DrawArrays(0, array->GetVertexSize());
+        }
     }
 
-    void OpenGLRenderer::draw_vertex_array(const std::vector<VertexArray>& vertex_arrays)
+    void OpenGLRenderer::draw_array(const std::vector<VertexArray>& vertex_arrays)
     {
         for (auto &vertex : vertex_arrays)
-            draw_vertex_array(vertex);
+            draw_array(vertex);
+    }
+
+    void OpenGLRenderer::draw_indexed(const VertexArray& vertex)
+    {
+        vertex.bind();
+        GLAPI_DrawIndex(vertex.__index_buffer()->size(), GL_UNSIGNED_INT);
+    }
+
+    void OpenGLRenderer::draw_indexed(const std::vector<VertexArray>& vertex_arrays)
+    {
+        for (auto &vertex : vertex_arrays)
+            draw_indexed(vertex);
     }
 
 }

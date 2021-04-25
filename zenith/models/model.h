@@ -40,19 +40,28 @@ namespace zenith
             : vertex_array(vertex), shader(shader) {}
 
         // vertex array
-         void __vertex_array(v_shared<VertexArray>&);
-        v_shared<VertexArray> __vertex_array() const;
+        void SetVertexArray(v_shared<VertexArray>&);
+
+        v_shared<VertexArray> GetVertexArray() const;
 
         // shader
-         void __shader(v_shared<Shader>&);
-        const v_shared<Shader> __shader() const;
+        void SetShader(v_shared<Shader>&);
+
+        const v_shared<Shader> GetShader() const;
 
         // 设置渲染类型
-         void __render_type(render::type_t = render::type_t::FILL);
-         render::type_t __render_type() const;
+        void SetRendertype(render::type_t = render::type_t::FILL);
 
-        void __transform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
-        glm::mat4 __def_transform() { return transform; }
+        render::type_t GetRendertype() const;
+
+        void SetTransform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
+
+        glm::mat4 GetTransform() { return transform; }
+
+        void SetLocation(glm::vec3 loc) { location = loc; }
+        glm::vec3 GetLocation() { return location; }
+
+        drawmod GetMod() const { return vertex_array->GetMod(); }
 
     private:
         bool modify = false;
@@ -61,6 +70,7 @@ namespace zenith
         render::type_t render_type_t;
         GLenum render_type = GL_FILL;
 
+        glm::vec3 location = { 0.0f, 0.0f, 0.0f };
         glm::mat4 transform;
     };
 }

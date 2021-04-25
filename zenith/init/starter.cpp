@@ -32,7 +32,7 @@ namespace zenith
         __instance = this;
         init_window(title, width, height);
 
-        sandbox = new SandBox(window->__width(), window->__height());
+        sandbox = new SandBox(window.get());
     }
 
     Starter::~Starter()
@@ -44,7 +44,7 @@ namespace zenith
     {
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);
-        this->window->__event_callback(ZENITH_BIND_EVENT_FN(Starter::event));
+        this->window->SetEventCallback(ZENITH_BIND_EVENT_FN(Starter::event));
     }
 
     void Starter::close()
@@ -75,43 +75,11 @@ namespace zenith
     {
         sandbox->clear_color(color::BLACK);
 
-        v_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
-
-        // ----------------------------------------
-        // 画三角形
-        std::shared_ptr<VertexArray> vertexArray;
-        vertexArray.reset(VertexArray::__create());
-
-        float vertices[] = {
-                -0.5f, -0.5f, 0.0f,
-                0.5f, -0.5f, 0.0f,
-                0.0f, 0.5f, 0.0f
-        };
-        std::shared_ptr<VertexBuffer> vbuf;
-        vbuf.reset(VertexBuffer::__create(vertices, sizeof(vertices)));
-
-        layout_t layout = {
-                {"position", shader_t::FLOAT3},
-        };
-        vbuf->__layout(layout);
-        vertexArray->add_vertex_buf(vbuf);
-
-        // ------------------------------------------
-        // set index
-        unsigned int indices[] = { 0, 1, 2 };
-        vertexArray->__index_buffer(indices, sizeof(indices) / ZENITH_UNSIGNED_INT);
-
-        RenderModel model(vertexArray, std::move(shader));
-
-        // 提交渲染模型
-        sandbox->submit(model);
-        GraphicsContext::instance()->__curr_model(model);
-
         // ------------------------------------------
         // game loop.
         while (running)
         {
-            float time = (float) glfwGetTime(); // FIXME: get time from different platform. And now use GLFW.
+            auto time = (float) glfwGetTime(); // FIXME: get time from different platform. And now use GLFW.
             Timestep timestep = time - last_frame_time;
             last_frame_time = time;
 

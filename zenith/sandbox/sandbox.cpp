@@ -24,14 +24,16 @@
 #include "sandbox.h"
 #include "settings.h"
 #include "layer/editor-layer.h"
+#include "example/example-layer.h"
 
 namespace zenith
 {
 
-    SandBox::SandBox(int width, int height)
-        : Layer("sandbox layer"), camera_control((float) width / (float) height)
+    SandBox::SandBox(Window* window)
+        : Layer("sandbox layer"), camera(Camera()), window(window)
     {
         this->renderer = Renderer::__create();
+        main_layer = new ExampleLayer(renderer.get());
 
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
@@ -43,31 +45,27 @@ namespace zenith
         // ----------------------------------------
         // reload settings
         reload_settings();
-        camera_control.update(timestep);
+        camera.update(window->__width(), window->__height(), timestep);
+        main_layer->update(timestep);
         layer_stack.update(timestep);
     }
 
     void SandBox::render()
     {
+        renderer->begin(camera);
         renderer->clear();
 
-        renderer->begin(camera_control.__camera());
+        // imlayer->begin();
+        // {
+        //     layer_stack.render();
+        // }
+        // imlayer->end();
 
-        imlayer->begin();
-        {
-            layer_stack.render();
-        }
-        imlayer->end();
-
-        // ----------------------------------------------------
-        // GL render from there.
-        for(auto model : models)
-            renderer->draw_render_model(model);
+        main_layer->render();
     }
 
     void SandBox::event(Event& e)
     {
-        camera_control.event(e);
     }
 
  }

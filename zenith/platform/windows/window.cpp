@@ -181,7 +181,7 @@ namespace zenith::win
 
     }
 
-    void WinWindow::__event_callback(const f_callback &fn)
+    void WinWindow::SetEventCallback(const f_callback &fn)
     {
         info.fn = fn;
     }

@@ -48,14 +48,14 @@ static void __properties()
         {
             if (ImGui::Button("关闭多重采样抗锯齿"))
             {
-                zenith::__value(KEY_MULTISAMPLE, V_FALSE);
+                zenith::SetValue(KEY_MULTISAMPLE, V_FALSE);
                 __multisample = false;
             }
         } else
         {
             if (ImGui::Button("开启多重采样抗锯齿"))
             {
-                zenith::__value(KEY_MULTISAMPLE, V_TRUE);
+                zenith::SetValue(KEY_MULTISAMPLE, V_TRUE);
                 __multisample = true;
             }
         }
@@ -64,14 +64,14 @@ static void __properties()
         {
             if (ImGui::Button("关闭深度缓冲"))
             {
-                zenith::__value(KEY_DEPTHTEST, V_FALSE);
+                zenith::SetValue(KEY_DEPTHTEST, V_FALSE);
                 __depthtest = false;
             }
         } else
         {
             if (ImGui::Button("开启深度缓冲"))
             {
-                zenith::__value(KEY_DEPTHTEST, V_TRUE);
+                zenith::SetValue(KEY_DEPTHTEST, V_TRUE);
                 __depthtest = true;
             }
         }
@@ -84,10 +84,10 @@ static void __properties()
         ImGui::Checkbox("启用线性渲染模式", &line_check);
         if (line_check)
         {
-            zenith::GraphicsContext::instance()->__curr_model()->__render_type(zenith::render::type_t::LINE);
+            zenith::GraphicsContext::instance()->GetCurrModel()->SetRendertype(zenith::render::type_t::LINE);
         } else
         {
-            zenith::GraphicsContext::instance()->__curr_model()->__render_type(zenith::render::type_t::FILL);
+            zenith::GraphicsContext::instance()->GetCurrModel()->SetRendertype(zenith::render::type_t::FILL);
         }
     }
 

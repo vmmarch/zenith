@@ -83,7 +83,7 @@ namespace Arrays
         E *elems;
 
         // 确保容器内部有多余的空间
-        void __ensure_capacity_internal(v_ui1 min_capacity)
+        void Setensure_capacity_internal(v_ui1 min_capacity)
         {
             int len = __len();
             if(min_capacity > len)
