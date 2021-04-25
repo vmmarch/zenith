@@ -25,6 +25,7 @@
 #include "settings.h"
 #include "layer/editor-layer.h"
 #include "example/example-layer.h"
+#include "event/input.h"
 
 namespace zenith
 {
@@ -46,6 +47,16 @@ namespace zenith
         // reload settings
         reload_settings();
         camera.update(window->__width(), window->__height(), timestep);
+
+        if(Input::pressed(ZN_KEY_W))
+            camera.direction(camera_movement::FORWARD);
+        if(Input::pressed(ZN_KEY_S))
+            camera.direction(camera_movement::BACKWARD);
+        if(Input::pressed(ZN_KEY_A))
+            camera.direction(camera_movement::LEFT);
+        if(Input::pressed(ZN_KEY_D))
+            camera.direction(camera_movement::RIGHT);
+
         main_layer->update(timestep);
         layer_stack.update(timestep);
     }
@@ -55,11 +66,11 @@ namespace zenith
         renderer->begin(camera);
         renderer->clear();
 
-        // imlayer->begin();
-        // {
-        //     layer_stack.render();
-        // }
-        // imlayer->end();
+        imlayer->begin();
+        {
+            layer_stack.render();
+        }
+        imlayer->end();
 
         main_layer->render();
     }

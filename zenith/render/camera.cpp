@@ -66,7 +66,7 @@ namespace zenith
         update_camera_vector();
     }
 
-    void Camera::zoom(float value)
+    void Camera::SetZoom(float value)
     {
         if (this->camera_zoom >= 1.0f && this->camera_zoom <= 45.0f)
             this->camera_zoom -= value;
@@ -76,7 +76,7 @@ namespace zenith
             this->camera_zoom = 45.0f;
     }
 
-    glm::mat4 Camera::__view_matrix()
+    glm::mat4 Camera::GetViewMatrix()
     {
         return glm::lookAt(pos, (pos + front), up);
     }
@@ -91,7 +91,7 @@ namespace zenith
         this->up = glm::normalize(glm::cross(this->right, this->front));
     }
 
-    float Camera::__camera_zoom()
+    float Camera::GetCameraZoom()
     {
         return camera_zoom;;
     }

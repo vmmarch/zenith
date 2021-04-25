@@ -66,18 +66,18 @@ namespace zenith
          * 缩放
          * @param value
          */
-        void zoom(float value);
+        void SetZoom(float value);
 
         /**
          * @return 视图矩阵
          */
-        glm::mat4 __view_matrix();
+        glm::mat4 GetViewMatrix();
 
-        float __camera_zoom();
+        float GetCameraZoom();
 
-        float __screen_width() { return screen_w; }
-        float __screen_height() { return screen_h; }
-        float __screen_aspect_radio() { return screen_w / screen_h; }
+        float GetScreenWidth() { return screen_w; }
+        float GetScreenHeight() { return screen_h; }
+        float GetScreenAspectRadio() { return screen_w / screen_h; }
 
         void update(float _screen_w, float _screen_h, float _delta_time)
         {

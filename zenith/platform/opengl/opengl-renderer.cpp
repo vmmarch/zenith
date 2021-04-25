@@ -40,8 +40,8 @@ namespace zenith
 
     void OpenGLRenderer::begin(Camera &camera)
     {
-        view_matrix = camera.__view_matrix();
-        projection = glm::perspective(camera.__camera_zoom(), camera.__screen_aspect_radio(), -1.0f, 1.0f);
+        view_matrix = camera.GetViewMatrix();
+        projection = glm::perspective(camera.GetCameraZoom(), camera.GetScreenAspectRadio(), -1.0f, 1.0f);
     }
 
     void OpenGLRenderer::disable_depth_test()
