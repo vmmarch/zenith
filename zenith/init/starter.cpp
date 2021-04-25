@@ -55,7 +55,7 @@ namespace zenith
 
     void Starter::event(Event &event)
     {
-        event::type type = event.__event_type();
+        event::type type = event.GetEventType();
         switch (type)
         {
             case event::type::EVENT_WINDOW_CLOSE:

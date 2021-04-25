@@ -55,6 +55,8 @@ namespace zenith
         Camera camera;
         Window* window;
 
+        float last_x, last_y;
+
         Layer* main_layer;
     };
 

@@ -58,10 +58,10 @@ namespace zenith
         MouseEvent(const float x, const float y) : x(x), y(y) {};
         MouseEvent(const float x, const float y, const v_moucode code): x(x), y(y), __mousecode(code) {};
 
-        float __x()
+        float GetX()
         { return x; }
 
-        float __y()
+        float GetY()
         { return y; }
 
         v_moucode __code()

@@ -28,7 +28,7 @@
 #define YAW -90.0f
 #define PITCH 0.0f
 #define SPEED 3.0f
-#define MOUSE_SENS 0.25f
+#define MOUSE_SENS 0.1f
 #define ZOOM 45.0f
 #define CONSTRAINT_PITCH 89.0f
 
@@ -78,6 +78,13 @@ namespace zenith
         float GetScreenWidth() { return screen_w; }
         float GetScreenHeight() { return screen_h; }
         float GetScreenAspectRadio() { return screen_w / screen_h; }
+
+        /**
+         * Get/Set 鼠标灵敏度
+         * @param sensitivity 鼠标灵敏度
+         */
+        void SetMouseSensitivity(float sensitivity) { mouse_sens = sensitivity; }
+        float GetMouseSensitivity() { return mouse_sens; }
 
         void update(float _screen_w, float _screen_h, float _delta_time)
         {

@@ -26,9 +26,12 @@
 #include "layer/editor-layer.h"
 #include "example/example-layer.h"
 #include "event/input.h"
+#include "event/mouse-event.h"
 
 namespace zenith
 {
+
+    static bool first = true;
 
     SandBox::SandBox(Window* window)
         : Layer("sandbox layer"), camera(Camera()), window(window)
@@ -77,6 +80,35 @@ namespace zenith
 
     void SandBox::event(Event& e)
     {
+        if(e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
+        {
+            MouseMovedEvent& event = dynamic_cast<MouseMovedEvent&>(e);
+
+            float xpos = event.GetX();
+            float ypos = event.GetY();
+
+            if(first)
+            {
+                last_x = xpos;
+                last_y = ypos;
+
+                first = false;
+            }
+
+            float xoffset = xpos - last_x;
+            float yoffset = last_y - ypos;
+
+            last_x = xpos;
+            last_y = ypos;
+
+            camera.perspective(xoffset, yoffset);
+        }
+
+        if(e.GetEventType() == event::type::EVENT_MOUSE_SCROLLED)
+        {
+            MouseButtonScrolledEvent& event = dynamic_cast<MouseButtonScrolledEvent&>(e);
+            camera.SetZoom(event.GetY());
+        }
     }
 
  }

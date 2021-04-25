@@ -32,6 +32,7 @@ namespace zenith
         this->worldup = up;
         this->yaw = yaw;
         this->pitch = pitch;
+        mouse_sens = MOUSE_SENS;
 
         update_camera_vector();
     }
@@ -54,13 +55,15 @@ namespace zenith
         x *= mouse_sens;
         y *= mouse_sens;
 
-        yaw = x;
-        pitch = y;
+        yaw += x;
+        pitch += y;
 
         if(constraint_pitch)
         {
-            if(pitch > CONSTRAINT_PITCH) pitch = CONSTRAINT_PITCH;
-            if(pitch < -CONSTRAINT_PITCH) pitch = -CONSTRAINT_PITCH;
+            if(pitch > CONSTRAINT_PITCH)
+                pitch = CONSTRAINT_PITCH;
+            if(pitch < -CONSTRAINT_PITCH)
+                pitch = -CONSTRAINT_PITCH;
         }
 
         update_camera_vector();
@@ -83,12 +86,14 @@ namespace zenith
 
     void Camera::update_camera_vector()
     {
-        front.x = cos(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
-        front.y = sin(glm::radians(this->pitch));
-        front.z = sin(glm::radians(this->yaw)) * cos(glm::radians(this->pitch));
+        glm::vec3 __front__;
+        __front__.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+        __front__.y = sin(glm::radians(pitch));
+        __front__.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+        front = glm::normalize(__front__);
 
-        this->right = glm::normalize(glm::cross(this->front, this->worldup));
-        this->up = glm::normalize(glm::cross(this->right, this->front));
+        right = glm::normalize(glm::cross(front, worldup));
+        up    = glm::normalize(glm::cross(right, front));
     }
 
     float Camera::GetCameraZoom()
