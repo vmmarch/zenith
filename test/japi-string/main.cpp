@@ -26,6 +26,10 @@
 
 int main()
 {
+    japi::string java("Java=%s, %s");
+    java.format("1.8", "1.9");
+    printf("%s\n", java.GetCharArray());
+
     japi::string str("v 0.005369267 0.623752 0.0064940881");
 
     // -------------------------------------------------------、

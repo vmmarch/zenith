@@ -24,7 +24,6 @@
 #pragma once
 
 #include "importer.h"
-#include <vector>
 
 namespace zenith
 {
@@ -33,6 +32,8 @@ namespace zenith
     public:
         void ReadFile(v_cc) override;
         void SetTextureFormFile(v_cc) override;
+        std::vector<glm::vec3> GetVertexArray() override
+        { return vertexs; }
     private:
         std::vector<glm::vec3> vertexs;
     };

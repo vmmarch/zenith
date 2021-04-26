@@ -1,0 +1,45 @@
+//#include "jni.h"
+//#include <Windows.h>
+//
+//int main()
+//{
+//    /* 设置 JVM 参数 */
+//    JavaVMInitArgs vmArgs;
+//    vmArgs.version = JNI_VERSION_1_8;
+//    const int OPTION_COUNT = 2;
+//    vmArgs.nOptions = OPTION_COUNT;
+//    JavaVMOption options[OPTION_COUNT] = { 0 };
+//    // classpath 指定为我们要调用的 jar 包路径
+//    options[0].optionString = const_cast<char*>("-Djava.class.path=D:\\project\\alkaid\\jar\\jnitest.jar");
+//    options[1].optionString = const_cast<char*>("-Xmx1024m");  // 最大堆大小
+//    vmArgs.options = options;
+//    vmArgs.ignoreUnrecognized = JNI_TRUE;
+//
+//    /* 启动 JVM */
+//    HMODULE hModule = LoadLibrary(TEXT("D:\\env\\Java\\jdk1.8.0_172\\jre\\bin\\server\\jvm.dll"));
+//    if (hModule == NULL)
+//    {
+//        return -1;
+//    }
+//    typedef jint (JNICALL *CreateJavaVMFuncPtr)(JavaVM **pvm, void **penv, void *args);
+//    CreateJavaVMFuncPtr CreateJavaVM = (CreateJavaVMFuncPtr)GetProcAddress(hModule, "JNI_CreateJavaVM");
+//    JavaVM *jvm = nullptr;
+//    JNIEnv *env = nullptr;
+//    jint res = (*CreateJavaVM)(&jvm, (void**)&env, &vmArgs);
+//    if (res < 0)
+//    {
+//        return -1;
+//    }
+//
+//    /* 调用 class */
+//    // 找到 class
+//    jclass class_Test = env->FindClass("com/test/Main");
+//    jmethodID methodId_main = env->GetStaticMethodID(class_Test, "main", "([Ljava/lang/String;)V");
+//    env->CallStaticVoidMethod(class_Test, methodId_main, "");
+//
+//    // 释放资源
+//    jvm->DestroyJavaVM();
+//    FreeLibrary(hModule);
+//
+//    return 0;
+//}

@@ -25,7 +25,8 @@
 
 #include <zenith/type.h>
 #include <zenith/glob.h>
-#include <api/glfw-api.h>
+#include <api/glm-api.h>
+#include <vector>
 
 namespace zenith
 {
@@ -44,5 +45,7 @@ namespace zenith
          * @param texpath 纹理路径
          */
         virtual void SetTextureFormFile(v_cc texpath) = 0;
+
+        virtual std::vector<glm::vec3> GetVertexArray() = 0;
     };
 }

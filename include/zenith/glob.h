@@ -88,5 +88,5 @@
 
 ///////////////////////////////////////////////////////////
 #else
-#error error message not support other country
+#   error error message not support other country
 #endif

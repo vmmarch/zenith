@@ -16,25 +16,22 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/22. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "init/starter.h"
+#include "load/obj-importer.h"
+#include <stdio.h>
 
-int main(int argc, char **argv)
+int main()
 {
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-    #ifdef __ZENITH_IN_CHINA__
-        system("chcp 65001");
-    #endif
-#endif
+    zenith::ObjImporter importer;
+    importer.ReadFile("C:/Users/aorus/Downloads/Girl/Girl_1.obj");
 
-     auto app = new zenith::Starter("zenith", 1940, 1290);
-     app->start_engine();
+    for(auto vec : importer.GetVertexArray())
+        printf("%d %d %d\n", vec.x, vec.y, vec.z);
 
     return 0;
 }

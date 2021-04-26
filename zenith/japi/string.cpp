@@ -24,6 +24,7 @@
 #include "string.h"
 #include <sstream>
 #include <vector>
+#include <stdarg.h>
 
 namespace japi
 {
@@ -119,6 +120,21 @@ namespace japi
         iss >> number;
 
         return number;
+    }
+
+    void string::format(...)
+    {
+        va_list args;
+        va_start(args, 0);
+
+        char* value = GetCharArray();
+        size_t len = _vscprintf(value, args) + 1;
+        std::vector<char> vbuf(len, '\0');
+        int nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, value, args);
+        if(nwrite > 0)
+            this->value = &vbuf[0];
+
+        va_end(args);
     }
 
 }

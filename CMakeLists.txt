@@ -5,6 +5,7 @@ option(UNIT_TEST "compile test." ON)
 
 if(UNIT_TEST)
 	add_subdirectory(test/japi-string)
+	add_subdirectory(test/obj-load)
 	add_subdirectory(test/typesize)
 endif()
 
@@ -28,6 +29,7 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/example SOURCE_EXAMPLE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/load SOURCE_LOAD)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/vm SOURCE_VM)
 
 # ---------------------------------------------------------------------------------------
 # for modules dir.
@@ -41,6 +43,11 @@ include_directories(SYSTEM modules/imgui/backends)
 # ---------------------------------------------------------------------------------------
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(SYSTEM include/api)
+
+# ---------------------------------------------------------------------------------------
+# for jvm dir.
+# ---------------------------------------------------------------------------------------
+include_directories(SYSTEM include/jvm/win64)
 
 # ---------------------------------------------------------------------------------------
 # for src dir.
@@ -85,6 +92,8 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_EXAMPLE}
 		${SOURCE_LOAD}
 		${SOURCE_JAPI}
+		${SOURCE_VM}
+		${LOADER_JVM_CALL}
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_demo.cpp

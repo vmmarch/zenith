@@ -96,10 +96,16 @@ namespace japi
         japi::string* Split(const char*, int);
 
         /**
+         * @return const char数组
+         */
+        const char* GetConstCharArray()
+        { return value.c_str(); }
+
+        /**
          * @return char数组
          */
-        const char* GetCharArray()
-        { return value.c_str(); }
+        char* GetCharArray()
+        { return const_cast<char*>(value.c_str()); }
 
         /**
          * @return 返回当前字符串大小
@@ -123,6 +129,8 @@ namespace japi
 
         std::string &GetOriginStdStringRef()
         { return value; }
+
+        void format(...);
 
     private:
         std::string value;

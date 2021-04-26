@@ -21,40 +21,40 @@
 /*!
  * @author 2B键盘
  */
-#include <fstream>
-#include "obj-importer.h"
-#include "japi/string.h"
-#include <iostream>
+#pragma once
+
+#include <jvm.h>
+#include <zenith/type.h>
+#include <japi/string.h>
+#include <Windows.h>
+
+#define SIG_LJAVA_LANG_STRING_V "([Ljava/lang/String;)V"
 
 namespace zenith
 {
-    void ObjImporter::ReadFile(v_cc path)
+    class JVM
     {
-        std::ifstream in(path);
-        if(!in.is_open())
-        {
-            ZENITH_ERROR(READ_MODEL_ERROR, path);
-            return;
-        }
+    private:
+        JVM(v_cc jar);
+    public:
+        static void CreateJVM(v_cc jar);
 
-        std::string line;
-        while(getline(in, line))
-        {
-            std::cout << line << std::endl;
-//            if(line.StartWith("#")) continue;
-//
-//            // 读取顶点
-//            if(line.StartWith("v"))
-//            {
-//                japi::string vertex_str = line.SubString(2);
-//                japi::string* _vertexs = vertex_str.Split(" ", 3);
-//                vertexs.push_back({ _vertexs[0].AsFloat(), _vertexs[1].AsFloat(), _vertexs[2].AsFloat() });
-//            }
-        }
-    }
+        static JVM* GetJVM() { return jvm_instance; }
 
-    void ObjImporter::SetTextureFormFile(v_cc)
-    {
+        /**
+         * 调用Java函数
+         */
+        void CallFunction(v_cc classname, v_cc funcname);
+        void CallStaticFunction(v_cc classname, v_cc funcname);
 
-    }
+        /**
+         * 销毁JVM释放内存
+         */
+        static void Destroy();
+    private:
+        JavaVM *jvm = nullptr;
+        JNIEnv *env = nullptr;
+        HMODULE hModule;
+        static JVM* jvm_instance;
+    };
 }

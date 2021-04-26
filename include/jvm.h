@@ -16,25 +16,15 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/26. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "init/starter.h"
-
-int main(int argc, char **argv)
-{
+#pragma once
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-    #ifdef __ZENITH_IN_CHINA__
-        system("chcp 65001");
-    #endif
+#   include <jvm/win64/jni.h>
+#else
+#   error not support other platform jvm.
 #endif
-
-     auto app = new zenith::Starter("zenith", 1940, 1290);
-     app->start_engine();
-
-    return 0;
-}
