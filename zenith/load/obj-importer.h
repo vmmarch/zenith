@@ -16,14 +16,24 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/22. <=== */
+/*! ===> Creates on 2021/4/26. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
+#pragma once
 
-int main()
+#include "importer.h"
+#include <vector>
+
+namespace zenith
 {
-    return 0;
+    class ObjImporter : public Importer
+    {
+    public:
+        void ReadFile(v_cc) override;
+        void SetTextureFormFile(v_cc) override;
+    private:
+        std::vector<glm::vec3> vertexs;
+    };
 }

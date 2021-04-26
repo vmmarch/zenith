@@ -133,11 +133,11 @@ namespace zenith
 #define ZENITH_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-#ifdef __ZENITH_BUILD_DLL__
-#define ZENITHAPI __declspec(dllexport)
-#else
-#define ZENITHAPI __declspec(dllimport)
+#   ifdef __ZENITH_BUILD_DLL__
+#       define ZENITH_API __declspec(dllexport)
+#   else
+#       define ZENITH_API __declspec(dllimport)
 #endif
 #else
-#error zenith only support Windows platform!
+#   error zenith only support Windows platform!
 #endif

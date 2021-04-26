@@ -21,9 +21,32 @@
 /*!
  * @author 2B键盘
  */
-#include <iostream>
+#include "japi/string.h"
+#include <stdio.h>
 
 int main()
 {
+    japi::string str("v 0.005369267 0.623752 0.0064940881");
+
+    // -------------------------------------------------------、
+    // 字符串开始字符判断
+    bool startWith_V = str.StartWith("v");
+    if(startWith_V)
+        printf("start with v: %d\n", startWith_V);
+
+    // -------------------------------------------------------、
+    // 字符串结束字符判断
+    bool endWith_881 = str.StartWith("v");
+    if(endWith_881)
+        printf("end with 881: %d\n", endWith_881);
+
+    // -------------------------------------------------------、
+    //删除字符和分割
+    str.Delete(0, 2);
+    japi::string* splits = str.Split(" ", 4);
+
+    for(int i = 0; i < 3; i++)
+        printf("[%d] - %s\n", i, splits[i].GetCharArray());
+
     return 0;
 }

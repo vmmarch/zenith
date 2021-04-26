@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
 project(zenith)
 
+option(UNIT_TEST "compile test." ON)
+
 if(UNIT_TEST)
+	add_subdirectory(test/japi-string)
 	add_subdirectory(test/typesize)
 endif()
 
@@ -23,6 +26,8 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/buf SOURCE_BUF)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/example SOURCE_EXAMPLE)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/load SOURCE_LOAD)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
 
 # ---------------------------------------------------------------------------------------
 # for modules dir.
@@ -53,11 +58,11 @@ add_definitions(
 		-D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
 		-D__ZENITH_IN_CHINA__							# 引擎语言为中文
 		-D__ZENITH_RENDERAPI_OPENGL__		   		    # 引擎渲染API使用OpenGL
-		-D__DEBUG__		   		    		    # 开启DEBUG
+		-D__DEBUG__		   		    		    		# 开启DEBUG
 )
 
 link_libraries(imm32)
-link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3.dll)
+link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/dll/glfw3.dll)
 
 add_executable( ${PROJECT_NAME}
 		${SOURCE}
@@ -78,6 +83,8 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_BUF}
 		${SOURCE_SANDBOX}
 		${SOURCE_EXAMPLE}
+		${SOURCE_LOAD}
+		${SOURCE_JAPI}
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_draw.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_demo.cpp

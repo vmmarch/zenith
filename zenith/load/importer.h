@@ -16,14 +16,33 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/22. <=== */
+/*! ===> Creates on 2021/4/26. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
+#pragma once
 
-int main()
+#include <zenith/type.h>
+#include <zenith/glob.h>
+#include <api/glfw-api.h>
+
+namespace zenith
 {
-    return 0;
+
+    class Importer
+    {
+    public:
+        /**
+         * 模型读取
+         * @param modpath 模型路径
+         */
+        virtual void ReadFile(v_cc modpath) = 0;
+
+        /**
+         * 设置纹理，从文件读取
+         * @param texpath 纹理路径
+         */
+        virtual void SetTextureFormFile(v_cc texpath) = 0;
+    };
 }

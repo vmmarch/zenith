@@ -25,10 +25,14 @@
 
 #include "render/shader/shader.h"
 #include "buf/vertex-array.h"
+
 #include <zenith/type.h>
 
 namespace zenith
 {
+
+    class RenderModel;
+
     /**
      * 渲染封装模型
      */

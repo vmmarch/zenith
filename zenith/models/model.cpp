@@ -36,9 +36,9 @@ namespace zenith
         return this->vertex_array;
     }
 
-    void RenderModel::SetShader(v_shared<Shader>& shader)
+    void RenderModel::SetShader(v_shared<Shader>& _shader)
     {
-        this->shader = shader;
+        this->shader = _shader;
     }
 
     const v_shared<Shader> RenderModel::GetShader() const
