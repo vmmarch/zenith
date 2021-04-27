@@ -16,48 +16,46 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/26. <=== */
+ /*! ===> Creates on 2021/4/26. <=== */
 
-/*!
- * @author 2B键盘
- */
+ /*!
+  * @author 2B键盘
+  */
 #include "obj-importer.h"
-#include "japi/string.h"
-#include "tool/file.h"
 
+#include <fkstr.h>
 #include <fstream>
 #include <iostream>
 
 namespace zenith
 {
-    void ObjImporter::
-    ReadFile(v_cc path)
-    {
-//        std::ifstream in(path, std::ios::in);
-//        if(!in.is_open())
-//        {
-//            ZENITH_ERROR(READ_MODEL_ERROR, path);
-//            return;
-//        }
+	void ObjImporter::
+		ReadFile(v_cc path)
+	{
+		std::ifstream in(path, std::ios::in);
+		if (!in.is_open())
+		{
+			ZENITH_ERROR(READ_MODEL_ERROR, path);
+			return;
+		}
 
-        read_line(path);
+		while (!in.eof())
+		{
+			fuckstd::string line;
+			if (line.start_with("#")) continue;
 
-//        while(!in.eof())
-//        {
-//           if(line.StartWith("#")) continue;
-//
-//            // 读取顶点
-//            if(line.StartWith("v"))
-//            {
-//                japi::string vertex_str = line.SubString(2);
-//                japi::string* _vertexs = vertex_str.Split(" ", 3);
-//                vertexs.push_back({ _vertexs[0].AsFloat(), _vertexs[1].AsFloat(), _vertexs[2].AsFloat() });
-//            }
-//        }
-    }
+			// 读取顶点
+			if (line.start_with("v"))
+			{
+				fuckstd::string vertex_str = line.substring(2);
+                fuckstd::string* _vertexs = vertex_str.split(" ", 3);
+				vertexs.push_back({ _vertexs[0].as_float(), _vertexs[1].as_float(), _vertexs[2].as_float() });
+			}
+		}
+	}
 
-    void ObjImporter::SetTextureFormFile(v_cc)
-    {
+	void ObjImporter::SetTextureFormFile(v_cc)
+	{
 
-    }
+	}
 }

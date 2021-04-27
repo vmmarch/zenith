@@ -25,7 +25,7 @@
  */
 #pragma once
 
-#define ENGINE_NAME "瑶光引擎"
+#define ENGINE_NAME "天顶引擎"
 
 #define GUI_TEXT_SHORTNAME_SETTING "Ctrl+Shift+S"
 
@@ -38,7 +38,7 @@
 #define GUI_TEXT_CREATE "新建"
 #define GUI_TEXT_CREATE_PROJECT "新建项目"
 
-#define GUI_TEXT_OPEN "打开 "
+#define GUI_TEXT_OPEN "打开"
 #define GUI_TEXT_OPEN_PROJECT "打开项目"
 #define GUI_TEXT_OPEN_FOLDER "打开文件夹"
 #define GUI_TEXT_IMPORT "导入 "
@@ -46,14 +46,14 @@
 #define GUI_TEXT_RESTART "重启引擎 "
 #define GUI_TEXT_EXIT "退出引擎 "
 
-#define GUI_TEXT_PROPERTIES "属性"
-#define GUI_TEXT_RESOURCE_MANAGER "资源管理器"
+#define GUI_TEXT_PROPERTIES "属性 "
+#define GUI_TEXT_RESOURCE_MANAGER "资源管理器 "
 
 // INFO MESSAGE
 #define CREATE_WINDOW_INFO "创建窗口信息：%s, %d, %d"
 #define CREATE_WINDOW_FAILED "窗口创建失败 "
 #define GLFW_INIT_FAILED "GLFW初始化失败 "
-#define OPENGL_INFO "OpenGL创建信息："
+#define OPENGL_INFO "OpenGL创建信息: "
 #define VENDOR_INFO "VENDOR: %s"
 #define RENDER_INFO "RENDER: %s"
 #define VERSION_INFO "VERSION: %s"

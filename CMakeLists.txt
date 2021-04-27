@@ -1,15 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(zenith)
 
-option(UNIT_TEST "compile test." ON)
 option(FUCK_STD "dont use sb std." ON)
-
-if(UNIT_TEST)
-	add_subdirectory(test/arraycopy)
-	add_subdirectory(test/japi-string)
-	add_subdirectory(test/obj-load)
-	add_subdirectory(test/typesize)
-endif()
 
 if(FUCK_STD)
 	add_subdirectory(fuckstd)
@@ -35,7 +27,8 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/example SOURCE_EXAMPLE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/load SOURCE_LOAD)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/vm SOURCE_VM)
+
+include_directories(SYSTEM fuckstd)
 
 # ---------------------------------------------------------------------------------------
 # for modules dir.
@@ -75,7 +68,7 @@ add_definitions(
 )
 
 link_libraries(imm32)
-link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/dll/glfw3.dll)
+link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
 
 add_executable( ${PROJECT_NAME}
 		${SOURCE}
@@ -98,7 +91,6 @@ add_executable( ${PROJECT_NAME}
 		${SOURCE_EXAMPLE}
 		${SOURCE_LOAD}
 		${SOURCE_JAPI}
-		${SOURCE_VM}
 		${LOADER_JVM_CALL}
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui.cpp
 		${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_draw.cpp
