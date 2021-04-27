@@ -24,10 +24,6 @@
 #ifndef FUCKSTD_FILE_H
 #define FUCKSTD_FILE_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /**
  * file status, invalid&checked
  */
@@ -48,7 +44,7 @@ typedef struct FILE
      * check file path is invalid.
      * @return true: path is checked, false else.
      */
-    bool is_invalid()
+    int is_invalid()
     {
         return path_status == status::CHECKED;
     }
@@ -83,9 +79,9 @@ typedef struct FILE
  * @param __fp file point
  * @return is open success.
  */
-bool fopen(FILE* __fp)
+int fopen(FILE* __fp)
 {
-    return false;
+    return 0;
 }
 
 /**
@@ -94,13 +90,9 @@ bool fopen(FILE* __fp)
  * @param __fp file point.
  * @return true or false
  */
-bool eof(FILE* __fp)
+int eof(FILE* __fp)
 {
     return 0;
 }
-
-#ifdef __cplusplus
-};
-#endif
 
 #endif

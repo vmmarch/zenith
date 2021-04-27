@@ -5,6 +5,7 @@ option(UNIT_TEST "compile test." ON)
 option(FUCK_STD "dont use sb std." ON)
 
 if(UNIT_TEST)
+	add_subdirectory(test/arraycopy)
 	add_subdirectory(test/japi-string)
 	add_subdirectory(test/obj-load)
 	add_subdirectory(test/typesize)

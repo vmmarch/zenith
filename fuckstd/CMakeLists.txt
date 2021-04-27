@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.17)
 project(fuckstd)
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/arrays SOURCE_ARRAYS)
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(SYSTEM fuckstd)
+
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/io SOURCE_IO)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/tool SOURCE_TOOL)
 
-add_library(
-		${PROJECT_NAME} SHARED
-		${SOURCE_IO}
-		${SOURCE_ARRAYS}
-		${SOURCE_TOOL}
+add_executable(
+		${PROJECT_NAME}
+		main.cpp
 )

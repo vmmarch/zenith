@@ -16,25 +16,32 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/4/27. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include <iostream>
-#include "init/starter.h"
+#include "String.h"
+#include <stdio.h>
+#include <string>
+#include <sys/time.h>
 
-int main(int argc, char **argv)
+using namespace std;
+
+int main()
 {
+    struct timeval sTime, eTime;
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-#   ifdef __ZENITH_IN_CHINA__
-        system("chcp 65001");
-#   endif
-#endif
+    fuckstd::String string("");
 
-     auto app = new zenith::Starter("zenith", 1940, 1290);
-     app->start_engine();
+    gettimeofday(&sTime, NULL);
+    for (int i = 0; i < 100000; i++)
+    {
+        string.append("append");
+    }
+    gettimeofday(&eTime, NULL);
+    long AppendTime = (eTime.tv_sec - sTime.tv_sec) * 1000000 + (eTime.tv_usec - sTime.tv_usec); //exeTime 单位是微秒
 
+    printf("%s %dms", string.get_char_array(), AppendTime);
     return 0;
 }

@@ -16,9 +16,23 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/27. <=== */
+/*! ===> Creates on 2021/4/22. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "stream.h"
+#include <Arrays.h>
+#include <stdio.h>
+
+int main()
+{
+
+    char* src = const_cast<char*>("luo tian sheng shi ge da shuai b.");
+    char value[20];
+
+    fuckstd::copyof(src, value, 4, sizeof(value));
+
+    printf("value is: %s\n", value);
+
+    return 0;
+}
