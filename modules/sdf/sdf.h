@@ -15,21 +15,40 @@
  *
  */
 
-#include "core/arithmetics.hpp"
-#include "core/Vector2.h"
-#include "core/Projection.h"
-#include "core/Scanline.h"
-#include "core/Shape.h"
-#include "core/BitmapRef.hpp"
-#include "core/Bitmap.h"
-#include "core/bitmap-interpolation.hpp"
-#include "core/pixel-conversion.hpp"
-#include "core/edge-coloring.h"
-#include "core/generator-config.h"
-#include "core/rasterization.h"
-#include "core/sdf-error-estimation.h"
+#include "arithmetics.hpp"
+#include "Vector2.h"
+#include "Projection.h"
+#include "Scanline.h"
+#include "Shape.h"
+#include "BitmapRef.hpp"
+#include "Bitmap.h"
+#include "bitmap-interpolation.hpp"
+#include "pixel-conversion.hpp"
+#include "edge-coloring.h"
+#include "generator-config.h"
+#include "rasterization.h"
+#include "sdf-error-estimation.h"
 
 #define MSDFGEN_VERSION "1.8"
+
+#ifndef SDF_API 
+	#define SDF_API extern "C" __declspec(dllexport)
+#endif
+
+struct SDFImage {
+    int width;
+    int height;
+    void* pixels;
+};
+SDF_API void* sdfCreateShape();
+SDF_API void* sdfAddContour(void* shape);
+SDF_API void sdfAddLine(void* contour, double startX, double startY, double endX, double endY);
+SDF_API void sdfAddCurve(void* contour, double startX, double startY, double endX, double endY, double controlX, double controlY);
+SDF_API void* sdfGenerate(void* shape, double x, double y, double width, double height, double scaleWidth, double scaleHeight, double range); // 返回一个STBImage并删除shape
+SDF_API int sdfImageWidth(void* image);
+SDF_API int sdfImageHeight(void* image);
+SDF_API void* sdfImagePixels(void* image);
+SDF_API void sdfFreeImage(void* image);
 
 namespace msdfgen {
 
