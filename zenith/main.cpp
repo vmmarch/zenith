@@ -21,20 +21,27 @@
 /*!
  * @author 2B键盘
  */
-#include <iostream>
 #include "init/starter.h"
+
+#include <iostream>
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 int main(int argc, char **argv)
 {
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
 #   ifdef __ZENITH_IN_CHINA__
-        system("chcp 65001");
+    system("chcp 65001");
 #   endif
 #endif
 
-     auto app = new zenith::Starter("zenith", 1940, 1290);
-     app->start_engine();
+    Assimp::Importer importer;
+    const aiScene *scene = importer.ReadFile("D:/model/Girl/Girl_1.obj", aiProcess_Triangulate | aiProcess_FlipUVs);
+
+    auto app = new zenith::Starter("zenith", 1940, 1290);
+    app->start_engine();
 
     return 0;
 }
