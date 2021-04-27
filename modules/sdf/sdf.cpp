@@ -12,9 +12,10 @@
 #include <cmath>
 #include <cstring>
 
-#include "sdf.h"
+#include "msdfgen.h"
+#include "msdfgen-ext.h"
 
-#include "ShapeDistanceFinder.h"
+#include "core/ShapeDistanceFinder.h"
 
 using namespace msdfgen;
 
@@ -25,20 +26,20 @@ static void invertColor(const BitmapRef<float, N> &bitmap) {
         *p = 1.f-*p;
 }
 
-SDF_API void* sdfCreateShape() {
+extern "C" __declspec(dllexport) void* sdfCreateShape() {
     return new Shape();
 }
-SDF_API void* sdfAddContour(void* shape) {
+extern "C" __declspec(dllexport) void* sdfAddContour(void* shape) {
     return &((Shape*)shape)->addContour();
 }
-SDF_API void sdfAddLine(void* contour, double startX, double startY, double endX, double endY) {
+extern "C" __declspec(dllexport) void sdfAddLine(void* contour, double startX, double startY, double endX, double endY) {
     ((Contour*)contour)->edges.push_back(new LinearSegment(Point2(startX, startY), Point2(endX, endY)));
 }
-SDF_API void sdfAddCurve(void* contour, double startX, double startY, double endX,
+extern "C" __declspec(dllexport) void sdfAddCurve(void* contour, double startX, double startY, double endX,
  double endY, double controlX, double controlY) {
      ((Contour*)contour)->edges.push_back(new QuadraticSegment(Point2(startX, startY), Point2(endX, endY), Point2(controlX, controlY)));
  }
-SDF_API void* sdfGenerate(void* shape, double x, double y, double width, double height, double scaleWidth, double scaleHeight, double range) {
+extern "C" __declspec(dllexport) void* sdfGenerate(void* shape, double x, double y, double width, double height, double scaleWidth, double scaleHeight, double range) {
     if(!((Shape*)shape)->validate()) {
         return NULL;
     }
@@ -64,16 +65,16 @@ SDF_API void* sdfGenerate(void* shape, double x, double y, double width, double 
     return image;
 }
 
-SDF_API int sdfImageWidth(void* image) {
+extern "C" __declspec(dllexport) int sdfImageWidth(void* image) {
     return((SDFImage*)image)->width;
 }
-SDF_API int sdfImageHeight(void* image) {
+extern "C" __declspec(dllexport) int sdfImageHeight(void* image) {
     return((SDFImage*)image)->height;
 }
-SDF_API void* sdfImagePixels(void* image) {
+extern "C" __declspec(dllexport) void* sdfImagePixels(void* image) {
     return((SDFImage*)image)->pixels;
 }
-SDF_API void sdfFreeImage(void* image) {
+extern "C" __declspec(dllexport) void sdfFreeImage(void* image) {
     free(((SDFImage*)image)->pixels);
     ((SDFImage*)image)->pixels = NULL;
 }
