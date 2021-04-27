@@ -16,21 +16,43 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/22. <=== */
+/*! ===> Creates on 2021/4/27. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "load/obj-importer.h"
+#ifndef ZENITH_FILE_H
+#define ZENITH_FILE_H
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <zenith/type.h>
 
-int main()
+#define MAX_LINE_BUF 1024
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void read_line(const char *path)
 {
-    zenith::ObjImporter importer;
-    importer.ReadFile("C:/Users/aorus/Downloads/Girl/Girl_1.obj");
+    FILE *fp;
+    char buf[MAX_LINE_BUF];
+    int count = 1;
 
-    for(auto vec : importer.GetVertexArray())
-        printf("%d %d %d\n", vec.x, vec.y, vec.z);
+    if ((fp = fopen(path, "r")) == NULL)
+        ZENITH_INFO("File Read Failed: %s", path);
 
-    return 0;
+    while (!feof(fp))
+    {
+        fgets(buf, MAX_LINE_BUF, fp);
+        printf("%s", buf);
+    }
 }
+
+#ifdef __cplusplus
+};
+#endif
+
+#endif

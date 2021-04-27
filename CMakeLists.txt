@@ -2,11 +2,16 @@ cmake_minimum_required(VERSION 3.17)
 project(zenith)
 
 option(UNIT_TEST "compile test." ON)
+option(FUCK_STD "dont use sb std." ON)
 
 if(UNIT_TEST)
 	add_subdirectory(test/japi-string)
 	add_subdirectory(test/obj-load)
 	add_subdirectory(test/typesize)
+endif()
+
+if(FUCK_STD)
+	add_subdirectory(fuckstd)
 endif()
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)

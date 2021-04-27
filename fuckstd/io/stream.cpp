@@ -16,21 +16,9 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/22. <=== */
+/*! ===> Creates on 2021/4/27. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "load/obj-importer.h"
-#include <stdio.h>
-
-int main()
-{
-    zenith::ObjImporter importer;
-    importer.ReadFile("C:/Users/aorus/Downloads/Girl/Girl_1.obj");
-
-    for(auto vec : importer.GetVertexArray())
-        printf("%d %d %d\n", vec.x, vec.y, vec.z);
-
-    return 0;
-}
+#include "stream.h"

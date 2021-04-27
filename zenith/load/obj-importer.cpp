@@ -21,27 +21,30 @@
 /*!
  * @author 2B键盘
  */
-#include <fstream>
 #include "obj-importer.h"
 #include "japi/string.h"
+#include "tool/file.h"
+
+#include <fstream>
 #include <iostream>
 
 namespace zenith
 {
-    void ObjImporter::ReadFile(v_cc path)
+    void ObjImporter::
+    ReadFile(v_cc path)
     {
-        std::ifstream in(path);
-        if(!in.is_open())
-        {
-            ZENITH_ERROR(READ_MODEL_ERROR, path);
-            return;
-        }
+//        std::ifstream in(path, std::ios::in);
+//        if(!in.is_open())
+//        {
+//            ZENITH_ERROR(READ_MODEL_ERROR, path);
+//            return;
+//        }
 
-        std::string line;
-        while(getline(in, line))
-        {
-            std::cout << line << std::endl;
-//            if(line.StartWith("#")) continue;
+        read_line(path);
+
+//        while(!in.eof())
+//        {
+//           if(line.StartWith("#")) continue;
 //
 //            // 读取顶点
 //            if(line.StartWith("v"))
@@ -50,7 +53,7 @@ namespace zenith
 //                japi::string* _vertexs = vertex_str.Split(" ", 3);
 //                vertexs.push_back({ _vertexs[0].AsFloat(), _vertexs[1].AsFloat(), _vertexs[2].AsFloat() });
 //            }
-        }
+//        }
     }
 
     void ObjImporter::SetTextureFormFile(v_cc)
