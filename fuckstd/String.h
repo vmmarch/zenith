@@ -57,21 +57,20 @@ namespace fuckstd
             if(begin == 0)
             {
                 int nv_size = v_size - (end - begin);
-                char* nv = new char[nv_size];
+                char* nv = (char*) malloc(nv_size);
                 strcpy(nv, value + end);
                 reload_property(nv);
             } else
             {
-                char* a = new char[begin];
+                char* a = (char*) malloc(begin);
                 strncpy(a, value, begin);
 
-                char *b = new char[v_size - end];
+                char *b = (char*) malloc(v_size - end);
                 strcpy(b, value+end);
 
                 clear(); append(a); append(b);
 
-                delete []&a;
-                delete []&b;
+                free(a); free(b);
             }
         }
 
@@ -168,16 +167,13 @@ namespace fuckstd
         void append(const char *cvalue)
         {
             int csize = c_size(cvalue);
-            char *nv = new char[csize + v_size];
+            char *nv = (char*) malloc(csize + v_size);
 
             strcpy(nv, value);
             strcpy(nv + v_size, cvalue);
 
             // reassign
             reload_property(nv);
-
-            free(nv);
-            free(&cvalue);
         }
 
         /**
@@ -223,14 +219,14 @@ namespace fuckstd
         void reload_property(char* _value)
         {
             if(value != NULL)
-                delete []&value;
+                delete[] &value;
 
             this->value = _value;
             this->v_size = c_size(value);
         }
 
     private:
-        char   *value;
+        char   *value = NULL;
         int     v_size = 0;
     };
 }
