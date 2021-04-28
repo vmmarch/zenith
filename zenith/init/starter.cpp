@@ -66,9 +66,9 @@ namespace zenith
         }
     }
 
-    void Starter::update(Timestep timestep)
+    void Starter::update(DeltaTime deltaTime)
     {
-        sandbox->update(timestep);
+        sandbox->update(deltaTime);
     }
 
     void Starter::start_engine()
@@ -80,10 +80,10 @@ namespace zenith
         while (running)
         {
             auto time = (float) glfwGetTime(); // FIXME: get time from different platform. And now use GLFW.
-            Timestep timestep = time - last_frame_time;
+            DeltaTime deltaTime = time - last_frame_time;
             last_frame_time = time;
 
-            update(timestep);
+            update(deltaTime);
             sandbox->render();
             this->window->update();
         }

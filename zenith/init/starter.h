@@ -47,7 +47,7 @@ namespace zenith
         // ===========================================================
         // event
         void close();
-        void update(Timestep timestep);
+        void update(DeltaTime deltaTime);
 
         static Starter& instance() { return *__instance; }
     private:

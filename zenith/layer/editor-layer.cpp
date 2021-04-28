@@ -36,7 +36,7 @@ namespace zenith
     {
     }
 
-    void EditorLayer::update(Timestep)
+    void EditorLayer::update(DeltaTime)
     {
 
     }

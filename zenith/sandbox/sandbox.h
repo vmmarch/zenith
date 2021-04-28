@@ -43,11 +43,15 @@ namespace zenith
     public:
         SandBox(Window* window);
         void render() override;
-        void update(Timestep timestep) override;
+        void update(DeltaTime deltaTime) override;
         void event(Event&) override;
         void close() override {};
 
         void clear_color(glm::vec4& color) { renderer->clear_color(color); }
+
+    private:
+        void camera_update(DeltaTime deltaTime);
+
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};

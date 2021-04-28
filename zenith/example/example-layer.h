@@ -90,7 +90,7 @@ namespace zenith
             }
         }
 
-        void update(Timestep) override
+        void update(DeltaTime) override
         {
 
         }

@@ -33,7 +33,7 @@ namespace zenith
     public:
         HomeLayer() : Layer("Hoem Layer") {}
         void render() override;
-        void update(Timestep) override;
+        void update(DeltaTime) override;
         void event(Event&) override;
         void close() override;
     };

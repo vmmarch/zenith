@@ -44,12 +44,12 @@ namespace zenith
         layer_stack.push(new EditorLayer());
     }
 
-    void SandBox::update(Timestep timestep)
+    void SandBox::update(DeltaTime deltaTime)
     {
         // ----------------------------------------
         // reload settings
         reload_settings();
-        camera.update(window->__width(), window->__height(), timestep);
+        camera.update(window->__width(), window->__height(), deltaTime);
 
         if(Input::pressed(ZN_KEY_W))
             camera.direction(camera_movement::FORWARD);
@@ -60,8 +60,8 @@ namespace zenith
         if(Input::pressed(ZN_KEY_D))
             camera.direction(camera_movement::RIGHT);
 
-        main_layer->update(timestep);
-        layer_stack.update(timestep);
+        main_layer->update(deltaTime);
+        layer_stack.update(deltaTime);
     }
 
     void SandBox::render()
