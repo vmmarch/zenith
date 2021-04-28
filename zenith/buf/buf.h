@@ -151,6 +151,9 @@ namespace zenith
         std::vector<element_t> elements;
     };
 
+    /**
+     * 顶点缓冲
+     */
     class VertexBuffer
     {
     public:
@@ -158,6 +161,12 @@ namespace zenith
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual void SetData(float* vertex, zenith_ui32 size) = 0;
+
+        /**
+         * 设置着色器布局，如：layout(location = 0) in vec3 position;
+         *
+         * @param layout { "position", Float3 }
+         */
         virtual void SetLayout(const layout_t&) = 0;
         virtual const layout_t& GetLayout() const = 0;
 
@@ -166,6 +175,10 @@ namespace zenith
          * 每个顶点的大小是3，那么这个值就设置为3
          */
         virtual void SetVertexSize(int) = 0;
+
+        /**
+         * @return 数组大小
+         */
         virtual int GetVertexSize() const = 0;
 
         static VertexBuffer* __create(zenith_ui32);

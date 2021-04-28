@@ -33,8 +33,20 @@ namespace zenith
     public:
         OpenGLVertexArray();
         ~OpenGLVertexArray();
+
+        /**
+         * 绑定Array
+         */
         void bind() const override;
+
+        /**
+         * 解绑Array
+         */
         void unbind() const override;
+
+        /**
+         * 添加顶点缓冲对象
+         */
         void AddVertexBuffer(std::shared_ptr<VertexBuffer>&) override;
         void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) override;
         void SetIndexBuffer(std::shared_ptr<IndexBuffer>&) override;

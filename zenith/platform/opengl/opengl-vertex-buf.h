@@ -33,6 +33,7 @@ namespace zenith
         OpenGLVertexBuffer(zenith_ui32 size);
         OpenGLVertexBuffer(float* buf, zenith_ui32 size);
         ~OpenGLVertexBuffer() override;
+
         void bind() override;
         void unbind() override;
         void SetData(float* buf, zenith_ui32 size) override;

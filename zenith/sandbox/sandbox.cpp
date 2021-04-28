@@ -44,6 +44,10 @@ namespace zenith
         layer_stack.push(new EditorLayer());
     }
 
+    void grid()
+    {
+    }
+
     void SandBox::update(DeltaTime deltaTime)
     {
         // ----------------------------------------
