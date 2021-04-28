@@ -23,6 +23,7 @@
  */
 #pragma once
 
+#include "event/input.h"
 #include <api/glfw-api.h>
 
 #define YAW -90.0f
@@ -91,6 +92,16 @@ namespace zenith
             this->screen_w = _screen_w;
             this->screen_h = _screen_h;
             this->delta_time = _delta_time;
+
+            // 移动
+            if(Input::pressed(ZENITH_KEY_W))
+                direction(camera_movement::FORWARD);
+            if(Input::pressed(ZENITH_KEY_S))
+                direction(camera_movement::BACKWARD);
+            if(Input::pressed(ZENITH_KEY_A))
+                direction(camera_movement::LEFT);
+            if(Input::pressed(ZENITH_KEY_D))
+                direction(camera_movement::RIGHT);
         }
 
     private:

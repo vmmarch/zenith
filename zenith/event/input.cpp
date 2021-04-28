@@ -22,14 +22,13 @@
  * @author 2B键盘
  */
 #include "input.h"
-#include "init/starter.h"
+#include "state.h"
 
 namespace zenith
 {
     bool Input::pressed(zenith_keycode key)
     {
-        auto* window = static_cast<GLFWwindow*>(Starter::instance().__window().__handle());
-        auto state = glfwGetKey(window, static_cast<int32_t>(key));
+        auto state = glfwGetKey(State::GetGLFWwindow(), static_cast<int32_t>(key));
         return state == GLFW_PRESS || state == GLFW_REPEAT;
     }
 }

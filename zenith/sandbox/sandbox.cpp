@@ -27,6 +27,7 @@
 #include "example/example-layer.h"
 #include "event/input.h"
 #include "event/mouse-event.h"
+#include "state.h"
 
 namespace zenith
 {
@@ -49,16 +50,18 @@ namespace zenith
         // ----------------------------------------
         // reload settings
         reload_settings();
-        camera.update(window->__width(), window->__height(), deltaTime);
+        camera.update(State::GetWidth(), State::GetHeight(), deltaTime);
 
-        if(Input::pressed(ZN_KEY_W))
-            camera.direction(camera_movement::FORWARD);
-        if(Input::pressed(ZN_KEY_S))
-            camera.direction(camera_movement::BACKWARD);
-        if(Input::pressed(ZN_KEY_A))
-            camera.direction(camera_movement::LEFT);
-        if(Input::pressed(ZN_KEY_D))
-            camera.direction(camera_movement::RIGHT);
+        if(Input::pressed(ZENITH_KEY_LEFTCONTROL))
+        {
+            if(Input::pressed(ZENITH_KEY_C))
+            {
+                if(!cursor_hide)
+                    glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+                else
+                    glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            }
+        }
 
         main_layer->update(deltaTime);
         layer_stack.update(deltaTime);

@@ -22,7 +22,7 @@
  * @author 2B键盘
  */
 #include "imgui-layer.h"
-#include "init/starter.h"
+#include "state.h"
 
 namespace zenith
 {
@@ -65,7 +65,7 @@ namespace zenith
         }
 
         Starter &starter = Starter::instance();
-        GLFWwindow *window = static_cast<GLFWwindow *>(starter.__window().__handle());
+        GLFWwindow *window = State::GetGLFWwindow();
 
         // Setup Platform/Renderer bindings
         ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -157,7 +157,7 @@ namespace zenith
 
         ImGuiIO &io = ImGui::GetIO();
         Starter &starter = Starter::instance();
-        io.DisplaySize = ImVec2((float) starter.__window().__width(), (float) starter.__window().__height());
+        io.DisplaySize = ImVec2((float) State::GetWidth(), (float) State::GetHeight());
 
         // Rendering
         ImGui::Render();

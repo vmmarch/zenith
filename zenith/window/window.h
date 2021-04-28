@@ -26,6 +26,7 @@
 #include <functional>
 #include <zenith/type.h>
 #include "event/event.h"
+#include <api/glfw-api.h>
 
 namespace zenith
 {
@@ -54,15 +55,17 @@ namespace zenith
         virtual ~Window() = default;
         virtual void setTitle(zenith_char) = 0;
         virtual zenith_char getTitle() const = 0;
-        virtual zenith_ui32 __width() const = 0;
-        virtual zenith_ui32 __height() const = 0;
+        virtual zenith_ui32 GetWidth() const = 0;
+        virtual zenith_ui32 GetHeight() const = 0;
 
         virtual void SetEventCallback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;
         virtual void update() = 0;
         virtual void close_window() = 0;
 
-        virtual void* __handle() const = 0;
+        virtual void* GetWindowHANDLE() const = 0;
+
+        virtual GLFWwindow* GetGLFWwindow() const = 0;
 
         // 创建Window
         static zenith_scope<Window> __create(const v_winprops&);

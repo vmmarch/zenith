@@ -42,7 +42,7 @@ namespace zenith
         void event(Event&); // 事件处理
         void start_engine();
 
-        Window& __window() { return *window; }
+        Window& GetWindow() { return *window; }
 
         // ===========================================================
         // event

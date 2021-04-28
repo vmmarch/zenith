@@ -16,27 +16,45 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/24. <=== */
+/*! ===> Creates on 2021/4/28. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include "event/key-event.h"
-#include <zenith/type.h>
+#include "init/starter.h"
 #include <api/glfw-api.h>
-
-#define NOT_SCROLLED        0
-#define SCROLLED_UP         1
-#define SCROLLED_DOWN       2
 
 namespace zenith
 {
-    class Input
+    struct State
     {
-    public:
-        static bool pressed(zenith_keycode);
-        static zenith_uint scrolled();
+        static GLFWwindow *GetGLFWwindow()
+        {
+            if(window == NULL)
+                window = Starter::instance().GetWindow().GetGLFWwindow();
+
+            return window;
+        }
+
+        /**
+         * 获取窗口宽度
+         */
+        static int GetWidth()
+        {
+            return Starter::instance().GetWindow().GetWidth();
+        }
+
+        /**
+         * 获取窗口高度
+         */
+        static int GetHeight()
+        {
+            return Starter::instance().GetWindow().GetHeight();
+        }
+
+    private:
+        static GLFWwindow *window;
     };
 }

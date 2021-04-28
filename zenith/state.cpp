@@ -16,27 +16,14 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/24. <=== */
+/*! ===> Creates on 2021/4/28. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
-
-#include "event/key-event.h"
-#include <zenith/type.h>
-#include <api/glfw-api.h>
-
-#define NOT_SCROLLED        0
-#define SCROLLED_UP         1
-#define SCROLLED_DOWN       2
+#include "state.h"
 
 namespace zenith
 {
-    class Input
-    {
-    public:
-        static bool pressed(zenith_keycode);
-        static zenith_uint scrolled();
-    };
+    GLFWwindow *State::window = nullptr;
 }

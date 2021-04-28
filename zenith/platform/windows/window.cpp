@@ -211,9 +211,15 @@ namespace zenith::win
         window_count_of_create--;
     }
 
-    void* WinWindow::__handle() const
+    void* WinWindow::GetWindowHANDLE() const
     {
         return this->window;
     }
+
+    GLFWwindow* WinWindow::GetGLFWwindow() const
+    {
+        return this->window;
+    }
+
 
 }
