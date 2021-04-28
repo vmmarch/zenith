@@ -35,7 +35,7 @@
 /**
  * @return 窗口实例
  */
-static v_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
+static zenith_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
 {
 #ifdef __ZENITH_PLATFORM_WINDOWS__
     return zenith::__create_scope<zenith::win::WinWindow>(props);
@@ -65,7 +65,7 @@ static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
 /**
  * @return 渲染器
  */
-static v_scope<zenith::Renderer> __create_renderer()
+static zenith_scope<zenith::Renderer> __create_renderer()
 {
     switch (zenith::Renderer::__render_api())
     {
@@ -83,7 +83,7 @@ static v_scope<zenith::Renderer> __create_renderer()
 /**
  * @return 着色器实例
  */
-static v_scope<zenith::Shader> __create_shader(zenith_char path, zenith_char debugname)
+static zenith_scope<zenith::Shader> __create_shader(zenith_char path, zenith_char debugname)
 {
     switch (zenith::Renderer::__render_api())
     {
@@ -101,7 +101,7 @@ static v_scope<zenith::Shader> __create_shader(zenith_char path, zenith_char deb
 /**
  * @return 纹理
  */
-static v_scope<zenith::Texture2D> __create_texture2D()
+static zenith_scope<zenith::Texture2D> __create_texture2D()
 {
     switch (zenith::Renderer::__render_api())
     {

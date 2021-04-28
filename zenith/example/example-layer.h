@@ -47,7 +47,7 @@ namespace zenith
     public:
         explicit ExampleLayer(Renderer* renderer) : Layer("example layer"), renderer(renderer)
         {
-            v_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
+            zenith_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
 
             // ----------------------------------------
             // 画三角形

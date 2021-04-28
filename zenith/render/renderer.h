@@ -73,7 +73,7 @@ namespace zenith
         // static
 
         // 创建渲染器
-        static v_scope<Renderer> __create();
+        static zenith_scope<Renderer> __create();
 
         // 获取当前API
         static render::api __render_api();

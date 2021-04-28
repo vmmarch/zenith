@@ -3,7 +3,7 @@
 
 namespace zenith
 {
-	static v_scope<Texture2D> __create()
+	static zenith_scope<Texture2D> __create()
 	{
 		return __create_texture2D();
 	}

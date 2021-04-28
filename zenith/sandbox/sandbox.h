@@ -51,7 +51,7 @@ namespace zenith
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
-        v_scope<Renderer> renderer;
+        zenith_scope<Renderer> renderer;
         Camera camera;
         Window* window;
 

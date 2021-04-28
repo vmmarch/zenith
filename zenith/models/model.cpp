@@ -26,22 +26,22 @@
 namespace zenith
 {
 
-    void RenderModel::SetVertexArray(v_shared<VertexArray>& vertex)
+    void RenderModel::SetVertexArray(zenith_shader<VertexArray>& vertex)
     {
         this->vertex_array = vertex;
     }
 
-    v_shared<VertexArray> RenderModel::GetVertexArray() const
+    zenith_shader<VertexArray> RenderModel::GetVertexArray() const
     {
         return this->vertex_array;
     }
 
-    void RenderModel::SetShader(v_shared<Shader>& _shader)
+    void RenderModel::SetShader(zenith_shader<Shader>& _shader)
     {
         this->shader = _shader;
     }
 
-    const v_shared<Shader> RenderModel::GetShader() const
+    const zenith_shader<Shader> RenderModel::GetShader() const
     {
         return this->shader;
     }

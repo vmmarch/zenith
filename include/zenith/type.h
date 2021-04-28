@@ -55,10 +55,10 @@ typedef zenith_ui16 zenith_keycode;
 typedef void (*zenith_noparam_fn)();
 
 template<typename T>
-using v_scope = std::unique_ptr<T>;
+using zenith_scope = std::unique_ptr<T>;
 
 template<typename T>
-using v_shared = std::shared_ptr<T>;
+using zenith_shader = std::shared_ptr<T>;
 
 #define ZENAPI extern
 
@@ -97,7 +97,7 @@ namespace zenith
     static const v_vec2 empty_vec2 = __create_vec2(0, 0);
 
     template<typename T, typename ... Args>
-    constexpr v_scope<T> __create_scope(Args &&... args)
+    constexpr zenith_scope<T> __create_scope(Args &&... args)
     {
         return std::make_unique<T>(std::forward<Args>(args)...);
     }

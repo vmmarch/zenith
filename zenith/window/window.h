@@ -65,6 +65,6 @@ namespace zenith
         virtual void* __handle() const = 0;
 
         // 创建Window
-        static v_scope<Window> __create(const v_winprops&);
+        static zenith_scope<Window> __create(const v_winprops&);
     };
 }

@@ -28,6 +28,8 @@
 
 #include <zenith/type.h>
 
+#include <utility>
+
 namespace zenith
 {
 
@@ -39,24 +41,28 @@ namespace zenith
     class RenderModel
     {
     public:
-        RenderModel() {}
-        RenderModel(v_shared<VertexArray> vertex, v_shared<Shader> shader)
-            : vertex_array(vertex), shader(shader) {}
+        RenderModel() = default;
+        RenderModel(zenith_shader<VertexArray> vertex, zenith_shader<Shader> shader)
+            : vertex_array(std::move(vertex)), shader(std::move(shader))
+            {
+                render_type = GL_FILL;
+                render_type_t = render::type_t::FILL;
+            }
 
         // vertex array
-        void SetVertexArray(v_shared<VertexArray>&);
+        void SetVertexArray(zenith_shader<VertexArray>&);
 
-        v_shared<VertexArray> GetVertexArray() const;
+        [[nodiscard]] zenith_shader<VertexArray> GetVertexArray() const;
 
         // shader
-        void SetShader(v_shared<Shader>&);
+        void SetShader(zenith_shader<Shader>&);
 
-        const v_shared<Shader> GetShader() const;
+        [[nodiscard]] const zenith_shader<Shader> GetShader() const;
 
         // 设置渲染类型
         void SetRendertype(render::type_t = render::type_t::FILL);
 
-        render::type_t GetRendertype() const;
+        [[nodiscard]] render::type_t GetRendertype() const;
 
         void SetTransform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
 
@@ -69,10 +75,10 @@ namespace zenith
 
     private:
         bool modify = false;
-        v_shared<Shader> shader;
-        v_shared<VertexArray> vertex_array;
+        zenith_shader<Shader> shader;
+        zenith_shader<VertexArray> vertex_array;
         render::type_t render_type_t;
-        GLenum render_type = GL_FILL;
+        GLenum render_type;
 
         glm::vec3 location = { 0.0f, 0.0f, 0.0f };
         glm::mat4 transform;

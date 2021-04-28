@@ -27,7 +27,7 @@
 namespace zenith
 {
 
-    v_scope<Shader> Shader::__create(zenith_char path, zenith_char debugname)
+    zenith_scope<Shader> Shader::__create(zenith_char path, zenith_char debugname)
     {
         return __create_shader(path, debugname);
     }

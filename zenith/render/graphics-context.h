@@ -44,7 +44,7 @@ namespace zenith
             curr_model.reset(&model);
         }
 
-        v_shared<RenderModel> GetCurrModel()
+        zenith_shader<RenderModel> GetCurrModel()
         {
             return curr_model;
         }
@@ -55,7 +55,7 @@ namespace zenith
         static GraphicsContext* __create(zenith_any window);
 
     private:
-        v_shared<RenderModel> curr_model;
+        zenith_shader<RenderModel> curr_model;
         static GraphicsContext* context;
     };
 }

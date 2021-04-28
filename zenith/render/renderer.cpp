@@ -40,7 +40,7 @@ namespace zenith
         return render_api;
     }
 
-    v_scope<Renderer> Renderer::__create()
+    zenith_scope<Renderer> Renderer::__create()
     {
         return __create_renderer();
     }

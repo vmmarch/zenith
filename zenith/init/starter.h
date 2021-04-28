@@ -55,7 +55,7 @@ namespace zenith
 
     private:
         int running = true;
-        v_scope<Window> window;
+        zenith_scope<Window> window;
         SandBox* sandbox;
         float last_frame_time = 0.0f;
 
