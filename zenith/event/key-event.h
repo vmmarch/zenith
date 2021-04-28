@@ -31,15 +31,15 @@ namespace zenith
     class KeyEvent : public Event
     {
     public:
-        KeyEvent(v_keycode keycode) : __keycode(keycode)
+        KeyEvent(zenith_keycode keycode) : __keycode(keycode)
         {}
 
-        v_keycode getKeycode()
+        zenith_keycode getKeycode()
         { return __keycode; }
 
         CLASSIF(event::KEYBOARD);
     private:
-        v_keycode __keycode;
+        zenith_keycode __keycode;
     };
 
     /**
@@ -48,7 +48,7 @@ namespace zenith
     class KeyPressedEvent : public KeyEvent
     {
     public:
-        KeyPressedEvent(v_keycode keycode, int repeat)
+        KeyPressedEvent(zenith_keycode keycode, int repeat)
             : KeyEvent(keycode), __repeat(repeat) {}
 
         TYPE(event::type::EVENT_KEY_PRESSED);
@@ -62,7 +62,7 @@ namespace zenith
     class KeyReleasedEvent : public KeyEvent
     {
     public:
-        KeyReleasedEvent(v_keycode keycode) : KeyEvent(keycode) {}
+        KeyReleasedEvent(zenith_keycode keycode) : KeyEvent(keycode) {}
 
         TYPE(event::type::EVENT_KEY_RELEASED);
     };
@@ -70,7 +70,7 @@ namespace zenith
     class KeyTypeEvent : public KeyEvent
     {
     public:
-        KeyTypeEvent(const v_keycode keycode) : KeyEvent(keycode) {}
+        KeyTypeEvent(const zenith_keycode keycode) : KeyEvent(keycode) {}
 
         TYPE(event::type::KEY_TYPE);
     };

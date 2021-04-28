@@ -47,7 +47,7 @@ static v_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
 /**
  * @return 图形上下文
  */
-static zenith::GraphicsContext* __create_graphics_context(v_any window)
+static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
 {
     switch (zenith::Renderer::__render_api())
     {
@@ -83,7 +83,7 @@ static v_scope<zenith::Renderer> __create_renderer()
 /**
  * @return 着色器实例
  */
-static v_scope<zenith::Shader> __create_shader(v_cc path, v_cc debugname)
+static v_scope<zenith::Shader> __create_shader(zenith_char path, zenith_char debugname)
 {
     switch (zenith::Renderer::__render_api())
     {
@@ -120,7 +120,7 @@ static v_scope<zenith::Texture2D> __create_texture2D()
 /**
  * @return vertex buffer
  */
-static zenith::VertexBuffer* __create_vertex_buf(float *buf, v_ui32 size)
+static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_ui32 size)
 {
     switch (zenith::Renderer::__render_api())
     {
@@ -141,7 +141,7 @@ static zenith::VertexBuffer* __create_vertex_buf(float *buf, v_ui32 size)
 /**
  * @return index buffer
  */
-static zenith::IndexBuffer* __create_index_buf(v_ui32 *buf, v_ui32 size)
+static zenith::IndexBuffer* __create_index_buf(zenith_ui32 *buf, zenith_ui32 size)
 {
     switch (zenith::Renderer::__render_api())
     {

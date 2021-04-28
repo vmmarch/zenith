@@ -30,21 +30,21 @@ namespace zenith
     class OpenGLShader : public Shader
     {
     public:
-        OpenGLShader(v_cc path, v_cc debugname);
+        OpenGLShader(zenith_char path, zenith_char debugname);
         ~OpenGLShader() override;
         void bind() override;
         void unbind() override;
-        void setBool(v_cc, bool) override;
-        void setInt(v_cc, int) override;
-        void setFloat(v_cc, float) override;
-        void setFloat2(v_cc, glm::vec2) override;
-        void setFloat3(v_cc, glm::vec3) override;
-        void setFloat4(v_cc, glm::vec4) override;
-        void setMat3(v_cc, glm::mat3) override;
-        void setMat4(v_cc, glm::mat4) override;
+        void setBool(zenith_char, bool) override;
+        void setInt(zenith_char, int) override;
+        void setFloat(zenith_char, float) override;
+        void setFloat2(zenith_char, glm::vec2) override;
+        void setFloat3(zenith_char, glm::vec3) override;
+        void setFloat4(zenith_char, glm::vec4) override;
+        void setMat3(zenith_char, glm::mat3) override;
+        void setMat4(zenith_char, glm::mat4) override;
 
     private:
-        v_ui1 shader_id;
+        zenith_uint shader_id;
 
     private:
         // utility function for checking shader compilation/linking errors.

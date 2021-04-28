@@ -29,7 +29,7 @@
 namespace zenith::win
 {
 
-    static v_ui1 window_count_of_create = 0;
+    static zenith_uint window_count_of_create = 0;
 
     WinWindow::WinWindow(const v_winprops &winprops)
     {
@@ -55,7 +55,7 @@ namespace zenith::win
 
         ZENITH_INFO(CREATE_WINDOW_INFO, info.title, info.width, info.height);
 
-        v_suc success = glfwInit();
+        int success = glfwInit();
         if (!success)
                 ZENITH_ERROR(GLFW_INIT_FAILED);
 
@@ -134,7 +134,7 @@ namespace zenith::win
         });
 
         // window char callback
-        glfwSetCharCallback(this->window, [](GLFWwindow *window, v_ui1 keycode)
+        glfwSetCharCallback(this->window, [](GLFWwindow *window, zenith_uint keycode)
         {
             v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 

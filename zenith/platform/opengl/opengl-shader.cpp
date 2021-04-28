@@ -34,9 +34,9 @@
 
 namespace zenith
 {
-    static void load_shader(v_cc path, std::string &vtext, std::string &ftext);
+    static void load_shader(zenith_char path, std::string &vtext, std::string &ftext);
 
-    OpenGLShader::OpenGLShader(v_cc path, v_cc debugname)
+    OpenGLShader::OpenGLShader(zenith_char path, zenith_char debugname)
     {
 #ifdef __DEBUG__
         ZENITH_DEBUG(IFSPLIT);
@@ -45,14 +45,14 @@ namespace zenith
         std::string v_str_code, f_str_code;
         load_shader(path, v_str_code, f_str_code);
 
-        v_cc vcode = v_str_code.c_str(), fcode = f_str_code.c_str();
+        zenith_char vcode = v_str_code.c_str(), fcode = f_str_code.c_str();
 
 #ifdef __DEBUG__
         ZENITH_DEBUG(VERTEX_SHADER_DEBUG, vcode);
         ZENITH_DEBUG(FRAGMENT_SHADER_DEBUG, fcode);
 #endif
 
-        v_ui1 vertex, fragment;
+        zenith_uint vertex, fragment;
         // 创建vertex shader
         vertex = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertex, 1, &vcode, NULL);
@@ -99,42 +99,42 @@ namespace zenith
         GLAPI_UnbindProgram();
     }
 
-    void OpenGLShader::setBool(v_cc name, bool value)
+    void OpenGLShader::setBool(zenith_char name, bool value)
     {
         GLAPI_Uniform1i(shader_id, name, value);
     }
 
-    void OpenGLShader::setInt(v_cc name, int value)
+    void OpenGLShader::setInt(zenith_char name, int value)
     {
         GLAPI_Uniform1i(shader_id, name, value);
     }
 
-    void OpenGLShader::setFloat(v_cc name, float value)
+    void OpenGLShader::setFloat(zenith_char name, float value)
     {
         GLAPI_Uniform1f(shader_id, name, value);
     }
 
-    void OpenGLShader::setFloat2(v_cc name, glm::vec2 value)
+    void OpenGLShader::setFloat2(zenith_char name, glm::vec2 value)
     {
         GLAPI_Uniform2f(shader_id, name, value.x, value.y);
     }
 
-    void OpenGLShader::setFloat3(v_cc name, glm::vec3 value)
+    void OpenGLShader::setFloat3(zenith_char name, glm::vec3 value)
     {
         GLAPI_Uniform3f(shader_id, name, value.x, value.y, value.z);
     }
 
-    void OpenGLShader::setFloat4(v_cc name, glm::vec4 value)
+    void OpenGLShader::setFloat4(zenith_char name, glm::vec4 value)
     {
         GLAPI_Uniform4f(shader_id, name, value.x, value.y, value.w, value.a);
     }
 
-    void OpenGLShader::setMat3(v_cc name, glm::mat3 value)
+    void OpenGLShader::setMat3(zenith_char name, glm::mat3 value)
     {
         GLAPI_UniformMatrix3fv(shader_id, name, value);
     }
 
-    void OpenGLShader::setMat4(v_cc name, glm::mat4 value)
+    void OpenGLShader::setMat4(zenith_char name, glm::mat4 value)
     {
         GLAPI_UniformMatrix4fv(shader_id, name, value);
     }
@@ -164,7 +164,7 @@ namespace zenith
         }
     }
 
-    static void load_shader(v_cc path, std::string &vtext, std::string &ftext)
+    static void load_shader(zenith_char path, std::string &vtext, std::string &ftext)
     {
         std::ifstream in(path);
         if(!in.is_open())

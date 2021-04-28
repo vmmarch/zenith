@@ -29,7 +29,7 @@
 
 namespace zenith
 {
-    using v_moucode = v_ui16;
+    using v_moucode = zenith_ui16;
 
     namespace mouse
     {

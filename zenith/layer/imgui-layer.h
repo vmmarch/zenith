@@ -33,9 +33,9 @@ namespace zenith
 
     struct v_font
     {
-        v_cc name;
+        zenith_char name;
         float size;
-        v_cc ttf;
+        zenith_char ttf;
     };
 
     class ImGuiLayer
@@ -45,14 +45,14 @@ namespace zenith
         ~ImGuiLayer() = default;
 
         void add_font(v_font);
-        void apply_font(v_cc);
+        void apply_font(zenith_char);
 
         void begin();
         void end();
 
         void close();
     private:
-        std::map<v_cc, ImFont*> font_libs;
+        std::map<zenith_char, ImFont*> font_libs;
         void initialize();
     };
 }

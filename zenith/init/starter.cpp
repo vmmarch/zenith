@@ -27,7 +27,7 @@ namespace zenith
 {
     Starter *Starter::__instance = nullptr;
 
-    Starter::Starter(v_cc title, int width, int height)
+    Starter::Starter(zenith_char title, int width, int height)
     {
         __instance = this;
         init_window(title, width, height);
@@ -40,7 +40,7 @@ namespace zenith
         delete &window;
     }
 
-    void Starter::init_window(v_cc title, int width, int height)
+    void Starter::init_window(zenith_char title, int width, int height)
     {
         v_winprops winprops(title, width, height);
         this->window = Window::__create(winprops);

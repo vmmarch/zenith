@@ -44,7 +44,7 @@ namespace zenith
         virtual ~Texture2D() = default;
 
         /** 读取纹理图片 */
-        virtual void read_image(v_cc) = 0;
+        virtual void read_image(zenith_char) = 0;
 
         /** 绑定纹理 */
         virtual void bind() = 0;
@@ -59,7 +59,7 @@ namespace zenith
          * @param [i] coor 坐标设置
          * @param [i] color 颜色, 只有CLMAP_TO_BORDER才有这个参数。
          */
-        virtual void SetMod(v_ui16, int, float * = NULL) = 0;
+        virtual void SetMod(zenith_ui16, int, float * = NULL) = 0;
 
         /**
          * 设置纹理过滤方式
@@ -67,7 +67,7 @@ namespace zenith
          * @param [i] zoom 纹理缩放处理
          * @param [i] filter 纹理过滤方式
          */
-        virtual void SetFilter(int, v_ui16) = 0;
+        virtual void SetFilter(int, zenith_ui16) = 0;
 
         // 创建纹理
         static v_scope<Texture2D> __create();

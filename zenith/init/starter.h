@@ -37,7 +37,7 @@ namespace zenith
     class Starter
     {
     public:
-        Starter(v_cc, int, int);
+        Starter(zenith_char, int, int);
         ~Starter();
         void event(Event&); // 事件处理
         void start_engine();
@@ -51,10 +51,10 @@ namespace zenith
 
         static Starter& instance() { return *__instance; }
     private:
-        void init_window(v_cc, int, int);
+        void init_window(zenith_char, int, int);
 
     private:
-        v_suc running = true;
+        int running = true;
         v_scope<Window> window;
         SandBox* sandbox;
         float last_frame_time = 0.0f;

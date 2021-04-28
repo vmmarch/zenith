@@ -36,14 +36,14 @@ namespace zenith
         void bind() const override;
         void unbind() const override;
         void AddVertexBuffer(std::shared_ptr<VertexBuffer>&) override;
-        void SetIndexBuffer(v_ui32* buf, v_ui32 size) override;
+        void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) override;
         void SetIndexBuffer(std::shared_ptr<IndexBuffer>&) override;
         drawmod GetMod() const { return mod; }
         std::shared_ptr<IndexBuffer> __index_buffer() const override { return index_buf; }
         std::vector<std::shared_ptr<VertexBuffer>> __vertex_buffers() const { return vertex_buffers; };
 
     private:
-        v_ui32 array_id;
+        zenith_ui32 array_id;
         drawmod mod = drawmod::ARRAY;
         std::vector<std::shared_ptr<VertexBuffer>> vertex_buffers;
         std::shared_ptr<IndexBuffer> index_buf;

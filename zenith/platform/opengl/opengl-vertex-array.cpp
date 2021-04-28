@@ -55,7 +55,7 @@ namespace zenith
         if(buf->GetLayout().__elements().size() == 0)
             ZENITH_ERROR(VERTEX_BUFFER_HAS_NOT_LAYOUT);
 
-        v_ui32 index = 0;
+        zenith_ui32 index = 0;
         const auto& layout = buf->GetLayout();
         for(const auto& element : layout)
         {
@@ -70,7 +70,7 @@ namespace zenith
         vertex_buffers.push_back(buf);
     }
 
-    void OpenGLVertexArray::SetIndexBuffer(v_ui32* buf, v_ui32 size)
+    void OpenGLVertexArray::SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size)
     {
         std::shared_ptr<IndexBuffer> index_buf;
         index_buf.reset(IndexBuffer::__create(buf, size));

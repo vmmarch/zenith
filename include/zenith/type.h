@@ -42,16 +42,15 @@
 #define ZENITH_UINT32_T         1
 #define ZENITH_VOID             8
 
-typedef const char *v_cc;
-typedef unsigned char v_uc;
-typedef unsigned int v_ui1;
-typedef uint8_t v_ui8;
-typedef uint16_t v_ui16;
-typedef uint32_t v_ui32;
-typedef void *v_any;
-typedef int v_suc;
+typedef const char* zenith_char;
+typedef unsigned char zenith_uchar;
+typedef unsigned int zenith_uint;
+typedef uint8_t zenith_ui8;
+typedef uint16_t zenith_ui16;
+typedef uint32_t zenith_ui32;
+typedef void * zenith_any;
 
-typedef v_ui16 v_keycode;
+typedef zenith_ui16 zenith_keycode;
 
 typedef void (*zenith_noparam_fn)();
 
@@ -84,13 +83,13 @@ namespace zenith
     // vec2
     struct v_vec2
     {
-        v_ui16 x, y;
+        zenith_ui16 x, y;
 
-        v_vec2(v_ui16 _x, v_ui16 _y) : x(_x), y(_y)
+        v_vec2(zenith_ui16 _x, zenith_ui16 _y) : x(_x), y(_y)
         {}
     };
 
-    static v_vec2 __create_vec2(v_ui16 x, v_ui16 y)
+    static v_vec2 __create_vec2(zenith_ui16 x, zenith_ui16 y)
     {
         return v_vec2(x, y);
     }

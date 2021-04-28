@@ -34,7 +34,7 @@ namespace zenith
     class Input
     {
     public:
-        static bool pressed(v_keycode);
-        static v_ui1 scrolled();
+        static bool pressed(zenith_keycode);
+        static zenith_uint scrolled();
     };
 }

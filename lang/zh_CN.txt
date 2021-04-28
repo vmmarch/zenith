@@ -1,0 +1,49 @@
+ENGINE_NAME "天顶引擎"
+
+GUI_TEXT_FILE 文件
+GUI_TEXT_CREATE 新建
+GUI_TEXT_CREATE_PROJECT 新建项目
+
+GUI_TEXT_OPEN 打开
+GUI_TEXT_OPEN_PROJECT 打开项目
+GUI_TEXT_OPEN_FOLDER 打开文件夹
+GUI_TEXT_IMPORT 导入 
+GUI_TEXT_SETTING 引擎配置 
+GUI_TEXT_RESTART 重启引擎 
+GUI_TEXT_EXIT 退出引擎 
+
+GUI_TEXT_PROPERTIES 属性 
+GUI_TEXT_RESOURCE_MANAGER 资源管理器 
+
+CREATE_WINDOW_INFO 创建窗口信息：%s, %d, %d
+CREATE_WINDOW_FAILED 窗口创建失败 
+GLFW_INIT_FAILED GLFW初始化失败 
+OPENGL_INFO OpenGL创建信息: 
+VENDOR_INFO VENDOR: %s
+RENDER_INFO RENDER: %s
+VERSION_INFO VERSION: %s
+
+IFSPLIT ----------------------------------------------
+ENDIFSPLIT ----------------------------------------------\n
+VERTEX_SHADER_DEBUG 顶点着色器源码:\n%s\n
+FRAGMENT_SHADER_DEBUG 片段着色器源码:\n%s\n
+CREATE_SHADER 创建着色器[%s]: %s
+
+OPENGL_SUPPORT_VERSION Zenith3D引擎需要使用4.5以上的OpenGL版本
+
+STARTUP_ERROR 启动失败
+CREATE_OPENGL_CONTEXT_ERROR 错误：创建OpenGLContext失败。原因：window == NULL
+INIT_GLAD_ERROR 错误：初始化GLAD失败。 
+APPLY_FONT_ERROR ENGINE_NAME 错误：应用字体失败：未获取到字体信息【%s】. // %s font name
+PLEASE_CHOOSE_RENDER_API 错误：请选择渲染API
+NOT_SUPPORT_DIRECTX_API 错误：暂不支持DirectX
+UNKNOWN_SHADER_TYPE 错误：位置着色器类型
+LOAD_GLAD_FAILED 错误：加载GLAD失败
+ONLY_SUPPORT_WINDOWS 错误：目前仅支持Windows平台
+CANNOT_READ_FONT 错误：未获取到{}字体
+SHADER_FILE_NOT_EXIST Shader文件不存在: %s
+SHADER_COMPILATION_ERROR Shader编译错误，类型：%s, 信息：\n-------\n%s
+PROGRAM_LINKING_ERROR 程序链接错误，类型：%s, 信息：\n-------\n%s
+CREATE_SHADER_FAILED 创建着色器失败：%s
+VERTEX_BUFFER_HAS_NOT_LAYOUT 顶点数组没有布局
+READ_MODEL_ERROR 读取模型文件失败: %s

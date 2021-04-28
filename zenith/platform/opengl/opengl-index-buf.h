@@ -30,12 +30,12 @@ namespace zenith
     class OpenGLIndexBuffer : public IndexBuffer
     {
     public:
-        OpenGLIndexBuffer(v_ui32* indices, v_ui32 size);
+        OpenGLIndexBuffer(zenith_ui32* indices, zenith_ui32 size);
         ~OpenGLIndexBuffer() override;
         void bind() override;
         void unbind() override;
-        v_ui32 size() const override;
+        zenith_ui32 size() const override;
     private:
-        v_ui32 index_id, v_size;
+        zenith_ui32 index_id, v_size;
     };
 }

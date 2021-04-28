@@ -79,7 +79,7 @@ namespace zenith
         font_libs[font.name] = io.Fonts->AddFontFromFileTTF(font.ttf, font.size, NULL, io.Fonts->GetGlyphRangesChineseFull());
     }
 
-    void ImGuiLayer::apply_font(v_cc name)
+    void ImGuiLayer::apply_font(zenith_char name)
     {
         if (font_libs.count(name) == 0)
         {

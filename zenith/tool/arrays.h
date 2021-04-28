@@ -78,12 +78,12 @@ namespace Arrays
         }
 
     private:
-        v_ui1 v_size;
-        v_ui1 index_ptr = 0;
+        zenith_uint v_size;
+        zenith_uint index_ptr = 0;
         E *elems;
 
         // 确保容器内部有多余的空间
-        void Setensure_capacity_internal(v_ui1 min_capacity)
+        void Setensure_capacity_internal(zenith_uint min_capacity)
         {
             int len = __len();
             if(min_capacity > len)
@@ -95,7 +95,7 @@ namespace Arrays
         }
 
         // 获取数组大小
-        v_ui1 __len()
+        zenith_uint __len()
         {
             return sizeof(this->elems) / sizeof(E);
         }

@@ -56,7 +56,7 @@ namespace zenith
         }
 
     private:
-        v_ui1 insert_index = 0;
+        zenith_uint insert_index = 0;
         std::vector<Layer *> layers_vector;
     };
 }

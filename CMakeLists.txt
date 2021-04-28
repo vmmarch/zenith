@@ -69,7 +69,6 @@ add_definitions(
 
 link_libraries(imm32)
 link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
-link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/assimp-vc142-mtd.dll)
 
 add_executable(${PROJECT_NAME}
         ${SOURCE}

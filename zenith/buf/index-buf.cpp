@@ -26,7 +26,7 @@
 
 namespace zenith
 {
-    IndexBuffer* IndexBuffer::__create(v_ui32* indices, v_ui32 size)
+    IndexBuffer* IndexBuffer::__create(zenith_ui32* indices, zenith_ui32 size)
     {
         return __create_index_buf(indices, size);
     }

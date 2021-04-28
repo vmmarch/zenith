@@ -35,10 +35,10 @@ namespace zenith
      */
     struct v_winprops
     {
-        v_cc title;
-        v_ui32 width, height;
+        zenith_char title;
+        zenith_ui32 width, height;
 
-        v_winprops(v_cc title, v_ui32 width, v_ui32 height)
+        v_winprops(zenith_char title, zenith_ui32 width, zenith_ui32 height)
             : title(title), width(width), height(height) {}
     };
 
@@ -52,10 +52,10 @@ namespace zenith
         using f_callback = std::function<void(Event&)>;
 
         virtual ~Window() = default;
-        virtual void setTitle(v_cc) = 0;
-        virtual v_cc getTitle() const = 0;
-        virtual v_ui32 __width() const = 0;
-        virtual v_ui32 __height() const = 0;
+        virtual void setTitle(zenith_char) = 0;
+        virtual zenith_char getTitle() const = 0;
+        virtual zenith_ui32 __width() const = 0;
+        virtual zenith_ui32 __height() const = 0;
 
         virtual void SetEventCallback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;

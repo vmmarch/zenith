@@ -35,10 +35,10 @@ namespace zenith::win
         WinWindow(const v_winprops&);
         virtual ~WinWindow();
 
-        void setTitle(v_cc title) override { info.title = title; }
-        v_cc getTitle() const override { return info.title; }
-        v_ui32 __width() const override { return info.width; }
-        v_ui32 __height() const override { return info.height; }
+        void setTitle(zenith_char title) override { info.title = title; }
+        zenith_char getTitle() const override { return info.title; }
+        zenith_ui32 __width() const override { return info.width; }
+        zenith_ui32 __height() const override { return info.height; }
 
         void SetEventCallback(const f_callback&) override;
 
@@ -51,8 +51,8 @@ namespace zenith::win
     private:
         struct v_info
         {
-            v_cc title;
-            v_ui32 width, height;
+            zenith_char title;
+            zenith_ui32 width, height;
 
             f_callback fn;
         };

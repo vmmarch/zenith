@@ -52,7 +52,7 @@ namespace zenith
         static GraphicsContext* instance()
         { return context; }
 
-        static GraphicsContext* __create(v_any window);
+        static GraphicsContext* __create(zenith_any window);
 
     private:
         v_shared<RenderModel> curr_model;

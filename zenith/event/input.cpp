@@ -26,7 +26,7 @@
 
 namespace zenith
 {
-    bool Input::pressed(v_keycode key)
+    bool Input::pressed(zenith_keycode key)
     {
         auto* window = static_cast<GLFWwindow*>(Starter::instance().__window().__handle());
         auto state = glfwGetKey(window, static_cast<int32_t>(key));

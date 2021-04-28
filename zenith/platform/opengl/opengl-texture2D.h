@@ -28,15 +28,15 @@ namespace zenith
 	class OpenGLTexture2D : public Texture2D
 	{
 	public:
-		void read_image(v_cc) override;
+		void read_image(zenith_char) override;
 		void bind() override;
 		void unbind() override;
-		void SetMod(v_ui16, int, float* = NULL) override;
-		void SetFilter(int, v_ui16) override;
+		void SetMod(zenith_ui16, int, float* = NULL) override;
+		void SetFilter(int, zenith_ui16) override;
 
 	private:
-	    v_ui1 texture_id;
-	    v_uc* image_data; // 纹理图片数据
+	    zenith_uint texture_id;
+	    zenith_uchar* image_data; // 纹理图片数据
 	    int width, height, nrchannels; // 纹理图片大小
 	};
 }

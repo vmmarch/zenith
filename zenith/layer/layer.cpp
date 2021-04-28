@@ -25,7 +25,7 @@
 
 namespace zenith
 {
-    Layer::Layer(v_cc name) : debug_name(name)
+    Layer::Layer(zenith_char name) : debug_name(name)
     {
     }
 }

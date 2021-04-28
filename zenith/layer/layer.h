@@ -31,7 +31,7 @@ namespace zenith
     class Layer
     {
     public:
-        Layer(const v_cc name = "layer");
+        Layer(const zenith_char name = "layer");
         virtual ~Layer() = default;
         virtual void render() = 0;
         virtual void update(Timestep timestep) = 0;
@@ -39,6 +39,6 @@ namespace zenith
         virtual void close() = 0;
 
     protected:
-        const v_cc debug_name;
+        const zenith_char debug_name;
     };
 }

@@ -44,7 +44,7 @@ namespace zenith
         INT, INT2, INT3, INT4
     };
 
-    static v_ui32 GetShader_t_size(shader_t type)
+    static zenith_ui32 GetShader_t_size(shader_t type)
     {
         switch(type)
         {
@@ -67,13 +67,13 @@ namespace zenith
 
     struct element_t
     {
-        v_cc name;
+        zenith_char name;
         size_t offset;
-        v_ui32 size;
+        zenith_ui32 size;
         shader_t type;
         bool normalized;
 
-        element_t(v_cc name_, shader_t type_, bool normalized_ = false)
+        element_t(zenith_char name_, shader_t type_, bool normalized_ = false)
             : name(name_), type(type_), size(GetShader_t_size(type_)), offset(0), normalized(normalized_) {}
 
         GLenum __type() const
@@ -95,7 +95,7 @@ namespace zenith
             return 0;
         }
 
-        v_ui32 __size() const
+        zenith_ui32 __size() const
         {
             switch (type)
             {
@@ -129,7 +129,7 @@ namespace zenith
         layout_t() {}
         layout_t(const std::initializer_list<element_t>& e) : elements(e)
         {
-            v_ui32 offset = 0;
+            zenith_ui32 offset = 0;
             stride = 0;
             for(auto& element : elements)
             {
@@ -139,7 +139,7 @@ namespace zenith
             }
         }
 
-        inline const v_ui32 __stride() const { return stride; }
+        inline const zenith_ui32 __stride() const { return stride; }
         inline const std::vector<element_t>& __elements() const { return elements; }
 
         std::vector<element_t>::iterator begin() { return elements.begin(); }
@@ -147,7 +147,7 @@ namespace zenith
         std::vector<element_t>::const_iterator begin() const { return elements.begin(); }
         std::vector<element_t>::const_iterator end() const { return elements.end(); }
     private:
-        v_ui32 stride;
+        zenith_ui32 stride;
         std::vector<element_t> elements;
     };
 
@@ -157,7 +157,7 @@ namespace zenith
         virtual ~VertexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual void SetData(float* vertex, v_ui32 size) = 0;
+        virtual void SetData(float* vertex, zenith_ui32 size) = 0;
         virtual void SetLayout(const layout_t&) = 0;
         virtual const layout_t& GetLayout() const = 0;
 
@@ -168,8 +168,8 @@ namespace zenith
         virtual void SetVertexSize(int) = 0;
         virtual int GetVertexSize() const = 0;
 
-        static VertexBuffer* __create(v_ui32);
-        static VertexBuffer* __create(float*, v_ui32);
+        static VertexBuffer* __create(zenith_ui32);
+        static VertexBuffer* __create(float*, zenith_ui32);
     };
 
     class IndexBuffer
@@ -178,9 +178,9 @@ namespace zenith
         virtual ~IndexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual v_ui32 size() const = 0;
+        virtual zenith_ui32 size() const = 0;
 
-        static IndexBuffer* __create(v_ui32* indices, v_ui32 size);
+        static IndexBuffer* __create(zenith_ui32* indices, zenith_ui32 size);
     };
 
 }

@@ -8,9 +8,9 @@
 namespace zenith
 {
 
-    static void SetWrapMod(int, v_ui16, float * = 0);
+    static void SetWrapMod(int, zenith_ui16, float * = 0);
 
-    void OpenGLTexture2D::read_image(v_cc path)
+    void OpenGLTexture2D::read_image(zenith_char path)
     {
         this->image_data = stbi_load(path, &width, &height, &nrchannels, 0);
     }
@@ -30,12 +30,12 @@ namespace zenith
         GLAPI_UnbindTexture2D();
     }
 
-    void OpenGLTexture2D::SetMod(v_ui16 mod, int coor, float *color)
+    void OpenGLTexture2D::SetMod(zenith_ui16 mod, int coor, float *color)
     {
         SetWrapMod(coor, CLMAP_TO_BORDER, color);
     }
 
-    void OpenGLTexture2D::SetFilter(int zoom, v_ui16 filter)
+    void OpenGLTexture2D::SetFilter(int zoom, zenith_ui16 filter)
     {
         if (zoom == MIN_FILTER)
         {
@@ -48,7 +48,7 @@ namespace zenith
         }
     }
 
-    static void SetWrapMod(int coor, v_ui16 mod, float* color)
+    static void SetWrapMod(int coor, zenith_ui16 mod, float* color)
     {
         if (color == NULL)
         {

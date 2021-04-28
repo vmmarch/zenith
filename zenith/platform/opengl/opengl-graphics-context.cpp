@@ -35,7 +35,7 @@ namespace zenith
     void OpenGLGraphicsContext::initialize()
     {
         glfwMakeContextCurrent(this->window);
-        v_suc success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+        int success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
         if(!success)
         {
             ZENITH_ERROR(LOAD_GLAD_FAILED);

@@ -26,10 +26,9 @@
 
 namespace zenith
 {
-
     GraphicsContext *GraphicsContext::context = nullptr;
 
-    GraphicsContext* GraphicsContext::__create(v_any window)
+    GraphicsContext* GraphicsContext::__create(zenith_any window)
     {
         GraphicsContext::context = __create_graphics_context(window);
         return GraphicsContext::context;
