@@ -53,18 +53,21 @@ namespace zenith
         buf->bind();
 
         if(buf->GetLayout().__elements().size() == 0)
-            ZENITH_ERROR(VERTEX_BUFFER_HAS_NOT_LAYOUT);
-
-        zenith_ui32 index = 0;
-        const auto& layout = buf->GetLayout();
-        for(const auto& element : layout)
         {
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, element.__size(), element.__type(),
-                                  element.normalized ? GL_TRUE : GL_FALSE,
-                                  buf->GetLayout().__stride(),
-                                  (const void*) element.offset);
-            index++;
+            ZENITH_ERROR(VERTEX_BUFFER_HAS_NOT_LAYOUT);
+        } else
+        {
+            zenith_ui32 index = 0;
+            const auto& layout = buf->GetLayout();
+            for(const auto& element : layout)
+            {
+                glEnableVertexAttribArray(index);
+                glVertexAttribPointer(index, element.__size(), element.__type(),
+                                      element.normalized ? GL_TRUE : GL_FALSE,
+                                      buf->GetLayout().__stride(),
+                                      (const void*) element.offset);
+                index++;
+            }
         }
 
         vertex_buffers.push_back(buf);

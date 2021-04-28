@@ -62,7 +62,7 @@ namespace zenith
 
     void OpenGLRenderer::draw_render_model(RenderModel& model)
     {
-        zenith_shader<Shader> shader = model.GetShader();
+        zenith_shared<Shader> shader = model.GetShader();
         shader->bind();
 
         glm::mat4 modloc = glm::mat4(1.0f);

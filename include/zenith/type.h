@@ -58,7 +58,7 @@ template<typename T>
 using zenith_scope = std::unique_ptr<T>;
 
 template<typename T>
-using zenith_shader = std::shared_ptr<T>;
+using zenith_shared = std::shared_ptr<T>;
 
 #define ZENAPI extern
 

@@ -61,7 +61,7 @@ namespace zenith
             };
             std::shared_ptr<VertexBuffer> vbuf;
             vbuf.reset(VertexBuffer::__create(vertices, sizeof(vertices)));
-            vbuf->SetVertexSize(3);
+                vbuf->SetVertexSize(3);
 
             layout_t layout = {
                     {"position", shader_t::FLOAT3},

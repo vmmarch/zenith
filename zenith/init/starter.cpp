@@ -22,6 +22,7 @@
  * @author 2B键盘
  */
 #include "starter.h"
+#include "state.h"
 
 namespace zenith
 {
@@ -86,6 +87,8 @@ namespace zenith
             update(deltaTime);
             sandbox->render();
             this->window->update();
+
+            State::npp();
         }
     }
 

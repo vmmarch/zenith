@@ -25,7 +25,6 @@
 #include "settings.h"
 #include "layer/editor-layer.h"
 #include "example/example-layer.h"
-#include "event/input.h"
 #include "event/mouse-event.h"
 #include "state.h"
 
@@ -34,8 +33,8 @@ namespace zenith
 
     static bool first = true;
 
-    SandBox::SandBox(Window* window)
-        : Layer("sandbox layer"), camera(Camera()), window(window)
+    SandBox::SandBox(Window *window)
+            : Layer("sandbox layer"), camera(Camera()), window(window)
     {
         this->renderer = Renderer::__create();
         main_layer = new ExampleLayer(renderer.get());
@@ -52,11 +51,11 @@ namespace zenith
         reload_settings();
         camera.update(State::GetWidth(), State::GetHeight(), deltaTime);
 
-        if(Input::pressed(ZENITH_KEY_LEFTCONTROL))
+        if (Input::pressed(ZENITH_KEY_LEFTCONTROL))
         {
-            if(Input::pressed(ZENITH_KEY_C))
+            if (Input::pressed(ZENITH_KEY_C))
             {
-                if(!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                if (!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
                 else glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
                 cursor_hide = !cursor_hide;
             }
@@ -80,16 +79,16 @@ namespace zenith
         main_layer->render();
     }
 
-    void SandBox::event(Event& e)
+    void SandBox::event(Event &e)
     {
-        if(e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
+        if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
         {
-            MouseMovedEvent& event = dynamic_cast<MouseMovedEvent&>(e);
+            MouseMovedEvent &event = dynamic_cast<MouseMovedEvent &>(e);
 
             float xpos = event.GetX();
             float ypos = event.GetY();
 
-            if(first)
+            if (first)
             {
                 last_x = xpos;
                 last_y = ypos;
@@ -106,11 +105,11 @@ namespace zenith
             camera.perspective(xoffset, yoffset);
         }
 
-        if(e.GetEventType() == event::type::EVENT_MOUSE_SCROLLED)
+        if (e.GetEventType() == event::type::EVENT_MOUSE_SCROLLED)
         {
-            MouseButtonScrolledEvent& event = dynamic_cast<MouseButtonScrolledEvent&>(e);
+            MouseButtonScrolledEvent &event = dynamic_cast<MouseButtonScrolledEvent &>(e);
             camera.SetZoom(event.GetY());
         }
     }
 
- }
+}

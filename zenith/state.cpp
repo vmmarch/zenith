@@ -22,8 +22,29 @@
  * @author 2B键盘
  */
 #include "state.h"
+#include "init/starter.h"
 
 namespace zenith
 {
+    long State::LOOP_NUMBER = 0;
     GLFWwindow *State::window = nullptr;
+
+    GLFWwindow *State::GetGLFWwindow()
+    {
+        if(window == NULL)
+            window = Starter::instance().GetWindow().GetGLFWwindow();
+
+        return window;
+    }
+
+    int State::GetWidth()
+    {
+        return Starter::instance().GetWindow().GetWidth();
+    }
+
+    int State::GetHeight()
+    {
+        return Starter::instance().GetWindow().GetHeight();
+    }
+
 }

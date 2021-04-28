@@ -23,38 +23,28 @@
  */
 #pragma once
 
-#include "init/starter.h"
 #include <api/glfw-api.h>
 
 namespace zenith
 {
     struct State
     {
-        static GLFWwindow *GetGLFWwindow()
-        {
-            if(window == NULL)
-                window = Starter::instance().GetWindow().GetGLFWwindow();
-
-            return window;
-        }
+        static GLFWwindow *GetGLFWwindow();
 
         /**
          * 获取窗口宽度
          */
-        static int GetWidth()
-        {
-            return Starter::instance().GetWindow().GetWidth();
-        }
+        static int GetWidth();
 
         /**
          * 获取窗口高度
          */
-        static int GetHeight()
-        {
-            return Starter::instance().GetWindow().GetHeight();
-        }
+        static int GetHeight();
+
+        static void npp() { LOOP_NUMBER++; }
 
     private:
+        static long LOOP_NUMBER;
         static GLFWwindow *window;
     };
 }
