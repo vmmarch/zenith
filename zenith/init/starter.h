@@ -40,7 +40,7 @@ namespace zenith
         Starter(zenith_char, int, int);
         ~Starter();
         void event(Event&); // 事件处理
-        void start_engine();
+        void main_cycle();
 
         Window& GetWindow() { return *window; }
 

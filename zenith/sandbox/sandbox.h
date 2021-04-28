@@ -50,8 +50,8 @@ namespace zenith
         /**
          * 绘制网格
          */
-        void DrawGrid();
-        void ClearColor(glm::vec4& color) { renderer->clear_color(color); }
+        void draw_grid();
+        void SetClearColor(glm::vec4& color) { renderer->clear_color(color); }
 
     private:
         LayerStack layer_stack;

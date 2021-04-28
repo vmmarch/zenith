@@ -85,13 +85,12 @@ namespace zenith
         }
         imlayer->end();
 
-        DrawGrid();
+        draw_grid();
         main_layer->render();
     }
 
-    void SandBox::DrawGrid()
+    void SandBox::draw_grid()
     {
-
     }
 
     void SandBox::event(Event &e)

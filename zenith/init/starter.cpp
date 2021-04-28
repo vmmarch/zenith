@@ -72,9 +72,9 @@ namespace zenith
         sandbox->update(deltaTime);
     }
 
-    void Starter::start_engine()
+    void Starter::main_cycle()
     {
-        sandbox->ClearColor(color::BLACK);
+        sandbox->SetClearColor(color::BLACK);
 
         // ------------------------------------------
         // game loop.
