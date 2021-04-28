@@ -56,10 +56,9 @@ namespace zenith
         {
             if(Input::pressed(ZENITH_KEY_C))
             {
-                if(!cursor_hide)
-                    glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-                else
-                    glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                if(!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                else glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                cursor_hide = !cursor_hide;
             }
         }
 

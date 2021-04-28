@@ -29,6 +29,14 @@ namespace zenith
     bool Input::pressed(zenith_keycode key)
     {
         auto state = glfwGetKey(State::GetGLFWwindow(), static_cast<int32_t>(key));
+#ifdef __DEBUG__
+        bool press = state == GLFW_PRESS || state == GLFW_REPEAT;
+        if(press)
+            ZENITH_INFO("keycode: %d", key);
+
+        return press;
+#else
         return state == GLFW_PRESS || state == GLFW_REPEAT;
+#endif
     }
 }
