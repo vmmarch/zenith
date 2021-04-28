@@ -60,10 +60,10 @@ namespace zenith
         if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
         {
             SetValue(KEY_CURSOR_MOVE_CAMER, !GetValue(KEY_CURSOR_MOVE_CAMER));
-        } else
+        }
 
         // 隐藏鼠标
-        if(Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
+        else if(Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
         {
             if (!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
             else glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -85,7 +85,13 @@ namespace zenith
         }
         imlayer->end();
 
+        DrawGrid();
         main_layer->render();
+    }
+
+    void SandBox::DrawGrid()
+    {
+
     }
 
     void SandBox::event(Event &e)

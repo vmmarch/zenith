@@ -47,7 +47,11 @@ namespace zenith
         void event(Event&) override;
         void close() override {};
 
-        void clear_color(glm::vec4& color) { renderer->clear_color(color); }
+        /**
+         * 绘制网格
+         */
+        void DrawGrid();
+        void ClearColor(glm::vec4& color) { renderer->clear_color(color); }
 
     private:
         LayerStack layer_stack;

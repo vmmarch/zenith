@@ -74,7 +74,7 @@ namespace zenith
 
     void Starter::start_engine()
     {
-        sandbox->clear_color(color::BLACK);
+        sandbox->ClearColor(color::BLACK);
 
         // ------------------------------------------
         // game loop.
