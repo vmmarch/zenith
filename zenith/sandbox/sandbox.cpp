@@ -52,17 +52,22 @@ namespace zenith
     {
         // ----------------------------------------
         // reload settings
-        reload_settings();
+        RELOAD_SETTING();
+
         camera.update(State::GetWidth(), State::GetHeight(), deltaTime);
 
-        if (Input::pressed(ZENITH_KEY_LEFTCONTROL))
+        // 禁止鼠标移动相机
+        if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
         {
-            if (Input::pressed(ZENITH_KEY_C))
-            {
-                if (!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-                else glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-                cursor_hide = !cursor_hide;
-            }
+            SetValue(KEY_CURSOR_MOVE_CAMER, !GetValue(KEY_CURSOR_MOVE_CAMER));
+        } else
+
+        // 隐藏鼠标
+        if(Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
+        {
+            if (!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            else glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            cursor_hide = !cursor_hide;
         }
 
         main_layer->update(deltaTime);
@@ -87,6 +92,7 @@ namespace zenith
     {
         if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
         {
+            if(!GetValue(KEY_CURSOR_MOVE_CAMER)) return;
             MouseMovedEvent &event = dynamic_cast<MouseMovedEvent &>(e);
 
             float xpos = event.GetX();

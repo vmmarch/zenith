@@ -28,11 +28,12 @@
 #include <zenith/type.h>
 #include <api/glfw-api.h>
 
-#define V_TRUE true
-#define V_FALSE false
+#define ZENITH_TRUE  true
+#define ZENITH_FALSE false
 
-const static int KEY_MULTISAMPLE        = 0;        // 多重采样抗锯齿
-const static int KEY_DEPTHTEST          = 1;        // 深度测试
+const static int KEY_MULTISAMPLE                      = 0;        // 多重采样抗锯齿
+const static int KEY_DEPTHTEST                        = 1;        // 深度测试
+const static int KEY_CURSOR_MOVE_CAMER                = 2;        // 禁止鼠标移动相机
 
 namespace zenith
 {
@@ -45,9 +46,14 @@ namespace zenith
     EXTAPI void SetValue(int k, bool v);
 
     /**
+     * 判断当前配置是否开启
+     */
+    EXTAPI bool GetValue(int k);
+
+    /**
      * 重新加载配置
      */
-    EXTAPI void reload_settings();
+    EXTAPI void RELOAD_SETTING();
 }
 
 #endif

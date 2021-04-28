@@ -26,6 +26,17 @@
 
 namespace zenith
 {
+
+    bool Input::multikey(zenith_keycode key1, zenith_keycode key2)
+    {
+        return pressed(key1) && pressed(key2);
+    }
+
+    bool Input::multikey(zenith_keycode key1, zenith_keycode key2, zenith_keycode key3)
+    {
+        return pressed(key1) && pressed(key2) && pressed(key3);
+    }
+
     bool Input::pressed(zenith_keycode key)
     {
         auto state = glfwGetKey(State::GetGLFWwindow(), static_cast<int32_t>(key));

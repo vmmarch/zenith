@@ -27,9 +27,10 @@ namespace zenith
 {
     struct settings_t
     {
-        bool CAN_BE_RELOAD      = false;           // 是否重新加载
-        bool multisample        = false;           // 多重采样抗锯齿
-        bool depthtest          = false;           // 多重采样抗锯齿
+        bool CAN_BE_RELOAD                  = false;           // 是否重新加载
+        bool Flags_MultiSample              = false;           // 多重采样抗锯齿
+        bool Flags_DepthTest                = false;           // 多重采样抗锯齿
+        bool Flags_CursorMoveCamera         = true;            // 鼠标移动相机
     };
 
     settings_t *settings = new settings_t();
@@ -38,22 +39,35 @@ namespace zenith
     {
         switch (k)
         {
-            case KEY_MULTISAMPLE: settings->multisample     = v; break;
-            case KEY_DEPTHTEST:   settings->depthtest       = v; break;
+            case KEY_MULTISAMPLE:                   settings->Flags_MultiSample                   = v; break;
+            case KEY_DEPTHTEST:                     settings->Flags_DepthTest                     = v; break;
+            case KEY_CURSOR_MOVE_CAMER:             settings->Flags_CursorMoveCamera              = v; break;
             default: return;
         }
 
         settings->CAN_BE_RELOAD = true;
     }
 
+    bool GetValue(int k)
+    {
+        switch (k)
+        {
+            case KEY_MULTISAMPLE:                   return settings->Flags_MultiSample;
+            case KEY_DEPTHTEST:                     return settings->Flags_DepthTest;
+            case KEY_CURSOR_MOVE_CAMER:             return settings->Flags_CursorMoveCamera;
+        }
+
+        return false;
+    }
+
     /**
      * 加载配置
      */
-    void reload_settings()
+    void RELOAD_SETTING()
     {
         if (settings->CAN_BE_RELOAD)
         {
-            if (settings->multisample)
+            if (settings->Flags_MultiSample)
             {
                 GLAPI_EnableMultisample();
             } else
@@ -61,7 +75,7 @@ namespace zenith
                 GLAPI_DisableMultisample();
             }
 
-            if (settings->depthtest)
+            if (settings->Flags_DepthTest)
             {
                 GLAPI_EnableDepthTest();
             } else

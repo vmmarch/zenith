@@ -27,9 +27,6 @@
 #include "settings.h"
 
 static bool line_check = false;
-static bool __multisample = false;
-static bool __depthtest = false;
-static bool reload_settings_check = false;
 
 /**
  * 属性面板配置
@@ -37,47 +34,58 @@ static bool reload_settings_check = false;
 static void __properties()
 {
     ImGui::Begin(GUI_TEXT_PROPERTIES);
-    if (ImGui::TreeNode("camera"))
+    if (ImGui::TreeNode("投影相机"))
     {
+        if (zenith::GetValue(KEY_CURSOR_MOVE_CAMER))
+        {
+            if (ImGui::Button("关闭鼠标移动相机"))
+            {
+                zenith::SetValue(KEY_CURSOR_MOVE_CAMER, ZENITH_FALSE);
+            }
+        } else
+        {
+            if (ImGui::Button("启用鼠标移动相机"))
+            {
+                zenith::SetValue(KEY_CURSOR_MOVE_CAMER, ZENITH_TRUE);
+            }
+        }
         ImGui::TreePop();
     }
 
-    if (ImGui::CollapsingHeader("配置"))
+    if (ImGui::TreeNode("配置"))
     {
-        if (__multisample)
+        if (zenith::GetValue(KEY_MULTISAMPLE))
         {
             if (ImGui::Button("关闭多重采样抗锯齿"))
             {
-                zenith::SetValue(KEY_MULTISAMPLE, V_FALSE);
-                __multisample = false;
+                zenith::SetValue(KEY_MULTISAMPLE, ZENITH_FALSE);
             }
         } else
         {
             if (ImGui::Button("开启多重采样抗锯齿"))
             {
-                zenith::SetValue(KEY_MULTISAMPLE, V_TRUE);
-                __multisample = true;
+                zenith::SetValue(KEY_MULTISAMPLE, ZENITH_TRUE);
             }
         }
 
-        if (__depthtest)
+        if (zenith::GetValue(KEY_DEPTHTEST))
         {
             if (ImGui::Button("关闭深度缓冲"))
             {
-                zenith::SetValue(KEY_DEPTHTEST, V_FALSE);
-                __depthtest = false;
+                zenith::SetValue(KEY_DEPTHTEST, ZENITH_FALSE);
             }
         } else
         {
             if (ImGui::Button("开启深度缓冲"))
             {
-                zenith::SetValue(KEY_DEPTHTEST, V_TRUE);
-                __depthtest = true;
+                zenith::SetValue(KEY_DEPTHTEST, ZENITH_TRUE);
             }
         }
+
+        ImGui::TreePop();
     }
 
-    if (ImGui::CollapsingHeader("模型选项"))
+    if (ImGui::TreeNode("模型选项"))
     {
         ImGui::TableNextColumn();
 
@@ -89,6 +97,8 @@ static void __properties()
         {
             zenith::GraphicsContext::instance()->GetCurrModel()->SetRendertype(zenith::render::type_t::FILL);
         }
+
+        ImGui::TreePop();
     }
 
     ImGui::End();

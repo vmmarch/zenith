@@ -37,6 +37,15 @@ namespace zenith
     {
     public:
         static bool pressed(zenith_keycode);
-        static zenith_uint scrolled();
+
+        /**
+         * 两个键是否按下
+         */
+        static bool multikey(zenith_keycode key1, zenith_keycode key2);
+
+        /**
+         * 三个键是否按下
+         */
+        static bool multikey(zenith_keycode key1, zenith_keycode key2, zenith_keycode key3);
     };
 }
