@@ -48,7 +48,7 @@ namespace zenith
         /*!
          * 创建着色器
          */
-        static zenith_scope<Shader> __create(zenith_char path, zenith_char debugname = "shader");
+        static Shader* __create(zenith_char path, zenith_char debugname = "shader");
     };
 
 }

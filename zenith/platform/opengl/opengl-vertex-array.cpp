@@ -47,7 +47,7 @@ namespace zenith
         GLAPI_UnbindVertexArray();
     }
 
-    void OpenGLVertexArray::AddVertexBuffer(std::shared_ptr<VertexBuffer> &buf)
+    void OpenGLVertexArray::AddVertexBuffer(VertexBuffer* buf)
     {
         GLAPI_BindVertexArray(array_id);
         buf->bind();
@@ -75,15 +75,11 @@ namespace zenith
 
     void OpenGLVertexArray::SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size)
     {
-        std::shared_ptr<IndexBuffer> index_buf;
-        index_buf.reset(IndexBuffer::__create(buf, size));
-
-        SetIndexBuffer(index_buf);
-
+        SetIndexBuffer(IndexBuffer::__create(buf, size));
         mod = drawmod::INDEX;
     }
 
-    void OpenGLVertexArray::SetIndexBuffer(std::shared_ptr<IndexBuffer> &buf)
+    void OpenGLVertexArray::SetIndexBuffer(IndexBuffer* buf)
     {
         GLAPI_BindVertexArray(array_id);
         buf->bind();

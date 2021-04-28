@@ -41,23 +41,22 @@ namespace zenith
     class RenderModel
     {
     public:
-        RenderModel() = default;
-        RenderModel(zenith_shared<VertexArray> vertex, zenith_shared<Shader> shader)
-            : vertex_array(std::move(vertex)), shader(std::move(shader))
+        RenderModel(VertexArray* vertex, Shader* shader)
+            : vertex_array(vertex), shader(shader)
             {
                 render_type = GL_FILL;
                 render_type_t = render::type_t::FILL;
             }
 
         // vertex array
-        void SetVertexArray(zenith_shared<VertexArray>&);
+        void SetVertexArray(VertexArray*);
 
-        [[nodiscard]] zenith_shared<VertexArray> GetVertexArray() const;
+        [[nodiscard]] VertexArray* GetVertexArray() const;
 
         // shader
-        void SetShader(zenith_shared<Shader>&);
+        void SetShader(Shader*);
 
-        [[nodiscard]] const zenith_shared<Shader> GetShader() const;
+        [[nodiscard]] Shader* GetShader();
 
         // 设置渲染类型
         void SetRendertype(render::type_t = render::type_t::FILL);
@@ -75,8 +74,8 @@ namespace zenith
 
     private:
         bool modify = false;
-        zenith_shared<Shader> shader;
-        zenith_shared<VertexArray> vertex_array;
+        Shader* shader;
+        VertexArray* vertex_array;
         render::type_t render_type_t;
         GLenum render_type;
 

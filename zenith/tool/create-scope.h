@@ -83,14 +83,14 @@ static zenith_scope<zenith::Renderer> __create_renderer()
 /**
  * @return 着色器实例
  */
-static zenith_scope<zenith::Shader> __create_shader(zenith_char path, zenith_char debugname)
+static zenith::Shader* __create_shader(zenith_char path, zenith_char debugname)
 {
     switch (zenith::Renderer::__render_api())
     {
         case zenith::render::api::NONE:
             break;
         case zenith::render::api::GL:
-            return zenith::__create_scope<zenith::OpenGLShader>(path, debugname);
+            return new zenith::OpenGLShader(path, debugname);
         case zenith::render::api::DX:
             break;
     }

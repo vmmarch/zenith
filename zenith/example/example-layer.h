@@ -47,21 +47,19 @@ namespace zenith
     public:
         explicit ExampleLayer(Renderer* renderer) : Layer("example layer"), renderer(renderer)
         {
-            zenith_scope<Shader> shader = Shader::__create("../sh/shader-vfs");
+            Shader* shader = Shader::__create("../sh/shader-vfs");
 
             // ----------------------------------------
             // 画三角形
-            std::shared_ptr<VertexArray> vertexArray;
-            vertexArray.reset(VertexArray::__create());
+            VertexArray* vertexArray = VertexArray::__create();
 
             float vertices[] = {
                     -0.5f, -0.5f, 0.0f,
                     0.5f, -0.5f, 0.0f,
                     0.0f,  0.5f, 0.0f
             };
-            std::shared_ptr<VertexBuffer> vbuf;
-            vbuf.reset(VertexBuffer::__create(vertices, sizeof(vertices)));
-                vbuf->SetVertexSize(3);
+            VertexBuffer* vbuf = VertexBuffer::__create(vertices, sizeof(vertices));
+            vbuf->SetVertexSize(3);
 
             layout_t layout = {
                     {"position", shader_t::FLOAT3},
@@ -69,7 +67,7 @@ namespace zenith
             vbuf->SetLayout(layout);
             vertexArray->AddVertexBuffer(vbuf);
 
-            RenderModel model(vertexArray, std::move(shader));
+            RenderModel model(vertexArray, shader);
 
             // 提交渲染模型
             for(int i = 0; i < 10; i++)

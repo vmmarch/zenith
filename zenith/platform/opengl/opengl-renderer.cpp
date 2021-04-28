@@ -62,15 +62,15 @@ namespace zenith
 
     void OpenGLRenderer::draw_render_model(RenderModel& model)
     {
-        zenith_shared<Shader> shader = model.GetShader();
+        Shader* shader = model.GetShader();
         shader->bind();
 
         glm::mat4 modloc = glm::mat4(1.0f);
         modloc = glm::translate(modloc, model.GetLocation());
 
-        model.GetShader()->setMat4("u_model_location", modloc);
-        model.GetShader()->setMat4("u_projection", projection);
-        model.GetShader()->setMat4("u_view_matrix", view_matrix);
+        shader->setMat4("u_model_location", modloc);
+        shader->setMat4("u_projection", projection);
+        shader->setMat4("u_view_matrix", view_matrix);
 
         if(model.GetMod() == drawmod::INDEX)
         {
@@ -84,7 +84,7 @@ namespace zenith
     void OpenGLRenderer::draw_array(const VertexArray &vertex)
     {
         vertex.bind();
-        for(auto& array : vertex.__vertex_buffers())
+        for(auto& array : vertex.GetVertexBuffers())
         {
             GLAPI_DrawArrays(0, array->GetVertexSize());
         }
@@ -99,7 +99,7 @@ namespace zenith
     void OpenGLRenderer::draw_indexed(const VertexArray& vertex)
     {
         vertex.bind();
-        GLAPI_DrawIndex(vertex.__index_buffer()->size(), GL_UNSIGNED_INT);
+        GLAPI_DrawIndex(vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
     }
 
     void OpenGLRenderer::draw_indexed(const std::vector<VertexArray>& vertex_arrays)
