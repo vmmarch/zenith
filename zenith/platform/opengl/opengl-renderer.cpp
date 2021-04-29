@@ -105,10 +105,16 @@ namespace zenith
         VertexArray* vertex = object.GetVertexArray();
         vertex->bind();
 
-        for(auto &buffer : vertex->GetVertexBuffers())
+        if(object.GetMod() == DrawMode::INDEX)
         {
-            buffer->bind();
-            GLAPI_DrawLineArrays(0, buffer->GetBufferSize());
+            GLAPI_DrawLineIndex(vertex->GetIndexBuffer()->size(), GL_UNSIGNED_INT);
+        } else
+        {
+            for (auto &buffer : vertex->GetVertexBuffers())
+            {
+                buffer->bind();
+                GLAPI_DrawLineArrays(0, buffer->GetBufferSize());
+            }
         }
     }
 

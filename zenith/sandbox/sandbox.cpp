@@ -47,7 +47,10 @@ namespace zenith
     {
         // 绘制网格
         float line_vertices[] = {
-                0.5f, 0.0f, 0.0f
+                -1.0,  1.0, 0.0, // Top Left
+                -1.0, -1.0, 0.0, // Bottom Left
+                1.0, -1.0, 0.0, // Bottom Right
+                1.0,  1.0, 0.0, // Top Right
         };
 
         VertexBuffer* line_buffer = VertexBuffer::Create(line_vertices, sizeof(line_vertices));
@@ -65,8 +68,7 @@ namespace zenith
             ShaderProgram* program = object.GetShader();
             program->bind();
 
-            program->setMat4("u_transform", object.GetTransform());
-            program->setMat4("u_location", object.GetMat4Location());
+            program->SetMat4("u_transform", glm::scale(glm::mat4(), glm::vec3{ glm::vec2{0.75f}, 1.0f }));
         });
     }
 

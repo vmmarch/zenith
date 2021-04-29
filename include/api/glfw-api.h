@@ -375,6 +375,12 @@
 { glDrawArrays(GL_LINES, begin, count); }
 
 /**
+ * 通过索引画线
+ */
+#define GLAPI_DrawLineIndex(size, type) \
+{ glDrawElements(GL_LINES, size, type, NULL); }
+
+/**
  * 根据顶点数组画三角形
  */
 #define GLAPI_DrawTriangleArrays(begin, count) \

@@ -4,7 +4,7 @@ project(zenith)
 # ---------------------------------------------
 # 发布时需要将Release设置为ON
 # ---------------------------------------------
-set(RELEASE OFF)
+set(DEBUG OFF)
 
 # ---------------------------------------------
 # 开启例子测试
@@ -13,6 +13,7 @@ set(EXAMPLE ON)
 
 if(EXAMPLE MATCHES ON)
     add_subdirectory(example/line)
+    add_subdirectory(example/grid)
 endif()
 
 add_subdirectory(fuckstd)
@@ -76,7 +77,7 @@ add_definitions(
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
 )
 
-if(RELEASE MATCHES OFF)
+if(DEBUG MATCHES ON)
     add_definitions(-D__DEBUG__) # 开启DEBUG
 endif()
 

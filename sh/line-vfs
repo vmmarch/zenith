@@ -1,25 +1,50 @@
 // @vertex
 layout(location = 0) in vec3 position;
 
+out vec2 fragCoord;
 out vec3 v_position;
+out vec3 color;
 
-uniform mat4 u_location;
 uniform mat4 u_transform;
 
 void main()
 {
     v_position = position;
-    gl_Position = u_location * u_transform * vec4(position, 1.0);
+    fragCoord = position.xy;
+    color = vec3(0.8f, 0.2f, 0.1f);
+    gl_Position = u_transform * vec4(position, 1.0);
 }
 // @end
 
 // @fragment
-layout(location = 0) out vec4 color;
+in vec2 fragCoord;
+out vec4 fragColor;
 
-in vec3 v_position;
+in vec3 color;
+
+const float PI = 3.1415926535897932384626433832795;
+const vec2 CANVAS_SIZE = vec2(2);
+
+vec2 convert_to_cell_coords(vec2 coord, vec2 grid);
+
+float lineWidth = 0.01;
+vec2 grid = vec2(4);
+vec2 cellSize = CANVAS_SIZE / grid;
 
 void main()
 {
-    color = vec4(v_position * 0.2 + 0.3, 1.0);
+    vec2 cellCoord = convert_to_cell_coords(fragCoord, cellSize);
+    vec2 cutoff = convert_to_cell_coords(vec2(1.0 - lineWidth), cellSize);
+
+    vec2 alpha = step(cutoff, cellCoord);
+    if (max(alpha.x, alpha.y) == 0.0)
+        discard;
+
+    fragColor = vec4(color, 1.0);
+}
+
+vec2 convert_to_cell_coords(vec2 coord, vec2 cellSize)
+{
+    return cos(((2 * PI) / cellSize) * coord);
 }
 // @end

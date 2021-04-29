@@ -34,14 +34,14 @@ namespace zenith
         ~OpenGLShaderProgram() override;
         void bind() override;
         void unbind() override;
-        void setBool(zenith_char, bool) override;
-        void setInt(zenith_char, int) override;
-        void setFloat(zenith_char, float) override;
-        void setFloat2(zenith_char, glm::vec2) override;
-        void setFloat3(zenith_char, glm::vec3) override;
-        void setFloat4(zenith_char, glm::vec4) override;
-        void setMat3(zenith_char, glm::mat3) override;
-        void setMat4(zenith_char, glm::mat4) override;
+        void SetBool(zenith_char, bool) override;
+        void SetInt(zenith_char, int) override;
+        void SetFloat(zenith_char, float) override;
+        void SetFloat2(zenith_char, glm::vec2) override;
+        void SetFloat3(zenith_char, glm::vec3) override;
+        void SetFloat4(zenith_char, glm::vec4) override;
+        void SetMat3(zenith_char, glm::mat3) override;
+        void SetMat4(zenith_char, glm::mat4) override;
 
     private:
         zenith_uint shader_id;

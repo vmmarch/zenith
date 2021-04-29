@@ -36,14 +36,14 @@ namespace zenith
         virtual ~ShaderProgram() = default;
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual void setBool(zenith_char name, bool value) = 0;
-        virtual void setInt(zenith_char name, int value) = 0;
-        virtual void setFloat(zenith_char name, float value) = 0;
-        virtual void setFloat2(zenith_char name, glm::vec2 value) = 0;
-        virtual void setFloat3(zenith_char name, glm::vec3 value) = 0;
-        virtual void setFloat4(zenith_char name, glm::vec4 value) = 0;
-        virtual void setMat3(zenith_char name, glm::mat3 value) = 0;
-        virtual void setMat4(zenith_char name, glm::mat4 value) = 0;
+        virtual void SetBool(zenith_char name, bool value) = 0;
+        virtual void SetInt(zenith_char name, int value) = 0;
+        virtual void SetFloat(zenith_char name, float value) = 0;
+        virtual void SetFloat2(zenith_char name, glm::vec2 value) = 0;
+        virtual void SetFloat3(zenith_char name, glm::vec3 value) = 0;
+        virtual void SetFloat4(zenith_char name, glm::vec4 value) = 0;
+        virtual void SetMat3(zenith_char name, glm::mat3 value) = 0;
+        virtual void SetMat4(zenith_char name, glm::mat4 value) = 0;
 
         /*!
          * 创建着色器

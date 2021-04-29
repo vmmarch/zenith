@@ -85,5 +85,6 @@ namespace zenith
         buf->bind();
 
         this->index_buf = buf;
+        mod = DrawMode::INDEX;
     }
 }

@@ -54,9 +54,9 @@
 #define CREATE_WINDOW_FAILED "窗口创建失败 "
 #define GLFW_INIT_FAILED "GLFW初始化失败 "
 #define OPENGL_INFO "OpenGL创建信息: "
-#define VENDOR_INFO "VENDOR: %s"
-#define RENDER_INFO "RENDER: %s"
-#define VERSION_INFO "VERSION: %s"
+#define VENDOR_INFO "    VENDOR: %s"
+#define RENDER_INFO "    RENDER: %s"
+#define VERSION_INFO "    VERSION: %s"
 
 // DEBUG MESSAGE
 #define IFSPLIT "----------------------------------------------"

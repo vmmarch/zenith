@@ -73,9 +73,9 @@ namespace zenith
                 ShaderProgram* shader = object.GetShader();
                 shader->bind();
 
-                shader->setMat4("u_object_location", object.GetMat4Location());
-                shader->setMat4("u_projection", projection);
-                shader->setMat4("u_view", view_matrix);
+                shader->SetMat4("u_object_location", object.GetMat4Location());
+                shader->SetMat4("u_projection", projection);
+                shader->SetMat4("u_view", view_matrix);
             });
 
             // 提交渲染模型
