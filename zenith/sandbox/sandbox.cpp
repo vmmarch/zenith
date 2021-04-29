@@ -62,8 +62,11 @@ namespace zenith
 
         this->grid_object = new RenderObject(line_array, ShaderProgram::Create("../sh/line-vfs"));
         this->grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view) {
-            ShaderProgram* shader = object.GetShader();
-            shader->bind();
+            ShaderProgram* program = object.GetShader();
+            program->bind();
+
+            program->setMat4("u_transform", object.GetTransform());
+            program->setMat4("u_location", object.GetMat4Location());
         });
     }
 

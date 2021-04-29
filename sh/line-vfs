@@ -3,10 +3,13 @@ layout(location = 0) in vec3 position;
 
 out vec3 v_position;
 
+uniform mat4 u_location;
+uniform mat4 u_transform;
+
 void main()
 {
     v_position = position;
-    gl_Position = vec4(position, 1.0);
+    gl_Position = u_location * u_transform * vec4(position, 1.0);
 }
 // @end
 
