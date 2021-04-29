@@ -60,9 +60,9 @@ namespace zenith
         line_array->AddVertexBuffer(line_buffer);
         line_array->bind();
 
-        this->grid_object = new RenderObject(line_array, Shader::Create("../sh/grid-vfs"));
+        this->grid_object = new RenderObject(line_array, ShaderProgram::Create("../sh/grid-vfs"));
         this->grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view) {
-            Shader* shader = object.GetShader();
+            ShaderProgram* shader = object.GetShader();
             shader->bind();
 
             shader->setMat4("u_object_location", object.GetMat4Location());

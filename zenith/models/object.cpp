@@ -36,12 +36,12 @@ namespace zenith
         return this->vertex_array;
     }
 
-    void RenderObject::SetShader(Shader* _shader)
+    void RenderObject::SetShader(ShaderProgram* _shader)
     {
         this->shader = _shader;
     }
 
-    Shader* RenderObject::GetShader()
+    ShaderProgram* RenderObject::GetShader()
     {
         return this->shader;
     }

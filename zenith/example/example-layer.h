@@ -47,7 +47,7 @@ namespace zenith
     public:
         explicit ExampleLayer(Renderer* renderer) : Layer("example layer"), renderer(renderer)
         {
-            Shader* shader = Shader::Create("../sh/shader-vfs");
+            ShaderProgram* shader = ShaderProgram::Create("../sh/shader-vfs");
 
             // ----------------------------------------
             // 画三角形
@@ -70,7 +70,7 @@ namespace zenith
 
             // 更新坐标等参数
             object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view_matrix){
-                Shader* shader = object.GetShader();
+                ShaderProgram* shader = object.GetShader();
                 shader->bind();
 
                 shader->setMat4("u_object_location", object.GetMat4Location());

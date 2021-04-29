@@ -63,8 +63,8 @@ namespace zenith
 
         ImGui::ShowDemoWindow();
 
-        __properties();
         __resource_manager();
+        __properties();
     }
 
     void HomeLayer::close()

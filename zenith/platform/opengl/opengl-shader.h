@@ -27,11 +27,11 @@
 
 namespace zenith
 {
-    class OpenGLShader : public Shader
+    class OpenGLShaderProgram : public ShaderProgram
     {
     public:
-        OpenGLShader(zenith_char path, zenith_char debugname);
-        ~OpenGLShader() override;
+        OpenGLShaderProgram(zenith_char path, zenith_char debugname);
+        ~OpenGLShaderProgram() override;
         void bind() override;
         void unbind() override;
         void setBool(zenith_char, bool) override;

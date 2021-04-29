@@ -26,7 +26,6 @@
 
 namespace zenith
 {
-
     bool Input::multikey(zenith_keycode key1, zenith_keycode key2)
     {
         return pressed(key1) && pressed(key2);
@@ -42,8 +41,9 @@ namespace zenith
         auto state = glfwGetKey(State::GetGLFWwindow(), static_cast<int32_t>(key));
 #ifdef __DEBUG__
         bool press = state == GLFW_PRESS || state == GLFW_REPEAT;
+
         if(press)
-            ZENITH_DEBUG("keycode: %d", key);
+            ZENITH_DEBUG("Pressed keycode: %d", key);
 
         return press;
 #else

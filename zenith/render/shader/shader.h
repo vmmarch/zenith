@@ -30,10 +30,10 @@
 namespace zenith
 {
 
-    class Shader
+    class ShaderProgram
     {
     public:
-        virtual ~Shader() = default;
+        virtual ~ShaderProgram() = default;
         virtual void bind() = 0;
         virtual void unbind() = 0;
         virtual void setBool(zenith_char name, bool value) = 0;
@@ -48,7 +48,7 @@ namespace zenith
         /*!
          * 创建着色器
          */
-        static Shader* Create(zenith_char path, zenith_char debugname = "shader");
+        static ShaderProgram* Create(zenith_char path, zenith_char debugname = "shader");
     };
 
 }

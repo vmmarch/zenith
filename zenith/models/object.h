@@ -48,7 +48,7 @@ namespace zenith
     class RenderObject
     {
     public:
-        RenderObject(VertexArray *vertex, Shader *shader) : vertex_array(vertex), shader(shader)
+        RenderObject(VertexArray *vertex, ShaderProgram *shader) : vertex_array(vertex), shader(shader)
         {
             render_type = GL_FILL;
             render_type_t = render::type_t::FILL;
@@ -71,9 +71,9 @@ namespace zenith
         [[nodiscard]] VertexArray* GetVertexArray() const;
 
         // shader
-        void SetShader(Shader*);
+        void SetShader(ShaderProgram*);
 
-        [[nodiscard]] Shader* GetShader();
+        [[nodiscard]] ShaderProgram* GetShader();
 
         // 设置渲染类型
         void SetRendertype(render::type_t = render::type_t::FILL);
@@ -98,7 +98,7 @@ namespace zenith
 
     private:
         bool modify = false;
-        Shader* shader;
+        ShaderProgram* shader;
         VertexArray* vertex_array;
         render::type_t render_type_t;
         GLenum render_type;
