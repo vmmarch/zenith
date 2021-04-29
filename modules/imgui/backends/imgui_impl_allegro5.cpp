@@ -109,7 +109,7 @@ void ImGui_ImplAllegro5_RenderDrawData(ImDrawData* draw_data)
     {
         const ImDrawList* cmd_list = draw_data->CmdLists[n];
 
-        // Allegro's implementation of al_draw_indexed_prim() for DX9 is completely broken. Unindex our buffers ourselves.
+        // Allegro's implementation of al_DrawIndex_prim() for DX9 is completely broken. Unindex our buffers ourselves.
         // FIXME-OPT: Unfortunately Allegro doesn't support 32-bit packed colors so we have to convert them to 4 float as well..
         static ImVector<ImDrawVertAllegro> vertices;
         vertices.resize(cmd_list->IdxBuffer.Size);

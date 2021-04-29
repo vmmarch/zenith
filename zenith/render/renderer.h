@@ -58,15 +58,15 @@ namespace zenith
         virtual void enable_depth_test() = 0;
 
         // 渲染顶点数组
-        virtual void draw_objects() = 0;
-        virtual void draw_object(RenderObject&) = 0;
-        virtual void draw_array(const VertexArray&) = 0;
-        virtual void draw_array(const std::vector<VertexArray>&) = 0;
-        virtual void draw_indexed(const VertexArray&) = 0;
-        virtual void draw_indexed(const std::vector<VertexArray>&) = 0;
+        virtual void DrawObjects() = 0;
+        virtual void DrawObject(RenderObject&) = 0;
+        virtual void DrawArray(const VertexArray&) = 0;
+        virtual void DrawArray(const std::vector<VertexArray>&) = 0;
+        virtual void DrawIndex(const VertexArray&) = 0;
+        virtual void DrawIndex(const std::vector<VertexArray>&) = 0;
 
         // 画线
-        virtual void draw_lines(RenderObject&) = 0;
+        virtual void DrawLines(RenderObject&) = 0;
 
         virtual std::vector<RenderObject> GetObjects() = 0;
 

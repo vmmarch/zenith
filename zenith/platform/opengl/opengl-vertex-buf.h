@@ -42,6 +42,8 @@ namespace zenith
         void SetVertexSize(int size) override { sizecount = size; }
         int GetVertexSize() const override { return sizecount; }
 
+        int GetBufferSize() const override { return bufsize; }
+
     private:
         zenith_ui32 render_id;
         int sizecount;

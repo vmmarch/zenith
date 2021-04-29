@@ -6,6 +6,15 @@ project(zenith)
 # ---------------------------------------------
 set(RELEASE OFF)
 
+# ---------------------------------------------
+# 开启例子测试
+# ---------------------------------------------
+set(EXAMPLE ON)
+
+if(EXAMPLE MATCHES ON)
+    add_subdirectory(example/line)
+endif()
+
 add_subdirectory(fuckstd)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)
@@ -97,9 +106,14 @@ add_executable(${PROJECT_NAME}
         ${SOURCE_JAPI}
         ${LOADER_JVM_CALL}
 
-        # ---------------------------------------------------------------------------------------
+        # ------------------------------------------------------
+        # GLAD
+        # ------------------------------------------------------
+        ${CMAKE_CURRENT_SOURCE_DIR}/extern/GLAD/glad.c
+
+        # ------------------------------------------------------
         # IMGUI
-        # ---------------------------------------------------------------------------------------
+        # ------------------------------------------------------
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_draw.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_demo.cpp

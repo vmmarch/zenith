@@ -181,6 +181,8 @@ namespace zenith
          */
         virtual int GetVertexSize() const = 0;
 
+        virtual int GetBufferSize() const = 0;
+
         static VertexBuffer* Create(zenith_ui32);
         static VertexBuffer* Create(float*, zenith_ui32);
     };

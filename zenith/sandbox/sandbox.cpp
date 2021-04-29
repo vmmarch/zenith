@@ -47,7 +47,7 @@ namespace zenith
     {
         // 绘制网格
         float line_vertices[] = {
-                0.5f, 0.0f, 0.0f,
+                0.5f, 0.0f, 0.0f
         };
 
         VertexBuffer* line_buffer = VertexBuffer::Create(line_vertices, sizeof(line_vertices));
@@ -60,14 +60,10 @@ namespace zenith
         line_array->AddVertexBuffer(line_buffer);
         line_array->bind();
 
-        this->grid_object = new RenderObject(line_array, ShaderProgram::Create("../sh/grid-vfs"));
+        this->grid_object = new RenderObject(line_array, ShaderProgram::Create("../sh/line-vfs"));
         this->grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view) {
             ShaderProgram* shader = object.GetShader();
             shader->bind();
-
-            shader->setMat4("u_object_location", object.GetMat4Location());
-            shader->setMat4("u_projection", projection);
-            shader->setMat4("u_view", view);
         });
     }
 
@@ -108,8 +104,7 @@ namespace zenith
         }
         imlayer->end();
 
-        glLineWidth(3.0f);
-        renderer->draw_lines(*grid_object);
+        renderer->DrawLines(*grid_object);
         main_layer->render();
     }
 

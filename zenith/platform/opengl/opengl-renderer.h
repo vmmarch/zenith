@@ -38,13 +38,13 @@ namespace zenith
         RenderObject& GetObject0() override { return objects.at(0); }
         void submit(RenderObject& model) override { objects.push_back(model); }
         std::vector<RenderObject> GetObjects() override { return objects; }
-        void draw_objects() override;
-        void draw_object(RenderObject&) override;
-        void draw_array(const VertexArray&) override;
-        void draw_array(const std::vector<VertexArray>&) override;
-        void draw_indexed(const VertexArray&) override;
-        void draw_indexed(const std::vector<VertexArray>&) override;
-        void draw_lines(RenderObject&) override;
+        void DrawObjects() override;
+        void DrawObject(RenderObject&) override;
+        void DrawArray(const VertexArray&) override;
+        void DrawArray(const std::vector<VertexArray>&) override;
+        void DrawIndex(const VertexArray&) override;
+        void DrawIndex(const std::vector<VertexArray>&) override;
+        void DrawLines(RenderObject&) override;
 
     private:
         glm::mat4 projection;

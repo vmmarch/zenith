@@ -54,51 +54,51 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::draw_objects()
+    void OpenGLRenderer::DrawObjects()
     {
         for(auto& object : objects)
-            draw_object(object);
+            DrawObject(object);
     }
 
-    void OpenGLRenderer::draw_object(RenderObject& object)
+    void OpenGLRenderer::DrawObject(RenderObject& object)
     {
         object.update(projection, view_matrix);
 
         if(object.GetMod() == DrawMode::INDEX)
         {
-            draw_indexed(*object.GetVertexArray());
+            DrawIndex(*object.GetVertexArray());
         } else
         {
-            draw_array(*object.GetVertexArray());
+            DrawArray(*object.GetVertexArray());
         }
     }
 
-    void OpenGLRenderer::draw_array(const VertexArray &vertex)
+    void OpenGLRenderer::DrawArray(const VertexArray &vertex)
     {
         vertex.bind();
         for(auto& array : vertex.GetVertexBuffers())
             GLAPI_DrawTriangleArrays(0, array->GetVertexSize());
     }
 
-    void OpenGLRenderer::draw_array(const std::vector<VertexArray>& vertex_arrays)
+    void OpenGLRenderer::DrawArray(const std::vector<VertexArray>& vertex_arrays)
     {
         for (auto &vertex : vertex_arrays)
-            draw_array(vertex);
+            DrawArray(vertex);
     }
 
-    void OpenGLRenderer::draw_indexed(const VertexArray& vertex)
+    void OpenGLRenderer::DrawIndex(const VertexArray& vertex)
     {
         vertex.bind();
         GLAPI_DrawTriangleIndex(vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
     }
 
-    void OpenGLRenderer::draw_indexed(const std::vector<VertexArray>& vertex_arrays)
+    void OpenGLRenderer::DrawIndex(const std::vector<VertexArray>& vertex_arrays)
     {
         for (auto &vertex : vertex_arrays)
-            draw_indexed(vertex);
+            DrawIndex(vertex);
     }
 
-    void OpenGLRenderer::draw_lines(RenderObject &object)
+    void OpenGLRenderer::DrawLines(RenderObject &object)
     {
         object.update(projection, view_matrix);
 
@@ -108,7 +108,7 @@ namespace zenith
         for(auto &buffer : vertex->GetVertexBuffers())
         {
             buffer->bind();
-            GLAPI_DrawLineArrays(0, buffer->GetVertexSize());
+            GLAPI_DrawLineArrays(0, buffer->GetBufferSize());
         }
     }
 

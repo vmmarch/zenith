@@ -91,7 +91,7 @@ namespace zenith
             {
                 RenderObject& object = renderer->GetObject0();
                 object.SetLocation(cube_pos[i]);
-                renderer->draw_object(object);
+                renderer->DrawObject(object);
             }
         }
 
