@@ -369,15 +369,21 @@
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
 
 /**
- * 通过索引画
+ * 画线
  */
-#define GLAPI_DrawArrays(begin, end) \
-{ glDrawArrays(GL_TRIANGLES, begin, end); }
+#define GLAPI_DrawLineArrays(begin, count) \
+{ glDrawArrays(GL_LINES, begin, count); }
 
 /**
- * 通过索引画
+ * 根据顶点数组画三角形
  */
-#define GLAPI_DrawIndex(size, type) \
+#define GLAPI_DrawTriangleArrays(begin, count) \
+{ glDrawArrays(GL_TRIANGLES, begin, count); }
+
+/**
+ * 通过索引画三角形
+ */
+#define GLAPI_DrawTriangleIndex(size, type) \
 { glDrawElements(GL_TRIANGLES, size, type, NULL); }
 
 // ----------------------------------------------------

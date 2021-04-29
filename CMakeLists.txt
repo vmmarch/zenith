@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.17)
 project(zenith)
 
-option(FUCK_STD "dont use sb std." ON)
+# ---------------------------------------------
+# 发布时需要将Release设置为ON
+# ---------------------------------------------
+set(RELEASE OFF)
 
-if (FUCK_STD)
-    add_subdirectory(fuckstd)
-endif ()
+add_subdirectory(fuckstd)
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/init SOURCE_INIT)
@@ -64,8 +65,11 @@ add_definitions(
         -D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
         -D__ZENITH_IN_CHINA__                           # 引擎语言为中文
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
-        -D__DEBUG__                                     # 开启DEBUG
 )
+
+if(RELEASE MATCHES OFF)
+    add_definitions(-D__DEBUG__) # 开启DEBUG
+endif()
 
 link_libraries(imm32)
 link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)

@@ -36,7 +36,7 @@ namespace zenith
         void disable_depth_test() override;
         void enable_depth_test() override;
         RenderObject& GetObject0() override { return objects.at(0); }
-        void submit(RenderObject& model) { objects.push_back(model); }
+        void submit(RenderObject& model) override { objects.push_back(model); }
         std::vector<RenderObject> GetObjects() override { return objects; }
         void draw_objects() override;
         void draw_object(RenderObject&) override;
@@ -44,6 +44,7 @@ namespace zenith
         void draw_array(const std::vector<VertexArray>&) override;
         void draw_indexed(const VertexArray&) override;
         void draw_indexed(const std::vector<VertexArray>&) override;
+        void draw_lines(RenderObject&) override;
 
     private:
         glm::mat4 projection;

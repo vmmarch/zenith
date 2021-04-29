@@ -77,7 +77,7 @@ namespace zenith
     {
         vertex.bind();
         for(auto& array : vertex.GetVertexBuffers())
-            GLAPI_DrawArrays(0, array->GetVertexSize());
+            GLAPI_DrawTriangleArrays(0, array->GetVertexSize());
     }
 
     void OpenGLRenderer::draw_array(const std::vector<VertexArray>& vertex_arrays)
@@ -89,13 +89,27 @@ namespace zenith
     void OpenGLRenderer::draw_indexed(const VertexArray& vertex)
     {
         vertex.bind();
-        GLAPI_DrawIndex(vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
+        GLAPI_DrawTriangleIndex(vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
     }
 
     void OpenGLRenderer::draw_indexed(const std::vector<VertexArray>& vertex_arrays)
     {
         for (auto &vertex : vertex_arrays)
             draw_indexed(vertex);
+    }
+
+    void OpenGLRenderer::draw_lines(RenderObject &object)
+    {
+        object.update(projection, view_matrix);
+
+        VertexArray* vertex = object.GetVertexArray();
+        vertex->bind();
+
+        for(auto &buffer : vertex->GetVertexBuffers())
+        {
+            buffer->bind();
+            GLAPI_DrawLineArrays(0, buffer->GetVertexSize());
+        }
     }
 
 }

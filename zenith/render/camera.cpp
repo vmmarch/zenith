@@ -48,6 +48,9 @@ namespace zenith
             pos -= right * velocity;
         if(movement == RIGHT)
             pos += right * velocity;
+#ifdef __DEBUG__
+        ZENITH_DEBUG("Camera position [X:%f, Y:%f, Z:%f]", pos.x, pos.y, pos.z);
+#endif
     }
 
     void Camera::perspective(float x, float y, bool constraint_pitch)

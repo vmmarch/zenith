@@ -43,7 +43,7 @@ namespace zenith
 #ifdef __DEBUG__
         bool press = state == GLFW_PRESS || state == GLFW_REPEAT;
         if(press)
-            ZENITH_INFO("keycode: %d", key);
+            ZENITH_DEBUG("keycode: %d", key);
 
         return press;
 #else

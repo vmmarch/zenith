@@ -64,6 +64,10 @@ namespace zenith
         virtual void draw_array(const std::vector<VertexArray>&) = 0;
         virtual void draw_indexed(const VertexArray&) = 0;
         virtual void draw_indexed(const std::vector<VertexArray>&) = 0;
+
+        // 画线
+        virtual void draw_lines(RenderObject&) = 0;
+
         virtual std::vector<RenderObject> GetObjects() = 0;
 
         virtual RenderObject& GetObject0() = 0;
