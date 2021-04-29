@@ -35,6 +35,8 @@ namespace zenith
     {
         bufsize = size / sizeof(float);
         GLAPI_CreateStaticVertexBufferAndBind(render_id, buf, size);
+
+        SetVertexSize(bufsize / 3);
     }
 
     OpenGLVertexBuffer::~OpenGLVertexBuffer()

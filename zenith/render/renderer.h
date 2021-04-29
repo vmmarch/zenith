@@ -27,7 +27,7 @@
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
 #include "buf/vertex-array.h"
-#include "models/model.h"
+#include "models/object.h"
 #include "render/camera.h"
 
 namespace zenith
@@ -58,28 +58,28 @@ namespace zenith
         virtual void enable_depth_test() = 0;
 
         // 渲染顶点数组
-        virtual void draw_render_models() = 0;
-        virtual void draw_render_model(RenderModel&) = 0;
+        virtual void draw_objects() = 0;
+        virtual void draw_object(RenderObject&) = 0;
         virtual void draw_array(const VertexArray&) = 0;
         virtual void draw_array(const std::vector<VertexArray>&) = 0;
         virtual void draw_indexed(const VertexArray&) = 0;
         virtual void draw_indexed(const std::vector<VertexArray>&) = 0;
-        virtual std::vector<RenderModel> __models() = 0;
+        virtual std::vector<RenderObject> GetObjects() = 0;
 
-        virtual RenderModel& __render_model0() = 0;
-        virtual void submit(RenderModel&) = 0;
+        virtual RenderObject& GetObject0() = 0;
+        virtual void submit(RenderObject&) = 0;
 
         // --------------------------------------------------
         // static
 
         // 创建渲染器
-        static zenith_scope<Renderer> __create();
+        static zenith_scope<Renderer> Create();
 
         // 获取当前API
-        static render::api __render_api();
+        static render::api GetRenderAPI();
 
     private:
-        std::vector<RenderModel> models;
+        std::vector<RenderObject> models;
         static render::api render_api;
     };
 

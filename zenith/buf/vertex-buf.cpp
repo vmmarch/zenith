@@ -26,12 +26,12 @@
 
 namespace zenith
 {
-    VertexBuffer* VertexBuffer::__create(zenith_ui32 size)
+    VertexBuffer* VertexBuffer::Create(zenith_ui32 size)
     {
         return __create_vertex_buf(NULL, size);
     }
 
-    VertexBuffer* VertexBuffer::__create(float *buf, zenith_ui32 size)
+    VertexBuffer* VertexBuffer::Create(float *buf, zenith_ui32 size)
     {
         return __create_vertex_buf(buf, size);
     }

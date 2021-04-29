@@ -70,7 +70,7 @@ namespace zenith
         virtual void SetFilter(int, zenith_ui16) = 0;
 
         // 创建纹理
-        static zenith_scope<Texture2D> __create();
+        static zenith_scope<Texture2D> Create();
     };
 
 }

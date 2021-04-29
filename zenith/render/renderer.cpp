@@ -35,12 +35,12 @@ namespace zenith
     #error ##PLEASE_CHOOSE_RENDER_API
 #endif
 
-    render::api Renderer::__render_api()
+    render::api Renderer::GetRenderAPI()
     {
         return render_api;
     }
 
-    zenith_scope<Renderer> Renderer::__create()
+    zenith_scope<Renderer> Renderer::Create()
     {
         return __create_renderer();
     }

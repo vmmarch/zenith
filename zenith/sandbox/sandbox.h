@@ -42,15 +42,14 @@ namespace zenith
     {
     public:
         SandBox(Window* window);
+
+        void initialize();
+
         void render() override;
         void update(DeltaTime deltaTime) override;
         void event(Event&) override;
         void close() override {};
 
-        /**
-         * 绘制网格
-         */
-        void draw_grid();
         void SetClearColor(glm::vec4& color) { renderer->clear_color(color); }
 
     private:
@@ -62,6 +61,8 @@ namespace zenith
         float last_x, last_y;
         Layer* main_layer;
         bool cursor_hide = false;
+
+        RenderObject* grid_object;
     };
 
 }

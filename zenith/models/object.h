@@ -33,20 +33,37 @@
 namespace zenith
 {
 
-    class RenderModel;
+    class RenderObject;
+
+    /**
+     * @param [i] RenderObject        渲染对象
+     * @param [i] projection_matrix   投影矩阵
+     * @param [i] view_matrix         视图矩阵
+     */
+    typedef void (*zenith_update)(RenderObject&, glm::mat4, glm::mat4);
 
     /**
      * 渲染封装模型
      */
-    class RenderModel
+    class RenderObject
     {
     public:
-        RenderModel(VertexArray* vertex, Shader* shader)
-            : vertex_array(vertex), shader(shader)
-            {
-                render_type = GL_FILL;
-                render_type_t = render::type_t::FILL;
-            }
+        RenderObject(VertexArray *vertex, Shader *shader) : vertex_array(vertex), shader(shader)
+        {
+            render_type = GL_FILL;
+            render_type_t = render::type_t::FILL;
+        }
+
+        void update(glm::mat4 projection, glm::mat4 view_matrix)
+        {
+            if(update_p != NULL)
+                update_p(*this, projection, view_matrix);
+        }
+
+        void SetUpdate(zenith_update update)
+        {
+            this->update_p = update;
+        }
 
         // vertex array
         void SetVertexArray(VertexArray*);
@@ -68,9 +85,16 @@ namespace zenith
         glm::mat4 GetTransform() { return transform; }
 
         void SetLocation(glm::vec3 loc) { location = loc; }
+
+        glm::mat4 GetMat4Location()
+        {
+            glm::mat4 m_location = glm::mat4(1.0f);
+            m_location = glm::translate(m_location, GetLocation());
+            return m_location;
+        }
         glm::vec3 GetLocation() { return location; }
 
-        drawmod GetMod() const { return vertex_array->GetMod(); }
+        DrawMode GetMod() const { return vertex_array->GetMod(); }
 
     private:
         bool modify = false;
@@ -81,5 +105,7 @@ namespace zenith
 
         glm::vec3 location = { 0.0f, 0.0f, 0.0f };
         glm::mat4 transform;
+
+        zenith_update update_p = NULL; // 更新函数
     };
 }

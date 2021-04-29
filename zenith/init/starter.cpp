@@ -34,6 +34,7 @@ namespace zenith
         init_window(title, width, height);
 
         sandbox = new SandBox(window.get());
+        sandbox->initialize();
     }
 
     Starter::~Starter()
@@ -44,7 +45,7 @@ namespace zenith
     void Starter::init_window(zenith_char title, int width, int height)
     {
         v_winprops winprops(title, width, height);
-        this->window = Window::__create(winprops);
+        this->window = Window::Create(winprops);
         this->window->SetEventCallback(ZENITH_BIND_EVENT_FN(Starter::event));
     }
 

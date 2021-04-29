@@ -26,7 +26,7 @@
 
 namespace zenith
 {
-    zenith_scope<Window> Window::__create(const v_winprops &winprops)
+    zenith_scope<Window> Window::Create(const v_winprops &winprops)
     {
         return __create_window(winprops);
     }

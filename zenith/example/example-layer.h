@@ -47,19 +47,18 @@ namespace zenith
     public:
         explicit ExampleLayer(Renderer* renderer) : Layer("example layer"), renderer(renderer)
         {
-            Shader* shader = Shader::__create("../sh/shader-vfs");
+            Shader* shader = Shader::Create("../sh/shader-vfs");
 
             // ----------------------------------------
             // 画三角形
-            VertexArray* vertexArray = VertexArray::__create();
+            VertexArray* vertexArray = VertexArray::Create();
 
             float vertices[] = {
                     -0.5f, -0.5f, 0.0f,
                     0.5f, -0.5f, 0.0f,
                     0.0f,  0.5f, 0.0f
             };
-            VertexBuffer* vbuf = VertexBuffer::__create(vertices, sizeof(vertices));
-            vbuf->SetVertexSize(3);
+            VertexBuffer* vbuf = VertexBuffer::Create(vertices, sizeof(vertices));
 
             layout_t layout = {
                     {"position", shader_t::FLOAT3},
@@ -67,13 +66,21 @@ namespace zenith
             vbuf->SetLayout(layout);
             vertexArray->AddVertexBuffer(vbuf);
 
-            RenderModel model(vertexArray, shader);
+            RenderObject object(vertexArray, shader);
+
+            // 更新坐标等参数
+            object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view_matrix){
+                Shader* shader = object.GetShader();
+                shader->bind();
+
+                shader->setMat4("u_object_location", object.GetMat4Location());
+                shader->setMat4("u_projection", projection);
+                shader->setMat4("u_view", view_matrix);
+            });
 
             // 提交渲染模型
-            for(int i = 0; i < 10; i++)
-                renderer->submit(model);
-
-            GraphicsContext::instance()->SetCurrModel(model);
+            renderer->submit(object);
+            GraphicsContext::instance()->SetCurrObject(object);
         }
 
         void render() override
@@ -82,9 +89,9 @@ namespace zenith
             // GL render from there.
             for(int i = 0; i < 10; i++)
             {
-                RenderModel& model = renderer->__render_model0();
-                model.SetLocation(cube_pos[i]);
-                renderer->draw_render_model(model);
+                RenderObject& object = renderer->GetObject0();
+                object.SetLocation(cube_pos[i]);
+                renderer->draw_object(object);
             }
         }
 

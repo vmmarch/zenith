@@ -21,32 +21,32 @@
 /*!
  * @author 2B键盘
  */
-#include "model.h"
+#include "object.h"
 
 namespace zenith
 {
 
-    void RenderModel::SetVertexArray(VertexArray* vertex)
+    void RenderObject::SetVertexArray(VertexArray* vertex)
     {
         this->vertex_array = vertex;
     }
 
-    VertexArray* RenderModel::GetVertexArray() const
+    VertexArray* RenderObject::GetVertexArray() const
     {
         return this->vertex_array;
     }
 
-    void RenderModel::SetShader(Shader* _shader)
+    void RenderObject::SetShader(Shader* _shader)
     {
         this->shader = _shader;
     }
 
-    Shader* RenderModel::GetShader()
+    Shader* RenderObject::GetShader()
     {
         return this->shader;
     }
 
-    void RenderModel::SetRendertype(render::type_t type)
+    void RenderObject::SetRendertype(render::type_t type)
     {
         if(type == render::type_t::LINE)
         {
@@ -61,7 +61,7 @@ namespace zenith
         }
     }
 
-    render::type_t RenderModel::GetRendertype() const
+    render::type_t RenderObject::GetRendertype() const
     {
         return render_type_t;
     }

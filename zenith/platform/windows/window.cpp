@@ -70,7 +70,7 @@ namespace zenith::win
             glfwTerminate();
         }
 
-        graphics_context = GraphicsContext::__create(this->window);
+        graphics_context = GraphicsContext::Create(this->window);
         glfwSetWindowUserPointer(this->window, &this->info);
     }
 

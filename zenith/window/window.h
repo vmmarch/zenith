@@ -68,6 +68,6 @@ namespace zenith
         virtual GLFWwindow* GetGLFWwindow() const = 0;
 
         // 创建Window
-        static zenith_scope<Window> __create(const v_winprops&);
+        static zenith_scope<Window> Create(const v_winprops&);
     };
 }

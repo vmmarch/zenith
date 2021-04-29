@@ -52,7 +52,7 @@ namespace zenith
         GLAPI_BindVertexArray(array_id);
         buf->bind();
 
-        if(buf->GetLayout().__elements().size() == 0)
+        if(buf->GetLayout().GetElements().size() == 0)
         {
             ZENITH_ERROR(VERTEX_BUFFER_HAS_NOT_LAYOUT);
         } else
@@ -64,7 +64,7 @@ namespace zenith
                 glEnableVertexAttribArray(index);
                 glVertexAttribPointer(index, element.__size(), element.__type(),
                                       element.normalized ? GL_TRUE : GL_FALSE,
-                                      buf->GetLayout().__stride(),
+                                      buf->GetLayout().GetStride(),
                                       (const void*) element.offset);
                 index++;
             }
@@ -75,8 +75,8 @@ namespace zenith
 
     void OpenGLVertexArray::SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size)
     {
-        SetIndexBuffer(IndexBuffer::__create(buf, size));
-        mod = drawmod::INDEX;
+        SetIndexBuffer(IndexBuffer::Create(buf, size));
+        mod = DrawMode::INDEX;
     }
 
     void OpenGLVertexArray::SetIndexBuffer(IndexBuffer* buf)

@@ -49,7 +49,7 @@ static zenith_scope<zenith::Window> __create_window(const zenith::v_winprops &pr
  */
 static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -67,7 +67,7 @@ static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
  */
 static zenith_scope<zenith::Renderer> __create_renderer()
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -85,7 +85,7 @@ static zenith_scope<zenith::Renderer> __create_renderer()
  */
 static zenith::Shader* __create_shader(zenith_char path, zenith_char debugname)
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -103,7 +103,7 @@ static zenith::Shader* __create_shader(zenith_char path, zenith_char debugname)
  */
 static zenith_scope<zenith::Texture2D> __create_texture2D()
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -122,7 +122,7 @@ static zenith_scope<zenith::Texture2D> __create_texture2D()
  */
 static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_ui32 size)
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -143,7 +143,7 @@ static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_ui32 size)
  */
 static zenith::IndexBuffer* __create_index_buf(zenith_ui32 *buf, zenith_ui32 size)
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -161,7 +161,7 @@ static zenith::IndexBuffer* __create_index_buf(zenith_ui32 *buf, zenith_ui32 siz
  */
 static zenith::VertexArray* __create_vertex_array()
 {
-    switch (zenith::Renderer::__render_api())
+    switch (zenith::Renderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;

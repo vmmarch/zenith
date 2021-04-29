@@ -54,30 +54,22 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::draw_render_models()
+    void OpenGLRenderer::draw_objects()
     {
-        for(auto& model : models)
-            draw_render_model(model);
+        for(auto& object : objects)
+            draw_object(object);
     }
 
-    void OpenGLRenderer::draw_render_model(RenderModel& model)
+    void OpenGLRenderer::draw_object(RenderObject& object)
     {
-        Shader* shader = model.GetShader();
-        shader->bind();
+        object.update(projection, view_matrix);
 
-        glm::mat4 modloc = glm::mat4(1.0f);
-        modloc = glm::translate(modloc, model.GetLocation());
-
-        shader->setMat4("u_model_location", modloc);
-        shader->setMat4("u_projection", projection);
-        shader->setMat4("u_view_matrix", view_matrix);
-
-        if(model.GetMod() == drawmod::INDEX)
+        if(object.GetMod() == DrawMode::INDEX)
         {
-            draw_indexed(*model.GetVertexArray());
+            draw_indexed(*object.GetVertexArray());
         } else
         {
-            draw_array(*model.GetVertexArray());
+            draw_array(*object.GetVertexArray());
         }
     }
 
@@ -85,9 +77,7 @@ namespace zenith
     {
         vertex.bind();
         for(auto& array : vertex.GetVertexBuffers())
-        {
             GLAPI_DrawArrays(0, array->GetVertexSize());
-        }
     }
 
     void OpenGLRenderer::draw_array(const std::vector<VertexArray>& vertex_arrays)

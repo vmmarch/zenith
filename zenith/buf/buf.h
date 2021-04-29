@@ -139,8 +139,8 @@ namespace zenith
             }
         }
 
-        inline const zenith_ui32 __stride() const { return stride; }
-        inline const std::vector<element_t>& __elements() const { return elements; }
+        inline const zenith_ui32 GetStride() const { return stride; }
+        inline const std::vector<element_t>& GetElements() const { return elements; }
 
         std::vector<element_t>::iterator begin() { return elements.begin(); }
         std::vector<element_t>::iterator end() { return elements.end(); }
@@ -181,8 +181,8 @@ namespace zenith
          */
         virtual int GetVertexSize() const = 0;
 
-        static VertexBuffer* __create(zenith_ui32);
-        static VertexBuffer* __create(float*, zenith_ui32);
+        static VertexBuffer* Create(zenith_ui32);
+        static VertexBuffer* Create(float*, zenith_ui32);
     };
 
     class IndexBuffer
@@ -193,7 +193,7 @@ namespace zenith
         virtual void unbind() = 0;
         virtual zenith_ui32 size() const = 0;
 
-        static IndexBuffer* __create(zenith_ui32* indices, zenith_ui32 size);
+        static IndexBuffer* Create(zenith_ui32* indices, zenith_ui32 size);
     };
 
 }

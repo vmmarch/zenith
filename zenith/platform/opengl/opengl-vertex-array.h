@@ -50,13 +50,13 @@ namespace zenith
         void AddVertexBuffer(VertexBuffer*) override;
         void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) override;
         void SetIndexBuffer(IndexBuffer*) override;
-        drawmod GetMod() const { return mod; }
+        DrawMode GetMod() const override { return mod; }
         IndexBuffer* GetIndexBuffer() const override { return index_buf; }
-        std::vector<VertexBuffer*> GetVertexBuffers() const { return vertex_buffers; };
+        std::vector<VertexBuffer*> GetVertexBuffers() const override { return vertex_buffers; };
 
     private:
         zenith_ui32 array_id;
-        drawmod mod = drawmod::ARRAY;
+        DrawMode mod = DrawMode::ARRAY;
         std::vector<VertexBuffer*> vertex_buffers;
         IndexBuffer* index_buf;
     };

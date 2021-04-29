@@ -26,7 +26,7 @@
 
 namespace zenith
 {
-    VertexArray* VertexArray::__create()
+    VertexArray* VertexArray::Create()
     {
         return __create_vertex_array();
     }

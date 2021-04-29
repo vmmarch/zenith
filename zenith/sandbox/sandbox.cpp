@@ -30,13 +30,12 @@
 
 namespace zenith
 {
-
     static bool first = true;
 
     SandBox::SandBox(Window *window)
             : Layer("sandbox layer"), camera(Camera()), window(window)
     {
-        this->renderer = Renderer::__create();
+        this->renderer = Renderer::Create();
         main_layer = new ExampleLayer(renderer.get());
 
         this->imlayer = new ImGuiLayer();
@@ -44,8 +43,33 @@ namespace zenith
         layer_stack.push(new EditorLayer());
     }
 
-    void grid()
+    void SandBox::initialize()
     {
+        // 绘制网格
+        float line_vertices[] = {
+                -0.5f, -0.5f, 0.0f,
+                0.5f, -0.5f, 0.0f,
+                0.0f,  0.5f, 0.0f
+        };
+
+        VertexBuffer* line_buffer = VertexBuffer::Create(line_vertices, sizeof(line_vertices));
+
+        line_buffer->SetLayout({
+            {"position", shader_t::FLOAT3}
+        });
+
+        VertexArray* line_array = VertexArray::Create();
+        line_array->AddVertexBuffer(line_buffer);
+
+        this->grid_object = new RenderObject(line_array, Shader::Create("../sh/grid-vfs"));
+        this->grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view) {
+            Shader* shader = object.GetShader();
+            shader->bind();
+
+            shader->setMat4("u_object_location", object.GetMat4Location());
+            shader->setMat4("u_projection", projection);
+            shader->setMat4("u_view", view);
+        });
     }
 
     void SandBox::update(DeltaTime deltaTime)
@@ -85,12 +109,8 @@ namespace zenith
         }
         imlayer->end();
 
-        draw_grid();
+        renderer->draw_object(*grid_object);
         main_layer->render();
-    }
-
-    void SandBox::draw_grid()
-    {
     }
 
     void SandBox::event(Event &e)

@@ -28,7 +28,7 @@
 namespace zenith
 {
 
-    enum drawmod
+    enum DrawMode
     {
         ARRAY, INDEX
     };
@@ -44,9 +44,9 @@ namespace zenith
         virtual void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) = 0;
         virtual void SetIndexBuffer(IndexBuffer* ibuf) = 0;
         virtual IndexBuffer* GetIndexBuffer() const = 0;
-        virtual drawmod GetMod() const = 0;
+        virtual DrawMode GetMod() const = 0;
         virtual std::vector<VertexBuffer*> GetVertexBuffers() const = 0;
 
-        static VertexArray* __create();
+        static VertexArray* Create();
     };
 }
