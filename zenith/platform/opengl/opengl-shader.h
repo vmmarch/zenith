@@ -43,13 +43,17 @@ namespace zenith
         void SetMat3(zenith_char, glm::mat3) override;
         void SetMat4(zenith_char, glm::mat4) override;
 
+        zenith_uint32 GetMarkID() const override;
+
     private:
         zenith_uint shader_id;
 
     private:
+
         // utility function for checking shader compilation/linking errors.
         // ------------------------------------------------------------------------
         bool error = false;
+        zenith_uint32 markid;
         void checkCompileErrors(unsigned int shader, std::string type);
     };
 }

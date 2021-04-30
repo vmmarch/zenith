@@ -34,10 +34,15 @@
 
 namespace zenith
 {
+
+    static zenith_uint32 markcount = 0;
+
     static void load_shader(zenith_char path, std::string &vtext, std::string &ftext);
 
     OpenGLShaderProgram::OpenGLShaderProgram(zenith_char path, zenith_char debugname)
     {
+        markid = (markcount++);
+
 #ifdef __DEBUG__
         ZENITH_DEBUG(IFSPLIT);
 #endif
@@ -138,6 +143,8 @@ namespace zenith
     {
         GLAPI_UniformMatrix4fv(shader_id, name, value);
     }
+
+    zenith_uint32 OpenGLShaderProgram::GetMarkID() const { return markid; }
 
     void OpenGLShaderProgram::checkCompileErrors(unsigned int shader, std::string type)
     {

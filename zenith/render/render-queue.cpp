@@ -19,24 +19,15 @@
 /*! ===> Creates on 2021/4/30. <=== */
 
 /*!
- * 渲染队列
- *
  * @author 2B键盘
  */
-#pragma once
-
-#include "models/object.h"
-#include "render/shader/shader.h"
-#include <vector>
+#include "render/render-queue.h"
 
 namespace zenith
 {
-    class RenderQueue
+    void RenderQueue::push(RenderObject& object)
     {
-    public:
-        void push(RenderObject& object);
-    private:
-        std::vector<RenderObject> objects;
-        std::vector<ShaderProgram*> programs;
-    };
+        objects.push_back(object);
+        programs.push_back(object.Ge    tShader());
+    }
 }
