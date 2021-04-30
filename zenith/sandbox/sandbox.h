@@ -32,6 +32,7 @@
 #include "render/camera.h"
 #include "render/renderer.h"
 #include "window/window.h"
+#include "render/render-command.h"
 
 #include <vector>
 
@@ -50,12 +51,11 @@ namespace zenith
         void event(Event&) override;
         void close() override {};
 
-        void SetClearColor(glm::vec4& color) { renderer->clear_color(color); }
+        void SetClearColor(glm::vec4& color) { Renderer::clear_color(color); }
 
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
-        zenith_scope<Renderer> renderer;
         Camera camera;
         Window* window;
         float last_x, last_y;

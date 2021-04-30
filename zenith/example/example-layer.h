@@ -24,6 +24,7 @@
 #pragma once
 
 #include "layer/layer.h"
+#include "render/render-command.h"
 
 namespace zenith
 {
@@ -39,7 +40,7 @@ namespace zenith
     class ExampleLayer : public Layer
     {
     public:
-        explicit ExampleLayer(Renderer* renderer) : Layer("example layer"), renderer(renderer)
+        explicit ExampleLayer() : Layer("example layer")
         {
             ShaderProgram* shader = ShaderProgram::Create("../sh/shader-vfs");
 
@@ -72,7 +73,7 @@ namespace zenith
             });
 
             // 提交渲染模型
-            renderer->submit(object);
+            Renderer::submit(object);
             GraphicsContext::instance()->SetCurrObject(object);
         }
 
@@ -82,9 +83,9 @@ namespace zenith
             // GL render from there.
             for(int i = 0; i < cube_len; i++)
             {
-                RenderObject& object = renderer->GetObject0();
+                RenderObject& object = Renderer::GetObject0();
                 object.SetLocation(cube_pos[i]);
-                renderer->DrawObject(object);
+                Renderer::DrawObject(object);
             }
         }
 
@@ -99,8 +100,5 @@ namespace zenith
         }
 
         void close() override {}
-
-    private:
-        Renderer* renderer;
     };
 }

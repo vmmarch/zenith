@@ -33,10 +33,10 @@
 namespace zenith
 {
 
-    class Renderer
+    class AbsRenderer
     {
     public:
-        virtual ~Renderer() = default;
+        virtual ~AbsRenderer() = default;
 
         // 设置清屏颜色
         virtual void clear_color(const glm::vec4& color) = 0;
@@ -72,7 +72,7 @@ namespace zenith
         // static
 
         // 创建渲染器
-        static zenith_scope<Renderer> Create();
+        static zenith_scope<AbsRenderer> Create();
 
         // 获取当前API
         static render::api GetRenderAPI();
@@ -80,6 +80,33 @@ namespace zenith
     private:
         std::vector<RenderObject> models;
         static render::api render_api;
+    };
+
+    class Renderer
+    {
+    public:
+        // 设置清屏颜色
+        static void clear_color(const glm::vec4& color);
+
+        static void begin(Camera&);
+
+        // 清屏
+        static void clear();
+
+        // 渲染顶点数组
+        static void DrawObjects();
+        static void DrawObject(RenderObject&);
+        static void DrawArray(const VertexArray&);
+        static void DrawArray(const std::vector<VertexArray>&);
+
+        // 画线
+        static void DrawLines(RenderObject&);
+
+        static RenderObject& GetObject0();
+        static void submit(RenderObject &object);
+
+    private:
+        static zenith_scope<AbsRenderer> s_renderer;
     };
 
 }

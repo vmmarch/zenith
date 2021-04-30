@@ -26,7 +26,7 @@
 
 namespace zenith
 {
-    class OpenGLRenderer : public Renderer
+    class OpenGLRenderer : public AbsRenderer
     {
     public:
         virtual ~OpenGLRenderer() {}

@@ -45,8 +45,7 @@ namespace zenith
     SandBox::SandBox(Window *window)
             : Layer("sandbox layer"), camera(Camera()), window(window)
     {
-        this->renderer = Renderer::Create();
-        main_layer = new ExampleLayer(renderer.get());
+        main_layer = new ExampleLayer();
 
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
@@ -103,8 +102,8 @@ namespace zenith
 
     void SandBox::render()
     {
-        renderer->begin(camera);
-        renderer->clear();
+        Renderer::begin(camera);
+        Renderer::clear();
 
         imlayer->begin();
         {
@@ -119,7 +118,7 @@ namespace zenith
             {
                 glm::vec3 loc = grid_x_pos[i];
                 this->grid_object->SetLocation(loc);
-                renderer->DrawLines(*grid_object);
+                Renderer::DrawLines(*grid_object);
             }
         }
         main_layer->render();
