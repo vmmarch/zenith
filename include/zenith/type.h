@@ -45,12 +45,12 @@
 typedef const char* zenith_char;
 typedef unsigned char zenith_uchar;
 typedef unsigned int zenith_uint;
-typedef uint8_t zenith_ui8;
-typedef uint16_t zenith_ui16;
-typedef uint32_t zenith_ui32;
+typedef uint8_t zenith_uint8;
+typedef uint16_t zenith_uint16;
+typedef uint32_t zenith_uint32;
 typedef void * zenith_any;
 
-typedef zenith_ui16 zenith_keycode;
+typedef zenith_uint16 zenith_keycode;
 
 typedef void (*zenith_noparam_fn)();
 
@@ -83,13 +83,13 @@ namespace zenith
     // vec2
     struct v_vec2
     {
-        zenith_ui16 x, y;
+        zenith_uint16 x, y;
 
-        v_vec2(zenith_ui16 _x, zenith_ui16 _y) : x(_x), y(_y)
+        v_vec2(zenith_uint16 _x, zenith_uint16 _y) : x(_x), y(_y)
         {}
     };
 
-    static v_vec2 __create_vec2(zenith_ui16 x, zenith_ui16 y)
+    static v_vec2 __create_vec2(zenith_uint16 x, zenith_uint16 y)
     {
         return v_vec2(x, y);
     }

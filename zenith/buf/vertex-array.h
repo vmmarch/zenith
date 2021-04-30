@@ -40,9 +40,9 @@ namespace zenith
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
 
-        virtual void AddVertexBuffer(float *buf, zenith_ui32 size) = 0;
+        virtual void AddVertexBuffer(float *buf, zenith_uint32 size) = 0;
         virtual void AddVertexBuffer(VertexBuffer* vbuf) = 0;
-        virtual void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) = 0;
+        virtual void SetIndexBuffer(zenith_uint32* buf, zenith_uint32 size) = 0;
         virtual void SetIndexBuffer(IndexBuffer* ibuf) = 0;
         virtual IndexBuffer* GetIndexBuffer() const = 0;
         virtual DrawMode GetMod() const = 0;

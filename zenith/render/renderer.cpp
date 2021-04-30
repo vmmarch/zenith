@@ -84,6 +84,7 @@ namespace zenith
     {
         s_renderer->DrawArray(arrays);
     }
+
     // 画线
     void Renderer::DrawLines(RenderObject &object)
     {

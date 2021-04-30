@@ -37,8 +37,8 @@ namespace zenith::win
 
         void setTitle(zenith_char title) override { info.title = title; }
         zenith_char getTitle() const override { return info.title; }
-        zenith_ui32 GetWidth() const override { return info.width; }
-        zenith_ui32 GetHeight() const override { return info.height; }
+        zenith_uint32 GetWidth() const override { return info.width; }
+        zenith_uint32 GetHeight() const override { return info.height; }
 
         void SetEventCallback(const f_callback&) override;
 
@@ -52,7 +52,7 @@ namespace zenith::win
         struct v_info
         {
             zenith_char title;
-            zenith_ui32 width, height;
+            zenith_uint32 width, height;
 
             f_callback fn;
         };

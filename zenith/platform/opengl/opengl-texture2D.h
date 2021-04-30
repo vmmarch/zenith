@@ -31,8 +31,8 @@ namespace zenith
 		void read_image(zenith_char) override;
 		void bind() override;
 		void unbind() override;
-		void SetMod(zenith_ui16, int, float* = NULL) override;
-		void SetFilter(int, zenith_ui16) override;
+		void SetMod(zenith_uint16, int, float* = NULL) override;
+		void SetFilter(int, zenith_uint16) override;
 
 	private:
 	    zenith_uint texture_id;

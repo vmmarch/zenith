@@ -37,9 +37,9 @@ namespace zenith
     struct v_winprops
     {
         zenith_char title;
-        zenith_ui32 width, height;
+        zenith_uint32 width, height;
 
-        v_winprops(zenith_char title, zenith_ui32 width, zenith_ui32 height)
+        v_winprops(zenith_char title, zenith_uint32 width, zenith_uint32 height)
             : title(title), width(width), height(height) {}
     };
 
@@ -55,8 +55,8 @@ namespace zenith
         virtual ~Window() = default;
         virtual void setTitle(zenith_char) = 0;
         virtual zenith_char getTitle() const = 0;
-        virtual zenith_ui32 GetWidth() const = 0;
-        virtual zenith_ui32 GetHeight() const = 0;
+        virtual zenith_uint32 GetWidth() const = 0;
+        virtual zenith_uint32 GetHeight() const = 0;
 
         virtual void SetEventCallback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;

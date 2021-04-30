@@ -47,16 +47,16 @@ namespace zenith
         /**
          * 添加顶点缓冲对象
          */
-        void AddVertexBuffer(float *buf, zenith_ui32 size) override;
+        void AddVertexBuffer(float *buf, zenith_uint32 size) override;
         void AddVertexBuffer(VertexBuffer*) override;
-        void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) override;
+        void SetIndexBuffer(zenith_uint32* buf, zenith_uint32 size) override;
         void SetIndexBuffer(IndexBuffer*) override;
         DrawMode GetMod() const override { return mod; }
         IndexBuffer* GetIndexBuffer() const override { return index_buf; }
         std::vector<VertexBuffer*> GetVertexBuffers() const override { return vertex_buffers; };
 
     private:
-        zenith_ui32 array_id;
+        zenith_uint32 array_id;
         DrawMode mod = DrawMode::ARRAY;
         std::vector<VertexBuffer*> vertex_buffers;
         IndexBuffer* index_buf;

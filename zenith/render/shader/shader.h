@@ -45,6 +45,8 @@ namespace zenith
         virtual void SetMat3(zenith_char name, glm::mat3 value) = 0;
         virtual void SetMat4(zenith_char name, glm::mat4 value) = 0;
 
+        virtual zenith_uint32 GetMarkId() const = 0;
+
         /*!
          * 创建着色器
          */

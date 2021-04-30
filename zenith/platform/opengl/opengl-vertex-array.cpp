@@ -47,7 +47,7 @@ namespace zenith
         GLAPI_UnbindVertexArray();
     }
 
-    void OpenGLVertexArray::AddVertexBuffer(float *buf, zenith_ui32 size)
+    void OpenGLVertexArray::AddVertexBuffer(float *buf, zenith_uint32 size)
     {
         VertexBuffer* vbuf = VertexBuffer::Create(buf, size);
         layout_t layout = {
@@ -67,7 +67,7 @@ namespace zenith
             ZENITH_ERROR(VERTEX_BUFFER_HAS_NOT_LAYOUT);
         } else
         {
-            zenith_ui32 index = 0;
+            zenith_uint32 index = 0;
             const auto& layout = buf->GetLayout();
             for(const auto& element : layout)
             {
@@ -83,7 +83,7 @@ namespace zenith
         vertex_buffers.push_back(buf);
     }
 
-    void OpenGLVertexArray::SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size)
+    void OpenGLVertexArray::SetIndexBuffer(zenith_uint32* buf, zenith_uint32 size)
     {
         SetIndexBuffer(IndexBuffer::Create(buf, size));
         mod = DrawMode::INDEX;

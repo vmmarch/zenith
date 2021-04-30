@@ -30,13 +30,13 @@ namespace zenith
     class OpenGLVertexBuffer : public VertexBuffer
     {
     public:
-        OpenGLVertexBuffer(zenith_ui32 size);
-        OpenGLVertexBuffer(float* buf, zenith_ui32 size);
+        OpenGLVertexBuffer(zenith_uint32 size);
+        OpenGLVertexBuffer(float* buf, zenith_uint32 size);
         ~OpenGLVertexBuffer() override;
 
         void bind() override;
         void unbind() override;
-        void SetData(float* buf, zenith_ui32 size) override;
+        void SetData(float* buf, zenith_uint32 size) override;
         void SetLayout(const layout_t& layout) override { this->layout = layout; }
         const layout_t& GetLayout() const override { return layout; }
         void SetVertexSize(int size) override { sizecount = size; }
@@ -45,10 +45,10 @@ namespace zenith
         int GetBufferSize() const override { return bufsize; }
 
     private:
-        zenith_ui32 render_id;
+        zenith_uint32 render_id;
         int sizecount;
         layout_t layout;
-        zenith_ui32 bufsize;
+        zenith_uint32 bufsize;
     };
 
 }

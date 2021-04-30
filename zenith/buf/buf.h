@@ -44,7 +44,7 @@ namespace zenith
         INT, INT2, INT3, INT4
     };
 
-    static zenith_ui32 GetShader_t_size(shader_t type)
+    static zenith_uint32 GetShader_t_size(shader_t type)
     {
         switch(type)
         {
@@ -69,7 +69,7 @@ namespace zenith
     {
         zenith_char name;
         size_t offset;
-        zenith_ui32 size;
+        zenith_uint32 size;
         shader_t type;
         bool normalized;
 
@@ -95,7 +95,7 @@ namespace zenith
             return 0;
         }
 
-        zenith_ui32 __size() const
+        zenith_uint32 __size() const
         {
             switch (type)
             {
@@ -129,7 +129,7 @@ namespace zenith
         layout_t() {}
         layout_t(const std::initializer_list<element_t>& e) : elements(e)
         {
-            zenith_ui32 offset = 0;
+            zenith_uint32 offset = 0;
             stride = 0;
             for(auto& element : elements)
             {
@@ -139,7 +139,7 @@ namespace zenith
             }
         }
 
-        inline const zenith_ui32 GetStride() const { return stride; }
+        inline const zenith_uint32 GetStride() const { return stride; }
         inline const std::vector<element_t>& GetElements() const { return elements; }
 
         std::vector<element_t>::iterator begin() { return elements.begin(); }
@@ -147,7 +147,7 @@ namespace zenith
         std::vector<element_t>::const_iterator begin() const { return elements.begin(); }
         std::vector<element_t>::const_iterator end() const { return elements.end(); }
     private:
-        zenith_ui32 stride;
+        zenith_uint32 stride;
         std::vector<element_t> elements;
     };
 
@@ -160,7 +160,7 @@ namespace zenith
         virtual ~VertexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual void SetData(float* vertex, zenith_ui32 size) = 0;
+        virtual void SetData(float* vertex, zenith_uint32 size) = 0;
 
         /**
          * 设置着色器布局，如：layout(location = 0) in vec3 position;
@@ -183,8 +183,8 @@ namespace zenith
 
         virtual int GetBufferSize() const = 0;
 
-        static VertexBuffer* Create(zenith_ui32);
-        static VertexBuffer* Create(float*, zenith_ui32);
+        static VertexBuffer* Create(zenith_uint32);
+        static VertexBuffer* Create(float*, zenith_uint32);
     };
 
     class IndexBuffer
@@ -193,9 +193,9 @@ namespace zenith
         virtual ~IndexBuffer() {};
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual zenith_ui32 size() const = 0;
+        virtual zenith_uint32 size() const = 0;
 
-        static IndexBuffer* Create(zenith_ui32* indices, zenith_ui32 size);
+        static IndexBuffer* Create(zenith_uint32* indices, zenith_uint32 size);
     };
 
 }

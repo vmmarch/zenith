@@ -120,7 +120,7 @@ static zenith_scope<zenith::Texture2D> __create_texture2D()
 /**
  * @return vertex buffer
  */
-static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_ui32 size)
+static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_uint32 size)
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
@@ -141,7 +141,7 @@ static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_ui32 size)
 /**
  * @return index buffer
  */
-static zenith::IndexBuffer* __create_index_buf(zenith_ui32 *buf, zenith_ui32 size)
+static zenith::IndexBuffer* __create_index_buf(zenith_uint32 *buf, zenith_uint32 size)
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
