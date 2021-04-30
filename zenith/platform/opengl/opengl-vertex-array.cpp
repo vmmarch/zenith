@@ -47,6 +47,16 @@ namespace zenith
         GLAPI_UnbindVertexArray();
     }
 
+    void OpenGLVertexArray::AddVertexBuffer(float *buf, zenith_ui32 size)
+    {
+        VertexBuffer* vbuf = VertexBuffer::Create(buf, size);
+        layout_t layout = {
+                {"position", shader_t::FLOAT3},
+        };
+        vbuf->SetLayout(layout);
+        AddVertexBuffer(vbuf);
+    }
+
     void OpenGLVertexArray::AddVertexBuffer(VertexBuffer* buf)
     {
         GLAPI_BindVertexArray(array_id);

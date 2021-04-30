@@ -126,7 +126,7 @@ namespace zenith
 
     void OpenGLShaderProgram::SetFloat4(zenith_char name, glm::vec4 value)
     {
-        GLAPI_Uniform4f(shader_id, name, value.x, value.y, value.w, value.a);
+        GLAPI_Uniform4f(shader_id, name, value.r, value.g, value.b, value.a);
     }
 
     void OpenGLShaderProgram::SetMat3(zenith_char name, glm::mat3 value)

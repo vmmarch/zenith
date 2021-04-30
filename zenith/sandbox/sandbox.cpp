@@ -27,10 +27,20 @@
 #include "example/example-layer.h"
 #include "event/mouse-event.h"
 #include "state.h"
+#include "color.h"
 
 namespace zenith
 {
     static bool first = true;
+
+    glm::vec3 grid_x_pos[] = {
+            { 0.0f, 0.5f, 0.5f },
+            { 0.0f, 1.0f, 0.5f },
+            { 0.0f, 1.5f, 0.5f },
+            { 0.0f, 2.0f, 0.5f },
+    };
+
+    static int grid_count = 4;
 
     SandBox::SandBox(Window *window)
             : Layer("sandbox layer"), camera(Camera()), window(window)
@@ -45,36 +55,29 @@ namespace zenith
 
     void SandBox::initialize()
     {
-        // 绘制网格
-        float line_vertices[] = {
-                -1.0,  1.0, 0.0, // Top Left
-                -1.0, -1.0, 0.0, // Bottom Left
-                1.0, -1.0, 0.0, // Bottom Right
-                1.0,  1.0, 0.0, // Top Right
+        float grid[] = {
+                 1.0f, 0.0f, 0.0f,
+                -1.0f, 0.0f, 0.0f,
         };
+        VertexArray* array = VertexArray::Create();
+        array->AddVertexBuffer(grid, sizeof(grid));
 
-        VertexBuffer* line_buffer = VertexBuffer::Create(line_vertices, sizeof(line_vertices));
+        this->grid_object = new RenderObject(array, ShaderProgram::Create("../sh/grid-vfs"));
 
-        line_buffer->SetLayout({
-            {"position", shader_t::FLOAT3}
-        });
+        grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view){
+            ShaderProgram* shader = object.GetShader();
 
-        VertexArray* line_array = VertexArray::Create();
-        line_array->AddVertexBuffer(line_buffer);
-        line_array->bind();
-
-        this->grid_object = new RenderObject(line_array, ShaderProgram::Create("../sh/line-vfs"));
-        this->grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view) {
-            ShaderProgram* program = object.GetShader();
-            program->bind();
-
-            program->SetMat4("u_transform", glm::scale(glm::mat4(), glm::vec3{ glm::vec2{0.75f}, 1.0f }));
+            shader->SetFloat4("u_color", RGBA::RED);
+            shader->SetMat4("u_view", view);
+            shader->SetMat4("u_projection", projection);
+            shader->SetMat4("u_location", object.GetMat4Location());
         });
     }
 
     void SandBox::update(DeltaTime deltaTime)
     {
-        // ----------------------------------------
+        // ----------------------------------
+        // ------
         // reload settings
         RELOAD_SETTING();
 
@@ -107,9 +110,18 @@ namespace zenith
         {
             layer_stack.render();
         }
+
         imlayer->end();
 
-        renderer->DrawLines(*grid_object);
+        for(int i = 0; i < grid_count; i++)
+        {
+            for(int j = 0; j < grid_count; j++)
+            {
+                glm::vec3 loc = grid_x_pos[i];
+                this->grid_object->SetLocation(loc);
+                renderer->DrawLines(*grid_object);
+            }
+        }
         main_layer->render();
     }
 

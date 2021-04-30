@@ -16,38 +16,15 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/21. <=== */
+/*! ===> Creates on 2021/4/30. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include "buf.h"
-
-namespace zenith
+namespace RGBA
 {
-
-    enum DrawMode
-    {
-        ARRAY, INDEX
-    };
-
-    class VertexArray
-    {
-    public:
-        virtual ~VertexArray() = default;
-        virtual void bind() const = 0;
-        virtual void unbind() const = 0;
-
-        virtual void AddVertexBuffer(float *buf, zenith_ui32 size) = 0;
-        virtual void AddVertexBuffer(VertexBuffer* vbuf) = 0;
-        virtual void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) = 0;
-        virtual void SetIndexBuffer(IndexBuffer* ibuf) = 0;
-        virtual IndexBuffer* GetIndexBuffer() const = 0;
-        virtual DrawMode GetMod() const = 0;
-        virtual std::vector<VertexBuffer*> GetVertexBuffers() const = 0;
-
-        static VertexArray* Create();
-    };
+    static glm::vec4 RED   = { 1.0f, 0.0f, 0.0f, 1.0f };
+    static glm::vec4 BLACK = { 0.1f, 0.1f, 0.1f, 1.0f };
 }

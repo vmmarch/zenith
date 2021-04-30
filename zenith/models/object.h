@@ -57,7 +57,10 @@ namespace zenith
         void update(glm::mat4 projection, glm::mat4 view_matrix)
         {
             if(update_p != NULL)
+            {
+                shader->bind();
                 update_p(*this, projection, view_matrix);
+            }
         }
 
         void SetUpdate(zenith_update update)
@@ -92,6 +95,7 @@ namespace zenith
             m_location = glm::translate(m_location, GetLocation());
             return m_location;
         }
+
         glm::vec3 GetLocation() { return location; }
 
         DrawMode GetMod() const { return vertex_array->GetMod(); }

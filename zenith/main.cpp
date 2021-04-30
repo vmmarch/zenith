@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 #   endif
 #endif
 
-    auto app = new zenith::Starter("zenith", 1940, 1290);
+    auto app = new zenith::Starter("zenith", 1260, 880);
     app->main_cycle();
 
     return 0;

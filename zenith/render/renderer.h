@@ -33,11 +33,6 @@
 namespace zenith
 {
 
-    namespace color
-    {
-        static glm::vec4 BLACK = { 0.1f, 0.1f, 0.1f, 1 };
-    }
-
     class Renderer
     {
     public:

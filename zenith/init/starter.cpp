@@ -23,6 +23,7 @@
  */
 #include "starter.h"
 #include "state.h"
+#include "color.h"
 
 namespace zenith
 {
@@ -75,7 +76,7 @@ namespace zenith
 
     void Starter::main_cycle()
     {
-        sandbox->SetClearColor(color::BLACK);
+        sandbox->SetClearColor(RGBA::BLACK);
 
         // ------------------------------------------
         // game loop.

@@ -47,6 +47,7 @@ namespace zenith
         /**
          * 添加顶点缓冲对象
          */
+        void AddVertexBuffer(float *buf, zenith_ui32 size) override;
         void AddVertexBuffer(VertexBuffer*) override;
         void SetIndexBuffer(zenith_ui32* buf, zenith_ui32 size) override;
         void SetIndexBuffer(IndexBuffer*) override;

@@ -30,17 +30,11 @@ namespace zenith
 
     // world space positions of our cubes
     static glm::vec3 cube_pos[] = {
-            glm::vec3( 0.0f,  0.0f,  0.0f),
-            glm::vec3( 2.0f,  5.0f, -15.0f),
-            glm::vec3(-1.5f, -2.2f, -2.5f),
             glm::vec3(-3.8f, -2.0f, -12.3f),
             glm::vec3( 2.4f, -0.4f, -3.5f),
-            glm::vec3(-1.7f,  3.0f, -7.5f),
-            glm::vec3( 1.3f, -2.0f, -2.5f),
-            glm::vec3( 1.5f,  2.0f, -2.5f),
-            glm::vec3( 1.5f,  0.2f, -1.5f),
-            glm::vec3(-1.3f,  1.0f, -1.5f)
     };
+
+    static int cube_len = 2;
 
     class ExampleLayer : public Layer
     {
@@ -71,7 +65,6 @@ namespace zenith
             // 更新坐标等参数
             object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view_matrix){
                 ShaderProgram* shader = object.GetShader();
-                shader->bind();
 
                 shader->SetMat4("u_object_location", object.GetMat4Location());
                 shader->SetMat4("u_projection", projection);
@@ -87,7 +80,7 @@ namespace zenith
         {
             // ----------------------------------------------------
             // GL render from there.
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < cube_len; i++)
             {
                 RenderObject& object = renderer->GetObject0();
                 object.SetLocation(cube_pos[i]);
