@@ -28,6 +28,6 @@ namespace zenith
     void RenderQueue::push(RenderObject& object)
     {
         objects.push_back(object);
-        programs.push_back(object.Ge    tShader());
+        programs.push_back(object.GetShader());
     }
 }

@@ -61,8 +61,6 @@ namespace zenith
         float last_x, last_y;
         Layer* main_layer;
         bool cursor_hide = false;
-
-        RenderObject* grid_object;
     };
 
 }

@@ -75,6 +75,7 @@ namespace zenith
         s_renderer->DrawObject(object);
     }
 
+#ifdef __DEBUG__
     void Renderer::DrawArray(const VertexArray &array)
     {
         s_renderer->DrawArray(array);
@@ -84,6 +85,7 @@ namespace zenith
     {
         s_renderer->DrawArray(arrays);
     }
+#endif
 
     // 画线
     void Renderer::DrawLines(RenderObject &object)

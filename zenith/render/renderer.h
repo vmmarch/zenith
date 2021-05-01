@@ -55,10 +55,13 @@ namespace zenith
         // 渲染顶点数组
         virtual void DrawObjects() = 0;
         virtual void DrawObject(RenderObject&) = 0;
+
+#ifdef __DEBUG__
         virtual void DrawArray(const VertexArray&) = 0;
         virtual void DrawArray(const std::vector<VertexArray>&) = 0;
         virtual void DrawIndex(const VertexArray&) = 0;
         virtual void DrawIndex(const std::vector<VertexArray>&) = 0;
+#endif
 
         // 画线
         virtual void DrawLines(RenderObject&) = 0;
@@ -67,9 +70,6 @@ namespace zenith
 
         virtual RenderObject& GetObject0() = 0;
         virtual void submit(RenderObject&) = 0;
-
-        // --------------------------------------------------
-        // static
 
         // 创建渲染器
         static zenith_scope<AbsRenderer> Create();
@@ -82,6 +82,8 @@ namespace zenith
         static render::api render_api;
     };
 
+    // --------------------------------------------------
+    // 渲染器
     class Renderer
     {
     public:
@@ -93,11 +95,15 @@ namespace zenith
         // 清屏
         static void clear();
 
-        // 渲染顶点数组
         static void DrawObjects();
+
         static void DrawObject(RenderObject&);
+
+#ifdef __DEBUG__
+        // 渲染顶点数组
         static void DrawArray(const VertexArray&);
         static void DrawArray(const std::vector<VertexArray>&);
+#endif
 
         // 画线
         static void DrawLines(RenderObject&);

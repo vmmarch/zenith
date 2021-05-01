@@ -33,14 +33,7 @@ namespace zenith
 {
     static bool first = true;
 
-    glm::vec3 grid_x_pos[] = {
-            { 0.0f, 0.5f, 0.5f },
-            { 0.0f, 1.0f, 0.5f },
-            { 0.0f, 1.5f, 0.5f },
-            { 0.0f, 2.0f, 0.5f },
-    };
-
-    static int grid_count = 4;
+    static int grid_count = 8;
 
     SandBox::SandBox(Window *window)
             : Layer("sandbox layer"), camera(Camera()), window(window)
@@ -54,23 +47,28 @@ namespace zenith
 
     void SandBox::initialize()
     {
-        float grid[] = {
-                 1.0f, 0.0f, 0.0f,
-                -1.0f, 0.0f, 0.0f,
+        float line[] = {
+                -1.0,  1.0, 0.0,
+                -1.0, -1.0, 0.0,
+                1.0, -1.0, 0.0,
+                1.0,  1.0, 0.0,
         };
+
         VertexArray* array = VertexArray::Create();
-        array->AddVertexBuffer(grid, sizeof(grid));
+        array->AddVertexBuffer(line, sizeof(line));
+        RenderObject object(array, ShaderProgram::Create("../sh/grid-vfs"));
+        object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view){
+            ShaderProgram* program = object.GetShader();
 
-        this->grid_object = new RenderObject(array, ShaderProgram::Create("../sh/grid-vfs"));
+            program->SetFloat4("u_color", RGBA::RED);
 
-        grid_object->SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view){
-            ShaderProgram* shader = object.GetShader();
-
-            shader->SetFloat4("u_color", RGBA::RED);
-            shader->SetMat4("u_view", view);
-            shader->SetMat4("u_projection", projection);
-            shader->SetMat4("u_location", object.GetMat4Location());
+            program->SetMat4("u_view", view);
+            program->SetMat4("u_projection", projection);
+            program->SetMat4("transform", scale(glm::mat4(), glm::vec3{ glm::vec2{0.75f}, 1.0f }));
         });
+
+        // object.SetType(DrawType::LINE);
+        Renderer::submit(object);
     }
 
     void SandBox::update(DeltaTime deltaTime)
@@ -109,19 +107,9 @@ namespace zenith
         {
             layer_stack.render();
         }
-
         imlayer->end();
 
-        for(int i = 0; i < grid_count; i++)
-        {
-            for(int j = 0; j < grid_count; j++)
-            {
-                glm::vec3 loc = grid_x_pos[i];
-                this->grid_object->SetLocation(loc);
-                Renderer::DrawLines(*grid_object);
-            }
-        }
-        main_layer->render();
+        Renderer::DrawObjects();
     }
 
     void SandBox::event(Event &e)
@@ -129,7 +117,7 @@ namespace zenith
         if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
         {
             if(!GetValue(KEY_CURSOR_MOVE_CAMER)) return;
-            MouseMovedEvent &event = dynamic_cast<MouseMovedEvent &>(e);
+            MouseMovedEvent &event = dynamic_cast<MouseMovedEvent&>(e);
 
             float xpos = event.GetX();
             float ypos = event.GetY();

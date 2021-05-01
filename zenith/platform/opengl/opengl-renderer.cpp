@@ -41,7 +41,7 @@ namespace zenith
     void OpenGLRenderer::begin(Camera &camera)
     {
         view_matrix = camera.GetViewMatrix();
-        projection = glm::perspective(camera.GetCameraZoom(), camera.GetScreenAspectRadio(), -1.0f, 1.0f);
+        projection = camera.GetProjection();
     }
 
     void OpenGLRenderer::disable_depth_test()
@@ -64,12 +64,13 @@ namespace zenith
     {
         object.update(projection, view_matrix);
 
-        if(object.GetMod() == DrawMode::INDEX)
+        if (object.GetType() == DrawType::DEFAULT)
         {
-            DrawIndex(*object.GetVertexArray());
+            if (object.GetMod() == DrawMode::INDEX) DrawIndex(*object.GetVertexArray());
+            else DrawArray(*object.GetVertexArray());
         } else
         {
-            DrawArray(*object.GetVertexArray());
+            DrawLines(object);
         }
     }
 

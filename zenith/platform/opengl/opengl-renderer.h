@@ -40,11 +40,19 @@ namespace zenith
         std::vector<RenderObject> GetObjects() override { return objects; }
         void DrawObjects() override;
         void DrawObject(RenderObject&) override;
+        void DrawLines(RenderObject&) override;
+
+#ifdef __DEBUG__
         void DrawArray(const VertexArray&) override;
         void DrawArray(const std::vector<VertexArray>&) override;
         void DrawIndex(const VertexArray&) override;
         void DrawIndex(const std::vector<VertexArray>&) override;
-        void DrawLines(RenderObject&) override;
+#else
+        void DrawArray(const VertexArray&);
+        void DrawArray(const std::vector<VertexArray>&);
+        void DrawIndex(const VertexArray&);
+        void DrawIndex(const std::vector<VertexArray>&);
+#endif
 
     private:
         glm::mat4 projection;

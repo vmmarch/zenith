@@ -72,21 +72,21 @@ namespace zenith
                 shader->SetMat4("u_view", view_matrix);
             });
 
-            // 提交渲染模型
-            Renderer::submit(object);
+            // ----------------------------------------------------
+            // GL render from there.
+            for(int i = 0; i < cube_len; i++)
+            {
+                object.SetLocation(cube_pos[i]);
+                // 提交渲染模型
+                Renderer::submit(object);
+            }
+
             GraphicsContext::instance()->SetCurrObject(object);
         }
 
         void render() override
         {
-            // ----------------------------------------------------
-            // GL render from there.
-            for(int i = 0; i < cube_len; i++)
-            {
-                RenderObject& object = Renderer::GetObject0();
-                object.SetLocation(cube_pos[i]);
-                Renderer::DrawObject(object);
-            }
+
         }
 
         void update(DeltaTime) override

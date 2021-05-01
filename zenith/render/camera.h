@@ -106,6 +106,8 @@ namespace zenith
                 direction(camera_movement::RIGHT);
         }
 
+        glm::mat4 GetProjection();
+
     private:
         void update_camera_vector();
 

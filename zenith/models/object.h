@@ -100,6 +100,9 @@ namespace zenith
 
         DrawMode GetMod() const { return vertex_array->GetMod(); }
 
+        void SetType(DrawType type) { vertex_array->SetType(type); }
+        DrawType GetType() const { return vertex_array->GetType(); }
+
     private:
         bool modify = false;
         ShaderProgram* shader;

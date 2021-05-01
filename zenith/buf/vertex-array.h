@@ -33,6 +33,11 @@ namespace zenith
         ARRAY, INDEX
     };
 
+    enum DrawType
+    {
+        DEFAULT, LINE
+    };
+
     class VertexArray
     {
     public:
@@ -46,6 +51,8 @@ namespace zenith
         virtual void SetIndexBuffer(IndexBuffer* ibuf) = 0;
         virtual IndexBuffer* GetIndexBuffer() const = 0;
         virtual DrawMode GetMod() const = 0;
+        virtual void SetType(DrawType) = 0;
+        virtual DrawType GetType() const = 0;
         virtual std::vector<VertexBuffer*> GetVertexBuffers() const = 0;
 
         static VertexArray* Create();
