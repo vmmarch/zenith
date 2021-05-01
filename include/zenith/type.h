@@ -27,6 +27,7 @@
 #include <iostream>
 #include <zenith/glob.h>
 #include <zenith/log.h>
+#include <zenith/enum.h>
 
 #define EXTAPI extern
 
@@ -71,12 +72,6 @@ namespace zenith
          * 渲染API
          */
         enum api { NONE, GL, DX };
-
-        /*!
-         * @enum [i] TYPE_FILL 默认模式
-         * @enum [i] TYPE_LINE 使用线来绘制
-         */
-        enum type_t { FILL, LINE };
     }
 
     // =================================================================

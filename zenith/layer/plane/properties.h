@@ -92,10 +92,10 @@ static void __properties()
         ImGui::Checkbox("启用线性渲染模式", &line_check);
         if (line_check)
         {
-            zenith::GraphicsContext::instance()->GetCurrModel()->SetRendertype(zenith::render::type_t::LINE);
+            glEnable(GL_LINE);
         } else
         {
-            zenith::GraphicsContext::instance()->GetCurrModel()->SetRendertype(zenith::render::type_t::FILL);
+            glEnable(GL_FILL);
         }
 
         ImGui::TreePop();

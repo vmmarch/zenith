@@ -50,8 +50,6 @@ namespace zenith
     public:
         RenderObject(VertexArray *vertex, ShaderProgram *shader) : vertex_array(vertex), shader(shader)
         {
-            render_type = GL_FILL;
-            render_type_t = render::type_t::FILL;
         }
 
         void update(glm::mat4 projection, glm::mat4 view_matrix)
@@ -78,11 +76,6 @@ namespace zenith
 
         [[nodiscard]] ShaderProgram* GetShader();
 
-        // 设置渲染类型
-        void SetRendertype(render::type_t = render::type_t::FILL);
-
-        [[nodiscard]] render::type_t GetRendertype() const;
-
         void SetTransform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
 
         glm::mat4 GetTransform() { return transform; }
@@ -98,21 +91,23 @@ namespace zenith
 
         glm::vec3 GetLocation() { return location; }
 
-        DrawMode GetMod() const { return vertex_array->GetMod(); }
-
-        void SetType(DrawType type) { vertex_array->SetType(type); }
-        DrawType GetType() const { return vertex_array->GetType(); }
+        /**
+         * 渲染模式, 填充渲染或线性渲染
+         *
+         * @param mode FILL or LINE
+         */
+        void SetRenderMode(zenith_enum mode) { render_mode = mode; }
+        zenith_enum GetRenderMode() const { return render_mode; }
 
     private:
         bool modify = false;
         ShaderProgram* shader;
         VertexArray* vertex_array;
-        render::type_t render_type_t;
-        GLenum render_type;
-
         glm::vec3 location = { 0.0f, 0.0f, 0.0f };
+
         glm::mat4 transform;
 
+        zenith_enum render_mode = ZENITH_TRIANGLES; // 渲染类型
         zenith_update update_p = NULL; // 更新函数
     };
 }

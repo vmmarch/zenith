@@ -65,16 +65,14 @@ namespace zenith
         object.update(projection, view_matrix);
 
         GLenum mode;
-        DrawType type = object.GetType();
-
-        switch (type)
+        switch (object.GetRenderMode())
         {
-            case DEFAULT: mode = GL_TRIANGLES; break;
-            case LINE: mode = GL_LINES; break;
-            case FAN: mode = GL_TRIANGLE_FAN; break;
+            case ZENITH_TRIANGLES: mode = GL_TRIANGLES; break;
+            case ZENITH_LINES: mode = GL_LINES; break;
+            case ZENITH_TRIANGLE_FAN: mode = GL_TRIANGLE_FAN; break;
         }
 
-        if (object.GetMod() == DrawMode::INDEX)
+        if (object.GetVertexArray()->HasIndex() == true)
             DrawIndex(mode, *object.GetVertexArray());
         else
             DrawArray(mode, *object.GetVertexArray());

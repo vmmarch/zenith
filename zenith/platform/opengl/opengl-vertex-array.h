@@ -51,17 +51,16 @@ namespace zenith
         void AddVertexBuffer(VertexBuffer*) override;
         void SetIndexBuffer(zenith_uint32* buf, zenith_uint32 size) override;
         void SetIndexBuffer(IndexBuffer*) override;
-        DrawMode GetMod() const override { return mod; }
-        void SetType(DrawType type) { this->type = type; };
-        DrawType GetType() const { return type; };
         IndexBuffer* GetIndexBuffer() const override { return index_buf; }
         std::vector<VertexBuffer*> GetVertexBuffers() const override { return vertex_buffers; };
 
+        virtual bool HasIndex() const { return has_index; };
+
     private:
         zenith_uint32 array_id;
-        DrawType type = DrawType::DEFAULT;
-        DrawMode mod = DrawMode::ARRAY;
         std::vector<VertexBuffer*> vertex_buffers;
-        IndexBuffer* index_buf;
+        IndexBuffer* index_buf = 0;
+
+        bool has_index = false;
     };
 }
