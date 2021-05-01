@@ -63,8 +63,10 @@ namespace zenith
         virtual void DrawIndex(const std::vector<VertexArray>&) = 0;
 #endif
 
+#ifdef __DEBUG__
         // 画线
         virtual void DrawLines(RenderObject&) = 0;
+#endif
 
         virtual std::vector<RenderObject> GetObjects() = 0;
 
@@ -103,10 +105,9 @@ namespace zenith
         // 渲染顶点数组
         static void DrawArray(const VertexArray&);
         static void DrawArray(const std::vector<VertexArray>&);
-#endif
-
         // 画线
         static void DrawLines(RenderObject&);
+#endif
 
         static RenderObject& GetObject0();
         static void submit(RenderObject &object);

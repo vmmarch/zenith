@@ -67,7 +67,7 @@ namespace zenith
             program->SetMat4("transform", scale(glm::mat4(), glm::vec3{ glm::vec2{0.75f}, 1.0f }));
         });
 
-        // object.SetType(DrawType::LINE);
+        object.SetType(DrawType::FAN);
         Renderer::submit(object);
     }
 

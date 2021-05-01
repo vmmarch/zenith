@@ -368,6 +368,7 @@
 #define GLAPI_Texture2D_Mag_Filter_Parameteriv(filtermod) \
 { glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtermod); }
 
+#ifdef __DEBUG__
 /**
  * 画线
  */
@@ -391,6 +392,19 @@
  */
 #define GLAPI_DrawTriangleIndex(size, type) \
 { glDrawElements(GL_TRIANGLES, size, type, NULL); }
+#endif
+
+/**
+ * 根据顶点数组画三角形
+ */
+#define GLAPI_DrawArray(mode, begin, count) \
+{ glDrawArrays(mode, begin, count); }
+
+/**
+ * 通过索引画三角形
+ */
+#define GLAPI_DrawIndex(mode, size, type) \
+{ glDrawElements(mode, size, type, NULL); }
 
 // ----------------------------------------------------
 // enable and disable

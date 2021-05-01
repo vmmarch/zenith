@@ -40,7 +40,10 @@ namespace zenith
         std::vector<RenderObject> GetObjects() override { return objects; }
         void DrawObjects() override;
         void DrawObject(RenderObject&) override;
+
+#ifdef __DEBUG__
         void DrawLines(RenderObject&) override;
+#endif
 
 #ifdef __DEBUG__
         void DrawArray(const VertexArray&) override;
@@ -48,10 +51,10 @@ namespace zenith
         void DrawIndex(const VertexArray&) override;
         void DrawIndex(const std::vector<VertexArray>&) override;
 #else
-        void DrawArray(const VertexArray&);
-        void DrawArray(const std::vector<VertexArray>&);
-        void DrawIndex(const VertexArray&);
-        void DrawIndex(const std::vector<VertexArray>&);
+        void DrawArray(GLenum mode, const VertexArray&);
+        void DrawArray(GLenum mode, const std::vector<VertexArray>&);
+        void DrawIndex(GLenum mode, const VertexArray&);
+        void DrawIndex(GLenum mode, const std::vector<VertexArray>&);
 #endif
 
     private:

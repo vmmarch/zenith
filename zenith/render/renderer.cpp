@@ -85,13 +85,13 @@ namespace zenith
     {
         s_renderer->DrawArray(arrays);
     }
-#endif
 
     // 画线
     void Renderer::DrawLines(RenderObject &object)
     {
         s_renderer->DrawLines(object);
     }
+#endif
 
     RenderObject& Renderer::GetObject0()
     {

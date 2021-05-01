@@ -64,16 +64,23 @@ namespace zenith
     {
         object.update(projection, view_matrix);
 
-        if (object.GetType() == DrawType::DEFAULT)
+        GLenum mode;
+        DrawType type = object.GetType();
+
+        switch (type)
         {
-            if (object.GetMod() == DrawMode::INDEX) DrawIndex(*object.GetVertexArray());
-            else DrawArray(*object.GetVertexArray());
-        } else
-        {
-            DrawLines(object);
+            case DEFAULT: mode = GL_TRIANGLES; break;
+            case LINE: mode = GL_LINES; break;
+            case FAN: mode = GL_TRIANGLE_FAN; break;
         }
+
+        if (object.GetMod() == DrawMode::INDEX)
+            DrawIndex(mode, *object.GetVertexArray());
+        else
+            DrawArray(mode, *object.GetVertexArray());
     }
 
+#ifdef __DEBUG__
     void OpenGLRenderer::DrawArray(const VertexArray &vertex)
     {
         vertex.bind();
@@ -118,5 +125,33 @@ namespace zenith
             }
         }
     }
+#else
+    void OpenGLRenderer::DrawArray(GLenum mode, const VertexArray &vertex)
+    {
+        vertex.bind();
+        for(auto& array : vertex.GetVertexBuffers())
+        {
+            GLAPI_DrawArray(mode, 0, array->GetVertexSize());
+        }
+    }
+
+    void OpenGLRenderer::DrawArray(GLenum mode, const std::vector<VertexArray>& vertex_arrays)
+    {
+        for (auto &vertex : vertex_arrays)
+            DrawArray(mode, vertex);
+    }
+
+    void OpenGLRenderer::DrawIndex(GLenum mode, const VertexArray& vertex)
+    {
+        vertex.bind();
+        GLAPI_DrawIndex(mode, vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
+    }
+
+    void OpenGLRenderer::DrawIndex(GLenum mode, const std::vector<VertexArray>& vertex_arrays)
+    {
+        for (auto &vertex : vertex_arrays)
+            DrawIndex(mode, vertex);
+    }
+#endif
 
 }

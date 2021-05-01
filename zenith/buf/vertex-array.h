@@ -33,9 +33,12 @@ namespace zenith
         ARRAY, INDEX
     };
 
+    // DEFAULT = TRIANGLES
     enum DrawType
     {
-        DEFAULT, LINE
+        DEFAULT,
+        LINE,
+        FAN
     };
 
     class VertexArray
