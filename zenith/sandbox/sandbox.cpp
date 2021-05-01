@@ -60,7 +60,7 @@ namespace zenith
         object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view){
             ShaderProgram* program = object.GetShader();
 
-            program->SetFloat4("u_color", RGBA::RED);
+            program->SetFloat4("u_color", { 0.3, 0.2, 0.5, 1.0 });
 
             program->SetMat4("u_view", view);
             program->SetMat4("u_projection", projection);

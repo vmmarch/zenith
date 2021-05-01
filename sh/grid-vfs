@@ -7,11 +7,13 @@ uniform mat4 u_projection;
 uniform mat4 transform;
 
 out vec4 v_color;
+out vec2 fragCoord;
 out vec3 v_position;
 
 void main()
 {
     v_color = u_color;
+    fragCoord = position.xy;
     gl_Position = transform * u_projection * u_view * vec4(position, 1.0);
 }
 // @end
@@ -39,9 +41,7 @@ void main()
 
     vec2 alpha = step(cutoff, cellCoord);
     if (max(alpha.x, alpha.y) == 0.0)
-    {
         discard;
-    }
 
     fragColor = v_color;
 }
