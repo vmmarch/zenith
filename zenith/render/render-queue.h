@@ -25,7 +25,7 @@
  */
 #pragma once
 
-#include "models/object.h"
+#include "render-object.h"
 #include "render/shader/shader.h"
 #include <vector>
 

@@ -25,7 +25,7 @@
 
 #include <zenith/type.h>
 #include <api/glfw-api.h>
-#include "models/object.h"
+#include "render-object.h"
 #include <vector>
 
 namespace zenith
