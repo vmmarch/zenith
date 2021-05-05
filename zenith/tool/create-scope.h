@@ -51,7 +51,8 @@ static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
-        case zenith::render::api::NONE:
+        case
+        ::render::api::NONE:
             break;
         case zenith::render::api::GL:
             return new zenith::OpenGLGraphicsContext(static_cast<GLFWwindow *>(window));

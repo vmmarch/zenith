@@ -27,7 +27,6 @@
 #include "example/example-layer.h"
 #include "event/mouse-event.h"
 #include "state.h"
-#include "color.h"
 
 namespace zenith
 {
