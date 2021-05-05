@@ -27,7 +27,7 @@
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
 #include "buf/vertex-array.h"
-#include "models/object.h"
+#include "render-object.h"
 #include "render/camera.h"
 
 namespace zenith
