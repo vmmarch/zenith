@@ -59,3 +59,5 @@ typedef uint32_t zenith_enum;
  * 线性渲染模式
  */
 #define ZENITH_LINE 0x006
+
+#define ZENITH_MODEL_OBJ 0x007

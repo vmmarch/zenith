@@ -78,52 +78,6 @@ namespace zenith
             DrawArray(mode, *object.GetVertexArray());
     }
 
-#ifdef __DEBUG__
-    void OpenGLRenderer::DrawArray(const VertexArray &vertex)
-    {
-        vertex.bind();
-        for(auto& array : vertex.GetVertexBuffers())
-            GLAPI_DrawTriangleArrays(0, array->GetVertexSize());
-    }
-
-    void OpenGLRenderer::DrawArray(const std::vector<VertexArray>& vertex_arrays)
-    {
-        for (auto &vertex : vertex_arrays)
-            DrawArray(vertex);
-    }
-
-    void OpenGLRenderer::DrawIndex(const VertexArray& vertex)
-    {
-        vertex.bind();
-        GLAPI_DrawTriangleIndex(vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
-    }
-
-    void OpenGLRenderer::DrawIndex(const std::vector<VertexArray>& vertex_arrays)
-    {
-        for (auto &vertex : vertex_arrays)
-            DrawIndex(vertex);
-    }
-
-    void OpenGLRenderer::DrawLines(RenderObject &object)
-    {
-        object.update(projection, view_matrix);
-
-        VertexArray* vertex = object.GetVertexArray();
-        vertex->bind();
-
-        if(object.GetMod() == DrawMode::INDEX)
-        {
-            GLAPI_DrawLineIndex(vertex->GetIndexBuffer()->size(), GL_UNSIGNED_INT);
-        } else
-        {
-            for (auto &buffer : vertex->GetVertexBuffers())
-            {
-                buffer->bind();
-                GLAPI_DrawLineArrays(0, buffer->GetBufferSize());
-            }
-        }
-    }
-#else
     void OpenGLRenderer::DrawArray(GLenum mode, const VertexArray &vertex)
     {
         vertex.bind();
@@ -150,6 +104,5 @@ namespace zenith
         for (auto &vertex : vertex_arrays)
             DrawIndex(mode, vertex);
     }
-#endif
 
 }

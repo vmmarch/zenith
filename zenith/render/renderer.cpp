@@ -75,24 +75,6 @@ namespace zenith
         s_renderer->DrawObject(object);
     }
 
-#ifdef __DEBUG__
-    void Renderer::DrawArray(const VertexArray &array)
-    {
-        s_renderer->DrawArray(array);
-    }
-
-    void Renderer::DrawArray(const std::vector <VertexArray> &arrays)
-    {
-        s_renderer->DrawArray(arrays);
-    }
-
-    // 画线
-    void Renderer::DrawLines(RenderObject &object)
-    {
-        s_renderer->DrawLines(object);
-    }
-#endif
-
     RenderObject& Renderer::GetObject0()
     {
         return s_renderer->GetObject0();

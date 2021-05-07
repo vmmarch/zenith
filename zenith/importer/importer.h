@@ -16,25 +16,25 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/5/5. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "init/starter.h"
-#include <iostream>
+#pragma once
 
-int main(int argc, char **argv)
+#include <zenith/type.h>
+#include <zenith/matrix.h>
+#include "render/render-object.h"
+
+namespace zenith
 {
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-#   ifdef __ZENITH_IN_CHINA__
-    system("chcp 65001");
-#   endif
-#endif
+    class Importer
+    {
+    public:
+        virtual RenderObject read_object() = 0;
+    };
 
-    auto app = new zenith::Starter("zenith", 1260, 880);
-    app->main_cycle();
-
-    return 0;
+    EXTAPI Importer* CreateImporter(zenith_char path, zenith_enum type);
 }

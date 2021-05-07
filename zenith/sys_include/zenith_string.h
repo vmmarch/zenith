@@ -16,25 +16,13 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/1. <=== */
+/*! ===> Creates on 2021/5/5. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "init/starter.h"
-#include <iostream>
+#pragma once
 
-int main(int argc, char **argv)
-{
+#include "fkstr.h"
 
-#ifdef __ZENITH_PLATFORM_WINDOWS__
-#   ifdef __ZENITH_IN_CHINA__
-    system("chcp 65001");
-#   endif
-#endif
-
-    auto app = new zenith::Starter("zenith", 1260, 880);
-    app->main_cycle();
-
-    return 0;
-}
+typedef fuckstd::fk_string zenith_string;

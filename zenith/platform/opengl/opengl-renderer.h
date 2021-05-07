@@ -41,21 +41,10 @@ namespace zenith
         void DrawObjects() override;
         void DrawObject(RenderObject&) override;
 
-#ifdef __DEBUG__
-        void DrawLines(RenderObject&) override;
-#endif
-
-#ifdef __DEBUG__
-        void DrawArray(const VertexArray&) override;
-        void DrawArray(const std::vector<VertexArray>&) override;
-        void DrawIndex(const VertexArray&) override;
-        void DrawIndex(const std::vector<VertexArray>&) override;
-#else
         void DrawArray(GLenum mode, const VertexArray&);
         void DrawArray(GLenum mode, const std::vector<VertexArray>&);
         void DrawIndex(GLenum mode, const VertexArray&);
         void DrawIndex(GLenum mode, const std::vector<VertexArray>&);
-#endif
 
     private:
         glm::mat4 projection;

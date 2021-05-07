@@ -4,7 +4,7 @@ project(zenith)
 # ---------------------------------------------
 # 发布时需要将Release设置为ON
 # ---------------------------------------------
-set(DEBUG OFF)
+set(DEBUG ON)
 
 # ---------------------------------------------
 # 开启例子测试
@@ -30,7 +30,6 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/tool SOURCE_TOOL)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/layer SOURCE_LAYER)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/texture SOURCE_TEXTURE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/shader SOURCE_SHADER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/models SOURCE_MODELS)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_SCENE_3D_CAMERA)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/buf SOURCE_BUF)
@@ -38,6 +37,10 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/example SOURCE_EXAMPLE)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/load SOURCE_LOAD)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
+
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer SOURCE_IMPORTER)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer/obj SOURCE_IMPORTER_OBJ)
+
 
 include_directories(SYSTEM fuckstd)
 
@@ -53,6 +56,7 @@ include_directories(SYSTEM modules/imgui/backends)
 # ---------------------------------------------------------------------------------------
 include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(SYSTEM include/api)
+include_directories(SYSTEM zenith/sys_include)
 
 # ---------------------------------------------------------------------------------------
 # for jvm dir.
@@ -75,6 +79,7 @@ add_definitions(
         -D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
         -D__ZENITH_IN_CHINA__                           # 引擎语言为中文
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
+        -DZENITH_GLAD_CORE                              # GLAD使用Core版本
 )
 
 if(DEBUG MATCHES ON)
@@ -97,7 +102,6 @@ add_executable(${PROJECT_NAME}
         ${SOURCE_LAYER}
         ${SOURCE_TEXTURE}
         ${SOURCE_SHADER}
-        ${SOURCE_MODELS}
         ${SOURCE_SCENE_3D_CAMERA}
         ${SOURCE_RENDER_2D_CAMERA}
         ${SOURCE_BUF}
@@ -106,6 +110,8 @@ add_executable(${PROJECT_NAME}
         ${SOURCE_LOAD}
         ${SOURCE_JAPI}
         ${LOADER_JVM_CALL}
+
+        ${SOURCE_IMPORTER} ${SOURCE_IMPORTER_OBJ}
 
         # ------------------------------------------------------
         # GLAD

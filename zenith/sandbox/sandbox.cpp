@@ -27,6 +27,7 @@
 #include "example/example-layer.h"
 #include "event/mouse-event.h"
 #include "state.h"
+#include "importer/importer.h"
 
 namespace zenith
 {
@@ -46,28 +47,12 @@ namespace zenith
 
     void SandBox::initialize()
     {
-        float line[] = {
-                -1.0,  1.0, 0.0,
-                -1.0, -1.0, 0.0,
-                1.0, -1.0, 0.0,
-                1.0,  1.0, 0.0,
-        };
+       Importer *importer = CreateImporter("D:/model/monkey.obj", ZENITH_MODEL_OBJ);
+       RenderObject monkey = importer->read_object();
 
-        VertexArray* array = VertexArray::Create();
-        array->AddVertexBuffer(line, sizeof(line));
-        RenderObject object(array, ShaderProgram::Create("../sh/grid-vfs"));
-        object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view){
-            ShaderProgram* program = object.GetShader();
+       // Renderer::submit(monkey);
 
-            program->SetFloat4("u_color", { 0.3, 0.2, 0.5, 1.0 });
-
-            program->SetMat4("u_view", view);
-            program->SetMat4("u_projection", projection);
-            program->SetMat4("transform", scale(glm::mat4(), glm::vec3{ glm::vec2{0.75f}, 1.0f }));
-        });
-
-        object.SetRenderMode(ZENITH_TRIANGLE_FAN);
-        Renderer::submit(object);
+       free(importer);
     }
 
     void SandBox::update(DeltaTime deltaTime)

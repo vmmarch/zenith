@@ -37,23 +37,29 @@ namespace fuckstd
         return strlen(cv);
     }
 
-    class string
+    class fk_string
     {
     public:
-        string() { this->value = ""; }
+        fk_string() { this->value = ""; }
 
-        explicit string(char* _value) { this->value = _value; }
+        explicit fk_string(char* _value) { this->value = _value; }
 
-        explicit string(const char* _value) { this->value = _value; }
+        explicit fk_string(const char* _value) { this->value = _value; }
 
-        explicit string(std::string _value) { this->value = _value; }
+        explicit fk_string(std::string _value) { this->value = _value; }
+
+        void operator=(char* _value) { this->value = _value; }
+
+        void operator=(const char* _value) { this->value = _value; }
+
+        void operator=(std::string _value) { this->value = _value; }
 
         /**
          * delete string.
          *
          * @param begin start index
          */
-        void __delete(int begin, int end)
+        void remove(int begin, int end)
         {
             value = value.erase(begin, end);
         }
@@ -64,9 +70,9 @@ namespace fuckstd
          * @param begin start index
          * @return      intercepted string
          */
-        string substring(int begin)
+        fk_string substring(int begin)
         {
-            return value.substr(begin, size());
+            return fk_string(value.substr(begin, size()));
         }
 
         /**
@@ -76,9 +82,9 @@ namespace fuckstd
          * @param end   end index
          * @return      intercepted string
          */
-        string substring(int begin, int end)
+        fk_string substring(int begin, int end)
         {
-            return value.substr(begin, end);
+            return fk_string(value.substr(begin, end));
         }
 
         /**
@@ -87,7 +93,7 @@ namespace fuckstd
          * @param start_cvalue begin string.
          * @return             if begin string is start_value that return true, else false.
          */
-        int start_with(const char *start_cvalue)
+        int begin(const char *start_cvalue)
         {
             return value.compare(0, c_size(start_cvalue), start_cvalue) == 0;
         }
@@ -98,7 +104,7 @@ namespace fuckstd
          * @param end_cvalue end string.
          * @return           if end string is end_value that return true, else false.
          */
-        int end_with(const char *end_cvalue)
+        int end(const char *end_cvalue)
         {
             int _size = size();
             return value.compare((_size - c_size(end_cvalue)), _size, end_cvalue) == 0;
@@ -111,9 +117,9 @@ namespace fuckstd
          * @param size        array size
          * @return            char* array
          */
-        string* split(const char *char_value, int size)
+        fk_string* split(const char *char_value, int size)
         {
-            string *splits = new string[size];
+            fk_string *splits = new fk_string[size];
             std::string::size_type pos1, pos2;
             pos1 = 0, pos2 = value.find(char_value);
 
@@ -134,7 +140,7 @@ namespace fuckstd
         /**
          * Get char*[].
          */
-        const char *get_constchar()
+        const char *c_str()
         {
             return value.c_str();
         }
@@ -180,7 +186,7 @@ namespace fuckstd
             va_list args;
             va_start(args, 0);
 
-            char* _value = const_cast<char*>(get_constchar());
+            char* _value = const_cast<char*>(c_str());
             size_t len = _vscprintf(_value, args) + 1;
             std::vector<char> vbuf(len, '\0');
             int nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, _value, args);

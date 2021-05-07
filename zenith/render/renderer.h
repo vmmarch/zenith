@@ -56,18 +56,6 @@ namespace zenith
         virtual void DrawObjects() = 0;
         virtual void DrawObject(RenderObject&) = 0;
 
-#ifdef __DEBUG__
-        virtual void DrawArray(const VertexArray&) = 0;
-        virtual void DrawArray(const std::vector<VertexArray>&) = 0;
-        virtual void DrawIndex(const VertexArray&) = 0;
-        virtual void DrawIndex(const std::vector<VertexArray>&) = 0;
-#endif
-
-#ifdef __DEBUG__
-        // 画线
-        virtual void DrawLines(RenderObject&) = 0;
-#endif
-
         virtual std::vector<RenderObject> GetObjects() = 0;
 
         virtual RenderObject& GetObject0() = 0;
