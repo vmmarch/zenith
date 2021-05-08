@@ -25,7 +25,7 @@
 
 #include <zenith/type.h>
 #include <zenith/matrix.h>
-#include "render/render-object.h"
+#include "render/mesh.h"
 
 namespace zenith
 {
@@ -33,7 +33,7 @@ namespace zenith
     class Importer
     {
     public:
-        virtual RenderObject read_object() = 0;
+        virtual Mesh read_object() = 0;
     };
 
     EXTAPI Importer* CreateImporter(zenith_char path, zenith_enum type);

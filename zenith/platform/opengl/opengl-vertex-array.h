@@ -61,6 +61,6 @@ namespace zenith
         std::vector<VertexBuffer*> vertex_buffers;
         IndexBuffer* index_buf = 0;
 
-        bool has_index = false;
+        bool has_index = false; // 存在索引
     };
 }

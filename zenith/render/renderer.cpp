@@ -70,17 +70,17 @@ namespace zenith
         s_renderer->DrawObjects();
     }
 
-    void Renderer::DrawObject(RenderObject &object)
+    void Renderer::DrawObject(Mesh &object)
     {
         s_renderer->DrawObject(object);
     }
 
-    RenderObject& Renderer::GetObject0()
+    Mesh& Renderer::GetObject0()
     {
         return s_renderer->GetObject0();
     }
 
-    void Renderer::submit(RenderObject &object)
+    void Renderer::submit(Mesh &object)
     {
         s_renderer->submit(object);
     }

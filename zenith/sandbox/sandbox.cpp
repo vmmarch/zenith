@@ -47,10 +47,10 @@ namespace zenith
 
     void SandBox::initialize()
     {
-       Importer *importer = CreateImporter("D:/model/monkey.obj", ZENITH_MODEL_OBJ);
-       RenderObject monkey = importer->read_object();
+       Importer *importer = CreateImporter("D:/model/cube.obj", ZENITH_MODEL_OBJ);
+       Mesh monkey = importer->read_object();
 
-       // Renderer::submit(monkey);
+       Renderer::submit(monkey);
 
        free(importer);
     }

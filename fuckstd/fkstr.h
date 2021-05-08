@@ -153,17 +153,17 @@ namespace fuckstd
         /**
          * to int.
          */
-        int as_int() { return to_type<int>(); }
+        int to_int() { return std::atoi(c_str()); }
 
         /**
          * to bool.
          */
-        bool as_bool() { return to_type<bool>(); }
+        bool to_boolean() { return to_int(); }
 
         /**
          * to float.
          */
-        float as_float() { return to_type<float>(); }
+        float to_float() { return (float) std::atof(c_str()); }
 
         /**
          * append string.
@@ -204,21 +204,6 @@ namespace fuckstd
         void clear() { value.clear(); }
 
     private:
-
-        /**
-         * type conversion.
-         *
-         * @tparam Type     like int, float
-         * @return          type is param Type value.
-         */
-        template<typename Type> Type to_type()
-        {
-            std::istringstream iss(value.c_str());
-            Type type;
-            iss >> type;
-
-            return type;
-        }
 
     private:
         std::string value;

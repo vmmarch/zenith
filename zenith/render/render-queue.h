@@ -25,7 +25,7 @@
  */
 #pragma once
 
-#include "render-object.h"
+#include "mesh.h"
 #include "render/shader/shader.h"
 #include <vector>
 
@@ -34,9 +34,9 @@ namespace zenith
     class RenderQueue
     {
     public:
-        void push(RenderObject& object);
+        void push(Mesh& object);
     private:
-        std::vector<RenderObject> objects;
+        std::vector<Mesh> objects;
         std::vector<ShaderProgram*> programs;
     };
 }

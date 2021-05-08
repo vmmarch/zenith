@@ -35,7 +35,7 @@ namespace zenith
             glm::vec3( 2.4f, -0.4f, -3.5f),
     };
 
-    static int cube_len = 2;
+    static int cube_len = 1;
 
     class ExampleLayer : public Layer
     {
@@ -61,10 +61,10 @@ namespace zenith
             vbuf->SetLayout(layout);
             vertexArray->AddVertexBuffer(vbuf);
 
-            RenderObject object(vertexArray, shader);
+            Mesh object(vertexArray, shader);
 
             // 更新坐标等参数
-            object.SetUpdate([](RenderObject& object, glm::mat4 projection, glm::mat4 view_matrix){
+            object.SetUpdate([](Mesh& object, glm::mat4 projection, glm::mat4 view_matrix){
                 ShaderProgram* shader = object.GetShader();
 
                 shader->SetMat4("u_object_location", object.GetMat4Location());

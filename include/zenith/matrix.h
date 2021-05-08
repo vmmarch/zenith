@@ -59,7 +59,7 @@ namespace zenith
             i4(int _r, int _g, int _b, int _a) : r(_r), g(_g), b(_b), a(_a) {};
         };
 
-        struct ip4
+        struct arr4i
         {
             i3
             a = { 0, 0, 0},
@@ -67,8 +67,8 @@ namespace zenith
             c = { 0, 0, 0},
             d = { 0, 0, 0};
 
-            ip4() {}
-            ip4(i3 _a, i3 _b, i3 _c, i3 _d) : a(_a), b(_b), c(_c), d(_d) {}
+            arr4i() {}
+            arr4i(i3 _a, i3 _b, i3 _c, i3 _d) : a(_a), b(_b), c(_c), d(_d) {}
 
             void add(int i, i3 p)
             {
@@ -80,6 +80,19 @@ namespace zenith
                     case 3: d = p; break;
                 }
             }
+        };
+
+        struct face
+        {
+            i3
+            x = { 0, 0, 0},
+            y = { 0, 0, 0},
+            z = { 0, 0, 0},
+            a = { 0, 0, 0};
+
+            face() {}
+            face(i3 _x, i3 _y, i3 _z) : x(_x), y(_y), z(_z) {}
+            face(i3 _x, i3 _y, i3 _z, i3 _a) : x(_x), y(_y), z(_z), a(_a) {}
         };
 
     }

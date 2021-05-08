@@ -60,7 +60,7 @@ namespace zenith
             DrawObject(object);
     }
 
-    void OpenGLRenderer::DrawObject(RenderObject& object)
+    void OpenGLRenderer::DrawObject(Mesh& object)
     {
         object.update(projection, view_matrix);
 

@@ -27,7 +27,7 @@
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
 #include "buf/vertex-array.h"
-#include "render-object.h"
+#include "mesh.h"
 #include "render/camera.h"
 
 namespace zenith
@@ -54,12 +54,12 @@ namespace zenith
 
         // 渲染顶点数组
         virtual void DrawObjects() = 0;
-        virtual void DrawObject(RenderObject&) = 0;
+        virtual void DrawObject(Mesh&) = 0;
 
-        virtual std::vector<RenderObject> GetObjects() = 0;
+        virtual std::vector<Mesh> GetObjects() = 0;
 
-        virtual RenderObject& GetObject0() = 0;
-        virtual void submit(RenderObject&) = 0;
+        virtual Mesh& GetObject0() = 0;
+        virtual void submit(Mesh&) = 0;
 
         // 创建渲染器
         static zenith_scope<AbsRenderer> Create();
@@ -68,7 +68,7 @@ namespace zenith
         static render::api GetRenderAPI();
 
     private:
-        std::vector<RenderObject> models;
+        std::vector<Mesh> models;
         static render::api render_api;
     };
 
@@ -87,18 +87,18 @@ namespace zenith
 
         static void DrawObjects();
 
-        static void DrawObject(RenderObject&);
+        static void DrawObject(Mesh&);
 
 #ifdef __DEBUG__
         // 渲染顶点数组
         static void DrawArray(const VertexArray&);
         static void DrawArray(const std::vector<VertexArray>&);
         // 画线
-        static void DrawLines(RenderObject&);
+        static void DrawLines(Mesh&);
 #endif
 
-        static RenderObject& GetObject0();
-        static void submit(RenderObject &object);
+        static Mesh& GetObject0();
+        static void submit(Mesh &object);
 
     private:
         static zenith_scope<AbsRenderer> s_renderer;

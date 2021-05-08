@@ -25,6 +25,7 @@
 
 #include "render/shader/shader.h"
 #include "buf/vertex-array.h"
+#include "color.h"
 
 #include <zenith/type.h>
 
@@ -33,32 +34,34 @@
 namespace zenith
 {
 
-    class RenderObject;
+    class Mesh;
 
     /**
-     * @param [i] RenderObject        渲染对象
+     * @param [i] Mesh        渲染对象
      * @param [i] projection_matrix   投影矩阵
      * @param [i] view_matrix         视图矩阵
      */
-    typedef void (*zenith_update)(RenderObject&, glm::mat4, glm::mat4);
+    typedef void (*zenith_update)(Mesh &, glm::mat4, glm::mat4);
 
     /**
      * 渲染封装模型
      */
-    class RenderObject
+    class Mesh
     {
     public:
-        RenderObject(VertexArray *vertex, ShaderProgram *shader) : vertex_array(vertex), shader(shader)
+        Mesh(VertexArray *vertex) : vertex_array(vertex)
+        {
+            this->shader = ShaderProgram::Create("../sh/default-vfs");
+        }
+
+        Mesh(VertexArray *vertex, ShaderProgram *shader) : vertex_array(vertex), shader(shader)
         {
         }
 
         void update(glm::mat4 projection, glm::mat4 view_matrix)
         {
-            if(update_p != NULL)
-            {
-                shader->bind();
-                update_p(*this, projection, view_matrix);
-            }
+            shader->bind();
+            update_p(*this, projection, view_matrix);
         }
 
         void SetUpdate(zenith_update update)
@@ -67,20 +70,23 @@ namespace zenith
         }
 
         // vertex array
-        void SetVertexArray(VertexArray*);
+        void SetVertexArray(VertexArray *);
 
-        [[nodiscard]] VertexArray* GetVertexArray() const;
+        [[nodiscard]] VertexArray *GetVertexArray() const;
 
         // shader
-        void SetShader(ShaderProgram*);
+        void SetShader(ShaderProgram *);
 
-        [[nodiscard]] ShaderProgram* GetShader();
+        [[nodiscard]] ShaderProgram *GetShader();
 
-        void SetTransform(glm::mat4 transform_ = glm::mat4(1.0f)) { transform = transform_; }
+        void SetTransform(glm::mat4 transform_ = glm::mat4(1.0f))
+        { transform = transform_; }
 
-        glm::mat4 GetTransform() { return transform; }
+        glm::mat4 GetTransform()
+        { return transform; }
 
-        void SetLocation(glm::vec3 loc) { location = loc; }
+        void SetLocation(glm::vec3 loc)
+        { location = loc; }
 
         glm::mat4 GetMat4Location()
         {
@@ -89,25 +95,37 @@ namespace zenith
             return m_location;
         }
 
-        glm::vec3 GetLocation() { return location; }
+        glm::vec3 GetLocation()
+        { return location; }
 
         /**
          * 渲染模式, 填充渲染或线性渲染
          *
          * @param mode FILL or LINE
          */
-        void SetRenderMode(zenith_enum mode) { render_mode = mode; }
-        zenith_enum GetRenderMode() const { return render_mode; }
+        void SetRenderMode(zenith_enum mode)
+        { render_mode = mode; }
+
+        zenith_enum GetRenderMode() const
+        { return render_mode; }
 
     private:
         bool modify = false;
-        ShaderProgram* shader;
-        VertexArray* vertex_array;
-        glm::vec3 location = { 0.0f, 0.0f, 0.0f };
+        ShaderProgram *shader;
+        VertexArray *vertex_array;
+        glm::vec3 location = {0.0f, 0.0f, 0.0f};
 
         glm::mat4 transform;
 
         zenith_enum render_mode = ZENITH_TRIANGLES; // 渲染类型
-        zenith_update update_p = NULL; // 更新函数
+        zenith_update update_p = [](Mesh &object, glm::mat4 projection, glm::mat4 view_matrix)
+        {
+            ShaderProgram *shader = object.GetShader();
+
+            shader->SetMat4("u_object_location", object.GetMat4Location());
+            shader->SetMat4("u_projection", projection);
+            shader->SetMat4("u_view", view_matrix);
+        }; // 更新函数
     };
+
 }

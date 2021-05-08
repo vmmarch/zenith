@@ -25,7 +25,7 @@
 
 #include <zenith/type.h>
 #include <api/glfw-api.h>
-#include "render-object.h"
+#include "mesh.h"
 #include <vector>
 
 namespace zenith
@@ -39,12 +39,12 @@ namespace zenith
         virtual void swap_buffers() = 0; // 交换缓冲区
 
         /*! 获取当前选择的模型 */
-        void SetCurrObject(RenderObject &model)
+        void SetCurrObject(Mesh &model)
         {
             curr_model.reset(&model);
         }
 
-        zenith_shared<RenderObject> GetCurrModel()
+        zenith_shared<Mesh> GetCurrModel()
         {
             return curr_model;
         }
@@ -55,7 +55,7 @@ namespace zenith
         static GraphicsContext* Create(zenith_any window);
 
     private:
-        zenith_shared<RenderObject> curr_model;
+        zenith_shared<Mesh> curr_model;
         static GraphicsContext* context;
     };
 }

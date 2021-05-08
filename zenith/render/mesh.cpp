@@ -21,27 +21,27 @@
 /*!
  * @author 2B键盘
  */
-#include "render-object.h"
+#include "mesh.h"
 
 namespace zenith
 {
 
-    void RenderObject::SetVertexArray(VertexArray* vertex)
+    void Mesh::SetVertexArray(VertexArray* vertex)
     {
         this->vertex_array = vertex;
     }
 
-    VertexArray* RenderObject::GetVertexArray() const
+    VertexArray* Mesh::GetVertexArray() const
     {
         return this->vertex_array;
     }
 
-    void RenderObject::SetShader(ShaderProgram* _shader)
+    void Mesh::SetShader(ShaderProgram* _shader)
     {
         this->shader = _shader;
     }
 
-    ShaderProgram* RenderObject::GetShader()
+    ShaderProgram* Mesh::GetShader()
     {
         return this->shader;
     }

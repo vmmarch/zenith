@@ -41,6 +41,8 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer SOURCE_IMPORTER)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer/obj SOURCE_IMPORTER_OBJ)
 
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/model SOURCE_MODEL)
+
 
 include_directories(SYSTEM fuckstd)
 
@@ -112,6 +114,8 @@ add_executable(${PROJECT_NAME}
         ${LOADER_JVM_CALL}
 
         ${SOURCE_IMPORTER} ${SOURCE_IMPORTER_OBJ}
+
+        ${SOURCE_MODEL}
 
         # ------------------------------------------------------
         # GLAD
