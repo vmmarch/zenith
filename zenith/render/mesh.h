@@ -23,17 +23,17 @@
  */
 #pragma once
 
-#include "render/shader/shader.h"
+#include "shader.h"
 #include "buf/vertex-array.h"
 #include "color.h"
 
 #include <zenith/type.h>
+#include <zenith_string.h>
 
 #include <utility>
 
 namespace zenith
 {
-
     class Mesh;
 
     /**
@@ -49,9 +49,9 @@ namespace zenith
     class Mesh
     {
     public:
-        Mesh(VertexArray *vertex) : vertex_array(vertex)
+        Mesh(VertexArray *vertex)
         {
-            this->shader = ShaderProgram::Create("../sh/default-vfs");
+            Mesh(vertex, ShaderProgram::Create("../sh/default-vfs"));
         }
 
         Mesh(VertexArray *vertex, ShaderProgram *shader) : vertex_array(vertex), shader(shader)

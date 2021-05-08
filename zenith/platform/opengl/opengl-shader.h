@@ -34,6 +34,7 @@ namespace zenith
         ~OpenGLShaderProgram() override;
         void bind() override;
         void unbind() override;
+        zenith_uint GetID() const override { return shader_id; }
         void SetBool(zenith_char, bool) override;
         void SetInt(zenith_char, int) override;
         void SetFloat(zenith_char, float) override;

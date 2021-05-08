@@ -16,46 +16,11 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/7. <=== */
+/*! ===> Creates on 2021/5/8. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include <zenith/type.h>
-#include <api/glfw-api.h>
-#include "mesh.h"
-#include <vector>
-
-namespace zenith
-{
-    /**
-     * 渲染图形上下文管理
-     */
-    class GraphicsContext
-    {
-    public:
-        virtual void swap_buffers() = 0; // 交换缓冲区
-
-        /*! 获取当前选择的模型 */
-        void SetCurrMesh(Mesh &model)
-        {
-            curr_model.reset(&model);
-        }
-
-        zenith_shared<Mesh> GetCurrModel()
-        {
-            return curr_model;
-        }
-
-        static GraphicsContext* instance()
-        { return context; }
-
-        static GraphicsContext* Create(zenith_any window);
-
-    private:
-        zenith_shared<Mesh> curr_model;
-        static GraphicsContext* context;
-    };
-}
+#include "shader/shader.h"

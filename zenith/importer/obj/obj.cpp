@@ -25,6 +25,7 @@
 #include <fstream>
 #include <iostream>
 #include <zenith_string.h>
+#include "render/renderer.h"
 
 namespace zenith
 {

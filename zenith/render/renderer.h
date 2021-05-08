@@ -88,14 +88,6 @@ namespace zenith
 
         static void DrawMesh(Mesh&);
 
-#ifdef __DEBUG__
-        // 渲染顶点数组
-        static void DrawArray(const VertexArray&);
-        static void DrawArray(const std::vector<VertexArray>&);
-        // 画线
-        static void DrawLines(Mesh&);
-#endif
-
         static void submit(Mesh &object);
 
     private:

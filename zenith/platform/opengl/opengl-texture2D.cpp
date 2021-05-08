@@ -3,7 +3,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "../../../modules/stb_image.h"
+#include "stb_image.h"
 
 namespace zenith
 {

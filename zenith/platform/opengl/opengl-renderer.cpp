@@ -87,22 +87,10 @@ namespace zenith
         }
     }
 
-    void OpenGLRenderer::DrawArray(GLenum mode, const std::vector<VertexArray>& vertex_arrays)
-    {
-        for (auto &vertex : vertex_arrays)
-            DrawArray(mode, vertex);
-    }
-
     void OpenGLRenderer::DrawIndex(GLenum mode, const VertexArray& vertex)
     {
         vertex.bind();
         GLAPI_DrawIndex(mode, vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
-    }
-
-    void OpenGLRenderer::DrawIndex(GLenum mode, const std::vector<VertexArray>& vertex_arrays)
-    {
-        for (auto &vertex : vertex_arrays)
-            DrawIndex(mode, vertex);
     }
 
 }

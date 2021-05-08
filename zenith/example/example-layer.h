@@ -81,7 +81,7 @@ namespace zenith
                 Renderer::submit(object);
             }
 
-            GraphicsContext::instance()->SetCurrObject(object);
+            GraphicsContext::instance()->SetCurrMesh(object);
         }
 
         void render() override

@@ -46,7 +46,7 @@
  *                  |                                                                    |
  *                  | -------------------                                                |
  *                                      |                                                |
- *                                      |  Submit Render Object.                         |
+ *                                      |  Submit Render Mesh.                         |
  *                                      |                                                |
  *                                     \_/                                               |
  *                            ----------------------            Execute Render.          |

@@ -41,9 +41,7 @@ namespace zenith
         void DrawMesh(Mesh&) override;
 
         void DrawArray(GLenum mode, const VertexArray&);
-        void DrawArray(GLenum mode, const std::vector<VertexArray>&);
         void DrawIndex(GLenum mode, const VertexArray&);
-        void DrawIndex(GLenum mode, const std::vector<VertexArray>&);
 
     private:
         glm::mat4 projection;
