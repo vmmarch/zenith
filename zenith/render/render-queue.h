@@ -26,7 +26,7 @@
 #pragma once
 
 #include "mesh.h"
-#include "render/shader/shader.h"
+#include "shader.h"
 #include <vector>
 
 namespace zenith

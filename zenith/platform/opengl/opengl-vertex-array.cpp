@@ -86,7 +86,6 @@ namespace zenith
     void OpenGLVertexArray::SetIndexBuffer(zenith_uint32* buf, zenith_uint32 size)
     {
         SetIndexBuffer(IndexBuffer::Create(buf, size));
-        has_index = true;
     }
 
     void OpenGLVertexArray::SetIndexBuffer(IndexBuffer* buf)
@@ -95,5 +94,7 @@ namespace zenith
         buf->bind();
 
         this->index_buf = buf;
+
+        has_index = true;
     }
 }

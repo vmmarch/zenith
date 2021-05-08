@@ -23,7 +23,7 @@
  */
 #pragma once
 
-#include "render/shader/shader.h"
+#include "shader.h"
 
 namespace zenith
 {

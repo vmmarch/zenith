@@ -27,7 +27,7 @@
 #include "window/window.h"
 #include "event/event.h"
 #include "render/camera.h"
-#include "render/shader/shader.h"
+#include "shader.h"
 #include "buf/buf.h"
 #include "event/mouse-event.h"
 #include "sandbox/sandbox.h"

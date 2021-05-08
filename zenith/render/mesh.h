@@ -58,6 +58,11 @@ namespace zenith
         {
         }
 
+        void SetName(zenith_char _name)
+        {
+            this->name = _name;
+        }
+
         void update(glm::mat4 projection, glm::mat4 view_matrix)
         {
             shader->bind();
@@ -116,6 +121,8 @@ namespace zenith
         glm::vec3 location = {0.0f, 0.0f, 0.0f};
 
         glm::mat4 transform;
+
+        zenith_char name;
 
         zenith_enum render_mode = ZENITH_TRIANGLES; // 渲染类型
         zenith_update update_p = [](Mesh &object, glm::mat4 projection, glm::mat4 view_matrix)

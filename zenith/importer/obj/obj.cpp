@@ -24,8 +24,6 @@
 #include "obj.h"
 #include <fstream>
 #include <iostream>
-#include <zenith_string.h>
-#include "render/renderer.h"
 
 namespace zenith
 {
@@ -137,10 +135,10 @@ namespace zenith
         }
         array->AddVertexBuffer(array_vertices, size);
 
-//        int isize = indices.size();
-//        zenith_uint32 index[isize];
-//        std::copy(indices.begin(), indices.end(), index);
-//        array->SetIndexBuffer(index, isize);
+        int isize = indices.size();
+        zenith_uint32 index[isize];
+        std::copy(indices.begin(), indices.end(), index);
+        array->SetIndexBuffer(index, isize);
 
         Mesh mesh(array);
         return mesh;
