@@ -31,7 +31,7 @@ namespace zenith
     {
     public:
         ObjImporter(zenith_char _path) : path(_path) {}
-        Mesh read_object() override;
+        Mesh read_mesh() override;
 
     private:
         zenith_char path;

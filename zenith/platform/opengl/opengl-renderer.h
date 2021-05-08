@@ -35,11 +35,10 @@ namespace zenith
         void begin(Camera&) override;
         void disable_depth_test() override;
         void enable_depth_test() override;
-        Mesh& GetObject0() override { return objects.at(0); }
-        void submit(Mesh& model) override { objects.push_back(model); }
-        std::vector<Mesh> GetObjects() override { return objects; }
-        void DrawObjects() override;
-        void DrawObject(Mesh&) override;
+        void submit(Mesh& model) override { meshs.push_back(model); }
+        std::vector<Mesh> GetMeshs() override { return meshs; }
+        void DrawMeshs() override;
+        void DrawMesh(Mesh&) override;
 
         void DrawArray(GLenum mode, const VertexArray&);
         void DrawArray(GLenum mode, const std::vector<VertexArray>&);
@@ -50,6 +49,6 @@ namespace zenith
         glm::mat4 projection;
         glm::mat4 view_matrix;
 
-        std::vector<Mesh> objects;
+        std::vector<Mesh> meshs;
     };
 }

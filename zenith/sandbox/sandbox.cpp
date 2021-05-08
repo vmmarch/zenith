@@ -48,7 +48,7 @@ namespace zenith
     void SandBox::initialize()
     {
        Importer *importer = CreateImporter("D:/model/cube.obj", ZENITH_MODEL_OBJ);
-       Mesh monkey = importer->read_object();
+       Mesh monkey = importer->read_mesh();
 
        Renderer::submit(monkey);
 
@@ -93,7 +93,7 @@ namespace zenith
         }
         imlayer->end();
 
-        Renderer::DrawObjects();
+        Renderer::DrawMeshs();
     }
 
     void SandBox::event(Event &e)

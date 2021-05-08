@@ -33,7 +33,7 @@ namespace zenith
     class Importer
     {
     public:
-        virtual Mesh read_object() = 0;
+        virtual Mesh read_mesh() = 0;
     };
 
     EXTAPI Importer* CreateImporter(zenith_char path, zenith_enum type);

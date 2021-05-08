@@ -53,12 +53,11 @@ namespace zenith
         virtual void enable_depth_test() = 0;
 
         // 渲染顶点数组
-        virtual void DrawObjects() = 0;
-        virtual void DrawObject(Mesh&) = 0;
+        virtual void DrawMeshs() = 0;
+        virtual void DrawMesh(Mesh&) = 0;
 
-        virtual std::vector<Mesh> GetObjects() = 0;
+        virtual std::vector<Mesh> GetMeshs() = 0;
 
-        virtual Mesh& GetObject0() = 0;
         virtual void submit(Mesh&) = 0;
 
         // 创建渲染器
@@ -85,9 +84,9 @@ namespace zenith
         // 清屏
         static void clear();
 
-        static void DrawObjects();
+        static void DrawMeshs();
 
-        static void DrawObject(Mesh&);
+        static void DrawMesh(Mesh&);
 
 #ifdef __DEBUG__
         // 渲染顶点数组
@@ -97,7 +96,6 @@ namespace zenith
         static void DrawLines(Mesh&);
 #endif
 
-        static Mesh& GetObject0();
         static void submit(Mesh &object);
 
     private:

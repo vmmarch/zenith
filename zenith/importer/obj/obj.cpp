@@ -39,7 +39,7 @@ namespace zenith
         return zms::f2(vers[0].to_float(), vers[1].to_float());
     }
 
-    Mesh ObjImporter::read_object()
+    Mesh ObjImporter::read_mesh()
     {
         std::string line;
         std::fstream fs;
@@ -141,7 +141,7 @@ namespace zenith
 //        std::copy(indices.begin(), indices.end(), index);
 //        array->SetIndexBuffer(index, isize);
 
-        Mesh object(array);
-        return object;
+        Mesh mesh(array);
+        return mesh;
     }
 }

@@ -54,28 +54,28 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::DrawObjects()
+    void OpenGLRenderer::DrawMeshs()
     {
-        for(auto& object : objects)
-            DrawObject(object);
+        for(auto& mesh : meshs)
+            DrawMesh(mesh);
     }
 
-    void OpenGLRenderer::DrawObject(Mesh& object)
+    void OpenGLRenderer::DrawMesh(Mesh& mesh)
     {
-        object.update(projection, view_matrix);
+        mesh.update(projection, view_matrix);
 
         GLenum mode;
-        switch (object.GetRenderMode())
+        switch (mesh.GetRenderMode())
         {
             case ZENITH_TRIANGLES: mode = GL_TRIANGLES; break;
             case ZENITH_LINES: mode = GL_LINES; break;
             case ZENITH_TRIANGLE_FAN: mode = GL_TRIANGLE_FAN; break;
         }
 
-        if (object.GetVertexArray()->HasIndex() == true)
-            DrawIndex(mode, *object.GetVertexArray());
+        if (mesh.GetVertexArray()->HasIndex() == true)
+            DrawIndex(mode, *mesh.GetVertexArray());
         else
-            DrawArray(mode, *object.GetVertexArray());
+            DrawArray(mode, *mesh.GetVertexArray());
     }
 
     void OpenGLRenderer::DrawArray(GLenum mode, const VertexArray &vertex)
