@@ -33,6 +33,7 @@
 #include "render/renderer.h"
 #include "window/window.h"
 #include "render/render-command.h"
+#include "render/model.h"
 
 #include <vector>
 
@@ -62,7 +63,7 @@ namespace zenith
         Layer* main_layer;
         bool cursor_hide = false;
 
-        std::vector<Mesh> meshs;
+        std::vector<Model> models;
 
         ShaderProgram *shader;
     };

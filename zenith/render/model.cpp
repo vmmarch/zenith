@@ -41,26 +41,10 @@ namespace zenith
 
     void Model::parse_obj(zenith_char path)
     {
-        fastObjMesh *mesh = fast_obj_read(path);
-        int t_offset = 0;
-        int v_offset = 0;
+        fastObjMesh *mi = fast_obj_read(path);
 
-        std::vector<vertex_t> vertices;
-        std::vector<unsigned int> indices;
+        // TODO Loader model.
 
-        for(int i = 0; i < mesh->position_count; i++)
-        {
-            vertex_t vertex;
-            vertex.position = { mesh->positions[v_offset], mesh->positions[(v_offset + 1)], mesh->positions[(v_offset + 2)] };
-            vertex.tex_coords = { mesh->texcoords[t_offset], mesh->texcoords[(t_offset + 1)]};
-            vertex.normal = { mesh->normals[v_offset], mesh->normals[(v_offset + 1)], mesh->normals[(v_offset + 2)] };
-
-            v_offset += 3;
-            t_offset += 3;
-
-            vertices.push_back(vertex);
-        }
-
-        fast_obj_destroy(mesh);
+        fast_obj_destroy(mi);
     }
 }

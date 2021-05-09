@@ -28,7 +28,6 @@
 #include "event/mouse-event.h"
 #include "state.h"
 
-#include "render/model.h"
 #include <fast-obj.h>
 
 namespace zenith
@@ -51,7 +50,7 @@ namespace zenith
 
     void SandBox::initialize()
     {
-        Model model("D:\\model\\cube.obj", ZENITH_MODEL_OBJ);
+        models.push_back(Model("D:\\model\\Girl\\Girl_1.obj", ZENITH_MODEL_OBJ));
     }
 
     void SandBox::update(DeltaTime deltaTime)
@@ -91,6 +90,12 @@ namespace zenith
             layer_stack.render();
         }
         imlayer->end();
+
+        for(auto model : models)
+        {
+            shader->bind();
+            model.draw(*shader);
+        }
     }
 
     void SandBox::event(Event &e)
