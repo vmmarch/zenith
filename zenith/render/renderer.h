@@ -27,7 +27,7 @@
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
 #include "buf/vertex-array.h"
-#include "mesh.h"
+#include "model.h"
 #include "render/camera.h"
 
 namespace zenith
@@ -52,9 +52,11 @@ namespace zenith
         // 开启深度测试
         virtual void enable_depth_test() = 0;
 
-        virtual void DrawMesh(Mesh&) = 0;
+        virtual void draw_models() = 0;
 
-        virtual void submit(Mesh&) = 0;
+        virtual void draw_model(Model&) = 0;
+
+        virtual void submit(Model&) = 0;
 
         // 创建渲染器
         static zenith_scope<AbsRenderer> Create();
@@ -80,9 +82,11 @@ namespace zenith
         // 清屏
         static void clear();
 
-        static void DrawMesh(Mesh&);
+        static void draw_models();
 
-        static void submit(Mesh &object);
+        static void draw_model(Model&);
+
+        static void submit(Model&);
 
     private:
         static zenith_scope<AbsRenderer> s_renderer;

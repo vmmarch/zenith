@@ -54,7 +54,13 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::DrawMesh(Mesh &mesh)
+    void OpenGLRenderer::draw_models()
+    {
+        for(auto model : models)
+            draw_model(model);
+    }
+
+    void OpenGLRenderer::draw_model(Model &model)
     {
     }
 

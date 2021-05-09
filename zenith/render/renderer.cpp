@@ -64,14 +64,19 @@ namespace zenith
         s_renderer->clear();
     }
 
-    void Renderer::DrawMesh(Mesh &object)
+    void Renderer::draw_models()
     {
-        s_renderer->DrawMesh(object);
+        s_renderer->draw_models();
     }
 
-    void Renderer::submit(Mesh &object)
+    void Renderer::draw_model(Model &model)
     {
-        s_renderer->submit(object);
+        s_renderer->draw_model(model);
+    }
+
+    void Renderer::submit(Model &model)
+    {
+        s_renderer->submit(model);
     }
 
 }

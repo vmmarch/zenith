@@ -50,7 +50,7 @@ namespace zenith
 
     void SandBox::initialize()
     {
-        models.push_back(Model("D:\\model\\Girl\\Girl_1.obj", ZENITH_MODEL_OBJ));
+        Renderer::submit(*new Model("D:\\model\\Girl\\Girl_1.obj", ZENITH_MODEL_OBJ));
     }
 
     void SandBox::update(DeltaTime deltaTime)
@@ -91,11 +91,7 @@ namespace zenith
         }
         imlayer->end();
 
-        for(auto model : models)
-        {
-            shader->bind();
-            model.draw(*shader);
-        }
+        Renderer::draw_models();
     }
 
     void SandBox::event(Event &e)

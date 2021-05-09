@@ -35,13 +35,14 @@ namespace zenith
         void begin(Camera&) override;
         void disable_depth_test() override;
         void enable_depth_test() override;
-        void submit(Mesh& model) override { meshs.push_back(model); }
-        void DrawMesh(Mesh&) override;
+        void submit(Model& model) override { models.push_back(model); }
+        void draw_model(Model&) override;
+        void draw_models() override;
 
     private:
         glm::mat4 projection;
         glm::mat4 view_matrix;
 
-        std::vector<Mesh> meshs;
+        std::vector<Model> models;
     };
 }
