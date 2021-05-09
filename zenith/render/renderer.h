@@ -52,11 +52,7 @@ namespace zenith
         // 开启深度测试
         virtual void enable_depth_test() = 0;
 
-        // 渲染顶点数组
-        virtual void DrawMeshs() = 0;
         virtual void DrawMesh(Mesh&) = 0;
-
-        virtual std::vector<Mesh> GetMeshs() = 0;
 
         virtual void submit(Mesh&) = 0;
 
@@ -83,8 +79,6 @@ namespace zenith
 
         // 清屏
         static void clear();
-
-        static void DrawMeshs();
 
         static void DrawMesh(Mesh&);
 

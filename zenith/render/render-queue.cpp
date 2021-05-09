@@ -25,9 +25,7 @@
 
 namespace zenith
 {
-    void RenderQueue::push(Mesh& object)
+    void RenderQueue::push(Mesh& mesh)
     {
-        objects.push_back(object);
-        programs.push_back(object.GetShader());
     }
 }

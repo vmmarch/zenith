@@ -16,23 +16,46 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/5/5. <=== */
+/*! ===> Creates on 2021/5/9. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "importer.h"
-#include "importer/obj/obj.h"
+#pragma once
+
+#include "mesh.h"
 
 namespace zenith
 {
-    Importer* CreateImporter(zenith_char path, zenith_enum type)
+    class Model
     {
-        switch(type)
+    public:
+
+        /**
+         * 创建模型对象
+         *
+         * @param path   模型路径
+         * @param mt     模型类型
+         */
+        Model(zenith_char path, zenith_enum mt, bool gamma = false) : gamma_correction(gamma)
         {
-            case ZENITH_MODEL_OBJ: return new ObjImporter(path);
+            load_model(path, mt);
         }
 
-        return NULL;
-    }
+        void draw(ShaderProgram &shader);
+
+    private:
+        void load_model(zenith_char path, zenith_enum mt);
+
+        /**
+         * 解析Obj模型
+         * @param path 模型路径
+         */
+        void parse_obj(zenith_char path);
+
+    private:
+        std::vector<texture_t> textures;
+        std::vector<Mesh> meshes;
+        bool gamma_correction;
+    };
 }

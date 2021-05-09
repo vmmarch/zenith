@@ -61,6 +61,10 @@ namespace zenith
         float last_x, last_y;
         Layer* main_layer;
         bool cursor_hide = false;
+
+        std::vector<Mesh> meshs;
+
+        ShaderProgram *shader;
     };
 
 }

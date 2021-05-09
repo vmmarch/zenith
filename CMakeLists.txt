@@ -118,9 +118,10 @@ add_executable(${PROJECT_NAME}
         ${SOURCE_MODEL}
 
         # ------------------------------------------------------
-        # GLAD
+        # C
         # ------------------------------------------------------
         ${CMAKE_CURRENT_SOURCE_DIR}/extern/GLAD/glad.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/modules/fast-obj/fast-obj.c
 
         # ------------------------------------------------------
         # IMGUI

@@ -64,12 +64,6 @@ namespace zenith
         s_renderer->clear();
     }
 
-    // 渲染顶点数组
-    void Renderer::DrawMeshs()
-    {
-        s_renderer->DrawMeshs();
-    }
-
     void Renderer::DrawMesh(Mesh &object)
     {
         s_renderer->DrawMesh(object);

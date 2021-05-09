@@ -27,7 +27,9 @@
 #include "example/example-layer.h"
 #include "event/mouse-event.h"
 #include "state.h"
-#include "importer/importer.h"
+
+#include "render/model.h"
+#include <fast-obj.h>
 
 namespace zenith
 {
@@ -43,16 +45,13 @@ namespace zenith
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
         layer_stack.push(new EditorLayer());
+
+        this->shader = ShaderProgram::Create("../sh/shader-vfs");
     }
 
     void SandBox::initialize()
     {
-       Importer *importer = CreateImporter("D:/model/cube.obj", ZENITH_MODEL_OBJ);
-       Mesh monkey = importer->read_mesh();
-
-       Renderer::submit(monkey);
-
-       free(importer);
+        Model model("D:\\model\\cube.obj", ZENITH_MODEL_OBJ);
     }
 
     void SandBox::update(DeltaTime deltaTime)
@@ -92,8 +91,6 @@ namespace zenith
             layer_stack.render();
         }
         imlayer->end();
-
-        Renderer::DrawMeshs();
     }
 
     void SandBox::event(Event &e)

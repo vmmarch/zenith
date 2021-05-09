@@ -16,25 +16,10 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/5/5. <=== */
+/*! ===> Creates on 2021/5/8. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
-
-#include <zenith/type.h>
-#include <zenith/matrix.h>
-#include "render/mesh.h"
-
-namespace zenith
-{
-
-    class Importer
-    {
-    public:
-        virtual Mesh read_mesh() = 0;
-    };
-
-    EXTAPI Importer* CreateImporter(zenith_char path, zenith_enum type);
-}
+#include <fast-obj/fast_obj.h>

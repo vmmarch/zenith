@@ -26,24 +26,39 @@
 namespace zenith
 {
 
-    void Mesh::SetVertexArray(VertexArray* vertex)
+    void Mesh::bind()
     {
-        this->vertex_array = vertex;
+        GLAPI_CreateVertexArray(vaoid);
+        GLAPI_CreateBuffer2(vboid, eboid);
+
+        // 绑定VAO, VBO
+        glBindVertexArray(vaoid);
+        glBindBuffer(GL_ARRAY_BUFFER, vboid);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertex_t), &vertices, GL_STATIC_DRAW);
+
+        // 绑定EBO
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboid);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(zenith_uint), &indices, GL_STATIC_DRAW);
+
+        // 设置顶点属性
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (void*) 0);
+
+        // 设置法向量
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (void*) offsetof(vertex_t, normal));
+
+        // 设置贴图
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(vertex_t), (void*) offsetof(vertex_t, tex_coords));
+
+        glBindVertexArray(0);
     }
 
-    VertexArray* Mesh::GetVertexArray() const
+    void Mesh::draw(ShaderProgram &shader)
     {
-        return this->vertex_array;
-    }
-
-    void Mesh::SetShader(ShaderProgram* _shader)
-    {
-        this->shader = _shader;
-    }
-
-    ShaderProgram* Mesh::GetShader()
-    {
-        return this->shader;
+        glBindVertexArray(vaoid);
+        GLAPI_DrawIndex(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT);
     }
 
 }

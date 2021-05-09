@@ -28,7 +28,7 @@
 namespace zenith
 {
 
-    void OpenGLRenderer::clear_color(const glm::vec4& color)
+    void OpenGLRenderer::clear_color(const glm::vec4 &color)
     {
         glClearColor(color.r, color.g, color.b, color.a);
     }
@@ -54,43 +54,8 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::DrawMeshs()
+    void OpenGLRenderer::DrawMesh(Mesh &mesh)
     {
-        for(auto& mesh : meshs)
-            DrawMesh(mesh);
-    }
-
-    void OpenGLRenderer::DrawMesh(Mesh& mesh)
-    {
-        mesh.update(projection, view_matrix);
-
-        GLenum mode;
-        switch (mesh.GetRenderMode())
-        {
-            case ZENITH_TRIANGLES: mode = GL_TRIANGLES; break;
-            case ZENITH_LINES: mode = GL_LINES; break;
-            case ZENITH_TRIANGLE_FAN: mode = GL_TRIANGLE_FAN; break;
-        }
-
-        if (mesh.GetVertexArray()->HasIndex() == true)
-            DrawIndex(mode, *mesh.GetVertexArray());
-        else
-            DrawArray(mode, *mesh.GetVertexArray());
-    }
-
-    void OpenGLRenderer::DrawArray(GLenum mode, const VertexArray &vertex)
-    {
-        vertex.bind();
-        for(auto& array : vertex.GetVertexBuffers())
-        {
-            GLAPI_DrawArray(mode, 0, array->GetVertexSize());
-        }
-    }
-
-    void OpenGLRenderer::DrawIndex(GLenum mode, const VertexArray& vertex)
-    {
-        vertex.bind();
-        GLAPI_DrawIndex(mode, vertex.GetIndexBuffer()->size(), GL_UNSIGNED_INT);
     }
 
 }

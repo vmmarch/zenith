@@ -48,13 +48,13 @@ namespace fuckstd
 
         explicit fk_string(std::string _value) { this->value = _value; }
 
-        void operator=(char* _value) { this->value = _value; }
-        void operator=(const char* _value) { this->value = _value; }
-        void operator=(std::string _value) { this->value = _value; }
-        bool operator==(std::string _value) { return this->value == _value; }
-        void operator+(std::string _value) { this->value + _value; }
+        inline void operator=(char* _value) { this->value = _value; }
+        inline fk_string operator=(const char* _value) { this->value = _value; }
+        inline void operator=(std::string _value) { this->value = _value; }
+        inline bool operator==(std::string _value) { return this->value == _value; }
+        inline void operator+(std::string _value) { this->value + _value; }
 
-        fk_string operator+(fk_string _value)
+        inline fk_string operator+(fk_string _value)
         {
             std::string __str(this->value + _value.value);
             fk_string __fkstr(__str);

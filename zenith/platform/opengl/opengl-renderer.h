@@ -36,12 +36,7 @@ namespace zenith
         void disable_depth_test() override;
         void enable_depth_test() override;
         void submit(Mesh& model) override { meshs.push_back(model); }
-        std::vector<Mesh> GetMeshs() override { return meshs; }
-        void DrawMeshs() override;
         void DrawMesh(Mesh&) override;
-
-        void DrawArray(GLenum mode, const VertexArray&);
-        void DrawIndex(GLenum mode, const VertexArray&);
 
     private:
         glm::mat4 projection;

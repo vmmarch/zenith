@@ -107,6 +107,9 @@
 #define GLAPI_CreateVertexArray(id) \
 { glGenVertexArrays(1, &id); }
 
+#define GLAPI_CreateBuffer2(id1, id2) \
+{ glGenBuffers(1, &id1); glGenBuffers(1, &id2); }
+
 /**
  * 删除VertexArray
  */

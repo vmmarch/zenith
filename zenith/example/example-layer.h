@@ -35,7 +35,7 @@ namespace zenith
             glm::vec3( 2.4f, -0.4f, -3.5f),
     };
 
-    static int cube_len = 1;
+    static int cube_len = 0;
 
     class ExampleLayer : public Layer
     {
@@ -43,45 +43,6 @@ namespace zenith
         explicit ExampleLayer() : Layer("example layer")
         {
             ShaderProgram* shader = ShaderProgram::Create("../sh/shader-vfs");
-
-            // ----------------------------------------
-            // 画三角形
-            VertexArray* vertexArray = VertexArray::Create();
-
-            float vertices[] = {
-                    -0.5f, -0.5f, 0.0f,
-                    0.5f, -0.5f, 0.0f,
-                    0.0f,  0.5f, 0.0f
-            };
-            VertexBuffer* vbuf = VertexBuffer::Create(vertices, sizeof(vertices));
-
-            layout_t layout = {
-                    {"position", shader_t::FLOAT3},
-            };
-            vbuf->SetLayout(layout);
-            vertexArray->AddVertexBuffer(vbuf);
-
-            Mesh object(vertexArray, shader);
-
-            // 更新坐标等参数
-            object.SetUpdate([](Mesh& object, glm::mat4 projection, glm::mat4 view_matrix){
-                ShaderProgram* shader = object.GetShader();
-
-                shader->SetMat4("u_object_location", object.GetMat4Location());
-                shader->SetMat4("u_projection", projection);
-                shader->SetMat4("u_view", view_matrix);
-            });
-
-            // ----------------------------------------------------
-            // GL render from there.
-            for(int i = 0; i < cube_len; i++)
-            {
-                object.SetLocation(cube_pos[i]);
-                // 提交渲染模型
-                Renderer::submit(object);
-            }
-
-            GraphicsContext::instance()->SetCurrMesh(object);
         }
 
         void render() override
