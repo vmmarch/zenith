@@ -28,8 +28,6 @@
 #include "event/mouse-event.h"
 #include "state.h"
 
-#include <fast-obj.h>
-
 namespace zenith
 {
     static bool first = true;

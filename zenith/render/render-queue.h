@@ -25,18 +25,23 @@
  */
 #pragma once
 
-#include "mesh.h"
+#include "model.h"
 #include "shader.h"
+
+#include <map>
 #include <vector>
 
 namespace zenith
 {
+    typedef ShaderProgram*              sp;
+    typedef std::vector<Model>          vecq;
+
     class RenderQueue
     {
     public:
-        void push(Mesh& object);
+        void push(ShaderProgram *program, Model& model);
+        void draw_queue();
     private:
-        std::vector<Mesh> objects;
-        std::vector<ShaderProgram*> programs;
+        std::map<sp, vecq> queue;
     };
 }

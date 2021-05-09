@@ -55,7 +55,7 @@ namespace zenith
         glBindVertexArray(0);
     }
 
-    void Mesh::draw(ShaderProgram &shader)
+    void Mesh::draw()
     {
         glBindVertexArray(vaoid);
         GLAPI_DrawIndex(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT);

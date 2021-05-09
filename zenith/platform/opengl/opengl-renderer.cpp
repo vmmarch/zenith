@@ -56,8 +56,7 @@ namespace zenith
 
     void OpenGLRenderer::draw_models()
     {
-        for(auto model : models)
-            draw_model(model);
+        render_queue.draw_queue();
     }
 
     void OpenGLRenderer::draw_model(Model &model)

@@ -42,7 +42,7 @@ namespace zenith
             load_model(path, mt);
         }
 
-        void draw(ShaderProgram &shader);
+        void draw();
 
     private:
         void load_model(zenith_char path, zenith_enum mt);
@@ -54,8 +54,10 @@ namespace zenith
         void parse_obj(zenith_char path);
 
     private:
+        ShaderProgram *program;
         std::vector<texture_t> textures;
         std::vector<Mesh> meshes;
+
         bool gamma_correction;
     };
 }

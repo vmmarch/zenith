@@ -25,7 +25,30 @@
 
 namespace zenith
 {
-    void RenderQueue::push(Mesh& mesh)
+    void RenderQueue::push(sp program, Model& model)
     {
+        if(queue.count(program) > 0)
+        {
+            vecq vq = queue[program];
+            vq.push_back(model);
+        } else
+        {
+            vecq vq;
+            vq.push_back(model);
+
+            queue.insert(std::pair<ShaderProgram*, vecq>(program, vq));
+        }
     }
+
+    void RenderQueue::draw_queue()
+    {
+        std::map<sp, vecq>::reverse_iterator    iter;
+        for(iter = queue.rbegin(); iter != queue.rend(); iter++)
+        {
+            iter->first->bind();
+            for(auto model : iter->second)
+                model.draw();
+        }
+    }
+
 }

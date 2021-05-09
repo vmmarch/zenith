@@ -27,10 +27,10 @@
 
 namespace zenith
 {
-    void Model::draw(ShaderProgram &shader)
+    void Model::draw()
     {
         for(auto mesh : meshes)
-            mesh.draw(shader);
+            mesh.draw();
     }
 
     void Model::load_model(zenith_char path, zenith_enum mt)

@@ -22,7 +22,9 @@
  * @author 2B键盘
  */
 #pragma once
+
 #include "render/renderer.h"
+#include "render/render-queue.h"
 
 namespace zenith
 {
@@ -35,7 +37,7 @@ namespace zenith
         void begin(Camera&) override;
         void disable_depth_test() override;
         void enable_depth_test() override;
-        void submit(Model& model) override { models.push_back(model); }
+        void submit(Model& model) override { render_queue.push(model); }
         void draw_model(Model&) override;
         void draw_models() override;
 
@@ -43,6 +45,6 @@ namespace zenith
         glm::mat4 projection;
         glm::mat4 view_matrix;
 
-        std::vector<Model> models;
+        RenderQueue render_queue;
     };
 }
