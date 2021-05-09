@@ -16,49 +16,32 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/24. <=== */
+/*! ===> Creates on 2021/5/9. <=== */
 
 /*!
  * @author 2B键盘
  */
 #pragma once
 
-#include "layer/layer.h"
-#include "render/render-command.h"
+#include <map>
+#include <zenith_string.h>
+#include "shader.h"
 
 namespace zenith
 {
-
-    // world space positions of our cubes
-    static glm::vec3 cube_pos[] = {
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3( 2.4f, -0.4f, -3.5f),
-    };
-
-    static int cube_len = 0;
-
-    class ExampleLayer : public Layer
+    class ShaderManager
     {
     public:
-        explicit ExampleLayer() : Layer("example layer")
+        ShaderManager() = default;
+
+        ShaderProgram* get_program(std::string name)
         {
+            return shaders[(name + "-vfs")];
         }
 
-        void render() override
-        {
+        void load_shaders(std::string folder);
 
-        }
-
-        void update(DeltaTime) override
-        {
-
-        }
-
-        void event(Event&) override
-        {
-
-        }
-
-        void close() override {}
+    private:
+        std::map<std::string, ShaderProgram*> shaders;
     };
 }

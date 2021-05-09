@@ -43,12 +43,14 @@ namespace zenith
         layer_stack.push(new HomeLayer());
         layer_stack.push(new EditorLayer());
 
-        this->shader = ShaderProgram::Create("../sh/shader-vfs");
+        shader_manager = new ShaderManager();
+        shader_manager->load_shaders("../sh");
     }
 
     void SandBox::initialize()
     {
-        Renderer::submit(*new Model("D:\\model\\Girl\\Girl_1.obj", ZENITH_MODEL_OBJ));
+        ShaderProgram *program = shader_manager->get_program("shader");
+        Renderer::submit(*new Model("D:\\model\\Girl\\Girl_1.obj", program));
     }
 
     void SandBox::update(DeltaTime deltaTime)

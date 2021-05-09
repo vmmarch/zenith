@@ -37,10 +37,14 @@ namespace zenith
          * @param path   模型路径
          * @param mt     模型类型
          */
-        Model(zenith_char path, zenith_enum mt, bool gamma = false) : gamma_correction(gamma)
+        Model(zenith_char path, ShaderProgram* program, zenith_enum mt = ZENITH_MODEL_OBJ, bool gamma = false)
+            : gamma_correction(gamma)
         {
             load_model(path, mt);
+            this->program = program;
         }
+
+        ShaderProgram *get_program() { return program; }
 
         void draw();
 

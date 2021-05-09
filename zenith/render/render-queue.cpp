@@ -25,8 +25,9 @@
 
 namespace zenith
 {
-    void RenderQueue::push(sp program, Model& model)
+    void RenderQueue::push(Model& model)
     {
+        sp program = model.get_program();
         if(queue.count(program) > 0)
         {
             vecq vq = queue[program];

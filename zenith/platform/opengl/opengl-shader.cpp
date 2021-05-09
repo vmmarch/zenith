@@ -43,19 +43,19 @@ namespace zenith
     {
         markid = (markcount++);
 
-#ifdef __DEBUG__
-        ZENITH_DEBUG(IFSPLIT);
-#endif
+//#ifdef __DEBUG__
+//        ZENITH_DEBUG(IFSPLIT);
+//#endif
         ZENITH_INFO(CREATE_SHADER, path, debugname);
         std::string v_str_code, f_str_code;
         load_shader(path, v_str_code, f_str_code);
 
         zenith_char vcode = v_str_code.c_str(), fcode = f_str_code.c_str();
 
-#ifdef __DEBUG__
-        ZENITH_DEBUG(VERTEX_SHADER_DEBUG, vcode);
-        ZENITH_DEBUG(FRAGMENT_SHADER_DEBUG, fcode);
-#endif
+//#ifdef __DEBUG__
+//        ZENITH_DEBUG(VERTEX_SHADER_DEBUG, vcode);
+//        ZENITH_DEBUG(FRAGMENT_SHADER_DEBUG, fcode);
+//#endif
 
         zenith_uint vertex, fragment;
         // 创建vertex shader

@@ -34,6 +34,7 @@
 #include "window/window.h"
 #include "render/render-command.h"
 #include "render/model.h"
+#include "render/shader-manager.h"
 
 #include <vector>
 
@@ -63,9 +64,10 @@ namespace zenith
         Layer* main_layer;
         bool cursor_hide = false;
 
+        ShaderManager* shader_manager;
         std::vector<Model> models;
 
-        ShaderProgram *shader;
+
     };
 
 }

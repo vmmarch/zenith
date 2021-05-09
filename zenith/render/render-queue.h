@@ -39,7 +39,7 @@ namespace zenith
     class RenderQueue
     {
     public:
-        void push(ShaderProgram *program, Model& model);
+        void push(Model& model);
         void draw_queue();
     private:
         std::map<sp, vecq> queue;
