@@ -35,27 +35,46 @@ namespace zenith
         {
             float x, y;
 
-            f2(float _x, float _y) : x(_x), y(_y)
-            {}
+            f2() {}
+            f2(float _x, float _y) : x(_x), y(_y) {}
+
+            float* array()
+            {
+                float *arr = new float[2];
+                arr[0] = x;
+                arr[1] = y;
+                return arr;
+            };
         };
 
         struct f3
         {
             float x, y, z;
 
-            f3(float _x, float _y, float _z) : x(_x), y(_y), z(_z)
-            {}
+            f3() {}
+            f3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
+
+            float* array()
+            {
+                float *arr = new float[3];
+                arr[0] = x;
+                arr[1] = y;
+                arr[2] = z;
+                return arr;
+            }
         };
 
         struct i3
         {
             int r, g, b;
-            i3(int _r, int _g, int _b) : r(_r), g(_g), b(_b) {};
+            i3() {}
+            i3(int _r, int _g, int _b) : r(_r), g(_g), b(_b) {}
         };
 
         struct i4
         {
             int r, g, b, a;
+            i4() {}
             i4(int _r, int _g, int _b, int _a) : r(_r), g(_g), b(_b), a(_a) {};
         };
 

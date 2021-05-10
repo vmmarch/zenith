@@ -29,8 +29,8 @@ namespace zenith
 {
     void Model::draw()
     {
-        for(auto mesh : meshes)
-            mesh.draw();
+        for(auto mesh : meshes)             {
+            mesh.bind(); mesh.draw();       }
     }
 
     void Model::load_model(zenith_char path, zenith_enum mt)
@@ -43,7 +43,31 @@ namespace zenith
     {
         fastObjMesh *mi = fast_obj_read(path);
 
-        // TODO Loader model.
+        std::vector<vertex_t> vertices;
+
+        int count       = 3;
+        int pos_len     = mi->position_count;
+        for(int i = 1; i < pos_len; i++)
+        {
+            vertex_t vertex;
+            vertex.position = new float[3]{
+                mi->positions[count],
+                mi->positions[(count + 1)],
+                mi->positions[(count + 2)]
+            };
+
+            count += 3; vertices.push_back(vertex);
+        }
+
+        ZENITH_DEBUG("position count: %d", mi->position_count);
+        ZENITH_DEBUG("texture coords count: %d", mi->texcoord_count);
+        ZENITH_DEBUG("group count: %d", mi->group_count);
+        ZENITH_DEBUG("face count: %d", mi->face_count);
+        ZENITH_DEBUG("material count: %d", mi->material_count);
+        ZENITH_DEBUG("normal count: %d", mi->normal_count);
+
+        ZENITH_DEBUG("f2 size: %d", sizeof(zms::f2));
+        ZENITH_DEBUG("f3 size: %d", sizeof(zms::f3));
 
         fast_obj_destroy(mi);
     }

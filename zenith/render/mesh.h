@@ -26,6 +26,7 @@
 #include "shader.h"
 #include "color.h"
 
+#include <zenith/zms.h>
 #include <zenith/type.h>
 #include <zenith_string.h>
 
@@ -37,9 +38,9 @@ namespace zenith
 
     struct vertex_t
     {
-        glm::vec3 position;
-        glm::vec2 tex_coords;
-        glm::vec3 normal;
+        float*      position;
+        float*      normal;
+        float*      tex_coords;
     };
 
     struct texture_t

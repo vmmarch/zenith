@@ -50,7 +50,7 @@ namespace zenith
     void SandBox::initialize()
     {
         ShaderProgram *program = shader_manager->get_program("shader");
-        Renderer::submit(*new Model("D:\\model\\Girl\\Girl_1.obj", program));
+        Renderer::submit(*new Model("D:\\model\\cube.obj", program));
     }
 
     void SandBox::update(DeltaTime deltaTime)
