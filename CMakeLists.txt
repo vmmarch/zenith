@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 project(zenith)
 
+SET(CMAKE_CXX_STANDARD 11)
+
 # ---------------------------------------------
 # 发布时需要将Release设置为ON
 # ---------------------------------------------
