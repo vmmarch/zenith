@@ -21,10 +21,11 @@
 /*!
  * @author 2B键盘
  */
-#include "String.h"
 #include <stdio.h>
 #include <string>
 #include <sys/time.h>
+
+#include "FK-FILE.h"
 
 using namespace std;
 
@@ -32,16 +33,12 @@ int main()
 {
     struct timeval sTime, eTime;
 
-    fuckstd::String string("");
+    fkstd::FK_FILE;
 
     gettimeofday(&sTime, NULL);
-    for (int i = 0; i < 100000; i++)
-    {
-        string.append("append");
-    }
     gettimeofday(&eTime, NULL);
     long AppendTime = (eTime.tv_sec - sTime.tv_sec) * 1000000 + (eTime.tv_usec - sTime.tv_usec); //exeTime 单位是微秒
 
-    printf("%s %dms", string.get_char_array(), AppendTime);
+    printf("%dms", AppendTime);
     return 0;
 }

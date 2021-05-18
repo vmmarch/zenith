@@ -28,7 +28,7 @@
 
 #include <zenith/zms.h>
 #include <zenith/type.h>
-#include <zenith_string.h>
+#include <FUCKSTD.h>
 
 #include <utility>
 

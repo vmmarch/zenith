@@ -24,7 +24,7 @@
 #pragma once
 
 #include <map>
-#include <zenith_string.h>
+#include <FUCKSTD.h>
 #include "shader.h"
 
 namespace zenith

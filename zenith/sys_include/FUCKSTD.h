@@ -23,6 +23,7 @@
  */
 #pragma once
 
-#include "fkstr.h"
+#include <FK-FILE.h>
 
-typedef fuckstd::fk_string zenith_string;
+typedef fkstd::FK_STRING STRING;
+typedef fkstd::FK_FILE F_FILE;

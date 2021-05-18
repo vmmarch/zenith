@@ -29,7 +29,7 @@
 #include <stdarg.h>
 #include <vector>
 
-namespace fuckstd
+namespace fkstd
 {
 
     static int c_size(const char* cv)
@@ -37,28 +37,33 @@ namespace fuckstd
         return strlen(cv);
     }
 
-    class fk_string
+    class FK_STRING
     {
     public:
-        fk_string() { this->value = ""; }
+        FK_STRING() { this->value = ""; }
 
-        explicit fk_string(char* _value) { this->value = _value; }
+        explicit FK_STRING(char* _value) { this->value = _value; }
 
-        explicit fk_string(const char* _value) { this->value = _value; }
+        explicit FK_STRING(const char* _value) { this->value = _value; }
 
-        explicit fk_string(std::string _value) { this->value = _value; }
+        explicit FK_STRING(std::string _value) { this->value = _value; }
 
         inline void operator=(char* _value) { this->value = _value; }
-        inline fk_string operator=(const char* _value) { this->value = _value; }
+        inline FK_STRING operator=(const char* _value) { this->value = _value; }
         inline void operator=(std::string _value) { this->value = _value; }
         inline bool operator==(std::string _value) { return this->value == _value; }
         inline void operator+(std::string _value) { this->value + _value; }
 
-        inline fk_string operator+(fk_string _value)
+        inline FK_STRING operator+(FK_STRING _value)
         {
             std::string __str(this->value + _value.value);
-            fk_string __fkstr(__str);
+            FK_STRING __fkstr(__str);
             return __fkstr;
+        }
+
+        size_t rfind(const char char_value)
+        {
+            return value.rfind(char_value);
         }
 
         /**
@@ -77,9 +82,9 @@ namespace fuckstd
          * @param begin start index
          * @return      intercepted string
          */
-        fk_string substring(int begin)
+        FK_STRING substring(int begin)
         {
-            return fk_string(value.substr(begin, size()));
+            return FK_STRING(value.substr(begin, size()));
         }
 
         /**
@@ -89,9 +94,9 @@ namespace fuckstd
          * @param end   end index
          * @return      intercepted string
          */
-        fk_string substring(int begin, int end)
+        FK_STRING substring(int begin, int end)
         {
-            return fk_string(value.substr(begin, end));
+            return FK_STRING(value.substr(begin, end));
         }
 
         /**
@@ -124,9 +129,9 @@ namespace fuckstd
          * @param size        array size
          * @return            char* array
          */
-        fk_string* split(const char *char_value, int size)
+        FK_STRING* split(const char *char_value, int size)
         {
-            fk_string *splits = new fk_string[size];
+            FK_STRING *splits = new FK_STRING[size];
             std::string::size_type pos1, pos2;
             pos1 = 0, pos2 = value.find(char_value);
 
@@ -142,6 +147,28 @@ namespace fuckstd
             splits[count] = value.substr(pos1);
 
             return splits;
+        }
+
+        /**
+         * Get index in current string content.
+         *
+         * @param value char value.
+         * @return index.
+         */
+        int findof(const char* char_value)
+        {
+            return value.find(char_value);
+        }
+
+        /**
+         * Get last index.
+         *
+         * @param value char value.
+         * @return index.
+         */
+        int find_last_of(const char* char_value)
+        {
+            return value.find_last_of(char_value);
         }
 
         /**
