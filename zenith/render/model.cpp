@@ -39,6 +39,6 @@ namespace zenith
 
     void Model::parse_obj(zenith_char path)
     {
-
+        // todo parse model
     }
 }
