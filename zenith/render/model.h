@@ -47,7 +47,7 @@ namespace zenith
         ShaderProgram *get_program() { return program; }
 
         void draw();
-
+s
     private:
         void load_model(zenith_char path, zenith_enum mt);
 

@@ -61,6 +61,7 @@ namespace zenith
 
     void OpenGLRenderer::draw_model(Model &model)
     {
+        model.draw();
     }
 
 }
