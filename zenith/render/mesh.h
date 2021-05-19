@@ -69,7 +69,7 @@ namespace zenith
          * 渲染网格
          * @param shader 着色器
          */
-        void draw();
+        void draw() const;
 
     public:
         std::vector<vertex_t>       vertices;
