@@ -40,7 +40,7 @@ namespace zenith
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, eboid);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(zenith_uint), &indices, GL_STATIC_DRAW);
 
-        // 设置顶点属性
+        // 设置顶点坐标
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*) 0);
 
