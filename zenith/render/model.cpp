@@ -27,8 +27,8 @@ namespace zenith
 {
     void Model::draw()
     {
-        for(auto mesh : meshes)             {
-            mesh.bind(); mesh.draw();       }
+        for(const auto& mesh : meshes)             {
+            mesh.draw();       }
     }
 
     void Model::load_model(zenith_char path, zenith_enum mt)

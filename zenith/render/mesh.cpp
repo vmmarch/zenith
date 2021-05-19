@@ -26,7 +26,7 @@
 namespace zenith
 {
 
-    void Mesh::bind()
+    void Mesh::setup_mesh()
     {
         GLAPI_CreateVertexArray(vaoid);
         GLAPI_CreateBuffer2(vboid, eboid);

@@ -61,15 +61,18 @@ namespace zenith
             this->vertices = vertices;
             this->indices = indices;
             this->textures = textures;
-        }
 
-        void bind();
+            setup_mesh();
+        }
 
         /**
          * 渲染网格
          * @param shader 着色器
          */
         void draw() const;
+
+    private:
+        void setup_mesh();
 
     public:
         std::vector<vertex_t>       vertices;
