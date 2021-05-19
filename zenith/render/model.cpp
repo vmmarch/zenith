@@ -39,6 +39,7 @@ namespace zenith
 
     void Model::parse_obj(zenith_char path)
     {
-        // todo parse model
+        ZENITH_DEBUG(LOAD_MODEL_DEBUG, path);
+        // TODO parse model
     }
 }

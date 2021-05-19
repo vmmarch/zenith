@@ -117,7 +117,11 @@ namespace zenith
 }
 
 #define ZENITH_INFO(...) zenith::zenithloggerinfo(__VA_ARGS__)
-#define ZENITH_DEBUG(...) zenith::zenithloggerdebug(__VA_ARGS__)
+#ifdef __DEBUG__
+#   define ZENITH_DEBUG(...) zenith::zenithloggerdebug(__VA_ARGS__)
+#else
+#   define ZENITH_DEBUG(...)
+#endif
 #define ZENITH_WARN(...) zenith::zenithloggerwarn(__VA_ARGS__)
 #define ZENITH_ERROR(...) zenith::zenithloggererror(__VA_ARGS__)
 

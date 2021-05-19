@@ -64,6 +64,7 @@
 #define VERTEX_SHADER_DEBUG "顶点着色器源码:\n%s\n"
 #define FRAGMENT_SHADER_DEBUG "片段着色器源码:\n%s\n"
 #define CREATE_SHADER "创建着色器[%s]: %s"
+#define LOAD_MODEL_DEBUG "读取模型, 模型地址: %s"
 
 // WARN MESSAGE
 #define OPENGL_SUPPORT_VERSION "Zenith3D引擎需要使用4.5以上的OpenGL版本"
