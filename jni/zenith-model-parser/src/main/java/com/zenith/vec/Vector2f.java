@@ -1,4 +1,4 @@
-package com.zenith;
+package com.zenith.vec;
 
 /* ************************************************************************
  *
@@ -25,14 +25,13 @@ package com.zenith;
 /**
  * @author luots
  */
-public class Vector3f {
+public class Vector2f {
 
-    public float x, y, z;
+    public float x, y;
 
-    Vector3f(float x, float y, float z) {
+    Vector2f(float x, float y) {
         this.x = x;
         this.y = y;
-        this.z = z;
     }
 
 }

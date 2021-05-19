@@ -1,4 +1,4 @@
-package com.zenith;
+package com.zenith.vec;
 
 /* ************************************************************************
  *
@@ -25,14 +25,13 @@ package com.zenith;
 /**
  * @author luots
  */
-public class Obj extends ModelLoader {
+public class Vector2i {
 
-    public Obj(String path) {
-        super(path);
-    }
+    public int x, y;
 
-    @Override
-    public void parseModel() {
+    Vector2i(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
 }

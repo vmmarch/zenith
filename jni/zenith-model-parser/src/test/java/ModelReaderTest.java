@@ -1,5 +1,3 @@
-package com.zenith;
-
 /* ************************************************************************
  *
  * Copyright (C) 2020 2B键盘 All rights reserved.
@@ -22,16 +20,17 @@ package com.zenith;
  * Creates on 2020/6/1.
  */
 
+import com.zenith.ObjReader;
+
+import java.io.IOException;
+
 /**
  * @author luots
  */
-public class Vector2i {
+public class ModelReaderTest {
 
-    public int x, y;
-
-    Vector2i(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public static void main(String[] args) throws IOException {
+        ObjReader reader = new ObjReader("D:\\model\\奥迪\\uploads_files_2663635_Audi_RS_6_Avant.obj");
     }
 
 }

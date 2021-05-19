@@ -1,4 +1,4 @@
-package com.zenith;
+package com.zenith.vec;
 
 /* ************************************************************************
  *
@@ -23,26 +23,16 @@ package com.zenith;
  */
 
 /**
- * 抽象模型加载器
- *
  * @author luots
  */
-public abstract class ModelLoader {
+public class Vector3f {
 
-    protected String path;
+    public float x, y, z;
 
-    /**
-     * 模型加载器构造
-     *
-     * @param path 模型地址
-     */
-    public ModelLoader(String path) {
-        this.path = path;
+    Vector3f(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
-
-    /**
-     * 解析模型
-     */
-    public abstract void parseModel();
 
 }
