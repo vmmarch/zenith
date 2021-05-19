@@ -13,5 +13,6 @@ build
 out
 .idea
 .vs
+*.iml
 
 release/vendor
