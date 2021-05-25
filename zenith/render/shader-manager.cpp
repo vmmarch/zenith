@@ -23,12 +23,15 @@
  */
 #include "shader-manager.h"
 
-#include <io.h>
+#ifdef __ZENITH_PLATFORM_WINDOWS__
+#   include <io.h>
+#endif
 
 namespace zenith
 {
     void ShaderManager::load_shaders(std::string folder)
     {
+#ifdef __ZENITH_PLATFORM_WINDOWS__
         long h_file             = 0; // 文件句柄
         struct _finddata_t      fileinfo;
         std::string p;
@@ -49,7 +52,8 @@ namespace zenith
                 }
             } while(_findnext(h_file, &fileinfo) == 0);
         }
-
-        _findclose(h_file);
+#elif __ZENITH_PLATFORM_MACOS__
+    // TODO Create shader.
+#endif
     }
 }
