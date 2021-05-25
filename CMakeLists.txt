@@ -6,12 +6,17 @@ SET(CMAKE_CXX_STANDARD 11)
 # ---------------------------------------------
 # 发布时需要将Release设置为ON
 # ---------------------------------------------
-set(DEBUG ON)
+SET(DEBUG ON)
+
+# ---------------------------------------------
+# 设置编译平台
+# ---------------------------------------------
+SET(PLATFORM MACOS)
 
 # ---------------------------------------------
 # 开启例子测试
 # ---------------------------------------------
-set(EXAMPLE ON)
+SET(EXAMPLE ON)
 
 if(EXAMPLE MATCHES ON)
     add_subdirectory(example/line)
@@ -79,8 +84,16 @@ aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
 set(CMAKE_CXX_STANDARD 20)
 
+# ---------------------------------------------------------------------------------------
+# 配置编译平台
+# ---------------------------------------------------------------------------------------
+if(PLATFORM MATCHES WINDOWS)
+    ADD_DEFINITIONS(-D__ZENITH_PLATFORM_WINDOWS__)
+else(PLATFORM MATCHES MACOS)
+    ADD_DEFINITIONS(-D__ZENITH_PLATFORM_MACOS__)
+endif()
+
 add_definitions(
-        -D__ZENITH_PLATFORM_WINDOWS__                   # 编译平台为Windows
         -D__ZENITH_IN_CHINA__                           # 引擎语言为中文
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
         -DZENITH_GLAD_CORE                              # GLAD使用Core版本
@@ -90,8 +103,12 @@ if(DEBUG MATCHES ON)
     add_definitions(-D__DEBUG__) # 开启DEBUG
 endif()
 
-link_libraries(imm32)
-link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
+if(PLATFORM MATCHES WINDOWS)
+    link_libraries(imm32)
+    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
+else(PLATFORM MATCHES MACOS)
+    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.a)
+endif()
 
 add_executable(${PROJECT_NAME}
         ${SOURCE}

@@ -221,9 +221,24 @@ namespace fkstd
             va_start(args, 0);
 
             char* _value = const_cast<char*>(c_str());
-            size_t len = _vscprintf(_value, args) + 1;
+            size_t len;
+#ifdef __ZENITH_PLATFORM_WINDOWS__
+            len = _vscprintf(_value, args) + 1;
+#elif __ZENITH_PLATFORM_MACOS__
+            len = 0;
+#else
+#   error NOT SUPPORT THIS PLATFORM.
+#endif
             std::vector<char> vbuf(len, '\0');
-            int nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, _value, args);
+
+            int nwrite;
+#ifdef __ZENITH_PLATFORM_WINDOWS__
+            nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, _value, args);
+#elif __ZENITH_PLATFORM_MACOS__
+            nwrite = 0;
+#else
+#   error NOT SUPPORT THIS PLATFORM.
+#endif
             if(nwrite > 0)
                 this->value = &vbuf[0];
 

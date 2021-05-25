@@ -37,10 +37,10 @@
  */
 static zenith_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
 {
-#ifdef __ZENITH_PLATFORM_WINDOWS__
+#if (defined __ZENITH_PLATFORM_WINDOWS__) || (defined __ZENITH_PLATFORM_MACOS__)
     return zenith::__create_scope<zenith::win::WinWindow>(props);
 #else
-    ZENITH_ERROR(__ONLY_SUPPORT_WINDOWS__); return nullptr;
+    ZENITH_ERROR("NOT SUPPORT CURRENT PLATFORM"); return nullptr;
 #endif
 }
 
