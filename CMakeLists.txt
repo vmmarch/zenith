@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.17)
-project(zenith)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.17)
+PROJECT(zenith)
 
-SET(CMAKE_CXX_STANDARD 11)
+SET(CMAKE_CXX_STANDARD 14)
 
 # ---------------------------------------------
 # 发布时需要将Release设置为ON
@@ -10,6 +10,7 @@ SET(DEBUG ON)
 
 # ---------------------------------------------
 # 设置编译平台
+# WINDOWS/MACOS
 # ---------------------------------------------
 SET(PLATFORM MACOS)
 
@@ -18,64 +19,64 @@ SET(PLATFORM MACOS)
 # ---------------------------------------------
 SET(EXAMPLE ON)
 
-if(EXAMPLE MATCHES ON)
-    add_subdirectory(example/line)
-    add_subdirectory(example/grid)
-endif()
+IF(EXAMPLE MATCHES ON)
+    ADD_SUBDIRECTORY(example/line)
+    ADD_SUBDIRECTORY(example/grid)
+ENDIF()
 
-add_subdirectory(fuckstd)
+ADD_SUBDIRECTORY(tool)
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/init SOURCE_INIT)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/window SOURCE_WIN)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/event SOURCE_EVENT)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform SOURCE_PLATFORM)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform/windows SOURCE_PLATFORM_WINDOWS)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform/opengl SOURCE_PLATFORM_OPENGL)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render SOURCE_RENDER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/tool SOURCE_TOOL)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/layer SOURCE_LAYER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/texture SOURCE_TEXTURE)
-aux_source_directory(zenith/shader SOURCE_SHADER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_SCENE_3D_CAMERA)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/buf SOURCE_BUF)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/example SOURCE_EXAMPLE)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/load SOURCE_LOAD)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith SOURCE)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/init SOURCE_INIT)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/window SOURCE_WIN)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/event SOURCE_EVENT)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform SOURCE_PLATFORM)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform/windows SOURCE_PLATFORM_WINDOWS)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/platform/opengl SOURCE_PLATFORM_OPENGL)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render SOURCE_RENDER)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/tool SOURCE_TOOL)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/layer SOURCE_LAYER)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/texture SOURCE_TEXTURE)
+AUX_SOURCE_DIRECTORY(zenith/shader SOURCE_SHADER)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/scene/3d/camera SOURCE_SCENE_3D_CAMERA)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/render/2d/texture SOURCE_RENDER_2D_CAMERA)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/buf SOURCE_BUF)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/sandbox SOURCE_SANDBOX)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/example SOURCE_EXAMPLE)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/load SOURCE_LOAD)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/japi SOURCE_JAPI)
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer SOURCE_IMPORTER)
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer/obj SOURCE_IMPORTER_OBJ)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer SOURCE_IMPORTER)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer/obj SOURCE_IMPORTER_OBJ)
 
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/zenith/model SOURCE_MODEL)
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/model SOURCE_MODEL)
 
 
-include_directories(SYSTEM fuckstd)
+INCLUDE_DIRECTORIES(SYSTEM tool)
 
 # ---------------------------------------------------------------------------------------
 # for modules dir.
 # ---------------------------------------------------------------------------------------
-include_directories(SYSTEM modules)
-include_directories(SYSTEM modules/imgui)
-include_directories(SYSTEM modules/imgui/backends)
+INCLUDE_DIRECTORIES(SYSTEM modules)
+INCLUDE_DIRECTORIES(SYSTEM modules/imgui)
+INCLUDE_DIRECTORIES(SYSTEM modules/imgui/backends)
 
 # ---------------------------------------------------------------------------------------
 # for include dir.
 # ---------------------------------------------------------------------------------------
-include_directories(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
-include_directories(SYSTEM include/api)
-include_directories(SYSTEM zenith/sys_include)
+INCLUDE_DIRECTORIES(SYSTEM ${CMAKE_CURRENT_SOURCE_DIR}/include)
+INCLUDE_DIRECTORIES(SYSTEM include/api)
+INCLUDE_DIRECTORIES(SYSTEM zenith/sys_include)
 
 # ---------------------------------------------------------------------------------------
 # for jvm dir.
 # ---------------------------------------------------------------------------------------
-include_directories(SYSTEM include/jvm/win64)
+INCLUDE_DIRECTORIES(SYSTEM include/jvm/win64)
 
 # ---------------------------------------------------------------------------------------
 # for src dir.
 # ---------------------------------------------------------------------------------------
-include_directories(zenith)
+INCLUDE_DIRECTORIES(zenith)
 
 # ---------------------------------------------------------------------------------------
 # 配置源码目录 SOURCEALL_DIR
@@ -87,30 +88,30 @@ set(CMAKE_CXX_STANDARD 20)
 # ---------------------------------------------------------------------------------------
 # 配置编译平台
 # ---------------------------------------------------------------------------------------
-if(PLATFORM MATCHES WINDOWS)
+IF(PLATFORM MATCHES WINDOWS)
     ADD_DEFINITIONS(-D__ZENITH_PLATFORM_WINDOWS__)
-else(PLATFORM MATCHES MACOS)
+ELSE(PLATFORM MATCHES MACOS)
     ADD_DEFINITIONS(-D__ZENITH_PLATFORM_MACOS__)
-endif()
+ENDIF()
 
-add_definitions(
+ADD_DEFINITIONS(
         -D__ZENITH_IN_CHINA__                           # 引擎语言为中文
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
         -DZENITH_GLAD_CORE                              # GLAD使用Core版本
 )
 
-if(DEBUG MATCHES ON)
-    add_definitions(-D__DEBUG__) # 开启DEBUG
-endif()
+IF(DEBUG MATCHES ON)
+    ADD_DEFINITIONS(-D__DEBUG__) # 开启DEBUG
+ENDIF()
 
-if(PLATFORM MATCHES WINDOWS)
+IF(PLATFORM MATCHES WINDOWS)
     link_libraries(imm32)
     link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
-else(PLATFORM MATCHES MACOS)
+ELSE(PLATFORM MATCHES MACOS)
     link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.a)
-endif()
+ENDIF()
 
-add_executable(${PROJECT_NAME}
+ADD_EXECUTABLE(${PROJECT_NAME}
         ${SOURCE}
         ${SOURCE_INIT}
         ${SOURCE_WIN}
@@ -153,6 +154,6 @@ add_executable(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp
         )
 
-install(
+INSTALL(
         TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}
 )
