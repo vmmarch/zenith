@@ -125,7 +125,6 @@ namespace zenith
 #define ZENITH_WARN(...) zenith::zenithloggerwarn(__VA_ARGS__)
 #define ZENITH_ERROR(...) zenith::zenithloggererror(__VA_ARGS__)
 
-
 #define __BIT__(x) (1 << x)
 
 #define ZENITH_BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)> (args)...); }
