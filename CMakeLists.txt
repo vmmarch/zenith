@@ -81,9 +81,9 @@ INCLUDE_DIRECTORIES(zenith)
 # ---------------------------------------------------------------------------------------
 # 配置源码目录 SOURCEALL_DIR
 # ---------------------------------------------------------------------------------------
-aux_source_directory(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
+AUX_SOURCE_DIRECTORY(${CMAKE_SOURCE_DIR} SOURCE_DIRECTORY)
 
-set(CMAKE_CXX_STANDARD 20)
+SET(CMAKE_CXX_STANDARD 20)
 
 # ---------------------------------------------------------------------------------------
 # 配置编译平台
@@ -105,11 +105,14 @@ IF(DEBUG MATCHES ON)
 ENDIF()
 
 IF(PLATFORM MATCHES WINDOWS)
-    link_libraries(imm32)
-    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
+    LINK_LIBRARIES(imm32)
+    LINK_LIBRARIES(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.dll)
 ELSE(PLATFORM MATCHES MACOS)
-    link_libraries(${CMAKE_CURRENT_SOURCE_DIR}/bin/glfw3.a)
+    LINK_LIBRARIES(${CMAKE_CURRENT_SOURCE_DIR}/bin/libglfw.3.dylib)
 ENDIF()
+
+SET(IMAGE_BACKENDS_1 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp)
+SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
         ${SOURCE}
@@ -150,9 +153,11 @@ ADD_EXECUTABLE(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_demo.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_widgets.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/imgui_tables.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp
-        )
+
+        # backends
+        ${IMAGE_BACKENDS_1}
+        ${IMAGE_BACKENDS_2}
+)
 
 INSTALL(
         TARGETS ${PROJECT_NAME} RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}
