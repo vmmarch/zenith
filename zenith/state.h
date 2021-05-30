@@ -29,17 +29,17 @@ namespace zenith
 {
     struct State
     {
-        static GLFWwindow *GetGLFWwindow();
+        static GLFWwindow *get_glfw_window();
 
         /**
          * 获取窗口宽度
          */
-        static int GetWidth();
+        static int get_width();
 
         /**
          * 获取窗口高度
          */
-        static int GetHeight();
+        static int get_height();
 
         static void count_plus() { LOOP_NUMBER++; }
 

@@ -97,4 +97,6 @@ namespace zenith
 
         has_index = true;
     }
+
+    bool OpenGLVertexArray::HasIndex() const { return has_index; }
 }

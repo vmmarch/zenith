@@ -55,8 +55,8 @@ namespace zenith
         virtual ~Window() = default;
         virtual void setTitle(zenith_char) = 0;
         virtual zenith_char getTitle() const = 0;
-        virtual zenith_uint32 GetWidth() const = 0;
-        virtual zenith_uint32 GetHeight() const = 0;
+        virtual zenith_uint32 get_width() const = 0;
+        virtual zenith_uint32 get_height() const = 0;
 
         virtual void SetEventCallback(const f_callback& callback) = 0;
         virtual bool is_close() = 0;
@@ -65,7 +65,7 @@ namespace zenith
 
         virtual void* GetWindowHANDLE() const = 0;
 
-        virtual GLFWwindow* GetGLFWwindow() const = 0;
+        virtual GLFWwindow* get_glfw_window() const = 0;
 
         // 创建Window
         static zenith_scope<Window> Create(const v_winprops&);

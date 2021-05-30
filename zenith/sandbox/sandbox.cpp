@@ -53,14 +53,14 @@ namespace zenith
         Renderer::submit(*new Model("D:/model/cube.obj", program));
     }
 
-    void SandBox::update(DeltaTime deltaTime)
+    void SandBox::update(DeltaTime delta_time)
     {
         // ----------------------------------
         // ------
         // reload settings
         RELOAD_SETTING();
 
-        camera.update((float) State::GetWidth(), (float) State::GetHeight(), deltaTime);
+        camera.update((float) State::get_width(), (float) State::get_height(), delta_time);
 
         // 禁止鼠标移动相机
         if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
@@ -71,13 +71,13 @@ namespace zenith
         // 隐藏鼠标
         else if(Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
         {
-            if (!cursor_hide) glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-            else glfwSetInputMode(window->GetGLFWwindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            if (!cursor_hide) glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            else glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
             cursor_hide = !cursor_hide;
         }
 
-        main_layer->update(deltaTime);
-        layer_stack.update(deltaTime);
+        main_layer->update(delta_time);
+        layer_stack.update(delta_time);
     }
 
     void SandBox::render()

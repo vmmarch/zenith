@@ -129,7 +129,7 @@
 //    STB_TEXTEDIT_STRINGLEN(obj)       the length of the string (ideally O(1))
 //    STB_TEXTEDIT_LAYOUTROW(&r,obj,n)  returns the results of laying out a line of characters
 //                                        starting from character #n (see discussion below)
-//    STB_TEXTEDIT_GETWIDTH(obj,n,i)    returns the pixel delta from the xpos of the i'th character
+//    STB_TEXTEDIT_get_width(obj,n,i)    returns the pixel delta from the xpos of the i'th character
 //                                        to the xpos of the i+1'th char for a line of characters
 //                                        starting at character #n (i.e. accounts for kerning
 //                                        with previous char)
@@ -435,7 +435,7 @@ static int stb_text_locate_coord(STB_TEXTEDIT_STRING *str, float x, float y)
       // search characters in row for one that straddles 'x'
       prev_x = r.x0;
       for (k=0; k < r.num_chars; ++k) {
-         float w = STB_TEXTEDIT_GETWIDTH(str, i, k);
+         float w = STB_TEXTEDIT_get_width(str, i, k);
          if (x < prev_x+w) {
             if (x < prev_x+w/2)
                return k+i;
@@ -568,7 +568,7 @@ static void stb_textedit_find_charpos(StbFindState *find, STB_TEXTEDIT_STRING *s
    // now scan to find xpos
    find->x = r.x0;
    for (i=0; first+i < n; ++i)
-      find->x += STB_TEXTEDIT_GETWIDTH(str, first, i);
+      find->x += STB_TEXTEDIT_get_width(str, first, i);
 }
 
 #define STB_TEXT_HAS_SELECTION(s)   ((s)->select_start != (s)->select_end)
@@ -898,9 +898,9 @@ retry:
             STB_TEXTEDIT_LAYOUTROW(&row, str, state->cursor);
             x = row.x0;
             for (i=0; i < row.num_chars; ++i) {
-               float dx = STB_TEXTEDIT_GETWIDTH(str, start, i);
-               #ifdef STB_TEXTEDIT_GETWIDTH_NEWLINE
-               if (dx == STB_TEXTEDIT_GETWIDTH_NEWLINE)
+               float dx = STB_TEXTEDIT_get_width(str, start, i);
+               #ifdef STB_TEXTEDIT_get_width_NEWLINE
+               if (dx == STB_TEXTEDIT_get_width_NEWLINE)
                   break;
                #endif
                x += dx;
@@ -960,9 +960,9 @@ retry:
             STB_TEXTEDIT_LAYOUTROW(&row, str, state->cursor);
             x = row.x0;
             for (i=0; i < row.num_chars; ++i) {
-               float dx = STB_TEXTEDIT_GETWIDTH(str, find.prev_first, i);
-               #ifdef STB_TEXTEDIT_GETWIDTH_NEWLINE
-               if (dx == STB_TEXTEDIT_GETWIDTH_NEWLINE)
+               float dx = STB_TEXTEDIT_get_width(str, find.prev_first, i);
+               #ifdef STB_TEXTEDIT_get_width_NEWLINE
+               if (dx == STB_TEXTEDIT_get_width_NEWLINE)
                   break;
                #endif
                x += dx;

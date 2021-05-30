@@ -26,6 +26,10 @@
 #include <map>
 #include <FUCKSTD.h>
 #include "shader.h"
+#include <zenith/type.h>
+#include <zenith/glob.h>
+
+#include "tool/system.h"
 
 namespace zenith
 {
@@ -34,9 +38,14 @@ namespace zenith
     public:
         ShaderManager() = default;
 
-        ShaderProgram* get_program(std::string name)
+        ShaderProgram* get_program(const std::string& name)
         {
-            return shaders[(name + "-vfs")];
+            auto shader = shaders[(name + "-vfs")];
+            if(shader != nullptr)
+                return shader;
+
+            ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
+            exit(FAILED);
         }
 
         void load_shaders(std::string folder);

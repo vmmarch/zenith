@@ -216,7 +216,7 @@ namespace zenith::win
         return this->window;
     }
 
-    GLFWwindow* WinWindow::GetGLFWwindow() const
+    GLFWwindow* WinWindow::get_glfw_window() const
     {
         return this->window;
     }

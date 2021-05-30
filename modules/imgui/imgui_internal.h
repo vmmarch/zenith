@@ -167,7 +167,7 @@ namespace ImStb
 #undef STB_TEXTEDIT_CHARTYPE
 #define STB_TEXTEDIT_STRING             ImGuiInputTextState
 #define STB_TEXTEDIT_CHARTYPE           ImWchar
-#define STB_TEXTEDIT_GETWIDTH_NEWLINE   (-1.0f)
+#define STB_TEXTEDIT_get_width_NEWLINE   (-1.0f)
 #define STB_TEXTEDIT_UNDOSTATECOUNT     99
 #define STB_TEXTEDIT_UNDOCHARCOUNT      999
 #include "imstb_textedit.h"
@@ -459,8 +459,8 @@ struct IMGUI_API ImRect
 
     ImVec2      GetCenter() const                   { return ImVec2((Min.x + Max.x) * 0.5f, (Min.y + Max.y) * 0.5f); }
     ImVec2      GetSize() const                     { return ImVec2(Max.x - Min.x, Max.y - Min.y); }
-    float       GetWidth() const                    { return Max.x - Min.x; }
-    float       GetHeight() const                   { return Max.y - Min.y; }
+    float       get_width() const                    { return Max.x - Min.x; }
+    float       get_height() const                   { return Max.y - Min.y; }
     float       GetArea() const                     { return (Max.x - Min.x) * (Max.y - Min.y); }
     ImVec2      GetTL() const                       { return Min; }                   // Top-left
     ImVec2      GetTR() const                       { return ImVec2(Max.x, Min.y); }  // Top-right

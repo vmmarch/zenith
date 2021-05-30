@@ -3873,7 +3873,7 @@ void ImGui::UpdateMouseWheel()
             window = window->ParentWindow;
         if (!(window->Flags & ImGuiWindowFlags_NoScrollWithMouse) && !(window->Flags & ImGuiWindowFlags_NoMouseInputs))
         {
-            float max_step = window->InnerRect.GetHeight() * 0.67f;
+            float max_step = window->InnerRect.get_height() * 0.67f;
             float scroll_step = ImFloor(ImMin(5 * window->CalcFontSize(), max_step));
             SetScrollY(window, window->Scroll.y - wheel_y * scroll_step);
         }
@@ -3888,7 +3888,7 @@ void ImGui::UpdateMouseWheel()
             window = window->ParentWindow;
         if (!(window->Flags & ImGuiWindowFlags_NoScrollWithMouse) && !(window->Flags & ImGuiWindowFlags_NoMouseInputs))
         {
-            float max_step = window->InnerRect.GetWidth() * 0.67f;
+            float max_step = window->InnerRect.get_width() * 0.67f;
             float scroll_step = ImFloor(ImMin(2 * window->CalcFontSize(), max_step));
             SetScrollX(window, window->Scroll.x - wheel_x * scroll_step);
         }
@@ -5996,7 +5996,7 @@ void ImGui::RenderWindowTitleBarContents(ImGuiWindow* window, const ImRect& titl
     if (style.WindowTitleAlign.x > 0.0f && style.WindowTitleAlign.x < 1.0f)
     {
         float centerness = ImSaturate(1.0f - ImFabs(style.WindowTitleAlign.x - 0.5f) * 2.0f); // 0.0f on either edges, 1.0f on center
-        float pad_extend = ImMin(ImMax(pad_l, pad_r), title_bar_rect.GetWidth() - pad_l - pad_r - text_size.x);
+        float pad_extend = ImMin(ImMax(pad_l, pad_r), title_bar_rect.get_width() - pad_l - pad_r - text_size.x);
         pad_l = ImMax(pad_l, pad_extend * centerness);
         pad_r = ImMax(pad_r, pad_extend * centerness);
     }
@@ -6008,7 +6008,7 @@ void ImGui::RenderWindowTitleBarContents(ImGuiWindow* window, const ImRect& titl
     RenderTextClipped(layout_r.Min, layout_r.Max, name, NULL, &text_size, style.WindowTitleAlign, &clip_r);
     if (flags & ImGuiWindowFlags_UnsavedDocument)
     {
-        ImVec2 marker_pos = ImVec2(ImMax(layout_r.Min.x, layout_r.Min.x + (layout_r.GetWidth() - text_size.x) * style.WindowTitleAlign.x) + text_size.x, layout_r.Min.y) + ImVec2(2 - marker_size_x, 0.0f);
+        ImVec2 marker_pos = ImVec2(ImMax(layout_r.Min.x, layout_r.Min.x + (layout_r.get_width() - text_size.x) * style.WindowTitleAlign.x) + text_size.x, layout_r.Min.y) + ImVec2(2 - marker_size_x, 0.0f);
         ImVec2 off = ImVec2(0.0f, IM_FLOOR(-g.FontSize * 0.25f));
         RenderTextClipped(marker_pos + off, layout_r.Max + off, UNSAVED_DOCUMENT_MARKER, NULL, NULL, ImVec2(0, style.WindowTitleAlign.y), &clip_r);
     }
@@ -6485,7 +6485,7 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         // FIXME: Similar to code in GetWindowAllowedExtentRect()
         if (!window_pos_set_by_api && !(flags & ImGuiWindowFlags_ChildWindow) && window->AutoFitFramesX <= 0 && window->AutoFitFramesY <= 0)
         {
-            if (!window->ViewportOwned && viewport_rect.GetWidth() > 0 && viewport_rect.GetHeight() > 0.0f)
+            if (!window->ViewportOwned && viewport_rect.get_width() > 0 && viewport_rect.get_height() > 0.0f)
             {
                 ClampWindowRect(window, visibility_rect);
             }
@@ -6621,8 +6621,8 @@ bool ImGui::Begin(const char* name, bool* p_open, ImGuiWindowFlags flags)
         // Lock down maximum scrolling
         // The value of ScrollMax are ahead from ScrollbarX/ScrollbarY which is intentionally using InnerRect from previous rect in order to accommodate
         // for right/bottom aligned items without creating a scrollbar.
-        window->ScrollMax.x = ImMax(0.0f, window->ContentSize.x + window->WindowPadding.x * 2.0f - window->InnerRect.GetWidth());
-        window->ScrollMax.y = ImMax(0.0f, window->ContentSize.y + window->WindowPadding.y * 2.0f - window->InnerRect.GetHeight());
+        window->ScrollMax.x = ImMax(0.0f, window->ContentSize.x + window->WindowPadding.x * 2.0f - window->InnerRect.get_width());
+        window->ScrollMax.y = ImMax(0.0f, window->ContentSize.y + window->WindowPadding.y * 2.0f - window->InnerRect.get_height());
 
         // Apply scrolling
         window->Scroll = CalcNextScrollFromScrollTargetAndClamp(window);
@@ -8346,7 +8346,7 @@ ImVec2 ImGui::GetWindowContentRegionMax()
 float ImGui::GetWindowContentRegionWidth()
 {
     ImGuiWindow* window = GImGui->CurrentWindow;
-    return window->ContentRegionRect.GetWidth();
+    return window->ContentRegionRect.get_width();
 }
 
 // Lock horizontal starting position + capture group bounding box into one "item" (so you can use IsItemHovered() or layout primitives such as SameLine() on whole group, etc.)
@@ -9163,7 +9163,7 @@ ImRect ImGui::GetWindowAllowedExtentRect(ImGuiWindow* window)
         r_screen = window->Viewport->GetMainRect();
     }
     ImVec2 padding = g.Style.DisplaySafeAreaPadding;
-    r_screen.Expand(ImVec2((r_screen.GetWidth() > padding.x * 2) ? -padding.x : 0.0f, (r_screen.GetHeight() > padding.y * 2) ? -padding.y : 0.0f));
+    r_screen.Expand(ImVec2((r_screen.get_width() > padding.x * 2) ? -padding.x : 0.0f, (r_screen.get_height() > padding.y * 2) ? -padding.y : 0.0f));
     return r_screen;
 }
 
@@ -9607,7 +9607,7 @@ static ImVec2 ImGui::NavCalcPreferredRefPos()
     {
         // When navigation is active and mouse is disabled, decide on an arbitrary position around the bottom left of the currently navigated item.
         const ImRect& rect_rel = g.NavWindow->NavRectRel[g.NavLayer];
-        ImVec2 pos = g.NavWindow->Pos + ImVec2(rect_rel.Min.x + ImMin(g.Style.FramePadding.x * 4, rect_rel.GetWidth()), rect_rel.Max.y - ImMin(g.Style.FramePadding.y, rect_rel.GetHeight()));
+        ImVec2 pos = g.NavWindow->Pos + ImVec2(rect_rel.Min.x + ImMin(g.Style.FramePadding.x * 4, rect_rel.get_width()), rect_rel.Max.y - ImMin(g.Style.FramePadding.y, rect_rel.get_height()));
         ImGuiViewport* viewport = g.NavWindow->Viewport;
         return ImFloor(ImClamp(pos, viewport->Pos, viewport->Pos + viewport->Size)); // ImFloor() is important because non-integer mouse position application in backend might be lossy and result in undesirable non-zero delta.
     }
@@ -9899,7 +9899,7 @@ static void ImGui::NavUpdate()
         {
             IMGUI_DEBUG_LOG_NAV("[nav] NavMoveRequest: clamp NavRectRel\n");
             float pad = window->CalcFontSize() * 0.5f;
-            window_rect_rel.Expand(ImVec2(-ImMin(window_rect_rel.GetWidth(), pad), -ImMin(window_rect_rel.GetHeight(), pad))); // Terrible approximation for the intent of starting navigation from first fully visible item
+            window_rect_rel.Expand(ImVec2(-ImMin(window_rect_rel.get_width(), pad), -ImMin(window_rect_rel.get_height(), pad))); // Terrible approximation for the intent of starting navigation from first fully visible item
             window->NavRectRel[g.NavLayer].ClipWithFull(window_rect_rel);
             g.NavId = g.NavFocusScopeId = 0;
         }
@@ -10028,9 +10028,9 @@ static float ImGui::NavUpdatePageUpPageDown()
         {
             // Fallback manual-scroll when window has no navigable item
             if (IsKeyPressed(io.KeyMap[ImGuiKey_PageUp], true))
-                SetScrollY(window, window->Scroll.y - window->InnerRect.GetHeight());
+                SetScrollY(window, window->Scroll.y - window->InnerRect.get_height());
             else if (IsKeyPressed(io.KeyMap[ImGuiKey_PageDown], true))
-                SetScrollY(window, window->Scroll.y + window->InnerRect.GetHeight());
+                SetScrollY(window, window->Scroll.y + window->InnerRect.get_height());
             else if (home_pressed)
                 SetScrollY(window, 0.0f);
             else if (end_pressed)
@@ -10039,7 +10039,7 @@ static float ImGui::NavUpdatePageUpPageDown()
         else
         {
             ImRect& nav_rect_rel = window->NavRectRel[g.NavLayer];
-            const float page_offset_y = ImMax(0.0f, window->InnerRect.GetHeight() - window->CalcFontSize() * 1.0f + nav_rect_rel.GetHeight());
+            const float page_offset_y = ImMax(0.0f, window->InnerRect.get_height() - window->CalcFontSize() * 1.0f + nav_rect_rel.get_height());
             float nav_scoring_rect_offset_y = 0.0f;
             if (IsKeyPressed(io.KeyMap[ImGuiKey_PageUp], true))
             {
@@ -10103,7 +10103,7 @@ static void ImGui::NavEndFrame()
                 ImMax(window->SizeFull.x, window->ContentSize.x + window->WindowPadding.x * 2.0f) - window->Scroll.x;
             if (move_flags & ImGuiNavMoveFlags_WrapX)
             {
-                bb_rel.TranslateY(-bb_rel.GetHeight());
+                bb_rel.TranslateY(-bb_rel.get_height());
                 clip_dir = ImGuiDir_Up;
             }
             NavMoveRequestForward(g.NavMoveDir, clip_dir, bb_rel, move_flags);
@@ -10113,7 +10113,7 @@ static void ImGui::NavEndFrame()
             bb_rel.Min.x = bb_rel.Max.x = -window->Scroll.x;
             if (move_flags & ImGuiNavMoveFlags_WrapX)
             {
-                bb_rel.TranslateY(+bb_rel.GetHeight());
+                bb_rel.TranslateY(+bb_rel.get_height());
                 clip_dir = ImGuiDir_Down;
             }
             NavMoveRequestForward(g.NavMoveDir, clip_dir, bb_rel, move_flags);
@@ -10124,7 +10124,7 @@ static void ImGui::NavEndFrame()
                 ImMax(window->SizeFull.y, window->ContentSize.y + window->WindowPadding.y * 2.0f) - window->Scroll.y;
             if (move_flags & ImGuiNavMoveFlags_WrapY)
             {
-                bb_rel.TranslateX(-bb_rel.GetWidth());
+                bb_rel.TranslateX(-bb_rel.get_width());
                 clip_dir = ImGuiDir_Left;
             }
             NavMoveRequestForward(g.NavMoveDir, clip_dir, bb_rel, move_flags);
@@ -10134,7 +10134,7 @@ static void ImGui::NavEndFrame()
             bb_rel.Min.y = bb_rel.Max.y = -window->Scroll.y;
             if (move_flags & ImGuiNavMoveFlags_WrapY)
             {
-                bb_rel.TranslateX(+bb_rel.GetWidth());
+                bb_rel.TranslateX(+bb_rel.get_width());
                 clip_dir = ImGuiDir_Right;
             }
             NavMoveRequestForward(g.NavMoveDir, clip_dir, bb_rel, move_flags);
@@ -10642,7 +10642,7 @@ const ImGuiPayload* ImGui::AcceptDragDropPayload(const char* type, ImGuiDragDrop
     // NB: We currently accept NULL id as target. However, overlapping targets requires a unique ID to function!
     const bool was_accepted_previously = (g.DragDropAcceptIdPrev == g.DragDropTargetId);
     ImRect r = g.DragDropTargetRect;
-    float r_surface = r.GetWidth() * r.GetHeight();
+    float r_surface = r.get_width() * r.get_height();
     if (r_surface <= g.DragDropAcceptIdCurrRectSurface)
     {
         g.DragDropAcceptFlags = flags;
@@ -12045,7 +12045,7 @@ static int ImGui::FindPlatformMonitorForRect(const ImRect& rect)
 
     // Use a minimum threshold of 1.0f so a zero-sized rect won't false positive, and will still find the correct monitor given its position.
     // This is necessary for tooltips which always resize down to zero at first.
-    const float surface_threshold = ImMax(rect.GetWidth() * rect.GetHeight() * 0.5f, 1.0f);
+    const float surface_threshold = ImMax(rect.get_width() * rect.get_height() * 0.5f, 1.0f);
     int best_monitor_n = -1;
     float best_monitor_surface = 0.001f;
 
@@ -12057,7 +12057,7 @@ static int ImGui::FindPlatformMonitorForRect(const ImRect& rect)
             return monitor_n;
         ImRect overlapping_rect = rect;
         overlapping_rect.ClipWithFull(monitor_rect);
-        float overlapping_surface = overlapping_rect.GetWidth() * overlapping_rect.GetHeight();
+        float overlapping_surface = overlapping_rect.get_width() * overlapping_rect.get_height();
         if (overlapping_surface < best_monitor_surface)
             continue;
         best_monitor_surface = overlapping_surface;
@@ -14104,7 +14104,7 @@ bool ImGui::DockNodeCalcDropRectsAndTestMousePos(const ImRect& parent, ImGuiDir 
 {
     ImGuiContext& g = *GImGui;
 
-    const float parent_smaller_axis = ImMin(parent.GetWidth(), parent.GetHeight());
+    const float parent_smaller_axis = ImMin(parent.get_width(), parent.get_height());
     const float hs_for_central_nodes = ImMin(g.FontSize * 1.5f, ImMax(g.FontSize * 0.5f, parent_smaller_axis / 8.0f));
     float hs_w; // Half-size, longer axis
     float hs_h; // Half-size, smaller axis
@@ -14113,10 +14113,10 @@ bool ImGui::DockNodeCalcDropRectsAndTestMousePos(const ImRect& parent, ImGuiDir 
     {
         //hs_w = ImFloor(ImClamp(parent_smaller_axis - hs_for_central_nodes * 4.0f, g.FontSize * 0.5f, g.FontSize * 8.0f));
         //hs_h = ImFloor(hs_w * 0.15f);
-        //off = ImVec2(ImFloor(parent.GetWidth() * 0.5f - GetFrameHeightWithSpacing() * 1.4f - hs_h), ImFloor(parent.GetHeight() * 0.5f - GetFrameHeightWithSpacing() * 1.4f - hs_h));
+        //off = ImVec2(ImFloor(parent.get_width() * 0.5f - GetFrameHeightWithSpacing() * 1.4f - hs_h), ImFloor(parent.get_height() * 0.5f - GetFrameHeightWithSpacing() * 1.4f - hs_h));
         hs_w = ImFloor(hs_for_central_nodes * 1.50f);
         hs_h = ImFloor(hs_for_central_nodes * 0.80f);
-        off = ImVec2(ImFloor(parent.GetWidth() * 0.5f - hs_h), ImFloor(parent.GetHeight() * 0.5f - hs_h));
+        off = ImVec2(ImFloor(parent.get_width() * 0.5f - hs_h), ImFloor(parent.get_height() * 0.5f - hs_h));
     }
     else
     {
@@ -16118,7 +16118,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
             for (int rect_n = 0; rect_n < WRT_Count; rect_n++)
             {
                 ImRect r = Funcs::GetWindowRect(g.NavWindow, rect_n);
-                Text("(%6.1f,%6.1f) (%6.1f,%6.1f) Size (%6.1f,%6.1f) %s", r.Min.x, r.Min.y, r.Max.x, r.Max.y, r.GetWidth(), r.GetHeight(), wrt_rects_names[rect_n]);
+                Text("(%6.1f,%6.1f) (%6.1f,%6.1f) Size (%6.1f,%6.1f) %s", r.Min.x, r.Min.y, r.Max.x, r.Max.y, r.get_width(), r.get_height(), wrt_rects_names[rect_n]);
             }
             Unindent();
         }
@@ -16151,7 +16151,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
                         for (int column_n = 0; column_n < table->ColumnsCount; column_n++)
                         {
                             ImRect r = Funcs::GetTableRect(table, rect_n, column_n);
-                            ImFormatString(buf, IM_ARRAYSIZE(buf), "(%6.1f,%6.1f) (%6.1f,%6.1f) Size (%6.1f,%6.1f) Col %d %s", r.Min.x, r.Min.y, r.Max.x, r.Max.y, r.GetWidth(), r.GetHeight(), column_n, trt_rects_names[rect_n]);
+                            ImFormatString(buf, IM_ARRAYSIZE(buf), "(%6.1f,%6.1f) (%6.1f,%6.1f) Size (%6.1f,%6.1f) Col %d %s", r.Min.x, r.Min.y, r.Max.x, r.Max.y, r.get_width(), r.get_height(), column_n, trt_rects_names[rect_n]);
                             Selectable(buf);
                             if (IsItemHovered())
                                 GetForegroundDrawList()->AddRect(r.Min - ImVec2(1, 1), r.Max + ImVec2(1, 1), IM_COL32(255, 255, 0, 255), 0.0f, 0, 2.0f);
@@ -16160,7 +16160,7 @@ void ImGui::ShowMetricsWindow(bool* p_open)
                     else
                     {
                         ImRect r = Funcs::GetTableRect(table, rect_n, -1);
-                        ImFormatString(buf, IM_ARRAYSIZE(buf), "(%6.1f,%6.1f) (%6.1f,%6.1f) Size (%6.1f,%6.1f) %s", r.Min.x, r.Min.y, r.Max.x, r.Max.y, r.GetWidth(), r.GetHeight(), trt_rects_names[rect_n]);
+                        ImFormatString(buf, IM_ARRAYSIZE(buf), "(%6.1f,%6.1f) (%6.1f,%6.1f) Size (%6.1f,%6.1f) %s", r.Min.x, r.Min.y, r.Max.x, r.Max.y, r.get_width(), r.get_height(), trt_rects_names[rect_n]);
                         Selectable(buf);
                         if (IsItemHovered())
                             GetForegroundDrawList()->AddRect(r.Min - ImVec2(1, 1), r.Max + ImVec2(1, 1), IM_COL32(255, 255, 0, 255), 0.0f, 0, 2.0f);

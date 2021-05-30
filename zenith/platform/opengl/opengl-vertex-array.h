@@ -54,7 +54,7 @@ namespace zenith
         IndexBuffer* GetIndexBuffer() const override { return index_buf; }
         std::vector<VertexBuffer*> GetVertexBuffers() const override { return vertex_buffers; };
 
-        virtual bool HasIndex() const { return has_index; };
+        [[nodiscard]] bool HasIndex() const;;
 
     private:
         zenith_uint32 array_id;

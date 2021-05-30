@@ -37,8 +37,8 @@ namespace zenith::win
 
         void setTitle(zenith_char title) override { info.title = title; }
         zenith_char getTitle() const override { return info.title; }
-        zenith_uint32 GetWidth() const override { return info.width; }
-        zenith_uint32 GetHeight() const override { return info.height; }
+        zenith_uint32 get_width() const override { return info.width; }
+        zenith_uint32 get_height() const override { return info.height; }
 
         void SetEventCallback(const f_callback&) override;
 
@@ -47,7 +47,7 @@ namespace zenith::win
         void update() override;
 
         void* GetWindowHANDLE() const override;
-        GLFWwindow* GetGLFWwindow() const override;
+        GLFWwindow* get_glfw_window() const override;
     private:
         struct v_info
         {

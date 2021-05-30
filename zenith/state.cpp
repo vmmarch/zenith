@@ -29,22 +29,22 @@ namespace zenith
     long State::LOOP_NUMBER = 0;
     GLFWwindow *State::window = nullptr;
 
-    GLFWwindow *State::GetGLFWwindow()
+    GLFWwindow *State::get_glfw_window()
     {
         if(window == nullptr)
-            window = Starter::instance().GetWindow().GetGLFWwindow();
+            window = Starter::instance().GetWindow().get_glfw_window();
 
         return window;
     }
 
-    int State::GetWidth()
+    int State::get_width()
     {
-        return (int) Starter::instance().GetWindow().GetWidth();
+        return (int) Starter::instance().GetWindow().get_width();
     }
 
-    int State::GetHeight()
+    int State::get_height()
     {
-        return (int) Starter::instance().GetWindow().GetHeight();
+        return (int) Starter::instance().GetWindow().get_height();
     }
 
 }

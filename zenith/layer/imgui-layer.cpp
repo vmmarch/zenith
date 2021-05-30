@@ -64,7 +64,7 @@ namespace zenith
             style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         }
 
-        GLFWwindow *window = State::GetGLFWwindow();
+        GLFWwindow *window = State::get_glfw_window();
 
         // Setup Platform/Renderer bindings
         ImGui_ImplGlfw_InitForOpenGL(window, true);
@@ -155,7 +155,7 @@ namespace zenith
         ImGui::End();
 
         ImGuiIO &io = ImGui::GetIO();
-        io.DisplaySize = ImVec2((float) State::GetWidth(), (float) State::GetHeight());
+        io.DisplaySize = ImVec2((float) State::get_width(), (float) State::get_height());
 
         // Rendering
         ImGui::Render();
