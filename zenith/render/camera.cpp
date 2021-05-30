@@ -115,9 +115,9 @@ namespace zenith
         return camera_zoom;;
     }
 
-    glm::mat4 Camera::GetProjection()
+    glm::mat4 Camera::get_projection()
     {
-        return glm::perspective(GetCameraZoom(), GetScreenAspectRadio(), -1.0f, 1.0f);
+        return glm::perspective(GetCameraZoom(), get_screen_aspect_radio(), -1.0f, 1.0f);
     }
 
 }

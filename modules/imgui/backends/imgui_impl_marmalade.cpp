@@ -270,7 +270,7 @@ void ImGui_Marmalade_NewFrame()
     ImGuiIO& io = ImGui::GetIO();
 
     // Setup display size (every frame to accommodate for window resizing)
-    int w = IwGxGetScreenWidth(), h = IwGxGetScreenHeight();
+    int w = IwGxget_screen_width(), h = IwGxget_screen_height();
     io.DisplaySize = ImVec2((float)w, (float)h);
     // For retina display or other situations where window coordinates are different from framebuffer coordinates. User storage only, presently not used by ImGui.
     io.DisplayFramebufferScale = g_scale;

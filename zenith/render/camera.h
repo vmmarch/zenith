@@ -44,7 +44,7 @@ namespace zenith
     class Camera
     {
     public:
-        Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 5.0f),
+        explicit Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 5.0f),
                glm::vec3 up = glm::vec3(0.0f, 0.1f, 0.0f),
                float yaw = YAW, float pitch = PITCH);
 
@@ -78,16 +78,16 @@ namespace zenith
 
         float GetCameraZoom();
 
-        float GetScreenWidth() { return screen_w; }
-        float GetScreenHeight() { return screen_h; }
-        float GetScreenAspectRadio() { return screen_w / screen_h; }
+        [[nodiscard]] float get_screen_width() const { return screen_w; }
+        [[nodiscard]] float get_screen_height() const { return screen_h; }
+        [[nodiscard]] float get_screen_aspect_radio() const { return screen_w / screen_h; }
 
         /**
          * Get/Set 鼠标灵敏度
          * @param sensitivity 鼠标灵敏度
          */
-        void SetMouseSensitivity(float sensitivity) { mouse_sens = sensitivity; }
-        float GetMouseSensitivity() { return mouse_sens; }
+        void set_mouse_sensitivity(float sensitivity) { mouse_sens = sensitivity; }
+        float get_mouse_sensitivity() { return mouse_sens; }
 
         void update(float _screen_w, float _screen_h, float _delta_time)
         {
@@ -106,7 +106,7 @@ namespace zenith
                 direction(camera_movement::RIGHT);
         }
 
-        glm::mat4 GetProjection();
+        glm::mat4 get_projection();
 
     private:
         void update_camera_vector();

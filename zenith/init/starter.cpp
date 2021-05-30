@@ -74,15 +74,15 @@ namespace zenith
         sandbox->update(deltaTime);
     }
 
-    void Starter::main_cycle()
+    void Starter::domain()
     {
-        sandbox->SetClearColor(RGBA::BLACK);
+        sandbox->set_clear_color(RGBA::BLACK);
 
         // ------------------------------------------
         // game loop.
         while (running)
         {
-            auto time = (float) glfwGetTime(); // FIXME: get time from different platform. And now use GLFW.
+            auto time = (float) glfwGetTime();
             DeltaTime deltaTime = time - last_frame_time;
             last_frame_time = time;
 
@@ -90,7 +90,7 @@ namespace zenith
             sandbox->render();
             this->window->update();
 
-            State::npp();
+            State::count_plus();
         }
     }
 

@@ -44,7 +44,7 @@ namespace zenith
     class SandBox : public Layer
     {
     public:
-        SandBox(Window* window);
+        explicit SandBox(Window* window);
 
         void initialize();
 
@@ -53,14 +53,14 @@ namespace zenith
         void event(Event&) override;
         void close() override {};
 
-        void SetClearColor(glm::vec4& color) { Renderer::clear_color(color); }
+        static void set_clear_color(glm::vec4& color) { Renderer::clear_color(color); }
 
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};
         Camera camera;
         Window* window;
-        float last_x, last_y;
+        float last_x = 0, last_y = 0;
         Layer* main_layer;
         bool cursor_hide = false;
 

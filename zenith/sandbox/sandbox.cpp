@@ -60,7 +60,7 @@ namespace zenith
         // reload settings
         RELOAD_SETTING();
 
-        camera.update(State::GetWidth(), State::GetHeight(), deltaTime);
+        camera.update((float) State::GetWidth(), (float) State::GetHeight(), deltaTime);
 
         // 禁止鼠标移动相机
         if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
@@ -85,11 +85,13 @@ namespace zenith
         Renderer::begin(camera);
         Renderer::clear();
 
+#ifndef __ZENITH_PLATFORM_MACOS__
         imlayer->begin();
         {
             layer_stack.render();
         }
         imlayer->end();
+#endif
 
         Renderer::draw_models();
     }
@@ -99,7 +101,7 @@ namespace zenith
         if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
         {
             if(!GetValue(KEY_CURSOR_MOVE_CAMER)) return;
-            MouseMovedEvent &event = dynamic_cast<MouseMovedEvent&>(e);
+            auto &event = dynamic_cast<MouseMovedEvent&>(e);
 
             float xpos = event.GetX();
             float ypos = event.GetY();
@@ -123,7 +125,7 @@ namespace zenith
 
         if (e.GetEventType() == event::type::EVENT_MOUSE_SCROLLED)
         {
-            MouseButtonScrolledEvent &event = dynamic_cast<MouseButtonScrolledEvent &>(e);
+            auto &event = dynamic_cast<MouseButtonScrolledEvent &>(e);
             camera.SetZoom(event.GetY());
         }
     }

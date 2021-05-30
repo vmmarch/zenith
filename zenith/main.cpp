@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 #endif
 
     auto app = new zenith::Starter("zenith", 1260, 880);
-    app->main_cycle();
+    app->domain();
 
     return 0;
 }

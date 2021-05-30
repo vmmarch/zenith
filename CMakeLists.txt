@@ -75,7 +75,6 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/importer/obj SOURCE_IMPO
 
 AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/model SOURCE_MODEL)
 
-
 INCLUDE_DIRECTORIES(SYSTEM tool)
 
 # ---------------------------------------------------------------------------------------
@@ -135,8 +134,13 @@ ELSE(PLATFORM MATCHES MACOS)
     LINK_LIBRARIES(${CMAKE_CURRENT_SOURCE_DIR}/bin/libglfw.3.dylib)
 ENDIF()
 
-SET(IMAGE_BACKENDS_1 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp)
-SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp)
+IF(PLATFORM MATCHES WINDOWS)
+    SET(IMAGE_BACKENDS_1 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp)
+    SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp)
+ELSE(PLATFORM MATCHES MACOS)
+    SET(IMAGE_BACKENDS_1 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp)
+    SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp)
+ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME}
         ${SOURCE}

@@ -41,7 +41,7 @@ namespace zenith
          */
         static int GetHeight();
 
-        static void npp() { LOOP_NUMBER++; }
+        static void count_plus() { LOOP_NUMBER++; }
 
     private:
         static long LOOP_NUMBER;

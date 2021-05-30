@@ -41,7 +41,7 @@ namespace zenith
     void OpenGLRenderer::begin(Camera &camera)
     {
         view_matrix = camera.GetViewMatrix();
-        projection = camera.GetProjection();
+        projection = camera.get_projection();
     }
 
     void OpenGLRenderer::disable_depth_test()

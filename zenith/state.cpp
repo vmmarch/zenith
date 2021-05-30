@@ -31,7 +31,7 @@ namespace zenith
 
     GLFWwindow *State::GetGLFWwindow()
     {
-        if(window == NULL)
+        if(window == nullptr)
             window = Starter::instance().GetWindow().GetGLFWwindow();
 
         return window;
@@ -39,12 +39,12 @@ namespace zenith
 
     int State::GetWidth()
     {
-        return Starter::instance().GetWindow().GetWidth();
+        return (int) Starter::instance().GetWindow().GetWidth();
     }
 
     int State::GetHeight()
     {
-        return Starter::instance().GetWindow().GetHeight();
+        return (int) Starter::instance().GetWindow().GetHeight();
     }
 
 }
