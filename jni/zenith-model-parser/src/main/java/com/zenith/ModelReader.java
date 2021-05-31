@@ -53,7 +53,7 @@ public abstract class ModelReader {
     /**
      * 解析模型
      */
-    public abstract void parseModel();
+    public abstract void parseModel() throws IOException;
 
     /**
      * 关闭IO流

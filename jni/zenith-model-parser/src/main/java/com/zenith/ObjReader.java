@@ -22,7 +22,13 @@ package com.zenith;
  * Creates on 2020/6/1.
  */
 
+import com.zenith.vec.Vector2f;
+import com.zenith.vec.Vector3f;
+import com.zenith.vec.Vector3i;
+
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author luots
@@ -34,10 +40,69 @@ public class ObjReader extends ModelReader {
     }
 
     @Override
-    public void parseModel() {
+    public void parseModel() throws IOException {
 
+        // 光化组
+        boolean smooth = false;
 
+        // 顶点数据
+        List<Vector3f> vertices = new LinkedList<>();
+        // 纹理坐标
+        List<Vector2f> texcoords = new LinkedList<>();
+        // 法向量
+        List<Vector3f> normals = new LinkedList<>();
+        // 面
+        List<Vector3i> faces = new LinkedList<>();
 
+        // 当前模型总共有多少面
+        int faceCount = 0;
+
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (line.startsWith("v")) {
+                // texture vertex
+                if (line.startsWith("vt")) {
+                    String substring = line.substring(2).trim();
+                    texcoords.add(Vector2f.toVec2f(substring.split(" ")));
+                }
+
+                // vertices normals
+                if (line.startsWith("vn")) {
+                    String substring = line.substring(2).trim();
+                    normals.add(Vector3f.toVec3f(substring.split(" ")));
+                }
+
+                if (line.startsWith("vp")) {
+                    continue;
+                }
+
+                // vertex
+                String vertex = line.substring(1).trim();
+                vertices.add(Vector3f.toVec3f(vertex.split(" ")));
+            }
+
+            // smooth
+            if (line.startsWith("s")) {
+                smooth = "off".equals(line.substring(1).trim());
+            }
+
+            // face
+            // 顶点索引/uv索引/法线索引
+            if (line.startsWith("f")) {
+                String face_str = line.substring(1).trim();
+                String[] faceArray = face_str.split(" ");
+                faceCount += faceArray.length;
+
+                // 解析face
+                for (String face : faceArray) {
+                    // 0: 顶点索引，1: UV索引，2: 法线索引
+                    String[] property = face.split("/");
+                    faces.add(Vector3i.toVec3i(property));
+                }
+            }
+        }
+
+        close();
     }
 
 }

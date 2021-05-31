@@ -29,10 +29,16 @@ public class Vector3f {
 
     public float x, y, z;
 
-    Vector3f(float x, float y, float z) {
+    public Vector3f(float x, float y, float z) {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public static Vector3f toVec3f(String[] array) {
+        return new Vector3f(Float.parseFloat(array[0]),
+                Float.parseFloat(array[1]),
+                Float.parseFloat(array[2]));
     }
 
 }

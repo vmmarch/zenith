@@ -31,6 +31,7 @@ public class ModelReaderTest {
 
     public static void main(String[] args) throws IOException {
         ObjReader reader = new ObjReader("D:\\model\\奥迪\\uploads_files_2663635_Audi_RS_6_Avant.obj");
+        reader.parseModel();
     }
 
 }

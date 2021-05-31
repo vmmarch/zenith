@@ -29,9 +29,14 @@ public class Vector2f {
 
     public float x, y;
 
-    Vector2f(float x, float y) {
+    public Vector2f(float x, float y) {
         this.x = x;
         this.y = y;
+    }
+
+    public static Vector2f toVec2f(String[] array) {
+        return new Vector2f(Float.parseFloat(array[0]),
+                Float.parseFloat(array[1]));
     }
 
 }

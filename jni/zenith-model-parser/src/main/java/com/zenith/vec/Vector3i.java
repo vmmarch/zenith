@@ -29,10 +29,16 @@ public class Vector3i {
 
     public int x, y, z;
 
-    Vector3i(int x, int y, int z) {
+    public Vector3i(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public static Vector3i toVec3i(String[] array) {
+        return new Vector3i(Integer.parseInt(array[0]),
+                Integer.parseInt(array[1]),
+                Integer.parseInt(array[2]));
     }
 
 }

@@ -73,6 +73,7 @@ namespace zenith
                     ptr->d_name, ShaderProgram::Create((folder + "/" + ptr->d_name).c_str())));
         }
 
+        closedir(dir);
 #endif
     }
 }
