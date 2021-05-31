@@ -63,7 +63,7 @@ namespace zenith
     /**
      * 加载配置
      */
-    void RELOAD_SETTING()
+    void reload_setting()
     {
         if (settings->CAN_BE_RELOAD)
         {

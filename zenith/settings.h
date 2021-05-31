@@ -53,7 +53,7 @@ namespace zenith
     /**
      * 重新加载配置
      */
-    EXTAPI void RELOAD_SETTING();
+    EXTAPI void reload_setting();
 }
 
 #endif

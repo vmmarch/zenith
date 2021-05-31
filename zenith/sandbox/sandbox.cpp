@@ -56,7 +56,7 @@ namespace zenith
         // ----------------------------------
         // ------
         // reload settings
-        RELOAD_SETTING();
+        reload_setting();
 
         camera.update((float) State::get_width(), (float) State::get_height(), delta_time);
 
@@ -91,6 +91,7 @@ namespace zenith
         imlayer->end();
 #endif
 
+        // 渲染模型
         Renderer::draw_models();
     }
 
