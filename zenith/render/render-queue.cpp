@@ -27,17 +27,20 @@ namespace zenith
 {
     void RenderQueue::push(Model& model)
     {
-        sp program = model.get_program();
-        if(queue.count(program) > 0)
+        if(model.get_load_success() == SUCCESSFUL)
         {
-            vecq vq = queue[program];
-            vq.push_back(model);
-        } else
-        {
-            vecq vq;
-            vq.push_back(model);
+            sp program = model.get_program();
+            if(queue.count(program) > 0)
+            {
+                vecq vq = queue[program];
+                vq.push_back(model);
+            } else
+            {
+                vecq vq;
+                vq.push_back(model);
 
-            queue.insert(std::pair<ShaderProgram*, vecq>(program, vq));
+                queue.insert(std::pair<ShaderProgram*, vecq>(program, vq));
+            }
         }
     }
 

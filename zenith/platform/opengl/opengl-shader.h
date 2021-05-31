@@ -34,17 +34,19 @@ namespace zenith
         ~OpenGLShaderProgram() override;
         void bind() override;
         void unbind() override;
-        zenith_uint GetID() const override { return shader_id; }
-        void SetBool(zenith_char, bool) override;
-        void SetInt(zenith_char, int) override;
-        void SetFloat(zenith_char, float) override;
-        void SetFloat2(zenith_char, glm::vec2) override;
-        void SetFloat3(zenith_char, glm::vec3) override;
-        void SetFloat4(zenith_char, glm::vec4) override;
-        void SetMat3(zenith_char, glm::mat3) override;
-        void SetMat4(zenith_char, glm::mat4) override;
+        zenith_uint get_id() const override { return shader_id; }
+        void set_bool(zenith_char, bool) override;
+        void set_int(zenith_char, int) override;
+        void set_float(zenith_char, float) override;
+        void set_float2(zenith_char, glm::vec2) override;
+        void set_float3(zenith_char, glm::vec3) override;
+        void set_float4(zenith_char, glm::vec4) override;
+        void set_mat3(zenith_char, glm::mat3) override;
+        void set_mat4(zenith_char, glm::mat4) override;
 
-        zenith_uint32 GetMarkID() const override;
+        zenith_uint32 get_mark_id() const override;
+
+        bool is_load_success() override;
 
     private:
         zenith_uint shader_id;
@@ -54,7 +56,7 @@ namespace zenith
         // utility function for checking shader compilation/linking errors.
         // ------------------------------------------------------------------------
         bool error = false;
-        zenith_uint32 markid;
-        void checkCompileErrors(unsigned int shader, std::string type);
+        zenith_uint32 mark_id;
+        void checkCompileErrors(unsigned int shader, const std::string& type);
     };
 }

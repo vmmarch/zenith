@@ -42,4 +42,23 @@ namespace zenith
         ZENITH_DEBUG(LOAD_MODEL_DEBUG, path);
         // TODO parse model
     }
+
+    void Model::set_load_success(int flag)
+    {
+        if(flag != SUCCESSFUL)
+        {
+            successful_flag = flag;
+        }
+    }
+
+    int Model::get_load_success() const
+    {
+        return successful_flag;
+    }
+
+    void reload()
+    {
+        // TODO now do nothing...
+    }
+
 }

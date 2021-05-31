@@ -23,6 +23,13 @@
  */
 #pragma once
 
+// if flag eq 5, that means the errors have flag 2 and flag 3;
+// or else flag eq 4, that means just have flag 4
+#define SUCCESSFUL    0
+#define CAUSE_SHADER  2       //  ------|--> 5
+#define CAUSE_MODEL   3       //  ------|
+#define CAUSE_UNKNOWN 4
+
 #include "mesh.h"
 
 namespace zenith
@@ -48,6 +55,19 @@ namespace zenith
 
         void draw();
 
+        int get_load_success() const;
+
+        /**
+         * 如果模型有些部分加载不成功，那么通过 flag 来判断。为了方便后续在运行中可以重新加载。
+         * @param flag 失败原因
+         */
+        void set_load_success(int flag);
+
+        /**
+         * 重新加载整个模型
+         */
+        void reload();
+
     private:
         void load_model(zenith_char path, zenith_enum mt);
 
@@ -63,5 +83,6 @@ namespace zenith
         std::vector<Mesh> meshes;
 
         bool gamma_correction;
+        int successful_flag = 0;
     };
 }

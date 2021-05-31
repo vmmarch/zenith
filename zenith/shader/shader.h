@@ -36,17 +36,25 @@ namespace zenith
         virtual ~ShaderProgram() = default;
         virtual void bind() = 0;
         virtual void unbind() = 0;
-        virtual zenith_uint GetID() const = 0;
-        virtual void SetBool(zenith_char name, bool value) = 0;
-        virtual void SetInt(zenith_char name, int value) = 0;
-        virtual void SetFloat(zenith_char name, float value) = 0;
-        virtual void SetFloat2(zenith_char name, glm::vec2 value) = 0;
-        virtual void SetFloat3(zenith_char name, glm::vec3 value) = 0;
-        virtual void SetFloat4(zenith_char name, glm::vec4 value) = 0;
-        virtual void SetMat3(zenith_char name, glm::mat3 value) = 0;
-        virtual void SetMat4(zenith_char name, glm::mat4 value) = 0;
+        virtual zenith_uint get_id() const = 0;
+        virtual void set_bool(zenith_char name, bool value) = 0;
+        virtual void set_int(zenith_char name, int value) = 0;
+        virtual void set_float(zenith_char name, float value) = 0;
+        virtual void set_float2(zenith_char name, glm::vec2 value) = 0;
+        virtual void set_float3(zenith_char name, glm::vec3 value) = 0;
+        virtual void set_float4(zenith_char name, glm::vec4 value) = 0;
+        virtual void set_mat3(zenith_char name, glm::mat3 value) = 0;
+        virtual void set_mat4(zenith_char name, glm::mat4 value) = 0;
 
-        virtual zenith_uint32 GetMarkID() const = 0;
+        /**
+         * 每个 Shader 程序都会有一个独特的标识。这个标识就是 MarkId。
+         */
+        virtual zenith_uint32 get_mark_id() const = 0;
+
+        /**
+         * 着色器是否加载成功
+         */
+        virtual bool is_load_success() = 0;
 
         /*!
          * 创建着色器

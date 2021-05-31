@@ -32,8 +32,6 @@ namespace zenith
 {
     static bool first = true;
 
-    static int grid_count = 8;
-
     SandBox::SandBox(Window *window)
             : Layer("sandbox layer"), camera(Camera()), window(window)
     {

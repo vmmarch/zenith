@@ -26,22 +26,25 @@
 #include <fstream>
 #include <sstream>
 
-#define RD_NONE 0
-#define RD_VERTEX 1
+#define RD_NONE     0
+#define RD_VERTEX   1
 #define RD_FRAGMENT 2
 
+/*!
+ * Shader 统一版本
+ */
 #define GLSL_VERSION "#version 330 core\n"
 
 namespace zenith
 {
 
-    static zenith_uint32 markcount = 0;
+    static zenith_uint32 mark_count = 0;
 
     static void load_shader(zenith_char path, std::string &vtext, std::string &ftext);
 
     OpenGLShaderProgram::OpenGLShaderProgram(zenith_char path, zenith_char debugname)
     {
-        markid = (markcount++);
+        mark_id = (mark_count++);
 
 //#ifdef __DEBUG__
 //        ZENITH_DEBUG(IFSPLIT);
@@ -60,13 +63,13 @@ namespace zenith
         zenith_uint vertex, fragment;
         // 创建vertex shader
         vertex = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vertex, 1, &vcode, NULL);
+        glShaderSource(vertex, 1, &vcode, nullptr);
         glCompileShader(vertex);
         checkCompileErrors(vertex, "VERTEX");
 
         // 创建fragment shader
         fragment = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(fragment, 1, &fcode, NULL);
+        glShaderSource(fragment, 1, &fcode, nullptr);
         glCompileShader(fragment);
         checkCompileErrors(fragment, "FRAGMENT");
 
@@ -104,72 +107,82 @@ namespace zenith
         GLAPI_UnbindProgram();
     }
 
-    void OpenGLShaderProgram::SetBool(zenith_char name, bool value)
+    void OpenGLShaderProgram::set_bool(zenith_char name, bool value)
     {
         GLAPI_Uniform1i(shader_id, name, value);
     }
 
-    void OpenGLShaderProgram::SetInt(zenith_char name, int value)
+    void OpenGLShaderProgram::set_int(zenith_char name, int value)
     {
         GLAPI_Uniform1i(shader_id, name, value);
     }
 
-    void OpenGLShaderProgram::SetFloat(zenith_char name, float value)
+    void OpenGLShaderProgram::set_float(zenith_char name, float value)
     {
         GLAPI_Uniform1f(shader_id, name, value);
     }
 
-    void OpenGLShaderProgram::SetFloat2(zenith_char name, glm::vec2 value)
+    void OpenGLShaderProgram::set_float2(zenith_char name, glm::vec2 value)
     {
         GLAPI_Uniform2f(shader_id, name, value.x, value.y);
     }
 
-    void OpenGLShaderProgram::SetFloat3(zenith_char name, glm::vec3 value)
+    void OpenGLShaderProgram::set_float3(zenith_char name, glm::vec3 value)
     {
         GLAPI_Uniform3f(shader_id, name, value.x, value.y, value.z);
     }
 
-    void OpenGLShaderProgram::SetFloat4(zenith_char name, glm::vec4 value)
+    void OpenGLShaderProgram::set_float4(zenith_char name, glm::vec4 value)
     {
         GLAPI_Uniform4f(shader_id, name, value.r, value.g, value.b, value.a);
     }
 
-    void OpenGLShaderProgram::SetMat3(zenith_char name, glm::mat3 value)
+    void OpenGLShaderProgram::set_mat3(zenith_char name, glm::mat3 value)
     {
         GLAPI_UniformMatrix3fv(shader_id, name, value);
     }
 
-    void OpenGLShaderProgram::SetMat4(zenith_char name, glm::mat4 value)
+    void OpenGLShaderProgram::set_mat4(zenith_char name, glm::mat4 value)
     {
         GLAPI_UniformMatrix4fv(shader_id, name, value);
     }
 
-    zenith_uint32 OpenGLShaderProgram::GetMarkID() const { return markid; }
+    zenith_uint32 OpenGLShaderProgram::get_mark_id() const { return mark_id; }
 
-    void OpenGLShaderProgram::checkCompileErrors(unsigned int shader, std::string type)
+    bool OpenGLShaderProgram::is_load_success()
+    {
+        return error;
+    }
+
+    void OpenGLShaderProgram::checkCompileErrors(unsigned int shader, const std::string& type)
     {
         int success;
         char infoLog[1024];
-        if(!error)
-            error = success;
+
         if (type != "PROGRAM")
         {
             glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
             if (!success)
             {
-                glGetShaderInfoLog(shader, 1024, NULL, infoLog);
+                glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
                 ZENITH_ERROR(SHADER_COMPILATION_ERROR, type.c_str(), infoLog);
+
+                error = true;
             }
         } else
         {
             glGetProgramiv(shader, GL_LINK_STATUS, &success);
             if (!success)
             {
-                glGetProgramInfoLog(shader, 1024, NULL, infoLog);
+                glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
                 ZENITH_ERROR(PROGRAM_LINKING_ERROR, type.c_str(), infoLog);
+
+                error = true;
             }
         }
     }
+
+    static bool check_status(std::string&, int&);
 
     static void load_shader(zenith_char path, std::string &vtext, std::string &ftext)
     {
@@ -188,23 +201,9 @@ namespace zenith
 
         while (getline(in, line))
         {
-            if (line == "// @vertex")
-            {
-                status = RD_VERTEX;
-                continue;
-            }
 
-            if (line == "// @fragment")
-            {
-                status = RD_FRAGMENT;
+            if(check_status(line, status))
                 continue;
-            }
-
-            if (line == "// @end")
-            {
-                status = RD_NONE;
-                continue;
-            }
 
             if (status == RD_VERTEX)
             {
@@ -222,6 +221,29 @@ namespace zenith
         vtext = vstr;
         ftext = fstr;
         in.close();
+    }
+
+    static bool check_status(std::string& line, int& status)
+    {
+        if (line == "// @vertex")
+        {
+            status = RD_VERTEX;
+            return true;
+        }
+
+        if (line == "// @fragment")
+        {
+            status = RD_FRAGMENT;
+            return true;
+        }
+
+        if (line == "// @end")
+        {
+            status = RD_NONE;
+            return true;
+        }
+
+        return false;
     }
 
 }
