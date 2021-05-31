@@ -25,11 +25,16 @@
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
 #   include <io.h>
+#elif __ZENITH_PLATFORM_MACOS__
+#   include <iostream>
+#   include <dirent.h>
+#   include <vector>
+#   include <fstream>
 #endif
 
 namespace zenith
 {
-    void ShaderManager::load_shaders(std::string folder)
+    void ShaderManager::load_shaders(const std::string& folder)
     {
 #ifdef __ZENITH_PLATFORM_WINDOWS__
         long h_file             = 0; // 文件句柄
@@ -53,7 +58,21 @@ namespace zenith
             } while(_findnext(h_file, &fileinfo) == 0);
         }
 #elif __ZENITH_PLATFORM_MACOS__
-    // TODO Create shader.
+        struct dirent *ptr;
+        DIR *dir = opendir(folder.c_str());
+
+        std::vector<std::string> files;
+
+        while((ptr = readdir(dir)) != nullptr)
+        {
+            // 跳过"."和".."两个特殊目录
+            if(ptr->d_name[0] == '.')
+                continue;
+
+            shaders.insert(std::make_pair<std::string, ShaderProgram*>(
+                    ptr->d_name, ShaderProgram::Create((folder + "/" + ptr->d_name).c_str())));
+        }
+
 #endif
     }
 }

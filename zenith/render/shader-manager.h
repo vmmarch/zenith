@@ -45,7 +45,7 @@ namespace zenith
             return shader;
         }
 
-        void load_shaders(std::string folder);
+        void load_shaders(const std::string& folder);
 
     private:
         std::map<std::string, ShaderProgram*> shaders;
