@@ -27,7 +27,7 @@ namespace zenith
 {
     void RenderQueue::push(Model& model)
     {
-        if(model.get_load_success() == SUCCESSFUL)
+        if(model.is_load_success())
         {
             sp program = model.get_program();
             if(queue.count(program) > 0)

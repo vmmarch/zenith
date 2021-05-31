@@ -24,13 +24,14 @@
  */
 #pragma once
 
+#include "virtual/loader.h"
 #include <api/glfw-api.h>
 #include "zenith/type.h"
 
 namespace zenith
 {
 
-    class ShaderProgram
+    class ShaderProgram : Loader
     {
     public:
         virtual ~ShaderProgram() = default;
@@ -50,11 +51,6 @@ namespace zenith
          * 每个 Shader 程序都会有一个独特的标识。这个标识就是 MarkId。
          */
         virtual zenith_uint32 get_mark_id() const = 0;
-
-        /**
-         * 着色器是否加载成功
-         */
-        virtual bool is_load_success() = 0;
 
         /*!
          * 创建着色器

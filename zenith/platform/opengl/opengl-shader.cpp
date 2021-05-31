@@ -85,7 +85,9 @@ namespace zenith
         glDeleteShader(fragment);
 
         if(error)
+        {
             ZENITH_ERROR(CREATE_SHADER_FAILED, debugname);
+        }
 
 // #ifdef __DEBUG__
 //         ZENITH_DEBUG(ENDIFSPLIT);
@@ -147,12 +149,12 @@ namespace zenith
         GLAPI_UniformMatrix4fv(shader_id, name, value);
     }
 
-    zenith_uint32 OpenGLShaderProgram::get_mark_id() const { return mark_id; }
-
-    bool OpenGLShaderProgram::is_load_success()
+    void OpenGLShaderProgram::reload()
     {
-        return error;
+        // TODO This function not implement in current.
     }
+
+    zenith_uint32 OpenGLShaderProgram::get_mark_id() const { return mark_id; }
 
     void OpenGLShaderProgram::checkCompileErrors(unsigned int shader, const std::string& type)
     {

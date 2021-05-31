@@ -46,7 +46,12 @@ namespace zenith
 
         zenith_uint32 get_mark_id() const override;
 
-        bool is_load_success() override;
+        bool is_load_success() const override
+        {
+            return error;
+        }
+
+        void reload() override;
 
     private:
         zenith_uint shader_id;

@@ -16,40 +16,19 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/5/9. <=== */
+/*! ===> Creates on 2021/4/30. <=== */
 
 /*!
  * @author 2B键盘
  */
-#include "model.h"
+#ifndef ZENITH_LOADER_H
+#define ZENITH_LOADER_H
 
-namespace zenith
+class Loader
 {
-    void Model::draw()
-    {
-        for(const auto& mesh : meshes)             {
-            mesh.draw();       }
-    }
+public:
+    virtual bool is_load_success() const = 0;
+    virtual void reload() = 0;
+};
 
-    void Model::load_model(zenith_char path, zenith_enum mt)
-    {
-        if(mt == ZENITH_MODEL_OBJ)          {
-            parse_obj(path); return;        }
-    }
-
-    void Model::parse_obj(zenith_char path)
-    {
-        ZENITH_DEBUG(LOAD_MODEL_DEBUG, path);
-        // TODO parse model
-        success_flag += CAUSE_MODEL;
-    }
-
-    /**
-     * 重新加载整个模型，用于动态加载或是错误加载修正。
-     */
-    void Model::reload()
-    {
-        // TODO now do nothing...
-    }
-
-}
+#endif //ZENITH_LOADER_H

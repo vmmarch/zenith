@@ -31,10 +31,11 @@
 #define CAUSE_UNKNOWN 4
 
 #include "mesh.h"
+#include "virtual/loader.h"
 
 namespace zenith
 {
-    class Model
+    class Model : Loader
     {
     public:
 
@@ -48,25 +49,30 @@ namespace zenith
             : gamma_correction(gamma)
         {
             load_model(path, mt);
-            this->program = program;
+
+            if(program != nullptr)
+            {
+                this->program = program;
+            }
+            else
+            {
+                success_flag += CAUSE_SHADER;
+            }
         }
 
         ShaderProgram *get_program() { return program; }
 
         void draw();
 
-        int get_load_success() const;
-
-        /**
-         * 如果模型有些部分加载不成功，那么通过 flag 来判断。为了方便后续在运行中可以重新加载。
-         * @param flag 失败原因
-         */
-        void set_load_success(int flag);
+        bool is_load_success() const override
+        {
+            return success_flag == SUCCESSFUL;
+        }
 
         /**
          * 重新加载整个模型
          */
-        void reload();
+        void reload() override;
 
     private:
         void load_model(zenith_char path, zenith_enum mt);
@@ -83,6 +89,6 @@ namespace zenith
         std::vector<Mesh> meshes;
 
         bool gamma_correction;
-        int successful_flag = 0;
+        int success_flag = 0;
     };
 }

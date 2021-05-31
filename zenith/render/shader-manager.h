@@ -29,8 +29,6 @@
 #include <zenith/type.h>
 #include <zenith/glob.h>
 
-#include "tool/system.h"
-
 namespace zenith
 {
     class ShaderManager
@@ -41,11 +39,10 @@ namespace zenith
         ShaderProgram* get_program(const std::string& name)
         {
             auto shader = shaders[(name + "-vfs")];
-            if(shader != nullptr)
-                return shader;
+            if(shader == nullptr)
+                ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
 
-            ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
-            exit(FAILED);
+            return shader;
         }
 
         void load_shaders(std::string folder);
