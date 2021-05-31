@@ -57,6 +57,8 @@ public class ObjReader extends ModelReader {
         // 当前模型总共有多少面
         int faceCount = 0;
 
+        List<Group> groups = new LinkedList<>();
+
         String line;
         while ((line = reader.readLine()) != null) {
             if (line.startsWith("v")) {
@@ -64,12 +66,14 @@ public class ObjReader extends ModelReader {
                 if (line.startsWith("vt")) {
                     String substring = line.substring(2).trim();
                     texcoords.add(Vector2f.toVec2f(substring.split(" ")));
+                    continue;
                 }
 
                 // vertices normals
                 if (line.startsWith("vn")) {
                     String substring = line.substring(2).trim();
                     normals.add(Vector3f.toVec3f(substring.split(" ")));
+                    continue;
                 }
 
                 if (line.startsWith("vp")) {
@@ -100,6 +104,18 @@ public class ObjReader extends ModelReader {
                     faces.add(Vector3i.toVec3i(property));
                 }
             }
+
+            if("g".equals(line)) {
+                groups.add(new Group(smooth, vertices, texcoords, normals, faces, faceCount));
+
+                smooth = false;
+                vertices = new LinkedList<>();
+                texcoords = new LinkedList<>();
+                normals = new LinkedList<>();
+                faces = new LinkedList<>();
+                faceCount = 0;
+            }
+
         }
 
         close();

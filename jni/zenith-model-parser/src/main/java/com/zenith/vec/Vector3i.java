@@ -37,7 +37,7 @@ public class Vector3i {
 
     public static Vector3i toVec3i(String[] array) {
         return new Vector3i(Integer.parseInt(array[0]),
-                Integer.parseInt(array[1]),
+                "".equals(array[1]) ? 0 : Integer.parseInt(array[1]),
                 Integer.parseInt(array[2]));
     }
 
