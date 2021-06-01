@@ -44,7 +44,7 @@ namespace zenith
 
     zenith_scope<AbsRenderer> AbsRenderer::Create()
     {
-        return __create_renderer();
+        return create_renderer();
     }
 
     // 设置清屏颜色

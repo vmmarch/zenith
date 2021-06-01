@@ -5,6 +5,6 @@ namespace zenith
 {
 	static zenith_scope<Texture2D> Create()
 	{
-		return __create_texture2D();
+		return create_texture2D();
 	}
 }

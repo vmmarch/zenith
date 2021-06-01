@@ -62,8 +62,10 @@ namespace zenith
         switch (type)
         {
             case event::type::EVENT_WINDOW_CLOSE:
+            {
                 close();
                 return;
+            }
 
             default: sandbox->event(event);
         }
@@ -76,7 +78,7 @@ namespace zenith
 
     void Starter::domain()
     {
-        sandbox->set_clear_color(RGBA::BLACK);
+        Renderer::clear_color(RGBA::BLACK);
 
         // ------------------------------------------
         // game loop.

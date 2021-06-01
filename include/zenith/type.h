@@ -84,15 +84,15 @@ namespace zenith
         {}
     };
 
-    static v_vec2 __create_vec2(zenith_uint16 x, zenith_uint16 y)
+    static v_vec2 create_vec2(zenith_uint16 x, zenith_uint16 y)
     {
         return v_vec2(x, y);
     }
 
-    static const v_vec2 empty_vec2 = __create_vec2(0, 0);
+    static const v_vec2 empty_vec2 = create_vec2(0, 0);
 
     template<typename T, typename ... Args>
-    constexpr zenith_scope<T> __create_scope(Args &&... args)
+    constexpr zenith_scope<T> create_scope(Args &&... args)
     {
         return std::make_unique<T>(std::forward<Args>(args)...);
     }
@@ -101,7 +101,7 @@ namespace zenith
     using Ref = std::shared_ptr<T>;
 
     template<typename T, typename... Args>
-    constexpr Ref<T> __create_ref(Args &&... args)
+    constexpr Ref<T> create_ref(Args &&... args)
     {
         return std::make_shared<T>(std::forward<Args>(args)...);
     }

@@ -53,8 +53,6 @@ namespace zenith
         void event(Event&) override;
         void close() override {};
 
-        static void set_clear_color(glm::vec4& color) { Renderer::clear_color(color); }
-
     private:
         LayerStack layer_stack;
         ImGuiLayer* imlayer {};

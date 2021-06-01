@@ -30,7 +30,7 @@ namespace zenith
 
     GraphicsContext* GraphicsContext::Create(zenith_any window)
     {
-        GraphicsContext::context = __create_graphics_context(window);
+        GraphicsContext::context = create_graphics_context(window);
         return GraphicsContext::context;
     }
 }

@@ -26,7 +26,6 @@
 #include <zenith/type.h>
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
-#include "buf/vertex-array.h"
 #include "model.h"
 #include "render/camera.h"
 

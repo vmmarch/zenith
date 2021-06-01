@@ -28,6 +28,6 @@ namespace zenith
 {
     ShaderProgram* ShaderProgram::Create(zenith_char path, zenith_char debugname)
     {
-        return __create_shader_program(path, debugname);
+        return create_shader_program(path, debugname);
     }
 }

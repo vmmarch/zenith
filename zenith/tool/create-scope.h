@@ -28,17 +28,14 @@
 #include "platform/windows/window.h"
 #include "platform/opengl/opengl-renderer.h"
 #include "platform/opengl/opengl-graphics-context.h"
-#include "platform/opengl/opengl-vertex-buf.h"
-#include "platform/opengl/opengl-index-buf.h"
-#include "platform/opengl/opengl-vertex-array.h"
 
 /**
  * @return 窗口实例
  */
-static zenith_scope<zenith::Window> __create_window(const zenith::v_winprops &props)
+static zenith_scope<zenith::Window> create_window(const zenith::v_winprops &props)
 {
 #if (defined __ZENITH_PLATFORM_WINDOWS__) || (defined __ZENITH_PLATFORM_MACOS__)
-    return zenith::__create_scope<zenith::win::WinWindow>(props);
+    return zenith::create_scope<zenith::win::WinWindow>(props);
 #else
     ZENITH_ERROR("NOT SUPPORT CURRENT PLATFORM"); return nullptr;
 #endif
@@ -47,7 +44,7 @@ static zenith_scope<zenith::Window> __create_window(const zenith::v_winprops &pr
 /**
  * @return 图形上下文
  */
-static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
+static zenith::GraphicsContext* create_graphics_context(zenith_any window)
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
@@ -65,14 +62,14 @@ static zenith::GraphicsContext* __create_graphics_context(zenith_any window)
 /**
  * @return 渲染器
  */
-static zenith_scope<zenith::AbsRenderer> __create_renderer()
+static zenith_scope<zenith::AbsRenderer> create_renderer()
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
         case zenith::render::api::GL:
-            return zenith::__create_scope<zenith::OpenGLRenderer>();
+            return zenith::create_scope<zenith::OpenGLRenderer>();
         case zenith::render::api::DX:
             break;
     }
@@ -83,7 +80,7 @@ static zenith_scope<zenith::AbsRenderer> __create_renderer()
 /**
  * @return 着色器实例
  */
-static zenith::ShaderProgram* __create_shader_program(zenith_char path, zenith_char debugname)
+static zenith::ShaderProgram* create_shader_program(zenith_char path, zenith_char debugname)
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
@@ -101,72 +98,14 @@ static zenith::ShaderProgram* __create_shader_program(zenith_char path, zenith_c
 /**
  * @return 纹理
  */
-static zenith_scope<zenith::Texture2D> __create_texture2D()
+static zenith_scope<zenith::Texture2D> create_texture2D()
 {
     switch (zenith::AbsRenderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
         case zenith::render::api::GL:
-            return zenith::__create_scope<zenith::OpenGLTexture2D>();
-        case zenith::render::api::DX:
-            break;
-    }
-
-    return nullptr;
-}
-
-
-/**
- * @return vertex buffer
- */
-static zenith::VertexBuffer* __create_vertex_buf(float *buf, zenith_uint32 size)
-{
-    switch (zenith::AbsRenderer::GetRenderAPI())
-    {
-        case zenith::render::api::NONE:
-            break;
-        case zenith::render::api::GL:
-            if(buf != NULL)
-                return new zenith::OpenGLVertexBuffer(buf, size);
-            else
-                return new zenith::OpenGLVertexBuffer(size);
-        case zenith::render::api::DX:
-            break;
-    }
-
-    return nullptr;
-}
-
-/**
- * @return index buffer
- */
-static zenith::IndexBuffer* __create_index_buf(zenith_uint32 *buf, zenith_uint32 size)
-{
-    switch (zenith::AbsRenderer::GetRenderAPI())
-    {
-        case zenith::render::api::NONE:
-            break;
-        case zenith::render::api::GL:
-                return new zenith::OpenGLIndexBuffer(buf, size);
-        case zenith::render::api::DX:
-            break;
-    }
-
-    return nullptr;
-}
-
-/**
- * @return vertex array
- */
-static zenith::VertexArray* __create_vertex_array()
-{
-    switch (zenith::AbsRenderer::GetRenderAPI())
-    {
-        case zenith::render::api::NONE:
-            break;
-        case zenith::render::api::GL:
-            return new zenith::OpenGLVertexArray();
+            return zenith::create_scope<zenith::OpenGLTexture2D>();
         case zenith::render::api::DX:
             break;
     }

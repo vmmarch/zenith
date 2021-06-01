@@ -38,7 +38,7 @@ namespace zenith
     {
 #ifdef __ZENITH_PLATFORM_WINDOWS__
         long h_file             = 0; // 文件句柄
-        struct _finddata_t      fileinfo;
+        struct _finddata_t      fileinfo {};
         std::string p;
 
         if((h_file = _findfirst(p.assign(folder).append("/*-vfs").c_str(),&fileinfo)) !=  -1)
