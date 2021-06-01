@@ -41,7 +41,10 @@ namespace zenith
     public:
         void push(Model& model);
         void draw_queue();
+
+        void reload_all_bad_model();
     private:
         std::map<sp, vecq> queue;
+        std::map<std::string, Model&> bad_models;
     };
 }

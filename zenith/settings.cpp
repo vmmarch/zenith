@@ -35,7 +35,7 @@ namespace zenith
 
     settings_t *settings = new settings_t();
 
-    void SetValue(int k, bool v)
+    void set_value(int k, bool v)
     {
         switch (k)
         {
@@ -48,7 +48,7 @@ namespace zenith
         settings->CAN_BE_RELOAD = true;
     }
 
-    bool GetValue(int k)
+    bool get_value(int k)
     {
         switch (k)
         {

@@ -43,12 +43,12 @@ namespace zenith
      * @param k KEY_XXX
      * @param v V_XXX
      */
-    EXTAPI void SetValue(int k, bool v);
+    EXTAPI void set_value(int k, bool v);
 
     /**
      * 判断当前配置是否开启
      */
-    EXTAPI bool GetValue(int k);
+    EXTAPI bool get_value(int k);
 
     /**
      * 重新加载配置

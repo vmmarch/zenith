@@ -27,14 +27,19 @@ namespace zenith
 {
     void Model::draw()
     {
-        for(const auto& mesh : meshes)             {
-            mesh.draw();       }
+        for(const auto& mesh : meshes)
+        {
+            mesh.draw();
+        }
     }
 
     void Model::load_model(zenith_char path, zenith_enum mt)
     {
-        if(mt == ZENITH_MODEL_OBJ)          {
-            parse_obj(path); return;        }
+        if(mt == ZENITH_MODEL_OBJ)
+        {
+            parse_obj(path);
+            return;
+        }
     }
 
     void Model::parse_obj(zenith_char path)

@@ -29,7 +29,7 @@ namespace zenith
     class OpenGLGraphicsContext : public GraphicsContext
     {
     public:
-        OpenGLGraphicsContext(GLFWwindow* window);
+        explicit OpenGLGraphicsContext(GLFWwindow* window);
         void initialize();
         void swap_buffers() override;
     private:

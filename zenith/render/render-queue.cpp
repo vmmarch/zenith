@@ -44,6 +44,11 @@ namespace zenith
         }
     }
 
+    void RenderQueue::reload_all_bad_model()
+    {
+
+    }
+
     void RenderQueue::draw_queue()
     {
         std::map<sp, vecq>::reverse_iterator    iter;

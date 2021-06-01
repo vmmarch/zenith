@@ -63,14 +63,16 @@ namespace zenith
         // 禁止鼠标移动相机
         if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
         {
-            SetValue(KEY_CURSOR_MOVE_CAMER, !GetValue(KEY_CURSOR_MOVE_CAMER));
+            set_value(KEY_CURSOR_MOVE_CAMER, !get_value(KEY_CURSOR_MOVE_CAMER));
         }
 
         // 隐藏鼠标
         else if(Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
         {
-            if (!cursor_hide) glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-            else glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+            if (!cursor_hide)
+                glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            else
+                glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
             cursor_hide = !cursor_hide;
         }
 
@@ -99,7 +101,7 @@ namespace zenith
     {
         if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
         {
-            if(!GetValue(KEY_CURSOR_MOVE_CAMER)) return;
+            if(!get_value(KEY_CURSOR_MOVE_CAMER)) return;
             auto &event = dynamic_cast<MouseMovedEvent&>(e);
 
             float xpos = event.GetX();
