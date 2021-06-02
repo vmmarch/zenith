@@ -13,16 +13,16 @@ public class Group {
     private boolean smooth;
 
     // 顶点数据
-    private List<Vector3f> vertices = new LinkedList<>();
+    private List<Vector3f> vertices;
 
     // 纹理坐标
-    private List<Vector2f> texcoords = new LinkedList<>();
+    private List<Vector2f> texcoords;
 
     // 法向量
-    private List<Vector3f> normals = new LinkedList<>();
+    private List<Vector3f> normals;
 
     // 面
-    private List<Vector3i> faces = new LinkedList<>();
+    private List<Vector3i> faces;
 
     // 当前模型总共有多少面
     private int faceCount = 0;
@@ -49,8 +49,19 @@ public class Group {
         this.smooth = smooth;
     }
 
-    public List<Vector3f> getVertices() {
-        return vertices;
+    public float[] getVertices() {
+        float[] vertexArray = new float[vertices.size() * 3];
+
+        int count = 0;
+        for (Vector3f vertex : vertices) {
+            vertexArray[count]          = vertex.x;
+            vertexArray[(count += 1)]      = vertex.y;
+            vertexArray[(count += 1)]      = vertex.z;
+
+            count++;
+        }
+
+        return vertexArray;
     }
 
     public void setVertices(List<Vector3f> vertices) {

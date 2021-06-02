@@ -22,46 +22,13 @@ package com.zenith;
  * Creates on 2020/6/1.
  */
 
-import java.io.*;
-
 /**
- * 抽象模型加载器
- *
  * @author luots
  */
-public abstract class ModelReader {
+public class Files {
 
-    protected File M_FILE;
-
-    protected BufferedReader reader;
-
-    /**
-     * 模型加载器构造
-     *
-     * @param path 模型地址
-     */
-    public ModelReader(String path) {
-        this.M_FILE = new File(path);
-
-        try {
-            this.reader = new BufferedReader(new FileReader(M_FILE));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 解析模型
-     */
-    public abstract void parseModel() throws IOException;
-
-    /**
-     * 关闭IO流
-     *
-     * @throws IOException IO异常
-     */
-    public void close() throws IOException {
-        reader.close();
+    public static String getExt(String path) {
+        return path.substring(path.lastIndexOf(".") + 1);
     }
 
 }
