@@ -13,16 +13,16 @@ public class Group {
     private boolean smooth;
 
     // 顶点数据
-    private List<Vector3f> vertices = new LinkedList<>();
+    private List<Vector3f> vertices;
 
     // 纹理坐标
-    private List<Vector2f> texcoords = new LinkedList<>();
+    private List<Vector2f> texcoords;
 
     // 法向量
-    private List<Vector3f> normals = new LinkedList<>();
+    private List<Vector3f> normals;
 
     // 面
-    private List<Vector3i> faces = new LinkedList<>();
+    private List<Vector3i> faces;
 
     // 当前模型总共有多少面
     private int faceCount = 0;
