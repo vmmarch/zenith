@@ -210,6 +210,16 @@ namespace fkstd
                 value.append(cvalue);
         }
 
+        bool eq(std::string value)
+        {
+            return this->value == value;
+        }
+
+        bool eq(FK_STRING value)
+        {
+            return this->value == value.value;
+        }
+
         /**
          * format current string.
          *

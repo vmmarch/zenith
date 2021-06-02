@@ -87,6 +87,7 @@
 #define VERTEX_BUFFER_HAS_NOT_LAYOUT "顶点数组没有布局"
 #define CANNOT_READ_SHADER "不能读取着色器程序，名称：%s"
 #define READ_MODEL_ERROR "读取模型文件失败: %s"
+#define CANNOT_OPEN_FILE "不能打开文件：%s"
 
 ///////////////////////////////////////////////////////////
 #else
