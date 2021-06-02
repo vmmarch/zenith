@@ -16,38 +16,41 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/5/9. <=== */
+/*! ===> Creates on 2021/6/2. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
+#ifndef ZENITH_MODEL_LOADER_H
+#define ZENITH_MODEL_LOADER_H
 
-#include <map>
-#include <zenith-std.h>
-#include "shader.h"
-#include <zenith/type.h>
 #include <zenith/glob.h>
+#include <iostream>
+#include <fstream>
+
+#include "render/model.h"
 
 namespace zenith
 {
-    class ShaderManager
+
+    /**
+     * 加载Obj模型
+     * @param path 模型路径
+     */
+    static void load_obj(zenith_char path)
     {
-    public:
-        ShaderManager() = default;
+        std::ifstream file(path);
+        if(!file.is_open())
+            ZENITH_ERROR(CANNOT_OPEN_FILE, path);
 
-        ShaderProgram* get_program(const std::string& name)
+        std::string line;
+        while(std::getline(file, line))
         {
-            auto shader = shaders[(name + "-vfs")];
-            if(shader == nullptr)
-                ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
 
-            return shader;
         }
 
-        void load_shaders(const std::string& folder);
+    }
 
-    private:
-        std::map<std::string, ShaderProgram*> shaders;
-    };
 }
+
+#endif // ==> ZENITH_OBJ_H <===

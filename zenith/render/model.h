@@ -45,10 +45,10 @@ namespace zenith
          * @param path   模型路径
          * @param mt     模型类型
          */
-        Model(zenith_char path, ShaderProgram* program, zenith_enum mt = ZENITH_MODEL_OBJ, bool gamma = false)
+        Model(zenith_char path, ShaderProgram* program, bool gamma = false)
             : gamma_correction(gamma)
         {
-            load_model(path, mt);
+            load_model(path);
 
             if(program != nullptr)
             {
@@ -75,13 +75,12 @@ namespace zenith
         void reload() override;
 
     private:
-        void load_model(zenith_char path, zenith_enum mt);
 
         /**
          * 解析Obj模型
          * @param path 模型路径
          */
-        void parse_obj(zenith_char path);
+        void load_model(zenith_char path);
 
     private:
         ShaderProgram *program;

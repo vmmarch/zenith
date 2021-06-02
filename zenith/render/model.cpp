@@ -22,6 +22,7 @@
  * @author 2B键盘
  */
 #include "model.h"
+#include "model/loader.h"
 
 namespace zenith
 {
@@ -33,19 +34,19 @@ namespace zenith
         }
     }
 
-    void Model::load_model(zenith_char path, zenith_enum mt)
-    {
-        if(mt == ZENITH_MODEL_OBJ)
-        {
-            parse_obj(path);
-            return;
-        }
-    }
-
-    void Model::parse_obj(zenith_char path)
+    void Model::load_model(zenith_char path)
     {
         ZENITH_DEBUG(LOAD_MODEL_DEBUG, path);
-        // TODO parse model
+
+        STRING _path(path);
+        STRING ext = _path.substring(_path.find_last_of(".") + 1);
+
+        // 解析Obj
+        if(ext.eq("obj"))
+        {
+            load_obj(path);
+        }
+
         success_flag += CAUSE_MODEL;
     }
 
