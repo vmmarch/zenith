@@ -46,7 +46,7 @@ static zenith_scope<zenith::Window> create_window(const zenith::v_winprops &prop
  */
 static zenith::GraphicsContext* create_graphics_context(zenith_any window)
 {
-    switch (zenith::AbsRenderer::GetRenderAPI())
+    switch (zenith::AbstractRenderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -62,9 +62,9 @@ static zenith::GraphicsContext* create_graphics_context(zenith_any window)
 /**
  * @return 渲染器
  */
-static zenith_scope<zenith::AbsRenderer> create_renderer()
+static zenith_scope<zenith::AbstractRenderer> create_renderer()
 {
-    switch (zenith::AbsRenderer::GetRenderAPI())
+    switch (zenith::AbstractRenderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -82,7 +82,7 @@ static zenith_scope<zenith::AbsRenderer> create_renderer()
  */
 static zenith::ShaderProgram* create_shader_program(zenith_char path, zenith_char debugname)
 {
-    switch (zenith::AbsRenderer::GetRenderAPI())
+    switch (zenith::AbstractRenderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;
@@ -100,7 +100,7 @@ static zenith::ShaderProgram* create_shader_program(zenith_char path, zenith_cha
  */
 static zenith_scope<zenith::Texture2D> create_texture2D()
 {
-    switch (zenith::AbsRenderer::GetRenderAPI())
+    switch (zenith::AbstractRenderer::GetRenderAPI())
     {
         case zenith::render::api::NONE:
             break;

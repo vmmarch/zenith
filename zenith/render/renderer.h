@@ -32,10 +32,10 @@
 namespace zenith
 {
 
-    class AbsRenderer
+    class AbstractRenderer
     {
     public:
-        virtual ~AbsRenderer() = default;
+        virtual ~AbstractRenderer() = default;
 
         // 设置清屏颜色
         virtual void clear_color(const glm::vec4& color) = 0;
@@ -58,7 +58,7 @@ namespace zenith
         virtual void submit(Model&) = 0;
 
         // 创建渲染器
-        static zenith_scope<AbsRenderer> Create();
+        static zenith_scope<AbstractRenderer> Create();
 
         // 获取当前API
         static render::api GetRenderAPI();
@@ -88,7 +88,7 @@ namespace zenith
         static void submit(Model&);
 
     private:
-        static zenith_scope<AbsRenderer> s_renderer;
+        static zenith_scope<AbstractRenderer> s_renderer;
     };
 
 }

@@ -27,22 +27,22 @@
 namespace zenith
 {
 
-    zenith_scope<AbsRenderer> Renderer::s_renderer = AbsRenderer::Create();
+    zenith_scope<AbstractRenderer> Renderer::s_renderer = AbstractRenderer::Create();
 
 #ifdef __GLAPI
-    render::api AbsRenderer::render_api = render::api::GL;
+    render::api AbstractRenderer::render_api = render::api::GL;
 #elif __DXAPI
     #error ##NOT_SUPPORT_DIRECTX_API
 #else
     #error ##PLEASE_CHOOSE_RENDER_API
 #endif
 
-    render::api AbsRenderer::GetRenderAPI()
+    render::api AbstractRenderer::GetRenderAPI()
     {
         return render_api;
     }
 
-    zenith_scope<AbsRenderer> AbsRenderer::Create()
+    zenith_scope<AbstractRenderer> AbstractRenderer::Create()
     {
         return create_renderer();
     }

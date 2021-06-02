@@ -30,7 +30,7 @@ import java.io.IOException;
 public class ModelReaderTest {
 
     public static void main(String[] args) throws IOException {
-        ObjReader reader = new ObjReader("/Users/wudi/Downloads/IronMan/IronMan.obj");
+        ObjReader reader = new ObjReader("D:\\model\\Girl\\Girl_1.obj");
         reader.parseModel();
     }
 

@@ -106,7 +106,7 @@ public class ObjReader extends ModelReader {
             }
 
             if("g".equals(line)) {
-                groups.add(new Group(smooth, vertices, texcoords, normals, faces, faceCount));
+                addGroup(smooth, vertices, texcoords, normals, faces, faceCount, groups);
 
                 smooth = false;
                 vertices = new LinkedList<>();
@@ -118,7 +118,21 @@ public class ObjReader extends ModelReader {
 
         }
 
+        // 最后一次添加组
+        addGroup(smooth, vertices, texcoords, normals, faces, faceCount, groups);
+
         close();
+    }
+
+    public static void addGroup(boolean smooth,
+                                 List<Vector3f> vertices,
+                                 List<Vector2f> texcoords,
+                                 List<Vector3f> normals,
+                                 List<Vector3i> faces,
+                                 int faceCount,
+                                 List<Group> groups)
+    {
+        groups.add(new Group(smooth, vertices, texcoords, normals, faces, faceCount));
     }
 
 }

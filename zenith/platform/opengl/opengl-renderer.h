@@ -28,10 +28,10 @@
 
 namespace zenith
 {
-    class OpenGLRenderer : public AbsRenderer
+    class OpenGLRenderer : public AbstractRenderer
     {
     public:
-        virtual ~OpenGLRenderer() {}
+        ~OpenGLRenderer() override = default;
         void clear_color(const glm::vec4&) override;
         void clear() override;
         void begin(Camera&) override;
