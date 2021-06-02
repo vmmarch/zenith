@@ -35,6 +35,8 @@ import java.util.List;
  */
 public class ObjReader extends ModelReader {
 
+    private List<Group> groups = new LinkedList<>();
+
     public ObjReader(String path) {
         super(path);
     }
@@ -56,8 +58,6 @@ public class ObjReader extends ModelReader {
 
         // 当前模型总共有多少面
         int faceCount = 0;
-
-        List<Group> groups = new LinkedList<>();
 
         String line;
         while ((line = reader.readLine()) != null) {
@@ -124,13 +124,18 @@ public class ObjReader extends ModelReader {
         close();
     }
 
+    @Override
+    public List<Group> getGroups() {
+        return groups;
+    }
+
     public static void addGroup(boolean smooth,
-                                 List<Vector3f> vertices,
-                                 List<Vector2f> texcoords,
-                                 List<Vector3f> normals,
-                                 List<Vector3i> faces,
-                                 int faceCount,
-                                 List<Group> groups)
+                                List<Vector3f> vertices,
+                                List<Vector2f> texcoords,
+                                List<Vector3f> normals,
+                                List<Vector3i> faces,
+                                int faceCount,
+                                List<Group> groups)
     {
         groups.add(new Group(smooth, vertices, texcoords, normals, faces, faceCount));
     }

@@ -49,8 +49,19 @@ public class Group {
         this.smooth = smooth;
     }
 
-    public List<Vector3f> getVertices() {
-        return vertices;
+    public float[] getVertices() {
+        float[] vertexArray = new float[vertices.size() * 3];
+
+        int count = 0;
+        for (Vector3f vertex : vertices) {
+            vertexArray[count]          = vertex.x;
+            vertexArray[(count += 1)]      = vertex.y;
+            vertexArray[(count += 1)]      = vertex.z;
+
+            count++;
+        }
+
+        return vertexArray;
     }
 
     public void setVertices(List<Vector3f> vertices) {

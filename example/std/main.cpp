@@ -6,20 +6,11 @@
 
 using namespace std;
 
-void reference(int&);
-
 int main()
 {
-    int r = 20;
-    reference(r);
+    int *p = ((int*)517287632);
 
-    cout << "type: " << r << endl;
+    cout << p[0] << endl;
 
     return 0;
-}
-
-void reference(int& type)
-{
-    cout << "type: " << type << endl;
-    type = 10;
 }
