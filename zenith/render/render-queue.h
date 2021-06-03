@@ -40,7 +40,7 @@ namespace zenith
     {
     public:
         void push(Model& model, ShaderProgram* shader);
-        void draw_queue();
+        void draw_queue(glm::mat4 view_matrix, glm::mat4 projection);
 
         void reload_all_bad_model();
     private:

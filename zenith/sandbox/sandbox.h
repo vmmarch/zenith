@@ -47,6 +47,7 @@ namespace zenith
         explicit SandBox(Window* window);
 
         void initialize();
+        void initialize_material();
 
         void render() override;
         void update(DeltaTime deltaTime) override;
@@ -65,11 +66,8 @@ namespace zenith
         ShaderManager* shader_manager;
         std::vector<Model> models;
 
-        //Textures
+        // Textures
         std::vector<Texture*> textures;
-
-        //Materials
-        std::vector<Material*> materials;
     };
 
 }

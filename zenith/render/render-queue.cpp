@@ -45,14 +45,19 @@ namespace zenith
 
     }
 
-    void RenderQueue::draw_queue()
+    void RenderQueue::draw_queue(glm::mat4 view_matrix, glm::mat4 projection)
     {
         std::map<sp, vecq>::reverse_iterator    iter;
         for(iter = queue.rbegin(); iter != queue.rend(); iter++)
         {
-            iter->first->bind(); // 绑定Shader
+            ShaderProgram* shader = iter->first;
+            shader->bind(); // 绑定Shader
+
+            shader->set_mat4("ViewMatrix", view_matrix);
+            shader->set_mat4("ProjectionMatrix", projection);
+
             for(auto model : iter->second)
-                model.draw();
+                model.draw(shader);
         }
     }
 

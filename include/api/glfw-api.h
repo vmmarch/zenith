@@ -86,8 +86,8 @@
 /**
  * 绑定ElementArrayBuffer
  */
-#define GLAPI_CreateAndBindIndexArrayBuffer(buf) \
-{ glGenBuffers(1, &buf); glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); }
+#define GLAPI_CreateIndexBuffer(buf, size, data) \
+{ glGenBuffers(1, &buf); glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buf); glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW); }
 
 /**
  * 绑定ElementArrayBuffer
@@ -106,6 +106,12 @@
  */
 #define GLAPI_CreateVertexArray(id) \
 { glGenVertexArrays(1, &id); }
+
+/**
+ * 创建并绑定VertexArray
+ */
+#define GLAPI_CreateAndBindVertexArray(id) \
+{ glGenVertexArrays(1, &id); glBindVertexArray(id); }
 
 #define GLAPI_CreateBuffer2(id1, id2) \
 { glGenBuffers(1, &id1); glGenBuffers(1, &id2); }
