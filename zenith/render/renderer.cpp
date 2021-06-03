@@ -64,9 +64,9 @@ namespace zenith
         s_renderer->clear();
     }
 
-    void Renderer::draw_models(PointLight* light)
+    void Renderer::draw_models()
     {
-        s_renderer->draw_models(light);
+        s_renderer->draw_models();
     }
 
     void Renderer::draw_model(Model &model)

@@ -35,7 +35,6 @@
 #include "render/render-command.h"
 #include "model/model.h"
 #include "shader/shader-manager.h"
-#include "render/light.h"
 
 #include <vector>
 
@@ -69,9 +68,6 @@ namespace zenith
 
         // Textures
         std::vector<Texture*> textures;
-
-        PointLight* light;
-
     };
 
 }

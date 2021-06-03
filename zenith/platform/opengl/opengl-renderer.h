@@ -39,7 +39,7 @@ namespace zenith
         void enable_depth_test() override;
         void submit(Model& model, ShaderProgram* shader) override { render_queue.push(model, shader); }
         void draw_model(Model&) override;
-        void draw_models(PointLight* light) override;
+        void draw_models() override;
 
     private:
         glm::mat4 projection;

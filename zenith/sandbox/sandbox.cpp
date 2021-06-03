@@ -39,7 +39,6 @@ namespace zenith
             : Layer("sandbox layer"), camera(Camera()), window(window)
     {
         main_layer = new ExampleLayer();
-        light = new PointLight(glm::vec3(1.0f));
 
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
@@ -53,7 +52,7 @@ namespace zenith
     {
         ShaderProgram *program = shader_manager->get_program("core");
         Renderer::submit(*new Model(
-                glm::vec3(4.0f, 0.0f, 1.0f),
+                glm::vec3(0.0f, 0.0f, 0.0f),
                 new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
                 new Texture("../resources/container.png"),
                 new Texture("../resources/container_specular.png"),
@@ -104,7 +103,7 @@ namespace zenith
 #endif
 
         // 渲染模型
-        Renderer::draw_models(light);
+        Renderer::draw_models();
     }
 
     void SandBox::event(Event &e)

@@ -55,12 +55,11 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::draw_models(PointLight* light)
+    void OpenGLRenderer::draw_models()
     {
         render_queue.draw_queue(view_matrix,
                                 projection,
-                                camera_position,
-                                light);
+                                camera_position);
     }
 
     void OpenGLRenderer::draw_model(Model &model)
