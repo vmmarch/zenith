@@ -88,6 +88,7 @@
 #define CANNOT_READ_SHADER "不能读取着色器程序，名称：%s"
 #define READ_MODEL_ERROR "读取模型文件失败: %s"
 #define CANNOT_OPEN_FILE "不能打开文件：%s"
+#define TEXTURE_LOAD_FAILED "纹理加载失败: %s"
 
 ///////////////////////////////////////////////////////////
 #else

@@ -56,7 +56,7 @@ namespace zenith
 
     void OpenGLRenderer::draw_models()
     {
-        render_queue.draw_queue();
+        render_queue.draw_queue(view_matrix, projection);
     }
 
     void OpenGLRenderer::draw_model(Model &model)

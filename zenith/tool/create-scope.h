@@ -23,7 +23,6 @@
  */
 #pragma once
 
-#include "platform/opengl/opengl-texture2D.h"
 #include "platform/opengl/opengl-shader.h"
 #include "platform/windows/window.h"
 #include "platform/opengl/opengl-renderer.h"
@@ -88,24 +87,6 @@ static zenith::ShaderProgram* create_shader_program(zenith_char path, zenith_cha
             break;
         case zenith::render::api::GL:
             return new zenith::OpenGLShaderProgram(path, debugname);
-        case zenith::render::api::DX:
-            break;
-    }
-
-    return nullptr;
-}
-
-/**
- * @return 纹理
- */
-static zenith_scope<zenith::Texture2D> create_texture2D()
-{
-    switch (zenith::AbstractRenderer::GetRenderAPI())
-    {
-        case zenith::render::api::NONE:
-            break;
-        case zenith::render::api::GL:
-            return zenith::create_scope<zenith::OpenGLTexture2D>();
         case zenith::render::api::DX:
             break;
     }

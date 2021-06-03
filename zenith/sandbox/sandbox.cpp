@@ -51,7 +51,13 @@ namespace zenith
     void SandBox::initialize()
     {
         ShaderProgram *program = shader_manager->get_program("shader");
-        Renderer::submit(*new Model(), program);
+        Renderer::submit(*new Model(
+                glm::vec3(4.0f, 0.0f, 1.0f),
+                new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
+                new Texture("../resources/container.png"),
+                new Texture("../resources/container_specular.png"),
+                "D:/model/cube.obj"
+        ), program);
     }
 
     void SandBox::update(DeltaTime delta_time)
@@ -89,11 +95,11 @@ namespace zenith
         Renderer::clear();
 
 #ifndef __ZENITH_PLATFORM_MACOS__
-        imlayer->begin();
-        {
-            layer_stack.render();
-        }
-        imlayer->end();
+        // imlayer->begin();
+        // {
+        //     layer_stack.render();
+        // }
+        // imlayer->end();
 #endif
 
         // 渲染模型

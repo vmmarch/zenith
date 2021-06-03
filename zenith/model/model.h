@@ -45,6 +45,32 @@ namespace zenith
     class Model
     {
     public:
-        void draw();
+        Model(glm::vec3             position,
+              Material*             material,
+              Texture*              or_tex_diff,
+              Texture*              or_tex_spec,
+              std::vector<Mesh*>    meshs);
+
+        Model(glm::vec3             position,
+              Material*             material,
+              Texture*              or_tex_diff,
+              Texture*              or_tex_spec,
+              const char*           file);
+
+        void init(glm::vec3             position,
+                  Material*             material,
+                  Texture*              or_tex_diff,
+                  Texture*              or_tex_spec);
+
+        void rotate(glm::vec3 rotation);
+        void draw(ShaderProgram* shader);
+
+    private:
+        Material*               material;
+        Texture*                override_texture_diffuse;
+        Texture*                override_texture_specular;
+        std::vector<Mesh*>      meshs;
+        glm::vec3               position;
+
     };
 }

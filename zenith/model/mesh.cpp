@@ -30,9 +30,9 @@ namespace zenith
                GLuint*     indices,
                GLuint      isize,
                glm::vec3   position,
+               glm::vec3   origin,
                glm::vec3   rotation,
-               glm::vec3   scale,
-               glm::vec3   origin)
+               glm::vec3   scale)
     {
         this->position = position;
         this->rotation = rotation;
@@ -57,8 +57,8 @@ namespace zenith
         if(indices_size > 0)
             glDeleteBuffers(1, &EBO);
 
-        delete[] vertices;
-        delete[] indices;
+        // delete[] vertices;
+        // delete[] indices;
     }
 
     void Mesh::setup_mesh()
@@ -95,7 +95,7 @@ namespace zenith
         this->matrix = glm::scale(this->matrix, this->scale);
     }
 
-    void Mesh::update_uniform(ShaderProgram* shader)
+    void Mesh::set_matrix(ShaderProgram* shader)
     {
         shader->set_mat4("matrix", matrix);
     }
@@ -133,6 +133,29 @@ namespace zenith
     void Mesh::scale_up(glm::vec3 scale)
     {
         this->scale += scale;
+    }
+
+    void Mesh::draw(ShaderProgram* shader)
+    {
+        update_matrix();
+        set_matrix(shader);
+
+        glBindVertexArray(VAO);
+
+        if(indices_size > 0)
+        {
+            GLAPI_DrawTriangleArrays(0, vertices_size);
+        }
+        else
+        {
+            GLAPI_DrawIndex(GL_TRIANGLES, indices_size, GL_UNSIGNED_INT);
+        }
+
+        glBindVertexArray(0);
+        glUseProgram(0);
+        glActiveTexture(0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+
     }
 
 }
