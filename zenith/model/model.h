@@ -30,64 +30,21 @@
 #define CAUSE_MODEL   3       //  ------|
 #define CAUSE_UNKNOWN 4
 
+#include "loader.h"
+#include "material.h"
 #include "mesh.h"
+#include "texture.h"
 #include "virtual/loader.h"
+#include "vertex.h"
+
+#include <vector>
 
 namespace zenith
 {
-    class Model : Loader
+    class Model
     {
+
     public:
-
-        /**
-         * 创建模型对象
-         *
-         * @param path   模型路径
-         * @param mt     模型类型
-         */
-        Model(zenith_char path, ShaderProgram* program, bool gamma = false)
-            : gamma_correction(gamma)
-        {
-            load_model(path);
-
-            if(program != nullptr)
-            {
-                this->program = program;
-            }
-            else
-            {
-                success_flag += CAUSE_SHADER;
-            }
-        }
-
-        ShaderProgram *get_program() { return program; }
-
         void draw();
-
-        bool is_load_success() const override
-        {
-            return success_flag == SUCCESSFUL;
-        }
-
-        /**
-         * 重新加载整个模型
-         */
-        void reload() override;
-
-    private:
-
-        /**
-         * 解析Obj模型
-         * @param path 模型路径
-         */
-        void load_model(zenith_char path);
-
-    private:
-        ShaderProgram *program;
-        std::vector<texture_t> textures;
-        std::vector<Mesh> meshes;
-
-        bool gamma_correction;
-        int success_flag = 0;
     };
 }

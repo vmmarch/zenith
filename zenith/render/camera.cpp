@@ -26,11 +26,7 @@
 namespace zenith
 {
 
-#ifdef __DEBUG__
-    static float DEBUG_last_time = (float) glfwGetTime();
-#endif
-
-    Camera::Camera(glm::vec3 pos, glm::vec3 up, float yaw, float pitch)
+    Camera::Camera(const glm::vec3& pos, const glm::vec3& up, float yaw, float pitch)
         : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
     {
         this->pos = pos;
@@ -53,15 +49,6 @@ namespace zenith
             pos -= right * velocity;
         if(movement == RIGHT)
             pos += right * velocity;
-
-#ifdef __DEBUG__
-        float time = (float) glfwGetTime();
-        if((DEBUG_last_time - time) > 5.0f)
-        {
-            DEBUG_last_time = time;
-            ZENITH_DEBUG("Camera position [X:%f, Y:%f, Z:%f]", pos.x, pos.y, pos.z);
-        }
-#endif
     }
 
     void Camera::perspective(float x, float y, bool constraint_pitch)

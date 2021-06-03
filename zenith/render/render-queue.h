@@ -25,7 +25,7 @@
  */
 #pragma once
 
-#include "model.h"
+#include "model/model.h"
 #include "shader.h"
 
 #include <map>
@@ -39,7 +39,7 @@ namespace zenith
     class RenderQueue
     {
     public:
-        void push(Model& model);
+        void push(Model& model, ShaderProgram* shader);
         void draw_queue();
 
         void reload_all_bad_model();

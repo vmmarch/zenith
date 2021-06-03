@@ -28,8 +28,11 @@
 #include "event/mouse-event.h"
 #include "state.h"
 
+#include "model/loader.h"
+
 namespace zenith
 {
+
     static bool first = true;
 
     SandBox::SandBox(Window *window)
@@ -48,7 +51,7 @@ namespace zenith
     void SandBox::initialize()
     {
         ShaderProgram *program = shader_manager->get_program("shader");
-        Renderer::submit(*new Model("D:/model/cube.obj", program));
+        Renderer::submit(*new Model(), program);
     }
 
     void SandBox::update(DeltaTime delta_time)

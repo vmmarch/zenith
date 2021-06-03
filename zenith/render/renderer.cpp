@@ -74,9 +74,9 @@ namespace zenith
         s_renderer->draw_model(model);
     }
 
-    void Renderer::submit(Model &model)
+    void Renderer::submit(Model& model, ShaderProgram* shader)
     {
-        s_renderer->submit(model);
+        s_renderer->submit(model, shader);
     }
 
 }

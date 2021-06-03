@@ -44,8 +44,8 @@ namespace zenith
     class Camera
     {
     public:
-        explicit Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 5.0f),
-               glm::vec3 up = glm::vec3(0.0f, 0.1f, 0.0f),
+        explicit Camera(const glm::vec3& pos = glm::vec3(0.0f, 0.0f, 5.0f),
+               const glm::vec3& up = glm::vec3(0.0f, 0.1f, 0.0f),
                float yaw = YAW, float pitch = PITCH);
 
         /**
@@ -122,7 +122,7 @@ namespace zenith
         float yaw, pitch;
 
         // update
-        float screen_w, screen_h, delta_time;
+        float screen_w{}, screen_h{}, delta_time{};
 
         // 相机参数
         float move_speed;   // 相机移动速度
