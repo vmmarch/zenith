@@ -41,7 +41,7 @@ namespace zenith
 
         inline unsigned int get_id() const;
 
-        void bind(unsigned int texture_unit);
+        void bind(GLenum unit);
         void unbind();
 
     private:
