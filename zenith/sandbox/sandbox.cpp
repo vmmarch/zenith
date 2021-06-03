@@ -50,6 +50,9 @@ namespace zenith
 
     void SandBox::initialize()
     {
+
+        light = new PointLight(glm::vec3(0.0f));
+
         ShaderProgram *program = shader_manager->get_program("core");
         Renderer::submit(*new Model(
                 glm::vec3(0.0f, 0.0f, 0.0f),
@@ -91,15 +94,15 @@ namespace zenith
 
     void SandBox::render()
     {
-        Renderer::begin(camera);
+        Renderer::begin(camera, light);
         Renderer::clear();
 
 #ifndef __ZENITH_PLATFORM_MACOS__
-        // imlayer->begin();
-        // {
-        //     layer_stack.render();
-        // }
-        // imlayer->end();
+         imlayer->begin();
+         {
+             layer_stack.render();
+         }
+         imlayer->end();
 #endif
 
         // 渲染模型

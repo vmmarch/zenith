@@ -34,7 +34,7 @@ namespace zenith
         ~OpenGLRenderer() override = default;
         void clear_color(const glm::vec4&) override;
         void clear() override;
-        void begin(Camera&) override;
+        void begin(Camera&, Light*) override;
         void disable_depth_test() override;
         void enable_depth_test() override;
         void submit(Model& model, ShaderProgram* shader) override { render_queue.push(model, shader); }
@@ -47,5 +47,6 @@ namespace zenith
         glm::vec3 camera_position;
 
         RenderQueue render_queue;
+        Light* light;
     };
 }

@@ -53,9 +53,9 @@ namespace zenith
         s_renderer->clear_color(color);
     }
 
-    void Renderer::begin(Camera &camera)
+    void Renderer::begin(Camera &camera, Light* light)
     {
-        s_renderer->begin(camera);
+        s_renderer->begin(camera, light);
     }
 
     // 清屏

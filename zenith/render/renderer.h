@@ -28,6 +28,7 @@
 #include <api/glfw-api.h>
 #include "model/model.h"
 #include "render/camera.h"
+#include "light/light.h"
 
 namespace zenith
 {
@@ -40,7 +41,7 @@ namespace zenith
         // 设置清屏颜色
         virtual void clear_color(const glm::vec4& color) = 0;
 
-        virtual void begin(Camera&) = 0;
+        virtual void begin(Camera&, Light*) = 0;
 
         // 清屏
         virtual void clear() = 0;
@@ -76,7 +77,7 @@ namespace zenith
         // 设置清屏颜色
         static void clear_color(const glm::vec4& color);
 
-        static void begin(Camera&);
+        static void begin(Camera&, Light*);
 
         // 清屏
         static void clear();
