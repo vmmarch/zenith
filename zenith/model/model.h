@@ -36,6 +36,7 @@
 #include "texture.h"
 #include "virtual/loader.h"
 #include "vertex.h"
+#include "mesh.h"
 
 #include <vector>
 
@@ -43,7 +44,6 @@ namespace zenith
 {
     class Model
     {
-
     public:
         void draw();
     };
