@@ -56,8 +56,8 @@ namespace zenith
             shader->set_float3("material.ambient", ambient);
             shader->set_float3("material.diffuse", diffuse);
             shader->set_float3("material.specular", specular);
-            shader->set_int("material.diffuse_tex", diffuse_tex);
-            shader->set_int("material.specular_tex", specular_tex);
+            shader->set_int("material.diffuseTex", diffuse_tex);
+            shader->set_int("material.specularTex", specular_tex);
         }
 
     };

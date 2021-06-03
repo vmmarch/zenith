@@ -62,7 +62,7 @@ namespace zenith
                   Texture*              or_tex_diff,
                   Texture*              or_tex_spec);
 
-        void rotate(glm::vec3 rotation);
+        void rotate(const glm::vec3& rotation);
         void draw(ShaderProgram* shader);
 
     private:

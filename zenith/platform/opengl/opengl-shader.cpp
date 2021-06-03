@@ -33,7 +33,7 @@
 /*!
  * Shader 统一版本
  */
-#define GLSL_VERSION "#version 330 core\n"
+#define GLSL_VERSION "#version 410 core\n"
 
 namespace zenith
 {

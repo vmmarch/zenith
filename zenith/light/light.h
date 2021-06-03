@@ -23,6 +23,8 @@
  */
 #pragma once
 
+#include "shader/shader.h"
+
 namespace zenith
 {
     class Light
@@ -32,19 +34,16 @@ namespace zenith
         glm::vec3 color;
 
     public:
-        Light(float intensity, glm::vec3 color)
+        Light(float intensity, const glm::vec3& color)
         {
             this->intensity = intensity;
             this->color = color;
         }
 
-        ~Light()
-        {
-
-        }
+        virtual void set_position(glm::vec3 position) = 0;
 
         //Functions
-        virtual void sendToShader(Shader &program) = 0;
+        virtual void update(ShaderProgram *program) = 0;
     };
 
     class PointLight : public Light
@@ -56,7 +55,7 @@ namespace zenith
         float quadratic;
 
     public:
-        PointLight(glm::vec3 position, float intensity = 1.f, glm::vec3 color = glm::vec3(1.f),
+        explicit PointLight(const glm::vec3& position, float intensity = 1.f, const glm::vec3& color = glm::vec3(1.f),
                    float constant = 1.f, float linear = 0.045f, float quadratic = 0.0075f)
                 : Light(intensity, color)
         {
@@ -66,24 +65,19 @@ namespace zenith
             this->quadratic = quadratic;
         }
 
-        ~PointLight()
-        {
-
-        }
-
-        void setPosition(const glm::vec3 position)
+        void set_position(const glm::vec3 position) override
         {
             this->position = position;
         }
 
-        void sendToShader(Shader &program)
+        void update(ShaderProgram *program) override
         {
-            program.setVec3f(this->position, "pointLight.position");
-            program.set1f(this->intensity, "pointLight.intensity");
-            program.setVec3f(this->color, "pointLight.color");
-            program.set1f(this->constant, "pointLight.constant");
-            program.set1f(this->linear, "pointLight.linear");
-            program.set1f(this->quadratic, "pointLight.quadratic");
+            program->set_float3("pointLight.position", position);
+            program->set_int("pointLight.intensity", intensity);
+            program->set_float3("pointLight.color", color);
+            program->set_int("pointLight.constant", constant);
+            program->set_int("pointLight.linear", linear);
+            program->set_int("pointLight.quadratic", quadratic);
         }
     };
 }

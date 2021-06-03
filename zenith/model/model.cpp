@@ -24,7 +24,6 @@
 #include "model.h"
 
 #include <utility>
-#include "model/loader.h"
 
 namespace zenith
 {
@@ -37,6 +36,7 @@ namespace zenith
     Model::Model(glm::vec3 position, Material *material, Texture* or_tex_diff, Texture* or_tex_spec,
                  const char* file)
     {
+        std::vector<GLuint> indices;
         std::vector<vertex_t> mesh = load_obj(file);
         this->meshs.push_back(new Mesh(mesh.data(), mesh.size(), NULL, 0,
                                        glm::vec3(1.f, 0.f, 0.f),
@@ -64,7 +64,7 @@ namespace zenith
 
     }
 
-    void Model::rotate(glm::vec3 rotation)
+    void Model::rotate(const glm::vec3& rotation)
     {
         for(auto& item : meshs)
             item->rotate(rotation);
@@ -76,8 +76,8 @@ namespace zenith
 
         for(auto& item : meshs)
         {
-            override_texture_diffuse->bind(0);
-            override_texture_specular->bind(1);
+            override_texture_diffuse->bind(GL_TEXTURE0);
+            override_texture_specular->bind(GL_TEXTURE1);
 
             item->draw(shader);
         }

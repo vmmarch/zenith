@@ -8,10 +8,10 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
+ * Unlestream required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either exprestream or implied.
+ * See the License for the specific language governing permistreamions and
  * limitations under the License.
  *
  *! ************************************************************************/
@@ -54,9 +54,9 @@ namespace zenith
         std::vector<glm::vec2> texcoords;
         std::vector<glm::vec3> normals;
 
-        std::vector<GLint> texcoord_indices;
-        std::vector<GLint> normals_indices;
-        std::vector<zenith_uint> positions_indices;
+        std::vector<GLint>          texcoord_indices;
+        std::vector<GLint>          normal_indices;
+        std::vector<zenith_uint>    position_indices;
 
         std::string line;
         std::string prefix;
@@ -95,30 +95,29 @@ namespace zenith
 
             if(prefix == "f")
             {
-                int count = 0;
-                while(stream >> temp_int)
+                int counter = 0;
+                while (stream >> temp_int)
                 {
-                    if(count == 0)
-                        positions_indices.push_back(temp_int);
-                    else if(count == 1)
+                    if (counter == 0)
+                        position_indices.push_back(temp_int);
+                    else if (counter == 1)
                         texcoord_indices.push_back(temp_int);
-                    else if(count == 2)
-                        normals_indices.push_back(temp_int);
+                    else if (counter == 2)
+                        normal_indices.push_back(temp_int);
 
-                    if(stream.peek() == '/')
+                    if (stream.peek() == '/')
                     {
+                        ++counter;
                         stream.ignore(1, '/');
-                        count++;
                     }
                     else if (stream.peek() == ' ')
                     {
+                        ++counter;
                         stream.ignore(1, ' ');
-                        count++;
                     }
 
-                    if(count > 2)
-                        count = 0;
-
+                    if (counter > 2)
+                        counter = 0;
                 }
                 continue;
             }
@@ -140,12 +139,12 @@ namespace zenith
         }
 
         // Building Mesh.
-        vertices.resize(positions_indices.size(), vertex_t());
+        vertices.resize(position_indices.size(), vertex_t());
 
-        for(size_t i = 0; i < positions_indices.size(); i++)
+        for(size_t i = 0; i < position_indices.size(); i++)
         {
-            vertices[i].position     = positions[positions_indices[i] - 1];
-            vertices[i].normal       = normals[normals_indices[i] - 1];
+            vertices[i].position     = positions[position_indices[i] - 1];
+            vertices[i].normal       = normals[normal_indices[i] - 1];
             vertices[i].texcoord     = texcoords[texcoord_indices[i] - 1];
             vertices[i].color        = glm::vec3(1.f, 1.f, 1.f);
         }

@@ -25,7 +25,7 @@
 
 namespace zenith
 {
-    void RenderQueue::push(Model &model, ShaderProgram* shader)
+    void RenderQueue::push(Model &model, ShaderProgram *shader)
     {
         if (queue.count(shader) > 0)
         {
@@ -45,18 +45,23 @@ namespace zenith
 
     }
 
-    void RenderQueue::draw_queue(glm::mat4 view_matrix, glm::mat4 projection)
+    void
+    RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projection, const glm::vec3 &camera_position,
+                            Light *light)
     {
-        std::map<sp, vecq>::reverse_iterator    iter;
-        for(iter = queue.rbegin(); iter != queue.rend(); iter++)
+        std::map<sp, vecq>::reverse_iterator iter;
+        for (iter = queue.rbegin(); iter != queue.rend(); iter++)
         {
-            ShaderProgram* shader = iter->first;
+            ShaderProgram *shader = iter->first;
             shader->bind(); // 绑定Shader
 
             shader->set_mat4("ViewMatrix", view_matrix);
             shader->set_mat4("ProjectionMatrix", projection);
+            shader->set_float3("cameraPos", camera_position);
 
-            for(auto model : iter->second)
+            light->update(shader);
+
+            for (auto model : iter->second)
                 model.draw(shader);
         }
     }

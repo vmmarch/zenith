@@ -422,10 +422,6 @@
 #define GLAPI_EnableMultisample() { glEnable(GL_MULTISAMPLE); }
 #define GLAPI_DisableMultisample() { glDisable(GL_MULTISAMPLE); }
 
-/** 光照计算 */
-#define GLAPI_EnableLight() { glEnable(GL_LIGHTING); }
-#define GLAPI_DisableLight() { glDisable(GL_LIGHTING); }
-
 /** 颜色追踪 */
 #define GLAPI_EnableColorMaterial() { glEnable(GL_COLOR_MATERIAL); }
 #define GLAPI_DisableColorMaterial() { glDisable(GL_COLOR_MATERIAL); }

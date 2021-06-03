@@ -97,7 +97,7 @@ namespace zenith
 
     void Mesh::set_matrix(ShaderProgram* shader)
     {
-        shader->set_mat4("matrix", matrix);
+        shader->set_mat4("ModelMatrix", matrix);
     }
 
     void Mesh::set_position(const glm::vec3 position)
@@ -144,17 +144,12 @@ namespace zenith
 
         if(indices_size > 0)
         {
-            GLAPI_DrawTriangleArrays(0, vertices_size);
+            GLAPI_DrawIndex(GL_TRIANGLES, indices_size, GL_UNSIGNED_INT);
         }
         else
         {
-            GLAPI_DrawIndex(GL_TRIANGLES, indices_size, GL_UNSIGNED_INT);
+            GLAPI_DrawTriangleArrays(0, vertices_size);
         }
-
-        glBindVertexArray(0);
-        glUseProgram(0);
-        glActiveTexture(0);
-        glBindTexture(GL_TEXTURE_2D, 0);
 
     }
 

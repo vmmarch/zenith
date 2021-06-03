@@ -45,9 +45,9 @@ namespace zenith
         return this->id;
     }
 
-    void Texture::bind(unsigned int texture_unit)
+    void Texture::bind(GLenum unit)
     {
-        glActiveTexture(GL_TEXTURE0 + texture_unit);
+        glActiveTexture(unit);
         glBindTexture(type, id);
     }
 

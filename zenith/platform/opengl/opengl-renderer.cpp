@@ -38,10 +38,16 @@ namespace zenith
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void OpenGLRenderer::begin(Camera &camera)
+    void OpenGLRenderer::begin(Camera &camera, Light* light)
     {
-        view_matrix = camera.GetViewMatrix();
-        projection = camera.get_projection();
+        view_matrix = camera.get_view_matrix();
+        projection  = camera.get_projection();
+        camera_position = camera.get_camera_position();
+
+        light->set_position(camera_position);
+
+        this->light = light;
+
     }
 
     void OpenGLRenderer::disable_depth_test()
@@ -56,7 +62,10 @@ namespace zenith
 
     void OpenGLRenderer::draw_models()
     {
-        render_queue.draw_queue(view_matrix, projection);
+        render_queue.draw_queue(view_matrix,
+                                projection,
+                                camera_position,
+                                light);
     }
 
     void OpenGLRenderer::draw_model(Model &model)
