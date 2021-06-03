@@ -21,41 +21,9 @@
 /*!
  * @author 2B键盘
  */
-#include "model.h"
-#include "model/loader.h"
+#include "material.h"
 
 namespace zenith
 {
-    void Model::draw()
-    {
-        for(const auto& mesh : meshes)
-        {
-            mesh.draw();
-        }
-    }
-
-    void Model::load_model(zenith_char path)
-    {
-        ZENITH_DEBUG(LOAD_MODEL_DEBUG, path);
-
-        STRING _path(path);
-        STRING ext = _path.substring(_path.find_last_of(".") + 1);
-
-        // 解析Obj
-        if(ext.eq("obj"))
-        {
-            load_obj(path);
-        }
-
-        success_flag += CAUSE_MODEL;
-    }
-
-    /**
-     * 重新加载整个模型，用于动态加载或是错误加载修正。
-     */
-    void Model::reload()
-    {
-        // TODO now do nothing...
-    }
 
 }

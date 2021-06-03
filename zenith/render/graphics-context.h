@@ -25,7 +25,7 @@
 
 #include <zenith/type.h>
 #include <api/glfw-api.h>
-#include "mesh.h"
+#include "model/mesh.h"
 #include <vector>
 
 namespace zenith

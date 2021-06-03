@@ -26,7 +26,7 @@
 #include <zenith/type.h>
 #include <render/renderer-config.h>
 #include <api/glfw-api.h>
-#include "model.h"
+#include "model/model.h"
 #include "render/camera.h"
 
 namespace zenith
@@ -55,7 +55,7 @@ namespace zenith
 
         virtual void draw_model(Model&) = 0;
 
-        virtual void submit(Model&) = 0;
+        virtual void submit(Model& model, ShaderProgram* shader) = 0;
 
         // 创建渲染器
         static zenith_scope<AbstractRenderer> Create();
@@ -85,7 +85,7 @@ namespace zenith
 
         static void draw_model(Model&);
 
-        static void submit(Model&);
+        static void submit(Model& model, ShaderProgram* shader);
 
     private:
         static zenith_scope<AbstractRenderer> s_renderer;

@@ -33,8 +33,8 @@
 #include "render/renderer.h"
 #include "window/window.h"
 #include "render/render-command.h"
-#include "render/model.h"
-#include "render/shader-manager.h"
+#include "model/model.h"
+#include "shader/shader-manager.h"
 
 #include <vector>
 
@@ -65,7 +65,11 @@ namespace zenith
         ShaderManager* shader_manager;
         std::vector<Model> models;
 
+        //Textures
+        std::vector<Texture*> textures;
 
+        //Materials
+        std::vector<Material*> materials;
     };
 
 }
