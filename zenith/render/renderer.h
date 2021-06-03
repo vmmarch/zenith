@@ -28,6 +28,7 @@
 #include <api/glfw-api.h>
 #include "model/model.h"
 #include "render/camera.h"
+#include "render/light.h"
 
 namespace zenith
 {
@@ -51,7 +52,7 @@ namespace zenith
         // 开启深度测试
         virtual void enable_depth_test() = 0;
 
-        virtual void draw_models() = 0;
+        virtual void draw_models(PointLight* light) = 0;
 
         virtual void draw_model(Model&) = 0;
 
@@ -81,7 +82,7 @@ namespace zenith
         // 清屏
         static void clear();
 
-        static void draw_models();
+        static void draw_models(PointLight* light);
 
         static void draw_model(Model&);
 

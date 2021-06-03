@@ -27,6 +27,7 @@
 
 #include "model/model.h"
 #include "shader.h"
+#include "render/light.h"
 
 #include <map>
 #include <vector>
@@ -40,7 +41,7 @@ namespace zenith
     {
     public:
         void push(Model& model, ShaderProgram* shader);
-        void draw_queue(glm::mat4 view_matrix, glm::mat4 projection);
+        void draw_queue(const glm::mat4& view_matrix, const glm::mat4& projection, const glm::vec3& camera_position, PointLight* light);
 
         void reload_all_bad_model();
     private:

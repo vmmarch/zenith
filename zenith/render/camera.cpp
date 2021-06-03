@@ -26,7 +26,7 @@
 namespace zenith
 {
 
-    Camera::Camera(const glm::vec3& pos, const glm::vec3& up, float yaw, float pitch)
+    Camera::Camera(const glm::vec3& , const glm::vec3& up, float yaw, float pitch)
         : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
     {
         this->pos = pos;
@@ -80,24 +80,24 @@ namespace zenith
             this->camera_zoom = 45.0f;
     }
 
-    glm::mat4 Camera::GetViewMatrix()
+    glm::mat4 Camera::get_view_matrix()
     {
         return glm::lookAt(pos, (pos + front), up);
     }
 
     void Camera::update_camera_vector()
     {
-        glm::vec3 __front__;
-        __front__.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-        __front__.y = sin(glm::radians(pitch));
-        __front__.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-        front = glm::normalize(__front__);
+        glm::vec3 _front_;
+        _front_.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+        _front_.y = sin(glm::radians(pitch));
+        _front_.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+        front = glm::normalize(_front_);
 
         right = glm::normalize(glm::cross(front, worldup));
         up    = glm::normalize(glm::cross(right, front));
     }
 
-    float Camera::GetCameraZoom()
+    float Camera::GetCameraZoom() const
     {
         return camera_zoom;;
     }
@@ -105,6 +105,11 @@ namespace zenith
     glm::mat4 Camera::get_projection()
     {
         return glm::perspective(GetCameraZoom(), get_screen_aspect_radio(), -1.0f, 1.0f);
+    }
+
+    glm::vec3 Camera::get_camera_position()
+    {
+        return this->pos;
     }
 
 }

@@ -97,7 +97,7 @@ namespace zenith
 
     void Mesh::set_matrix(ShaderProgram* shader)
     {
-        shader->set_mat4("matrix", matrix);
+        shader->set_mat4("ModelMatrix", matrix);
     }
 
     void Mesh::set_position(const glm::vec3 position)

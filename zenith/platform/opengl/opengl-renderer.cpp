@@ -40,8 +40,9 @@ namespace zenith
 
     void OpenGLRenderer::begin(Camera &camera)
     {
-        view_matrix = camera.GetViewMatrix();
-        projection = camera.get_projection();
+        view_matrix = camera.get_view_matrix();
+        projection  = camera.get_projection();
+        camera_position = camera.get_camera_position();
     }
 
     void OpenGLRenderer::disable_depth_test()
@@ -54,9 +55,12 @@ namespace zenith
         GLAPI_EnableDepthTest();
     }
 
-    void OpenGLRenderer::draw_models()
+    void OpenGLRenderer::draw_models(PointLight* light)
     {
-        render_queue.draw_queue(view_matrix, projection);
+        render_queue.draw_queue(view_matrix,
+                                projection,
+                                camera_position,
+                                light);
     }
 
     void OpenGLRenderer::draw_model(Model &model)

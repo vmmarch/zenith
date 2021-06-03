@@ -39,18 +39,19 @@ namespace zenith
             : Layer("sandbox layer"), camera(Camera()), window(window)
     {
         main_layer = new ExampleLayer();
+        light = new PointLight(glm::vec3(1.0f));
 
         this->imlayer = new ImGuiLayer();
         layer_stack.push(new HomeLayer());
         layer_stack.push(new EditorLayer());
 
         shader_manager = new ShaderManager();
-        shader_manager->load_shaders("../sh");
+        shader_manager->load_shaders("../shader");
     }
 
     void SandBox::initialize()
     {
-        ShaderProgram *program = shader_manager->get_program("shader");
+        ShaderProgram *program = shader_manager->get_program("core");
         Renderer::submit(*new Model(
                 glm::vec3(4.0f, 0.0f, 1.0f),
                 new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
@@ -103,7 +104,7 @@ namespace zenith
 #endif
 
         // 渲染模型
-        Renderer::draw_models();
+        Renderer::draw_models(light);
     }
 
     void SandBox::event(Event &e)

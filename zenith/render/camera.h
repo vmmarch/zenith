@@ -74,9 +74,11 @@ namespace zenith
         /**
          * @return 视图矩阵
          */
-        glm::mat4 GetViewMatrix();
+        glm::mat4 get_view_matrix();
 
-        float GetCameraZoom();
+        glm::vec3 get_camera_position();
+
+        float GetCameraZoom() const;
 
         [[nodiscard]] float get_screen_width() const { return screen_w; }
         [[nodiscard]] float get_screen_height() const { return screen_h; }

@@ -64,7 +64,7 @@ namespace zenith
 
     }
 
-    void Model::rotate(glm::vec3 rotation)
+    void Model::rotate(const glm::vec3& rotation)
     {
         for(auto& item : meshs)
             item->rotate(rotation);

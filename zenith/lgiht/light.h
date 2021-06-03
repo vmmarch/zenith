@@ -44,7 +44,7 @@ namespace zenith
         }
 
         //Functions
-        virtual void sendToShader(Shader &program) = 0;
+        virtual void update(Shader &program) = 0;
     };
 
     class PointLight : public Light
@@ -76,7 +76,7 @@ namespace zenith
             this->position = position;
         }
 
-        void sendToShader(Shader &program)
+        void update(Shader &program)
         {
             program.setVec3f(this->position, "pointLight.position");
             program.set1f(this->intensity, "pointLight.intensity");
