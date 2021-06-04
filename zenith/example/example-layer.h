@@ -26,39 +26,35 @@
 #include "layer/layer.h"
 #include "render/render-command.h"
 
-namespace zenith
+// world space positions of our cubes
+static glm::vec3 cube_pos[] = {
+        glm::vec3(-3.8f, -2.0f, -12.3f),
+        glm::vec3( 2.4f, -0.4f, -3.5f),
+};
+
+static int cube_len = 0;
+
+class ExampleLayer : public Layer
 {
-
-    // world space positions of our cubes
-    static glm::vec3 cube_pos[] = {
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3( 2.4f, -0.4f, -3.5f),
-    };
-
-    static int cube_len = 0;
-
-    class ExampleLayer : public Layer
+public:
+    explicit ExampleLayer() : Layer("example layer")
     {
-    public:
-        explicit ExampleLayer() : Layer("example layer")
-        {
-        }
+    }
 
-        void render() override
-        {
+    void render() override
+    {
 
-        }
+    }
 
-        void update(DeltaTime) override
-        {
+    void update(DeltaTime) override
+    {
 
-        }
+    }
 
-        void event(Event&) override
-        {
+    void event(Event&) override
+    {
 
-        }
+    }
 
-        void close() override {}
-    };
-}
+    void close() override {}
+};

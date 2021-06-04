@@ -26,53 +26,53 @@
 #include "event.h"
 #include "keycode.h"
 
-namespace zenith
+
+class KeyEvent : public Event
 {
-    class KeyEvent : public Event
-    {
-    public:
-        KeyEvent(zenith_keycode keycode) : __keycode(keycode)
-        {}
+public:
+    KeyEvent(zenith_keycode keycode) : __keycode(keycode)
+    {}
 
-        zenith_keycode getKeycode()
-        { return __keycode; }
+    zenith_keycode getKeycode()
+    { return __keycode; }
 
-        CLASSIF(event::KEYBOARD);
-    private:
-        zenith_keycode __keycode;
-    };
+    CLASSIF(event::KEYBOARD);
+private:
+    zenith_keycode __keycode;
+};
 
-    /**
-     * 键盘按下事件处理
-     */
-    class KeyPressedEvent : public KeyEvent
-    {
-    public:
-        KeyPressedEvent(zenith_keycode keycode, int repeat)
-            : KeyEvent(keycode), __repeat(repeat) {}
+/**
+ * 键盘按下事件处理
+ */
+class KeyPressedEvent : public KeyEvent
+{
+public:
+    KeyPressedEvent(zenith_keycode keycode, int repeat)
+            : KeyEvent(keycode), __repeat(repeat)
+    {}
 
-        TYPE(event::type::EVENT_KEY_PRESSED);
-    private:
-        int __repeat;
-    };
+    TYPE(event::type::EVENT_KEY_PRESSED);
+private:
+    int __repeat;
+};
 
-    /**
-     * 键盘释放事件处理
-     */
-    class KeyReleasedEvent : public KeyEvent
-    {
-    public:
-        KeyReleasedEvent(zenith_keycode keycode) : KeyEvent(keycode) {}
+/**
+ * 键盘释放事件处理
+ */
+class KeyReleasedEvent : public KeyEvent
+{
+public:
+    KeyReleasedEvent(zenith_keycode keycode) : KeyEvent(keycode)
+    {}
 
-        TYPE(event::type::EVENT_KEY_RELEASED);
-    };
+    TYPE(event::type::EVENT_KEY_RELEASED);
+};
 
-    class KeyTypeEvent : public KeyEvent
-    {
-    public:
-        KeyTypeEvent(const zenith_keycode keycode) : KeyEvent(keycode) {}
+class KeyTypeEvent : public KeyEvent
+{
+public:
+    KeyTypeEvent(const zenith_keycode keycode) : KeyEvent(keycode)
+    {}
 
-        TYPE(event::type::KEY_TYPE);
-    };
-
-}
+    TYPE(event::type::KEY_TYPE);
+};

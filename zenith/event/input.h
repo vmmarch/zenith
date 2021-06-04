@@ -31,21 +31,19 @@
 #define SCROLLED_UP         1
 #define SCROLLED_DOWN       2
 
-namespace zenith
+
+class Input
 {
-    class Input
-    {
-    public:
-        static bool pressed(zenith_keycode);
+public:
+    static bool pressed(zenith_keycode);
 
-        /**
-         * 两个键是否按下
-         */
-        static bool multikey(zenith_keycode key1, zenith_keycode key2);
+    /**
+     * 两个键是否按下
+     */
+    static bool multikey(zenith_keycode key1, zenith_keycode key2);
 
-        /**
-         * 三个键是否按下
-         */
-        static bool multikey(zenith_keycode key1, zenith_keycode key2, zenith_keycode key3);
-    };
-}
+    /**
+     * 三个键是否按下
+     */
+    static bool multikey(zenith_keycode key1, zenith_keycode key2, zenith_keycode key3);
+};

@@ -28,34 +28,31 @@
 #include "model/mesh.h"
 #include <vector>
 
-namespace zenith
+/**
+ * 渲染图形上下文管理
+ */
+class GraphicsContext
 {
-    /**
-     * 渲染图形上下文管理
-     */
-    class GraphicsContext
+public:
+    virtual void swap_buffers() = 0; // 交换缓冲区
+
+    /*! 获取当前选择的模型 */
+    void SetCurrMesh(Mesh &model)
     {
-    public:
-        virtual void swap_buffers() = 0; // 交换缓冲区
+        curr_model.reset(&model);
+    }
 
-        /*! 获取当前选择的模型 */
-        void SetCurrMesh(Mesh &model)
-        {
-            curr_model.reset(&model);
-        }
+    zenith_shared<Mesh> GetCurrModel()
+    {
+        return curr_model;
+    }
 
-        zenith_shared<Mesh> GetCurrModel()
-        {
-            return curr_model;
-        }
+    static GraphicsContext *instance()
+    { return context; }
 
-        static GraphicsContext* instance()
-        { return context; }
+    static GraphicsContext *Create(zenith_any window);
 
-        static GraphicsContext* Create(zenith_any window);
-
-    private:
-        zenith_shared<Mesh> curr_model;
-        static GraphicsContext* context;
-    };
-}
+private:
+    zenith_shared<Mesh> curr_model;
+    static GraphicsContext *context;
+};

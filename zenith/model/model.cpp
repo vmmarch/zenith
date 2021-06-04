@@ -25,61 +25,62 @@
 
 #include <utility>
 
-namespace zenith
+Model::Model(glm::vec3 position, Material *material, Texture *or_tex_diff, Texture *or_tex_spec,
+             std::vector<Mesh *> _meshs) : meshs(std::move(_meshs))
 {
-    Model::Model(glm::vec3 position, Material *material, Texture* or_tex_diff, Texture* or_tex_spec,
-                      std::vector<Mesh*> _meshs) : meshs(std::move(_meshs))
+    init(position, material, or_tex_diff, or_tex_spec);
+}
+
+Model::Model(glm::vec3 position, Material *material, Texture *or_tex_diff, Texture *or_tex_spec,
+             const char *file)
+{
+    std::vector<GLuint> indices;
+    std::vector<vertex_t> mesh = load_obj(file, indices);
+    for (GLuint item : indices)
     {
-        init(position, material, or_tex_diff, or_tex_spec);
+        std::cout << item << std::endl;
+    }
+    this->meshs.push_back(new Mesh(mesh.data(), mesh.size(), indices.data(), indices.size(),
+                                   glm::vec3(1.f, 0.f, 0.f),
+                                   glm::vec3(0.f),
+                                   glm::vec3(0.f),
+                                   glm::vec3(1.f))
+    );
+
+    init(position, material, or_tex_diff, or_tex_spec);
+
+}
+
+void Model::init(glm::vec3 position, Material *material, Texture *or_tex_diff, Texture *or_tex_spec)
+{
+    this->position = position;
+    this->material = material;
+    this->override_texture_diffuse = or_tex_diff;
+    this->override_texture_specular = or_tex_spec;
+
+    for (auto &item : meshs)
+    {
+        item->move(this->position);
+        item->set_origin(this->position);
     }
 
-    Model::Model(glm::vec3 position, Material *material, Texture* or_tex_diff, Texture* or_tex_spec,
-                 const char* file)
+}
+
+void Model::rotate(const glm::vec3 &rotation)
+{
+    for (auto &item : meshs)
+        item->rotate(rotation);
+}
+
+void Model::draw(ShaderProgram *shader)
+{
+    this->material->update(shader);
+
+    for (auto &item : meshs)
     {
-        std::vector<GLuint> indices;
-        std::vector<vertex_t> mesh = load_obj(file);
-        this->meshs.push_back(new Mesh(mesh.data(), mesh.size(), NULL, 0,
-                                       glm::vec3(1.f, 0.f, 0.f),
-                                       glm::vec3(0.f),
-                                       glm::vec3(0.f),
-                                       glm::vec3(1.f))
-        );
+        override_texture_diffuse->bind(GL_TEXTURE0);
+        override_texture_specular->bind(GL_TEXTURE1);
 
-        init(position, material, or_tex_diff, or_tex_spec);
-
-    }
-
-    void Model::init(glm::vec3 position, Material *material, Texture* or_tex_diff, Texture* or_tex_spec)
-    {
-        this->position = position;
-        this->material = material;
-        this->override_texture_diffuse  = or_tex_diff;
-        this->override_texture_specular = or_tex_spec;
-
-        for(auto& item : meshs)
-        {
-            item->move(this->position);
-            item->set_origin(this->position);
-        }
-
-    }
-
-    void Model::rotate(const glm::vec3& rotation)
-    {
-        for(auto& item : meshs)
-            item->rotate(rotation);
-    }
-
-    void Model::draw(ShaderProgram* shader)
-    {
-        this->material->update(shader);
-
-        for(auto& item : meshs)
-        {
-            override_texture_diffuse->bind(GL_TEXTURE0);
-            override_texture_specular->bind(GL_TEXTURE1);
-
-            item->draw(shader);
-        }
+        item->draw(shader);
     }
 }

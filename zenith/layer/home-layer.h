@@ -26,15 +26,12 @@
 #include "layer/layer.h"
 #include <api/imgui-api.h>
 
-namespace zenith
+class HomeLayer : public Layer
 {
-    class HomeLayer : public Layer
-    {
-    public:
-        HomeLayer() : Layer("Hoem Layer") {}
-        void render() override;
-        void update(DeltaTime) override;
-        void event(Event&) override;
-        void close() override;
-    };
-}
+public:
+    HomeLayer() : Layer("Hoem Layer") {}
+    void render() override;
+    void update(DeltaTime) override;
+    void event(Event&) override;
+    void close() override;
+};

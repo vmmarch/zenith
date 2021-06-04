@@ -25,75 +25,72 @@
 #include "state.h"
 #include "color.h"
 
-namespace zenith
+Starter *Starter::__instance = nullptr;
+
+Starter::Starter(zenith_char title, int width, int height)
 {
-    Starter *Starter::__instance = nullptr;
+    __instance = this;
+    init_window(title, width, height);
 
-    Starter::Starter(zenith_char title, int width, int height)
+    sandbox = new SandBox(window.get());
+    sandbox->initialize();
+}
+
+Starter::~Starter()
+{
+    delete &window;
+}
+
+void Starter::init_window(zenith_char title, int width, int height)
+{
+    v_winprops winprops(title, width, height);
+    this->window = Window::Create(winprops);
+    this->window->SetEventCallback(ZENITH_BIND_EVENT_FN(Starter::event));
+}
+
+void Starter::close()
+{
+    this->running = false;
+    this->window->close_window();
+}
+
+void Starter::event(Event &event)
+{
+    event::type type = event.GetEventType();
+    switch (type)
     {
-        __instance = this;
-        init_window(title, width, height);
-
-        sandbox = new SandBox(window.get());
-        sandbox->initialize();
-    }
-
-    Starter::~Starter()
-    {
-        delete &window;
-    }
-
-    void Starter::init_window(zenith_char title, int width, int height)
-    {
-        v_winprops winprops(title, width, height);
-        this->window = Window::Create(winprops);
-        this->window->SetEventCallback(ZENITH_BIND_EVENT_FN(Starter::event));
-    }
-
-    void Starter::close()
-    {
-        this->running = false;
-        this->window->close_window();
-    }
-
-    void Starter::event(Event &event)
-    {
-        event::type type = event.GetEventType();
-        switch (type)
+        case event::type::EVENT_WINDOW_CLOSE:
         {
-            case event::type::EVENT_WINDOW_CLOSE:
-            {
-                close();
-                return;
-            }
-
-            default: sandbox->event(event);
+            close();
+            return;
         }
-    }
 
-    void Starter::update(DeltaTime deltaTime)
+        default:
+            sandbox->event(event);
+    }
+}
+
+void Starter::update(DeltaTime deltaTime)
+{
+    sandbox->update(deltaTime);
+}
+
+void Starter::domain()
+{
+    Renderer::clear_color(RGBA::BLACK);
+
+    // ------------------------------------------
+    // game loop.
+    while (running)
     {
-        sandbox->update(deltaTime);
+        auto time = (float) glfwGetTime();
+        DeltaTime deltaTime = time - last_frame_time;
+        last_frame_time = time;
+
+        update(deltaTime);
+        sandbox->render();
+        this->window->update();
+
+        State::count_plus();
     }
-
-    void Starter::domain()
-    {
-        Renderer::clear_color(RGBA::BLACK);
-
-        // ------------------------------------------
-        // game loop.
-        while (running)
-        {
-            auto time = (float) glfwGetTime();
-            DeltaTime deltaTime = time - last_frame_time;
-            last_frame_time = time;
-
-            update(deltaTime);
-            sandbox->render();
-            this->window->update();
-
-            State::count_plus();
-        }
-    }
-
 }

@@ -23,33 +23,28 @@
  */
 #include "opengl-graphics-context.h"
 
-namespace zenith
+OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow *window)
 {
+    this->window = window;
+    initialize();
+}
 
-    OpenGLGraphicsContext::OpenGLGraphicsContext(GLFWwindow* window)
+void OpenGLGraphicsContext::initialize()
+{
+    glfwMakeContextCurrent(this->window);
+    int success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    if (!success)
     {
-        this->window = window;
-        initialize();
+        ZENITH_ERROR(LOAD_GLAD_FAILED);
     }
 
-    void OpenGLGraphicsContext::initialize()
-    {
-        glfwMakeContextCurrent(this->window);
-        int success = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
-        if(!success)
-        {
-            ZENITH_ERROR(LOAD_GLAD_FAILED);
-        }
+    ZENITH_INFO(OPENGL_INFO);
+    ZENITH_INFO(VENDOR_INFO, GLAPI_GetVendor());
+    ZENITH_INFO(RENDER_INFO, GLAPI_GetRenderer());
+    ZENITH_INFO(VERSION_INFO, GLAPI_GetVersion());
+}
 
-        ZENITH_INFO(OPENGL_INFO);
-        ZENITH_INFO(VENDOR_INFO, GLAPI_GetVendor());
-        ZENITH_INFO(RENDER_INFO, GLAPI_GetRenderer());
-        ZENITH_INFO(VERSION_INFO, GLAPI_GetVersion());
-    }
-
-    void OpenGLGraphicsContext::swap_buffers()
-    {
-        glfwSwapBuffers(this->window);
-    }
-
+void OpenGLGraphicsContext::swap_buffers()
+{
+    glfwSwapBuffers(this->window);
 }

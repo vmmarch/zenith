@@ -30,66 +30,61 @@
 #include "render/camera.h"
 #include "light/light.h"
 
-namespace zenith
+class AbstractRenderer
 {
+public:
+    virtual ~AbstractRenderer() = default;
 
-    class AbstractRenderer
-    {
-    public:
-        virtual ~AbstractRenderer() = default;
+    // 设置清屏颜色
+    virtual void clear_color(const glm::vec4& color) = 0;
 
-        // 设置清屏颜色
-        virtual void clear_color(const glm::vec4& color) = 0;
+    virtual void begin(Camera&, Light*) = 0;
 
-        virtual void begin(Camera&, Light*) = 0;
+    // 清屏
+    virtual void clear() = 0;
 
-        // 清屏
-        virtual void clear() = 0;
+    // 禁用深度测试
+    virtual void disable_depth_test() = 0;
 
-        // 禁用深度测试
-        virtual void disable_depth_test() = 0;
+    // 开启深度测试
+    virtual void enable_depth_test() = 0;
 
-        // 开启深度测试
-        virtual void enable_depth_test() = 0;
+    virtual void draw_models() = 0;
 
-        virtual void draw_models() = 0;
+    virtual void draw_model(Model&) = 0;
 
-        virtual void draw_model(Model&) = 0;
+    virtual void submit(Model& model, ShaderProgram* shader) = 0;
 
-        virtual void submit(Model& model, ShaderProgram* shader) = 0;
+    // 创建渲染器
+    static zenith_scope<AbstractRenderer> Create();
 
-        // 创建渲染器
-        static zenith_scope<AbstractRenderer> Create();
+    // 获取当前API
+    static render::api GetRenderAPI();
 
-        // 获取当前API
-        static render::api GetRenderAPI();
+private:
+    std::vector<Mesh> models;
+    static render::api render_api;
+};
 
-    private:
-        std::vector<Mesh> models;
-        static render::api render_api;
-    };
+// --------------------------------------------------
+// 渲染器
+class Renderer
+{
+public:
+    // 设置清屏颜色
+    static void clear_color(const glm::vec4& color);
 
-    // --------------------------------------------------
-    // 渲染器
-    class Renderer
-    {
-    public:
-        // 设置清屏颜色
-        static void clear_color(const glm::vec4& color);
+    static void begin(Camera&, Light*);
 
-        static void begin(Camera&, Light*);
+    // 清屏
+    static void clear();
 
-        // 清屏
-        static void clear();
+    static void draw_models();
 
-        static void draw_models();
+    static void draw_model(Model&);
 
-        static void draw_model(Model&);
+    static void submit(Model& model, ShaderProgram* shader);
 
-        static void submit(Model& model, ShaderProgram* shader);
-
-    private:
-        static zenith_scope<AbstractRenderer> s_renderer;
-    };
-
-}
+private:
+    static zenith_scope<AbstractRenderer> s_renderer;
+};

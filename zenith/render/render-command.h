@@ -26,7 +26,3 @@
 
 #include "renderer.h"
 
-namespace zenith
-{
-
-}

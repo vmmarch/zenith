@@ -25,52 +25,47 @@
 
 #define U_VIEW_PROJECTION_MATRIX "u_viewProjectionMatrix"
 
-namespace zenith
+void OpenGLRenderer::clear_color(const glm::vec4 &color)
 {
+    glClearColor(color.r, color.g, color.b, color.a);
+}
 
-    void OpenGLRenderer::clear_color(const glm::vec4 &color)
-    {
-        glClearColor(color.r, color.g, color.b, color.a);
-    }
+void OpenGLRenderer::clear()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
-    void OpenGLRenderer::clear()
-    {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    }
+void OpenGLRenderer::begin(Camera &camera, Light *light)
+{
+    view_matrix = camera.get_view_matrix();
+    projection = camera.get_projection();
+    camera_position = camera.get_camera_position();
 
-    void OpenGLRenderer::begin(Camera &camera, Light* light)
-    {
-        view_matrix = camera.get_view_matrix();
-        projection  = camera.get_projection();
-        camera_position = camera.get_camera_position();
+    light->set_position(camera_position);
 
-        light->set_position(camera_position);
+    this->light = light;
 
-        this->light = light;
+}
 
-    }
+void OpenGLRenderer::disable_depth_test()
+{
+    GLAPI_DisableDepthTest();
+}
 
-    void OpenGLRenderer::disable_depth_test()
-    {
-        GLAPI_DisableDepthTest();
-    }
+void OpenGLRenderer::enable_depth_test()
+{
+    GLAPI_EnableDepthTest();
+}
 
-    void OpenGLRenderer::enable_depth_test()
-    {
-        GLAPI_EnableDepthTest();
-    }
+void OpenGLRenderer::draw_models()
+{
+    render_queue.draw_queue(view_matrix,
+                            projection,
+                            camera_position,
+                            light);
+}
 
-    void OpenGLRenderer::draw_models()
-    {
-        render_queue.draw_queue(view_matrix,
-                                projection,
-                                camera_position,
-                                light);
-    }
-
-    void OpenGLRenderer::draw_model(Model &model)
-    {
-        // TODO Draw Model.
-    }
-
+void OpenGLRenderer::draw_model(Model &model)
+{
+    // TODO Draw Model.
 }

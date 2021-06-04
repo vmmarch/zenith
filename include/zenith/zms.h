@@ -23,8 +23,7 @@
  */
 #pragma once
 
-namespace zenith
-{
+
     /**
      * zenith matrix struct.
      */

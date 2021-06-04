@@ -24,11 +24,7 @@
 #include "window.h"
 #include "tool/create-scope.h"
 
-namespace zenith
+zenith_scope<Window> Window::Create(const v_winprops &winprops)
 {
-    zenith_scope<Window> Window::Create(const v_winprops &winprops)
-    {
-        return create_window(winprops);
-    }
-
+    return create_window(winprops);
 }

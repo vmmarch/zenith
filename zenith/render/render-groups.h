@@ -57,9 +57,6 @@
  */
 #pragma once
 
-namespace zenith
+class RenderGroups
 {
-    class RenderGroups
-    {
-    };
-}
+};

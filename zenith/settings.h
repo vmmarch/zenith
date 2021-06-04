@@ -31,29 +31,27 @@
 #define ZENITH_TRUE  true
 #define ZENITH_FALSE false
 
-const static int KEY_MULTISAMPLE                      = 0;        // 多重采样抗锯齿
-const static int KEY_DEPTHTEST                        = 1;        // 深度测试
-const static int KEY_CURSOR_MOVE_CAMER                = 2;        // 禁止鼠标移动相机
+const static int KEY_MULTISAMPLE = 0;        // 多重采样抗锯齿
+const static int KEY_DEPTHTEST = 1;        // 深度测试
+const static int KEY_CURSOR_MOVE_CAMER = 2;        // 禁止鼠标移动相机
 
-namespace zenith
-{
-    /**
-     * 设置配置参数
-     *
-     * @param k KEY_XXX
-     * @param v V_XXX
-     */
-    EXTAPI void set_value(int k, bool v);
 
-    /**
-     * 判断当前配置是否开启
-     */
-    EXTAPI bool get_value(int k);
+/**
+ * 设置配置参数
+ *
+ * @param k KEY_XXX
+ * @param v V_XXX
+ */
+EXTAPI void set_value(int k, bool v);
 
-    /**
-     * 重新加载配置
-     */
-    EXTAPI void reload_setting();
-}
+/**
+ * 判断当前配置是否开启
+ */
+EXTAPI bool get_value(int k);
+
+/**
+ * 重新加载配置
+ */
+EXTAPI void reload_setting();
 
 #endif

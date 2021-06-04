@@ -36,17 +36,17 @@ static void __properties()
     ImGui::Begin(GUI_TEXT_PROPERTIES);
     if (ImGui::TreeNode("投影相机"))
     {
-        if (zenith::get_value(KEY_CURSOR_MOVE_CAMER))
+        if (get_value(KEY_CURSOR_MOVE_CAMER))
         {
             if (ImGui::Button("关闭鼠标移动相机"))
             {
-                zenith::set_value(KEY_CURSOR_MOVE_CAMER, ZENITH_FALSE);
+                set_value(KEY_CURSOR_MOVE_CAMER, ZENITH_FALSE);
             }
         } else
         {
             if (ImGui::Button("启用鼠标移动相机"))
             {
-                zenith::set_value(KEY_CURSOR_MOVE_CAMER, ZENITH_TRUE);
+                set_value(KEY_CURSOR_MOVE_CAMER, ZENITH_TRUE);
             }
         }
         ImGui::TreePop();
@@ -54,31 +54,31 @@ static void __properties()
 
     if (ImGui::TreeNode("配置"))
     {
-        if (zenith::get_value(KEY_MULTISAMPLE))
+        if (get_value(KEY_MULTISAMPLE))
         {
             if (ImGui::Button("关闭多重采样抗锯齿"))
             {
-                zenith::set_value(KEY_MULTISAMPLE, ZENITH_FALSE);
+                set_value(KEY_MULTISAMPLE, ZENITH_FALSE);
             }
         } else
         {
             if (ImGui::Button("开启多重采样抗锯齿"))
             {
-                zenith::set_value(KEY_MULTISAMPLE, ZENITH_TRUE);
+                set_value(KEY_MULTISAMPLE, ZENITH_TRUE);
             }
         }
 
-        if (zenith::get_value(KEY_DEPTHTEST))
+        if (get_value(KEY_DEPTHTEST))
         {
             if (ImGui::Button("关闭深度缓冲"))
             {
-                zenith::set_value(KEY_DEPTHTEST, ZENITH_FALSE);
+                set_value(KEY_DEPTHTEST, ZENITH_FALSE);
             }
         } else
         {
             if (ImGui::Button("开启深度缓冲"))
             {
-                zenith::set_value(KEY_DEPTHTEST, ZENITH_TRUE);
+                set_value(KEY_DEPTHTEST, ZENITH_TRUE);
             }
         }
 

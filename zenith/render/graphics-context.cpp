@@ -24,13 +24,10 @@
 #include "graphics-context.h"
 #include "tool/create-scope.h"
 
-namespace zenith
-{
-    GraphicsContext *GraphicsContext::context = nullptr;
+GraphicsContext *GraphicsContext::context = nullptr;
 
-    GraphicsContext* GraphicsContext::Create(zenith_any window)
-    {
-        GraphicsContext::context = create_graphics_context(window);
-        return GraphicsContext::context;
-    }
+GraphicsContext* GraphicsContext::Create(zenith_any window)
+{
+    GraphicsContext::context = create_graphics_context(window);
+    return GraphicsContext::context;
 }

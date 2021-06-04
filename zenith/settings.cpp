@@ -23,67 +23,75 @@
  */
 #include "settings.h"
 
-namespace zenith
+
+struct settings_t
 {
-    struct settings_t
+    bool CAN_BE_RELOAD = false;           // 是否重新加载
+    bool Flags_MultiSample = false;           // 多重采样抗锯齿
+    bool Flags_DepthTest = false;           // 多重采样抗锯齿
+    bool Flags_CursorMoveCamera = true;            // 鼠标移动相机
+};
+
+settings_t *settings = new settings_t();
+
+void set_value(int k, bool v)
+{
+    switch (k)
     {
-        bool CAN_BE_RELOAD                  = false;           // 是否重新加载
-        bool Flags_MultiSample              = false;           // 多重采样抗锯齿
-        bool Flags_DepthTest                = false;           // 多重采样抗锯齿
-        bool Flags_CursorMoveCamera         = true;            // 鼠标移动相机
-    };
-
-    settings_t *settings = new settings_t();
-
-    void set_value(int k, bool v)
-    {
-        switch (k)
-        {
-            case KEY_MULTISAMPLE:                   settings->Flags_MultiSample                   = v; break;
-            case KEY_DEPTHTEST:                     settings->Flags_DepthTest                     = v; break;
-            case KEY_CURSOR_MOVE_CAMER:             settings->Flags_CursorMoveCamera              = v; break;
-            default: return;
-        }
-
-        settings->CAN_BE_RELOAD = true;
+        case KEY_MULTISAMPLE:
+            settings->Flags_MultiSample = v;
+            break;
+        case KEY_DEPTHTEST:
+            settings->Flags_DepthTest = v;
+            break;
+        case KEY_CURSOR_MOVE_CAMER:
+            settings->Flags_CursorMoveCamera = v;
+            break;
+        default:
+            return;
     }
 
-    bool get_value(int k)
-    {
-        switch (k)
-        {
-            case KEY_MULTISAMPLE:                   return settings->Flags_MultiSample;
-            case KEY_DEPTHTEST:                     return settings->Flags_DepthTest;
-            case KEY_CURSOR_MOVE_CAMER:             return settings->Flags_CursorMoveCamera;
-        }
+    settings->CAN_BE_RELOAD = true;
+}
 
-        return false;
+bool get_value(int k)
+{
+    switch (k)
+    {
+        case KEY_MULTISAMPLE:
+            return settings->Flags_MultiSample;
+        case KEY_DEPTHTEST:
+            return settings->Flags_DepthTest;
+        case KEY_CURSOR_MOVE_CAMER:
+            return settings->Flags_CursorMoveCamera;
     }
 
-    /**
-     * 加载配置
-     */
-    void reload_setting()
+    return false;
+}
+
+/**
+ * 加载配置
+ */
+void reload_setting()
+{
+    if (settings->CAN_BE_RELOAD)
     {
-        if (settings->CAN_BE_RELOAD)
+        if (settings->Flags_MultiSample)
         {
-            if (settings->Flags_MultiSample)
-            {
-                GLAPI_EnableMultisample();
-            } else
-            {
-                GLAPI_DisableMultisample();
-            }
-
-            if (settings->Flags_DepthTest)
-            {
-                GLAPI_EnableDepthTest();
-            } else
-            {
-                GLAPI_DisableDepthTest();
-            }
-
-            settings->CAN_BE_RELOAD = false;
+            GLAPI_EnableMultisample();
+        } else
+        {
+            GLAPI_DisableMultisample();
         }
+
+        if (settings->Flags_DepthTest)
+        {
+            GLAPI_EnableDepthTest();
+        } else
+        {
+            GLAPI_DisableDepthTest();
+        }
+
+        settings->CAN_BE_RELOAD = false;
     }
 }

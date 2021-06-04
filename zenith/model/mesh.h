@@ -28,57 +28,62 @@
 
 #include <glfw-api.h>
 
-namespace zenith
+
+class Mesh
 {
-    class Mesh
-    {
 
-    public:
-        Mesh(vertex_t*   vertices,
-             GLuint      vsize,
-             GLuint*     indices,
-             GLuint      isize,
-             glm::vec3   position = glm::vec3(0.f),
-             glm::vec3   rotation = glm::vec3(0.f),
-             glm::vec3   scale    = glm::vec3(1.f),
-             glm::vec3   origin   = glm::vec3(0.f)
-        );
+public:
+    Mesh(vertex_t *vertices,
+         GLuint vsize,
+         GLuint *indices,
+         GLuint isize,
+         glm::vec3 position = glm::vec3(0.f),
+         glm::vec3 rotation = glm::vec3(0.f),
+         glm::vec3 scale = glm::vec3(1.f),
+         glm::vec3 origin = glm::vec3(0.f)
+    );
 
-        ~Mesh();
+    ~Mesh();
 
-        void set_scale(glm::vec3 scale);
-        void set_origin(glm::vec3 origin);
-        void set_position(glm::vec3 position);
-        void set_rotation(glm::vec3 rotation);
+    void set_scale(glm::vec3 scale);
 
-        void move(glm::vec3 position);
-        void rotate(glm::vec3 rotation);
-        void scale_up(glm::vec3 scale);
+    void set_origin(glm::vec3 origin);
 
-        void draw(ShaderProgram* shader);
+    void set_position(glm::vec3 position);
 
-    private:
-        void setup_mesh();
-        void update_matrix();
-        void set_matrix(ShaderProgram* shader);
+    void set_rotation(glm::vec3 rotation);
 
-    private:
-        vertex_t* vertices;
-        GLuint    vertices_size;
+    void move(glm::vec3 position);
 
-        GLuint*   indices;
-        GLuint    indices_size;
+    void rotate(glm::vec3 rotation);
 
-        GLuint    VAO;
-        GLuint    VBO;
-        GLuint    EBO;
+    void scale_up(glm::vec3 scale);
 
-        glm::vec3 position;
-        glm::vec3 rotation;
-        glm::vec3 scale;
-        glm::vec3 origin;
+    void draw(ShaderProgram *shader);
 
-        glm::mat4 matrix;
+private:
+    void setup_mesh();
 
-    };
-}
+    void update_matrix();
+
+    void set_matrix(ShaderProgram *shader);
+
+private:
+    vertex_t *vertices;
+    GLuint vertices_size;
+
+    GLuint *indices;
+    GLuint indices_size;
+
+    GLuint VAO;
+    GLuint VBO;
+    GLuint EBO;
+
+    glm::vec3 position;
+    glm::vec3 rotation;
+    glm::vec3 scale;
+    glm::vec3 origin;
+
+    glm::mat4 matrix;
+
+};

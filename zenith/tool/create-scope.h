@@ -31,10 +31,10 @@
 /**
  * @return 窗口实例
  */
-static zenith_scope<zenith::Window> create_window(const zenith::v_winprops &props)
+static zenith_scope<Window> create_window(const v_winprops &props)
 {
 #if (defined __ZENITH_PLATFORM_WINDOWS__) || (defined __ZENITH_PLATFORM_MACOS__)
-    return zenith::create_scope<zenith::win::WinWindow>(props);
+    return create_scope<WinWindow>(props);
 #else
     ZENITH_ERROR("NOT SUPPORT CURRENT PLATFORM"); return nullptr;
 #endif
@@ -43,15 +43,15 @@ static zenith_scope<zenith::Window> create_window(const zenith::v_winprops &prop
 /**
  * @return 图形上下文
  */
-static zenith::GraphicsContext* create_graphics_context(zenith_any window)
+static GraphicsContext* create_graphics_context(zenith_any window)
 {
-    switch (zenith::AbstractRenderer::GetRenderAPI())
+    switch (AbstractRenderer::GetRenderAPI())
     {
-        case zenith::render::api::NONE:
+        case render::api::NONE:
             break;
-        case zenith::render::api::GL:
-            return new zenith::OpenGLGraphicsContext(static_cast<GLFWwindow *>(window));
-        case zenith::render::api::DX:
+        case render::api::GL:
+            return new OpenGLGraphicsContext(static_cast<GLFWwindow *>(window));
+        case render::api::DX:
             break;
     }
 
@@ -61,15 +61,15 @@ static zenith::GraphicsContext* create_graphics_context(zenith_any window)
 /**
  * @return 渲染器
  */
-static zenith_scope<zenith::AbstractRenderer> create_renderer()
+static zenith_scope<AbstractRenderer> create_renderer()
 {
-    switch (zenith::AbstractRenderer::GetRenderAPI())
+    switch (AbstractRenderer::GetRenderAPI())
     {
-        case zenith::render::api::NONE:
+        case render::api::NONE:
             break;
-        case zenith::render::api::GL:
-            return zenith::create_scope<zenith::OpenGLRenderer>();
-        case zenith::render::api::DX:
+        case render::api::GL:
+            return create_scope<OpenGLRenderer>();
+        case render::api::DX:
             break;
     }
 
@@ -79,15 +79,15 @@ static zenith_scope<zenith::AbstractRenderer> create_renderer()
 /**
  * @return 着色器实例
  */
-static zenith::ShaderProgram* create_shader_program(zenith_char path, zenith_char debugname)
+static ShaderProgram* create_shader_program(zenith_char path, zenith_char debugname)
 {
-    switch (zenith::AbstractRenderer::GetRenderAPI())
+    switch (AbstractRenderer::GetRenderAPI())
     {
-        case zenith::render::api::NONE:
+        case render::api::NONE:
             break;
-        case zenith::render::api::GL:
-            return new zenith::OpenGLShaderProgram(path, debugname);
-        case zenith::render::api::DX:
+        case render::api::GL:
+            return new OpenGLShaderProgram(path, debugname);
+        case render::api::DX:
             break;
     }
 

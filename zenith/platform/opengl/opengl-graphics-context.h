@@ -22,17 +22,16 @@
  * @author 2B键盘
  */
 #pragma once
+
 #include "render/graphics-context.h"
 
-namespace zenith
+class OpenGLGraphicsContext : public GraphicsContext
 {
-    class OpenGLGraphicsContext : public GraphicsContext
-    {
-    public:
-        explicit OpenGLGraphicsContext(GLFWwindow* window);
-        void initialize();
-        void swap_buffers() override;
-    private:
-        GLFWwindow* window;
-    };
-}
+public:
+    explicit OpenGLGraphicsContext(GLFWwindow *window);
+    void initialize();
+    void swap_buffers() override;
+
+private:
+    GLFWwindow *window;
+};

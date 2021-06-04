@@ -32,21 +32,18 @@
 #include <map>
 #include <vector>
 
-namespace zenith
+typedef ShaderProgram*              sp;
+typedef std::vector<Model>          vecq;
+
+class RenderQueue
 {
-    typedef ShaderProgram*              sp;
-    typedef std::vector<Model>          vecq;
+public:
+    void push(Model& model, ShaderProgram* shader);
+    void draw_queue(const glm::mat4& view_matrix, const glm::mat4& projection, const glm::vec3& camera_position,
+                    Light* light);
 
-    class RenderQueue
-    {
-    public:
-        void push(Model& model, ShaderProgram* shader);
-        void draw_queue(const glm::mat4& view_matrix, const glm::mat4& projection, const glm::vec3& camera_position,
-                        Light* light);
-
-        void reload_all_bad_model();
-    private:
-        std::map<sp, vecq> queue;
-        std::map<std::string, Model&> bad_models;
-    };
-}
+    void reload_all_bad_model();
+private:
+    std::map<sp, vecq> queue;
+    std::map<std::string, Model&> bad_models;
+};

@@ -27,20 +27,17 @@
 #include <api/imgui-api.h>
 #include "event/key-event.h"
 
-namespace zenith
+class EditorLayer : public Layer
 {
-    class EditorLayer : public Layer
-    {
-    public:
-        EditorLayer() : Layer("editor layer") {}
+public:
+    EditorLayer() : Layer("editor layer") {}
 
-        void render() override;
-        void update(DeltaTime) override;
-        void event(Event&) override;
-        void close() override;
+    void render() override;
+    void update(DeltaTime) override;
+    void event(Event&) override;
+    void close() override;
 
-    private:
-        void initialize();
-        void on_keypress(KeyPressedEvent&); // 处理键盘事件
-    };
-}
+private:
+    void initialize();
+    void on_keypress(KeyPressedEvent&); // 处理键盘事件
+};
