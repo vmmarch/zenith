@@ -29,25 +29,22 @@
 #include <zenith/type.h>
 #include <zenith/glob.h>
 
-namespace zenith
+class ShaderManager
 {
-    class ShaderManager
+public:
+    ShaderManager() = default;
+
+    ShaderProgram *get_program(const std::string &name)
     {
-    public:
-        ShaderManager() = default;
+        auto shader = shaders[(name + "-vfs")];
+        if (shader == nullptr)
+            ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
 
-        ShaderProgram* get_program(const std::string& name)
-        {
-            auto shader = shaders[(name + "-vfs")];
-            if(shader == nullptr)
-                ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
+        return shader;
+    }
 
-            return shader;
-        }
+    void load_shaders(const std::string &folder);
 
-        void load_shaders(const std::string& folder);
-
-    private:
-        std::map<std::string, ShaderProgram*> shaders;
-    };
-}
+private:
+    std::map<std::string, ShaderProgram *> shaders;
+};

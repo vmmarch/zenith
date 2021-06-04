@@ -39,38 +39,34 @@
 
 #include <vector>
 
-namespace zenith
+class SandBox : public Layer
 {
+public:
+    explicit SandBox(Window* window);
 
-    class SandBox : public Layer
-    {
-    public:
-        explicit SandBox(Window* window);
+    void initialize();
+    void initialize_material();
 
-        void initialize();
-        void initialize_material();
+    void render() override;
+    void update(DeltaTime deltaTime) override;
+    void event(Event&) override;
+    void close() override {};
 
-        void render() override;
-        void update(DeltaTime deltaTime) override;
-        void event(Event&) override;
-        void close() override {};
+private:
+    LayerStack layer_stack;
+    ImGuiLayer* imlayer {};
+    Camera camera;
+    Window* window;
+    float last_x = 0, last_y = 0;
+    Layer* main_layer;
+    bool cursor_hide = false;
 
-    private:
-        LayerStack layer_stack;
-        ImGuiLayer* imlayer {};
-        Camera camera;
-        Window* window;
-        float last_x = 0, last_y = 0;
-        Layer* main_layer;
-        bool cursor_hide = false;
+    ShaderManager* shader_manager;
+    std::vector<Model> models;
 
-        ShaderManager* shader_manager;
-        std::vector<Model> models;
+    // Textures
+    std::vector<Texture*> textures;
 
-        // Textures
-        std::vector<Texture*> textures;
+    Light* light;
+};
 
-        Light* light;
-    };
-
-}

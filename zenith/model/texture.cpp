@@ -26,60 +26,58 @@
 #include <zenith/type.h>
 
 #define STB_IMAGE_IMPLEMENTATION
+
 #include <stb_image.h>
 
-namespace zenith
+
+Texture::Texture(const char *file, GLenum _type) : type(_type)
 {
-    Texture::Texture(const char *file, GLenum _type) : type(_type)
+    load_form_file(file);
+}
+
+Texture::~Texture()
+{
+    glDeleteTextures(1, &id);
+}
+
+unsigned int Texture::get_id() const
+{
+    return this->id;
+}
+
+void Texture::bind(GLenum unit)
+{
+    glActiveTexture(unit);
+    glBindTexture(type, id);
+}
+
+void Texture::unbind()
+{
+    glActiveTexture(0);
+    glBindTexture(type, 0);
+}
+
+void Texture::load_form_file(const char *file)
+{
+    unsigned char *image = stbi_load(file, &width, &height, nullptr, 0);
+
+    glGenTextures(1, &id);
+    glBindTexture(type, id);
+
+    glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+    if (image)
     {
-        load_form_file(file);
+        glTexImage2D(type, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+        glGenerateMipmap(type);
+    } else
+    {
+        ZENITH_ERROR(TEXTURE_LOAD_FAILED, file);
     }
 
-    Texture::~Texture()
-    {
-        glDeleteTextures(1, &id);
-    }
-
-    unsigned int Texture::get_id() const
-    {
-        return this->id;
-    }
-
-    void Texture::bind(GLenum unit)
-    {
-        glActiveTexture(unit);
-        glBindTexture(type, id);
-    }
-
-    void Texture::unbind()
-    {
-        glActiveTexture(0);
-        glBindTexture(type, 0);
-    }
-
-    void Texture::load_form_file(const char *file)
-    {
-        unsigned char* image = stbi_load(file, &width, &height, nullptr, 0);
-
-        glGenTextures(1, &id);
-        glBindTexture(type, id);
-
-        glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-        if(image)
-        {
-            glTexImage2D(type, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-            glGenerateMipmap(type);
-        } else
-        {
-            ZENITH_ERROR(TEXTURE_LOAD_FAILED, file);
-        }
-
-        unbind();
-        stbi_image_free(image);
-    }
-
+    unbind();
+    stbi_image_free(image);
 }

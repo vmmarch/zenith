@@ -23,9 +23,6 @@
  */
 #include "layer.h"
 
-namespace zenith
+Layer::Layer(zenith_char name) : debug_name(name)
 {
-    Layer::Layer(zenith_char name) : debug_name(name)
-    {
-    }
 }

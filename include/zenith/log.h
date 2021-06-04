@@ -29,95 +29,92 @@
 #include <stdarg.h>
 #include <vector>
 
-namespace zenith
+enum level
 {
-    enum level
-    {
-        INFO, DEBUG, WARN, ERR
-    };
+    INFO, DEBUG, WARN, ERR
+};
 
-    static const char *__get_level_value(level lev)
+static const char *__get_level_value(level lev)
+{
+    switch (lev)
     {
-        switch (lev)
-        {
-            case level::INFO:
-                return "INFO";
-            case level::DEBUG:
-                return "DEBUG";
-            case level::WARN:
-                return "WARN";
-            default:
-                return "ERROR";
-        }
-
+        case level::INFO:
+            return "INFO";
+        case level::DEBUG:
+            return "DEBUG";
+        case level::WARN:
+            return "WARN";
+        default:
+            return "ERROR";
     }
 
-    /**
-     * 字符格式化
-     * @param fmt 格式化的原字符串
-     * @param ... 可变参数列表
-     */
-    static void __logc(const char *fmt, ...)
-    {
-        va_list args;
-        va_start(args, fmt);
+}
 
-        size_t len;
+/**
+ * 字符格式化
+ * @param fmt 格式化的原字符串
+ * @param ... 可变参数列表
+ */
+static void __logc(const char *fmt, ...)
+{
+    va_list args;
+    va_start(args, fmt);
+
+    size_t len;
 
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-        len = _vscprintf(fmt, args) + 1; // Used MinGW
+    len = _vscprintf(fmt, args) + 1; // Used MinGW
 #elif __ZENITH_PLATFORM_MACOS__
-        len = 0;
+    len = 0;
 #else
 #   error NOT SUPPORT THIS PLATFORM.
 #endif
-        std::vector<char> vbuf(len, '\0');
+    std::vector<char> vbuf(len, '\0');
 
-        int nwrite;
+    int nwrite;
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-        nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, fmt, args);
+    nwrite = _vsnprintf_s(&vbuf[0], vbuf.size(), len, fmt, args);
 #elif __ZENITH_PLATFORM_MACOS__
-        nwrite = 0;
+    nwrite = 0;
 #else
 #   error NOT SUPPORT THIS PLATFORM.
 #endif
 
-        if(nwrite > 0)
-        {
-            printf("%s\n", &vbuf[0]);
-        }
-        va_end(args);
-    }
-
-    template<typename FMT, typename... Args>
-    void log(FMT &__fmt, level lev, Args &&... args)
+    if (nwrite > 0)
     {
-        char buf[2048];
-        snprintf(buf, sizeof(buf), "[%s] [%s] - %s", "2020-04:20 00:26", __get_level_value(lev), __fmt);
-        __logc(buf, std::forward<Args>(args)...);
+        printf("%s\n", &vbuf[0]);
     }
+    va_end(args);
+}
 
-    template<typename FMT, typename... Args>
-    void zenithloggerinfo(FMT &__fmt, Args &&... args)
-    {
-        log(__fmt, level::INFO, std::forward<Args>(args)...);
-    }
+template<typename FMT, typename... Args>
+void log(FMT &__fmt, level lev, Args &&... args)
+{
+    char buf[2048];
+    snprintf(buf, sizeof(buf), "[%s] [%s] - %s", "2020-04:20 00:26", __get_level_value(lev), __fmt);
+    __logc(buf, std::forward<Args>(args)...);
+}
 
-    template<typename FMT, typename... Args>
-    void zenithloggerdebug(FMT &__fmt, Args &&... args)
-    {
-        log(__fmt, level::DEBUG, std::forward<Args>(args)...);
-    }
+template<typename FMT, typename... Args>
+void zenithloggerinfo(FMT &__fmt, Args &&... args)
+{
+    log(__fmt, level::INFO, std::forward<Args>(args)...);
+}
 
-    template<typename FMT, typename... Args>
-    void zenithloggerwarn(FMT &__fmt, Args &&... args)
-    {
-        log(__fmt, level::WARN, std::forward<Args>(args)...);
-    }
+template<typename FMT, typename... Args>
+void zenithloggerdebug(FMT &__fmt, Args &&... args)
+{
+    log(__fmt, level::DEBUG, std::forward<Args>(args)...);
+}
 
-    template<typename FMT, typename... Args>
-    void zenithloggererror(FMT &__fmt, Args &&... args)
-    {
-        log(__fmt, level::ERR, std::forward<Args>(args)...);
-    }
+template<typename FMT, typename... Args>
+void zenithloggerwarn(FMT &__fmt, Args &&... args)
+{
+    log(__fmt, level::WARN, std::forward<Args>(args)...);
+}
+
+template<typename FMT, typename... Args>
+void zenithloggererror(FMT &__fmt, Args &&... args)
+{
+    log(__fmt, level::ERR, std::forward<Args>(args)...);
 }

@@ -25,26 +25,25 @@
 
 #include <api/glfw-api.h>
 
-namespace zenith
+
+struct State
 {
-    struct State
-    {
-        static GLFWwindow *get_glfw_window();
+    static GLFWwindow *get_glfw_window();
 
-        /**
-         * 获取窗口宽度
-         */
-        static int get_width();
+    /**
+     * 获取窗口宽度
+     */
+    static int get_width();
 
-        /**
-         * 获取窗口高度
-         */
-        static int get_height();
+    /**
+     * 获取窗口高度
+     */
+    static int get_height();
 
-        static void count_plus() { LOOP_NUMBER++; }
+    static void count_plus()
+    { LOOP_NUMBER++; }
 
-    private:
-        static long LOOP_NUMBER;
-        static GLFWwindow *window;
-    };
-}
+private:
+    static long LOOP_NUMBER;
+    static GLFWwindow *window;
+};

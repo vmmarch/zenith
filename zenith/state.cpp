@@ -24,27 +24,23 @@
 #include "state.h"
 #include "init/starter.h"
 
-namespace zenith
+long State::LOOP_NUMBER = 0;
+GLFWwindow *State::window = nullptr;
+
+GLFWwindow *State::get_glfw_window()
 {
-    long State::LOOP_NUMBER = 0;
-    GLFWwindow *State::window = nullptr;
+    if (window == nullptr)
+        window = Starter::instance().GetWindow().get_glfw_window();
 
-    GLFWwindow *State::get_glfw_window()
-    {
-        if(window == nullptr)
-            window = Starter::instance().GetWindow().get_glfw_window();
+    return window;
+}
 
-        return window;
-    }
+int State::get_width()
+{
+    return (int) Starter::instance().GetWindow().get_width();
+}
 
-    int State::get_width()
-    {
-        return (int) Starter::instance().GetWindow().get_width();
-    }
-
-    int State::get_height()
-    {
-        return (int) Starter::instance().GetWindow().get_height();
-    }
-
+int State::get_height()
+{
+    return (int) Starter::instance().GetWindow().get_height();
 }

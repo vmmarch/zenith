@@ -24,59 +24,54 @@
 #include "renderer.h"
 #include "tool/create-scope.h"
 
-namespace zenith
-{
-
-    zenith_scope<AbstractRenderer> Renderer::s_renderer = AbstractRenderer::Create();
+zenith_scope<AbstractRenderer> Renderer::s_renderer = AbstractRenderer::Create();
 
 #ifdef __GLAPI
-    render::api AbstractRenderer::render_api = render::api::GL;
+render::api AbstractRenderer::render_api = render::api::GL;
 #elif __DXAPI
-    #error ##NOT_SUPPORT_DIRECTX_API
+#error ##NOT_SUPPORT_DIRECTX_API
 #else
-    #error ##PLEASE_CHOOSE_RENDER_API
+#error ##PLEASE_CHOOSE_RENDER_API
 #endif
 
-    render::api AbstractRenderer::GetRenderAPI()
-    {
-        return render_api;
-    }
+render::api AbstractRenderer::GetRenderAPI()
+{
+    return render_api;
+}
 
-    zenith_scope<AbstractRenderer> AbstractRenderer::Create()
-    {
-        return create_renderer();
-    }
+zenith_scope<AbstractRenderer> AbstractRenderer::Create()
+{
+    return create_renderer();
+}
 
-    // 设置清屏颜色
-    void Renderer::clear_color(const glm::vec4 &color)
-    {
-        s_renderer->clear_color(color);
-    }
+// 设置清屏颜色
+void Renderer::clear_color(const glm::vec4 &color)
+{
+    s_renderer->clear_color(color);
+}
 
-    void Renderer::begin(Camera &camera, Light* light)
-    {
-        s_renderer->begin(camera, light);
-    }
+void Renderer::begin(Camera &camera, Light *light)
+{
+    s_renderer->begin(camera, light);
+}
 
-    // 清屏
-    void Renderer::clear()
-    {
-        s_renderer->clear();
-    }
+// 清屏
+void Renderer::clear()
+{
+    s_renderer->clear();
+}
 
-    void Renderer::draw_models()
-    {
-        s_renderer->draw_models();
-    }
+void Renderer::draw_models()
+{
+    s_renderer->draw_models();
+}
 
-    void Renderer::draw_model(Model &model)
-    {
-        s_renderer->draw_model(model);
-    }
+void Renderer::draw_model(Model &model)
+{
+    s_renderer->draw_model(model);
+}
 
-    void Renderer::submit(Model& model, ShaderProgram* shader)
-    {
-        s_renderer->submit(model, shader);
-    }
-
+void Renderer::submit(Model &model, ShaderProgram *shader)
+{
+    s_renderer->submit(model, shader);
 }

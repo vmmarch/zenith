@@ -26,200 +26,194 @@
 #include "event/key-event.h"
 #include "event/window-event.h"
 
-namespace zenith::win
+static zenith_uint window_count_of_create = 0;
+
+WinWindow::WinWindow(const v_winprops &winprops)
+{
+    initialize(winprops);
+    callback();
+}
+
+WinWindow::~WinWindow()
+{
+    glfwTerminate();
+}
+
+/**
+ * 创建窗口并初始化GLFW
+ * @param winprops 窗口基本信息（标题、宽度、高度）
+ */
+void WinWindow::initialize(const v_winprops &winprops)
 {
 
-    static zenith_uint window_count_of_create = 0;
+    info.title = winprops.title;
+    info.width = winprops.width;
+    info.height = winprops.height;
 
-    WinWindow::WinWindow(const v_winprops &winprops)
-    {
-        initialize(winprops);
-        callback();
-    }
+    ZENITH_INFO(CREATE_WINDOW_INFO, info.title, info.width, info.height);
 
-    WinWindow::~WinWindow()
+    int success = glfwInit();
+    if (!success)
+            ZENITH_ERROR(GLFW_INIT_FAILED);
+
+    glfwWindowHint(GL_SAMPLES, 4); // 开启多样本缓冲
+    this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title),
+                                    nullptr, nullptr);
+    window_count_of_create++; // 窗口计数+1
+
+    if (window == nullptr)
     {
+        ZENITH_ERROR(CREATE_WINDOW_FAILED);
         glfwTerminate();
     }
 
-    /**
-     * 创建窗口并初始化GLFW
-     * @param winprops 窗口基本信息（标题、宽度、高度）
-     */
-    void WinWindow::initialize(const v_winprops &winprops)
+    graphics_context = GraphicsContext::Create(this->window);
+    glfwSetWindowUserPointer(this->window, &this->info);
+}
+
+void WinWindow::callback()
+{
+    // set framebuffer callback
+    glfwSetFramebufferSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
     {
+        glViewport(0, 0, width, height);
+    });
 
-        info.title = winprops.title;
-        info.width = winprops.width;
-        info.height = winprops.height;
+    // window resize callback
+    glfwSetWindowSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
+    {
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+        info.width = width;
+        info.height = height;
 
-        ZENITH_INFO(CREATE_WINDOW_INFO, info.title, info.width, info.height);
+        WindowResizeEvent event(width, height);
+        info.fn(event);
+    });
 
-        int success = glfwInit();
-        if (!success)
-                ZENITH_ERROR(GLFW_INIT_FAILED);
+    // window close callback.
+    glfwSetWindowCloseCallback(this->window, [](GLFWwindow *window)
+    {
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
-        glfwWindowHint(GL_SAMPLES, 4); // 开启多样本缓冲
-        this->window = glfwCreateWindow(info.width, info.height, reinterpret_cast<const char *>(info.title),
-                                        nullptr, nullptr);
-        window_count_of_create++; // 窗口计数+1
+        WindowCloseEvent event;
+        info.fn(event);
+    });
 
-        if (window == nullptr)
+    // key callback
+    glfwSetKeyCallback(this->window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
+    {
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+
+        switch(action)
         {
-            ZENITH_ERROR(CREATE_WINDOW_FAILED);
-            glfwTerminate();
+            case GLFW_PRESS:
+            {
+                KeyPressedEvent event(key, 0);
+                info.fn(event);
+                break;
+            }
+
+            case GLFW_RELEASE:
+            {
+                KeyReleasedEvent event(key);
+                info.fn(event);
+                break;
+            }
+
+            case GLFW_REPEAT:
+            {
+                KeyPressedEvent event(key, 1);
+                info.fn(event);
+                break;
+            }
         }
 
-        graphics_context = GraphicsContext::Create(this->window);
-        glfwSetWindowUserPointer(this->window, &this->info);
-    }
+    });
 
-    void WinWindow::callback()
+    // window char callback
+    glfwSetCharCallback(this->window, [](GLFWwindow *window, zenith_uint keycode)
     {
-        // set framebuffer callback
-        glfwSetFramebufferSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+
+        KeyTypeEvent event(keycode);
+        info.fn(event);
+    });
+
+    // mouse button callback
+    glfwSetMouseButtonCallback(this->window, [](GLFWwindow *window, int button, int action, int mods)
+    {
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
+        switch(action)
         {
-            glViewport(0, 0, width, height);
-        });
-
-        // window resize callback
-        glfwSetWindowSizeCallback(this->window, [](GLFWwindow *window, int width, int height)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-            info.width = width;
-            info.height = height;
-
-            WindowResizeEvent event(width, height);
-            info.fn(event);
-        });
-
-        // window close callback.
-        glfwSetWindowCloseCallback(this->window, [](GLFWwindow *window)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-
-            WindowCloseEvent event;
-            info.fn(event);
-        });
-
-        // key callback
-        glfwSetKeyCallback(this->window, [](GLFWwindow *window, int key, int scancode, int action, int mods)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-
-            switch(action)
+            case GLFW_PRESS:
             {
-                case GLFW_PRESS:
-                {
-                    KeyPressedEvent event(key, 0);
-                    info.fn(event);
-                    break;
-                }
-
-                case GLFW_RELEASE:
-                {
-                    KeyReleasedEvent event(key);
-                    info.fn(event);
-                    break;
-                }
-
-                case GLFW_REPEAT:
-                {
-                    KeyPressedEvent event(key, 1);
-                    info.fn(event);
-                    break;
-                }
+                MouseButtonPressedEvent event(button);
+                info.fn(event);
             }
 
-        });
-
-        // window char callback
-        glfwSetCharCallback(this->window, [](GLFWwindow *window, zenith_uint keycode)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-
-            KeyTypeEvent event(keycode);
-            info.fn(event);
-        });
-
-        // mouse button callback
-        glfwSetMouseButtonCallback(this->window, [](GLFWwindow *window, int button, int action, int mods)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-            switch(action)
+            case GLFW_RELEASE:
             {
-                case GLFW_PRESS:
-                {
-                    MouseButtonPressedEvent event(button);
-                    info.fn(event);
-                }
-
-                case GLFW_RELEASE:
-                {
-                    MouseButtonReleasedEvent event(button);
-                    info.fn(event);
-                }
+                MouseButtonReleasedEvent event(button);
+                info.fn(event);
             }
-        });
+        }
+    });
 
-        // mouse scrolled callback
-        glfwSetScrollCallback(this->window, [](GLFWwindow *window, double x_offset, double y_offset)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-
-            MouseButtonScrolledEvent event((float) x_offset, (float) y_offset);
-            info.fn(event);
-        });
-
-        glfwSetCursorPosCallback(this->window, [](GLFWwindow *window, double x_pos, double y_pos)
-        {
-            v_info info = *(v_info*) glfwGetWindowUserPointer(window);
-
-            MouseMovedEvent event((float) x_pos, (float) y_pos);
-            info.fn(event);
-        });
-
-    }
-
-    void WinWindow::SetEventCallback(const f_callback &fn)
+    // mouse scrolled callback
+    glfwSetScrollCallback(this->window, [](GLFWwindow *window, double x_offset, double y_offset)
     {
-        info.fn = fn;
-    }
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
-    bool WinWindow::is_close()
+        MouseButtonScrolledEvent event((float) x_offset, (float) y_offset);
+        info.fn(event);
+    });
+
+    glfwSetCursorPosCallback(this->window, [](GLFWwindow *window, double x_pos, double y_pos)
     {
-        return glfwWindowShouldClose(this->window);
-    }
+        v_info info = *(v_info*) glfwGetWindowUserPointer(window);
 
-    void WinWindow::close_window()
-    {
-        destroy(this->window);
-        // 如果窗口数量为0就释放窗口占用的内存
-        if(window_count_of_create == 0)
-            glfwTerminate();
-    }
+        MouseMovedEvent event((float) x_pos, (float) y_pos);
+        info.fn(event);
+    });
 
-    void WinWindow::update()
-    {
-        glfwPollEvents();
-        graphics_context->swap_buffers();
-    }
+}
 
-    void WinWindow::destroy(GLFWwindow *window)
-    {
-        glfwDestroyWindow(window);
-        window_count_of_create--;
-    }
+void WinWindow::SetEventCallback(const f_callback &fn)
+{
+    info.fn = fn;
+}
 
-    void* WinWindow::GetWindowHANDLE() const
-    {
-        return this->window;
-    }
+bool WinWindow::is_close()
+{
+    return glfwWindowShouldClose(this->window);
+}
 
-    GLFWwindow* WinWindow::get_glfw_window() const
-    {
-        return this->window;
-    }
+void WinWindow::close_window()
+{
+    destroy(this->window);
+    // 如果窗口数量为0就释放窗口占用的内存
+    if(window_count_of_create == 0)
+        glfwTerminate();
+}
 
+void WinWindow::update()
+{
+    glfwPollEvents();
+    graphics_context->swap_buffers();
+}
 
+void WinWindow::destroy(GLFWwindow *window)
+{
+    glfwDestroyWindow(window);
+    window_count_of_create--;
+}
+
+void* WinWindow::GetWindowHANDLE() const
+{
+    return this->window;
+}
+
+GLFWwindow* WinWindow::get_glfw_window() const
+{
+    return this->window;
 }

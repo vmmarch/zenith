@@ -25,59 +25,56 @@
 
 #include "shader/shader.h"
 
-namespace zenith
+class Light
 {
-    class Light
+protected:
+    float intensity;
+    glm::vec3 color;
+
+public:
+    Light(float intensity, const glm::vec3& color)
     {
-    protected:
-        float intensity;
-        glm::vec3 color;
+        this->intensity = intensity;
+        this->color = color;
+    }
 
-    public:
-        Light(float intensity, const glm::vec3& color)
-        {
-            this->intensity = intensity;
-            this->color = color;
-        }
+    virtual void set_position(glm::vec3 position) = 0;
 
-        virtual void set_position(glm::vec3 position) = 0;
+    //Functions
+    virtual void update(ShaderProgram *program) = 0;
+};
 
-        //Functions
-        virtual void update(ShaderProgram *program) = 0;
-    };
+class PointLight : public Light
+{
+protected:
+    glm::vec3 position;
+    float constant;
+    float linear;
+    float quadratic;
 
-    class PointLight : public Light
+public:
+    explicit PointLight(const glm::vec3& position, float intensity = 1.f, const glm::vec3& color = glm::vec3(1.f),
+               float constant = 1.f, float linear = 0.045f, float quadratic = 0.0075f)
+            : Light(intensity, color)
     {
-    protected:
-        glm::vec3 position;
-        float constant;
-        float linear;
-        float quadratic;
+        this->position = position;
+        this->constant = constant;
+        this->linear = linear;
+        this->quadratic = quadratic;
+    }
 
-    public:
-        explicit PointLight(const glm::vec3& position, float intensity = 1.f, const glm::vec3& color = glm::vec3(1.f),
-                   float constant = 1.f, float linear = 0.045f, float quadratic = 0.0075f)
-                : Light(intensity, color)
-        {
-            this->position = position;
-            this->constant = constant;
-            this->linear = linear;
-            this->quadratic = quadratic;
-        }
+    void set_position(const glm::vec3 position) override
+    {
+        this->position = position;
+    }
 
-        void set_position(const glm::vec3 position) override
-        {
-            this->position = position;
-        }
-
-        void update(ShaderProgram *program) override
-        {
-            program->set_float3("pointLight.position", position);
-            program->set_int("pointLight.intensity", intensity);
-            program->set_float3("pointLight.color", color);
-            program->set_int("pointLight.constant", constant);
-            program->set_int("pointLight.linear", linear);
-            program->set_int("pointLight.quadratic", quadratic);
-        }
-    };
-}
+    void update(ShaderProgram *program) override
+    {
+        program->set_float3("pointLight.position", position);
+        program->set_int("pointLight.intensity", intensity);
+        program->set_float3("pointLight.color", color);
+        program->set_int("pointLight.constant", constant);
+        program->set_int("pointLight.linear", linear);
+        program->set_int("pointLight.quadratic", quadratic);
+    }
+};

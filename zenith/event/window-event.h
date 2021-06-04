@@ -25,29 +25,26 @@
 
 #include "event/event.h"
 
-namespace zenith
+class WindowCloseEvent : public Event
 {
-    class WindowCloseEvent : public Event
-    {
-    public:
-        WindowCloseEvent() = default;
+public:
+    WindowCloseEvent() = default;
 
-        TYPE(event::type::EVENT_WINDOW_CLOSE);
-        CLASSIF(event::classif::MAIN);
-    };
+    TYPE(event::type::EVENT_WINDOW_CLOSE);
+    CLASSIF(event::classif::MAIN);
+};
 
-    class WindowResizeEvent : public Event
-    {
-    public:
-        WindowResizeEvent(int _width, int _height) : width(_width), height(_height) {}
+class WindowResizeEvent : public Event
+{
+public:
+    WindowResizeEvent(int _width, int _height) : width(_width), height(_height) {}
 
-        int __width() const { return width; }
-        int __height() const { return height; }
+    int __width() const { return width; }
+    int __height() const { return height; }
 
-        TYPE(event::type::EVENT_WINDOW_RESIZE);
-        CLASSIF(event::classif::MAIN);
-    private:
-        int width, height;
-    };
+    TYPE(event::type::EVENT_WINDOW_RESIZE);
+    CLASSIF(event::classif::MAIN);
+private:
+    int width, height;
+};
 
-}

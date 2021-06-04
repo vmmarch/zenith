@@ -30,117 +30,112 @@
 
 #include "model/loader.h"
 
-namespace zenith
+static bool first = true;
+
+SandBox::SandBox(Window *window)
+        : Layer("sandbox layer"), camera(Camera()), window(window)
+{
+    main_layer = new ExampleLayer();
+
+    this->imlayer = new ImGuiLayer();
+    layer_stack.push(new HomeLayer());
+    layer_stack.push(new EditorLayer());
+
+    shader_manager = new ShaderManager();
+    shader_manager->load_shaders("../shader");
+}
+
+void SandBox::initialize()
 {
 
-    static bool first = true;
+    light = new PointLight(glm::vec3(0.0f));
 
-    SandBox::SandBox(Window *window)
-            : Layer("sandbox layer"), camera(Camera()), window(window)
+    ShaderProgram *program = shader_manager->get_program("core");
+    Renderer::submit(*new Model(
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
+            new Texture("../resources/container.png"),
+            new Texture("../resources/container_specular.png"),
+            "D:/model/cube.obj"
+    ), program);
+}
+
+void SandBox::update(DeltaTime delta_time)
+{
+    // ----------------------------------
+    // ------
+    // reload settings
+    reload_setting();
+
+    camera.update((float) State::get_width(), (float) State::get_height(), delta_time);
+
+    // 禁止鼠标移动相机
+    if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
     {
-        main_layer = new ExampleLayer();
-
-        this->imlayer = new ImGuiLayer();
-        layer_stack.push(new HomeLayer());
-        layer_stack.push(new EditorLayer());
-
-        shader_manager = new ShaderManager();
-        shader_manager->load_shaders("../shader");
+        set_value(KEY_CURSOR_MOVE_CAMER, !get_value(KEY_CURSOR_MOVE_CAMER));
     }
-
-    void SandBox::initialize()
-    {
-
-        light = new PointLight(glm::vec3(0.0f));
-
-        ShaderProgram *program = shader_manager->get_program("core");
-        Renderer::submit(*new Model(
-                glm::vec3(0.0f, 0.0f, 0.0f),
-                new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
-                new Texture("../resources/container.png"),
-                new Texture("../resources/container_specular.png"),
-                "D:/model/cube.obj"
-        ), program);
-    }
-
-    void SandBox::update(DeltaTime delta_time)
-    {
-        // ----------------------------------
-        // ------
-        // reload settings
-        reload_setting();
-
-        camera.update((float) State::get_width(), (float) State::get_height(), delta_time);
-
-        // 禁止鼠标移动相机
-        if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
-        {
-            set_value(KEY_CURSOR_MOVE_CAMER, !get_value(KEY_CURSOR_MOVE_CAMER));
-        }
 
         // 隐藏鼠标
-        else if(Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
-        {
-            if (!cursor_hide)
-                glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-            else
-                glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-            cursor_hide = !cursor_hide;
-        }
-
-        main_layer->update(delta_time);
-        layer_stack.update(delta_time);
+    else if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
+    {
+        if (!cursor_hide)
+            glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        else
+            glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        cursor_hide = !cursor_hide;
     }
 
-    void SandBox::render()
-    {
-        Renderer::begin(camera, light);
-        Renderer::clear();
+    main_layer->update(delta_time);
+    layer_stack.update(delta_time);
+}
+
+void SandBox::render()
+{
+    Renderer::begin(camera, light);
+    Renderer::clear();
 
 #ifndef __ZENITH_PLATFORM_MACOS__
-         imlayer->begin();
-         {
-             layer_stack.render();
-         }
-         imlayer->end();
+    imlayer->begin();
+    {
+        layer_stack.render();
+    }
+    imlayer->end();
 #endif
 
-        // 渲染模型
-        Renderer::draw_models();
-    }
+    // 渲染模型
+    Renderer::draw_models();
+}
 
-    void SandBox::event(Event &e)
+void SandBox::event(Event &e)
+{
+    if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
     {
-        if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
+        if (!get_value(KEY_CURSOR_MOVE_CAMER)) return;
+        auto &event = dynamic_cast<MouseMovedEvent &>(e);
+
+        float xpos = event.GetX();
+        float ypos = event.GetY();
+
+        if (first)
         {
-            if(!get_value(KEY_CURSOR_MOVE_CAMER)) return;
-            auto &event = dynamic_cast<MouseMovedEvent&>(e);
-
-            float xpos = event.GetX();
-            float ypos = event.GetY();
-
-            if (first)
-            {
-                last_x = xpos;
-                last_y = ypos;
-
-                first = false;
-            }
-
-            float xoffset = xpos - last_x;
-            float yoffset = last_y - ypos;
-
             last_x = xpos;
             last_y = ypos;
 
-            camera.perspective(xoffset, yoffset);
+            first = false;
         }
 
-        if (e.GetEventType() == event::type::EVENT_MOUSE_SCROLLED)
-        {
-            auto &event = dynamic_cast<MouseButtonScrolledEvent &>(e);
-            camera.SetZoom(event.GetY());
-        }
+        float xoffset = xpos - last_x;
+        float yoffset = last_y - ypos;
+
+        last_x = xpos;
+        last_y = ypos;
+
+        camera.perspective(xoffset, yoffset);
     }
 
+    if (e.GetEventType() == event::type::EVENT_MOUSE_SCROLLED)
+    {
+        auto &event = dynamic_cast<MouseButtonScrolledEvent &>(e);
+        camera.SetZoom(event.GetY());
+    }
 }

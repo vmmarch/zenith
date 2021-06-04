@@ -26,37 +26,34 @@
 #include "layer/layer.h"
 #include <vector>
 
-namespace zenith
+class LayerStack
 {
-    class LayerStack
+public:
+
+    LayerStack() = default;
+
+    ~LayerStack() = default;
+
+    void push(Layer *layer)
     {
-    public:
+        layers_vector.push_back(layer);
+        // layers_vector.emplace(layers_vector.begin() + insert_index, layer);
+        insert_index++;
+    }
 
-        LayerStack() = default;
+    void update(DeltaTime deltaTime)
+    {
+        for (auto layer : layers_vector)
+            layer->update(deltaTime);
+    }
 
-        ~LayerStack() = default;
+    void render()
+    {
+        for (auto layer : layers_vector)
+            layer->render();
+    }
 
-        void push(Layer *layer)
-        {
-            layers_vector.push_back(layer);
-            // layers_vector.emplace(layers_vector.begin() + insert_index, layer);
-            insert_index++;
-        }
-
-        void update(DeltaTime deltaTime)
-        {
-            for (auto layer : layers_vector)
-                layer->update(deltaTime);
-        }
-
-        void render()
-        {
-            for (auto layer : layers_vector)
-                layer->render();
-        }
-
-    private:
-        zenith_uint insert_index = 0;
-        std::vector<Layer *> layers_vector;
-    };
-}
+private:
+    zenith_uint insert_index = 0;
+    std::vector<Layer *> layers_vector;
+};

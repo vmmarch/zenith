@@ -27,100 +27,104 @@
 
 #define DIRECTION_UP 1
 
-namespace zenith
+
+using v_moucode = zenith_uint16;
+
+namespace mouse
 {
-    using v_moucode = zenith_uint16;
-
-    namespace mouse
+    enum : v_moucode
     {
-        enum : v_moucode
-        {
-            // From glfw3.h
-            Button0 = 0,
-            Button1 = 1,
-            Button2 = 2,
-            Button3 = 3,
-            Button4 = 4,
-            Button5 = 5,
-            Button6 = 6,
-            Button7 = 7,
+        // From glfw3.h
+        Button0 = 0,
+        Button1 = 1,
+        Button2 = 2,
+        Button3 = 3,
+        Button4 = 4,
+        Button5 = 5,
+        Button6 = 6,
+        Button7 = 7,
 
-            ButtonLast = Button7,
-            ButtonLeft = Button0,
-            ButtonRight = Button1,
-            ButtonMiddle = Button2
-        };
-    }
-
-    class MouseEvent : public Event
-    {
-    public:
-        MouseEvent(const float x, const float y) : x(x), y(y) {};
-        MouseEvent(const float x, const float y, const v_moucode code): x(x), y(y), __mousecode(code) {};
-
-        float GetX()
-        { return x; }
-
-        float GetY()
-        { return y; }
-
-        v_moucode __code()
-        { return __mousecode; }
-
-        CLASSIF(event::MOUSE);
-    private:
-        float x, y;
-        v_moucode __mousecode;
+        ButtonLast = Button7,
+        ButtonLeft = Button0,
+        ButtonRight = Button1,
+        ButtonMiddle = Button2
     };
-
-    /**
-     * 鼠标移动
-     */
-    class MouseMovedEvent : public MouseEvent
-    {
-    public:
-        MouseMovedEvent(const float x, const float y) : MouseEvent(x, y)
-        {}
-
-        TYPE(event::type::EVENT_MOUSE_MOVED);
-    };
-
-    /**
-     * 鼠标按钮按下
-     */
-    class MouseButtonPressedEvent : public MouseEvent
-    {
-    public:
-        MouseButtonPressedEvent(v_moucode vcode) : MouseEvent(0.0f, 0.0f, vcode) {}
-        MouseButtonPressedEvent(v_moucode vcode, const float x, const float y) : MouseEvent(x, y, vcode)
-        {}
-
-        TYPE(event::type::EVENT_MOUSE_PRESSED);
-    };
-
-    /**
-     * 鼠标按钮释放
-     */
-    class MouseButtonReleasedEvent : public MouseEvent
-    {
-    public:
-        MouseButtonReleasedEvent(v_moucode vcode) : MouseEvent(0.0f, 0.0f, vcode) {}
-        MouseButtonReleasedEvent(v_moucode vcode, const float x, const float y) : MouseEvent(vcode, x, y)
-        {}
-
-        TYPE(event::type::EVENT_MOUSE_RELEASED);
-    };
-
-    /**
-     * 鼠标滚动
-     */
-    class MouseButtonScrolledEvent : public MouseEvent
-    {
-    public:
-        MouseButtonScrolledEvent(const float x, const float y) : MouseEvent(x, y)
-        {}
-
-        TYPE(event::type::EVENT_MOUSE_SCROLLED);
-    };
-
 }
+
+class MouseEvent : public Event
+{
+public:
+    MouseEvent(const float x, const float y) : x(x), y(y)
+    {};
+
+    MouseEvent(const float x, const float y, const v_moucode code) : x(x), y(y), __mousecode(code)
+    {};
+
+    float GetX()
+    { return x; }
+
+    float GetY()
+    { return y; }
+
+    v_moucode __code()
+    { return __mousecode; }
+
+    CLASSIF(event::MOUSE);
+private:
+    float x, y;
+    v_moucode __mousecode;
+};
+
+/**
+ * 鼠标移动
+ */
+class MouseMovedEvent : public MouseEvent
+{
+public:
+    MouseMovedEvent(const float x, const float y) : MouseEvent(x, y)
+    {}
+
+    TYPE(event::type::EVENT_MOUSE_MOVED);
+};
+
+/**
+ * 鼠标按钮按下
+ */
+class MouseButtonPressedEvent : public MouseEvent
+{
+public:
+    MouseButtonPressedEvent(v_moucode vcode) : MouseEvent(0.0f, 0.0f, vcode)
+    {}
+
+    MouseButtonPressedEvent(v_moucode vcode, const float x, const float y) : MouseEvent(x, y, vcode)
+    {}
+
+    TYPE(event::type::EVENT_MOUSE_PRESSED);
+};
+
+/**
+ * 鼠标按钮释放
+ */
+class MouseButtonReleasedEvent : public MouseEvent
+{
+public:
+    MouseButtonReleasedEvent(v_moucode vcode) : MouseEvent(0.0f, 0.0f, vcode)
+    {}
+
+    MouseButtonReleasedEvent(v_moucode vcode, const float x, const float y) : MouseEvent(vcode, x, y)
+    {}
+
+    TYPE(event::type::EVENT_MOUSE_RELEASED);
+};
+
+/**
+ * 鼠标滚动
+ */
+class MouseButtonScrolledEvent : public MouseEvent
+{
+public:
+    MouseButtonScrolledEvent(const float x, const float y) : MouseEvent(x, y)
+    {}
+
+    TYPE(event::type::EVENT_MOUSE_SCROLLED);
+};

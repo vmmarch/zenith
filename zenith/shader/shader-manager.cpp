@@ -32,48 +32,47 @@
 #   include <fstream>
 #endif
 
-namespace zenith
+
+void ShaderManager::load_shaders(const std::string &folder)
 {
-    void ShaderManager::load_shaders(const std::string& folder)
-    {
 #ifdef __ZENITH_PLATFORM_WINDOWS__
-        long h_file             = 0; // 文件句柄
-        struct _finddata_t      fileinfo {};
-        std::string p;
+    long h_file = 0; // 文件句柄
+    struct _finddata_t fileinfo{};
+    std::string p;
 
-        if((h_file = _findfirst(p.assign(folder).append("/*-vfs").c_str(),&fileinfo)) !=  -1)
+    if ((h_file = _findfirst(p.assign(folder).append("/*-vfs").c_str(), &fileinfo)) != -1)
+    {
+        do
         {
-            do
+            if (fileinfo.attrib & _A_SUBDIR)
             {
-                if(fileinfo.attrib & _A_SUBDIR)
-                {
-                    if(strcmp(fileinfo.name, ".") != 0  &&  strcmp(fileinfo.name, "..") != 0)
-                        load_shaders(p.assign(folder).append("/").append(fileinfo.name).c_str());
-                } else
-                {
-                    std::string np(folder);
-                    zenith_char path = np.append("/").append(fileinfo.name).c_str();
-                    shaders.insert(std::make_pair<std::string, ShaderProgram*>(fileinfo.name, ShaderProgram::Create(path)));
-                }
-            } while(_findnext(h_file, &fileinfo) == 0);
-        }
-#elif __ZENITH_PLATFORM_MACOS__
-        struct dirent *ptr;
-        DIR *dir = opendir(folder.c_str());
-
-        std::vector<std::string> files;
-
-        while((ptr = readdir(dir)) != nullptr)
-        {
-            // 跳过"."和".."两个特殊目录
-            if(ptr->d_name[0] == '.')
-                continue;
-
-            shaders.insert(std::make_pair<std::string, ShaderProgram*>(
-                    ptr->d_name, ShaderProgram::Create((folder + "/" + ptr->d_name).c_str())));
-        }
-
-        closedir(dir);
-#endif
+                if (strcmp(fileinfo.name, ".") != 0 && strcmp(fileinfo.name, "..") != 0)
+                    load_shaders(p.assign(folder).append("/").append(fileinfo.name).c_str());
+            } else
+            {
+                std::string np(folder);
+                zenith_char path = np.append("/").append(fileinfo.name).c_str();
+                shaders.insert(
+                        std::make_pair<std::string, ShaderProgram *>(fileinfo.name, ShaderProgram::Create(path)));
+            }
+        } while (_findnext(h_file, &fileinfo) == 0);
     }
+#elif __ZENITH_PLATFORM_MACOS__
+    struct dirent *ptr;
+    DIR *dir = opendir(folder.c_str());
+
+    std::vector<std::string> files;
+
+    while((ptr = readdir(dir)) != nullptr)
+    {
+        // 跳过"."和".."两个特殊目录
+        if(ptr->d_name[0] == '.')
+            continue;
+
+        shaders.insert(std::make_pair<std::string, ShaderProgram*>(
+                ptr->d_name, ShaderProgram::Create((folder + "/" + ptr->d_name).c_str())));
+    }
+
+    closedir(dir);
+#endif
 }

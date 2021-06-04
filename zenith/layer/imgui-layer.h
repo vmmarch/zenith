@@ -28,31 +28,25 @@
 #include <api/glfw-api.h>
 #include <map>
 
-namespace zenith
+struct v_font
 {
+    zenith_char name;
+    float size;
+    zenith_char ttf;
+};
 
-    struct v_font
-    {
-        zenith_char name;
-        float size;
-        zenith_char ttf;
-    };
+class ImGuiLayer
+{
+public:
+    ImGuiLayer();
+    ~ImGuiLayer() = default;
+    void add_font(v_font);
+    void apply_font(zenith_char);
+    void begin();
+    void end();
+    void close();
 
-    class ImGuiLayer
-    {
-    public:
-        ImGuiLayer();
-        ~ImGuiLayer() = default;
-
-        void add_font(v_font);
-        void apply_font(zenith_char);
-
-        void begin();
-        void end();
-
-        void close();
-    private:
-        std::map<zenith_char, ImFont*> font_libs;
-        void initialize();
-    };
-}
+private:
+    std::map<zenith_char, ImFont *> font_libs;
+    void initialize();
+};

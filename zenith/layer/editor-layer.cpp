@@ -24,34 +24,30 @@
 #include "editor-layer.h"
 #include "init/starter.h"
 
-namespace zenith
+void EditorLayer::initialize()
 {
 
-    void EditorLayer::initialize()
-    {
+}
 
-    }
+void EditorLayer::render()
+{
+}
 
-    void EditorLayer::render()
-    {
-    }
+void EditorLayer::update(DeltaTime)
+{
 
-    void EditorLayer::update(DeltaTime)
-    {
+}
 
-    }
+void EditorLayer::close()
+{
 
-    void EditorLayer::close()
-    {
+}
 
-    }
+void EditorLayer::event(Event &)
+{
+}
 
-    void EditorLayer::event(Event &)
-    {
-    }
+void EditorLayer::on_keypress(KeyPressedEvent &)
+{
 
-    void EditorLayer::on_keypress(KeyPressedEvent &)
-    {
-
-    }
 }

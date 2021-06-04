@@ -43,13 +43,13 @@
 #define ZENITH_UINT32_T         1
 #define ZENITH_VOID             8
 
-typedef const char* zenith_char;
+typedef const char *zenith_char;
 typedef unsigned char zenith_uchar;
 typedef unsigned int zenith_uint;
 typedef uint8_t zenith_uint8;
 typedef uint16_t zenith_uint16;
 typedef uint32_t zenith_uint32;
-typedef void * zenith_any;
+typedef void *zenith_any;
 
 typedef zenith_uint16 zenith_keycode;
 
@@ -63,67 +63,71 @@ using zenith_shared = std::shared_ptr<T>;
 
 #define ZENAPI extern
 
-namespace zenith
+
+namespace render
 {
-    namespace render
+
+    /**
+     * 渲染API
+     */
+    enum api
     {
-
-        /**
-         * 渲染API
-         */
-        enum api { NONE, GL, DX };
-    }
-
-    // =================================================================
-    // vec2
-    struct v_vec2
-    {
-        zenith_uint16 x, y;
-
-        v_vec2(zenith_uint16 _x, zenith_uint16 _y) : x(_x), y(_y)
-        {}
+        NONE, GL, DX
     };
-
-    static v_vec2 create_vec2(zenith_uint16 x, zenith_uint16 y)
-    {
-        return v_vec2(x, y);
-    }
-
-    static const v_vec2 empty_vec2 = create_vec2(0, 0);
-
-    template<typename T, typename ... Args>
-    constexpr zenith_scope<T> create_scope(Args &&... args)
-    {
-        return std::make_unique<T>(std::forward<Args>(args)...);
-    }
-
-    template<typename T>
-    using Ref = std::shared_ptr<T>;
-
-    template<typename T, typename... Args>
-    constexpr Ref<T> create_ref(Args &&... args)
-    {
-        return std::make_shared<T>(std::forward<Args>(args)...);
-    }
-
-    template<typename FMT, typename... Args>
-    EXTAPI void zenithloggerinfo(FMT &, Args &&...);
-    template<typename FMT, typename... Args>
-    EXTAPI void zenithloggerdebug(FMT &, Args &&...);
-    template<typename FMT, typename... Args>
-    EXTAPI void zenithloggerwarn(FMT &, Args &&...);
-    template<typename FMT, typename... Args>
-    EXTAPI void zenithloggererror(FMT &, Args &&...);
 }
 
-#define ZENITH_INFO(...) zenith::zenithloggerinfo(__VA_ARGS__)
+// =================================================================
+// vec2
+struct v_vec2
+{
+    zenith_uint16 x, y;
+
+    v_vec2(zenith_uint16 _x, zenith_uint16 _y) : x(_x), y(_y)
+    {}
+};
+
+static v_vec2 create_vec2(zenith_uint16 x, zenith_uint16 y)
+{
+    return v_vec2(x, y);
+}
+
+static const v_vec2 empty_vec2 = create_vec2(0, 0);
+
+template<typename T, typename ... Args>
+constexpr zenith_scope<T> create_scope(Args &&... args)
+{
+    return std::make_unique<T>(std::forward<Args>(args)...);
+}
+
+template<typename T>
+using Ref = std::shared_ptr<T>;
+
+template<typename T, typename... Args>
+constexpr Ref<T> create_ref(Args &&... args)
+{
+    return std::make_shared<T>(std::forward<Args>(args)...);
+}
+
+template<typename FMT, typename... Args>
+EXTAPI void zenithloggerinfo(FMT &, Args &&...);
+
+template<typename FMT, typename... Args>
+EXTAPI void zenithloggerdebug(FMT &, Args &&...);
+
+template<typename FMT, typename... Args>
+EXTAPI void zenithloggerwarn(FMT &, Args &&...);
+
+template<typename FMT, typename... Args>
+EXTAPI void zenithloggererror(FMT &, Args &&...);
+
+#define ZENITH_INFO(...) zenithloggerinfo(__VA_ARGS__)
 #ifdef __DEBUG__
-#   define ZENITH_DEBUG(...) zenith::zenithloggerdebug(__VA_ARGS__)
+#   define ZENITH_DEBUG(...) zenithloggerdebug(__VA_ARGS__)
 #else
 #   define ZENITH_DEBUG(...)
 #endif
-#define ZENITH_WARN(...) zenith::zenithloggerwarn(__VA_ARGS__)
-#define ZENITH_ERROR(...) zenith::zenithloggererror(__VA_ARGS__)
+#define ZENITH_WARN(...) zenithloggerwarn(__VA_ARGS__)
+#define ZENITH_ERROR(...) zenithloggererror(__VA_ARGS__)
 
 #define __BIT__(x) (1 << x)
 

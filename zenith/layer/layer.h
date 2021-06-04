@@ -26,19 +26,16 @@
 #include "event/event.h"
 #include "tool/time.h"
 
-namespace zenith
+class Layer
 {
-    class Layer
-    {
-    public:
-        Layer(const zenith_char name = "layer");
-        virtual ~Layer() = default;
-        virtual void render() = 0;
-        virtual void update(DeltaTime deltaTime) = 0;
-        virtual void event(Event&) = 0;
-        virtual void close() = 0;
+public:
+    Layer(const zenith_char name = "layer");
+    virtual ~Layer() = default;
+    virtual void render() = 0;
+    virtual void update(DeltaTime deltaTime) = 0;
+    virtual void event(Event&) = 0;
+    virtual void close() = 0;
 
-    protected:
-        const zenith_char debug_name;
-    };
-}
+protected:
+    const zenith_char debug_name;
+};

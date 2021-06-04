@@ -27,77 +27,72 @@
 #include "layer/plane/properties.h"
 #include "layer/plane/resource-manager.h"
 
-namespace zenith
+void HomeLayer::render()
 {
-
-    void HomeLayer::render()
+    if (ImGui::BeginMenuBar())
     {
-        if (ImGui::BeginMenuBar())
+        if (ImGui::BeginMenu(GUI_TEXT_FILE))
         {
-            if (ImGui::BeginMenu(GUI_TEXT_FILE))
+
+            // 新建
+            if (ImGui::BeginMenu(GUI_TEXT_CREATE))
             {
-
-                // 新建
-                if (ImGui::BeginMenu(GUI_TEXT_CREATE))
-                {
-                    if (ImGui::MenuItem(GUI_TEXT_CREATE_PROJECT)); // TODO 新建项目
-                    ImGui::EndMenu();
-                }
-
-                // 打开
-                if (ImGui::BeginMenu(GUI_TEXT_OPEN))
-                {
-                    if (ImGui::MenuItem(GUI_TEXT_OPEN_PROJECT)); // TODO 打开项目
-                    if (ImGui::MenuItem(GUI_TEXT_OPEN_FOLDER)); // TODO 打开文件夹
-                    ImGui::EndMenu();
-                }
-
-                // 退出引擎
-                if (ImGui::MenuItem(GUI_TEXT_EXIT))
-                    Starter::instance().close();
-
+                if (ImGui::MenuItem(GUI_TEXT_CREATE_PROJECT)); // TODO 新建项目
                 ImGui::EndMenu();
             }
-            ImGui::EndMenuBar();
+
+            // 打开
+            if (ImGui::BeginMenu(GUI_TEXT_OPEN))
+            {
+                if (ImGui::MenuItem(GUI_TEXT_OPEN_PROJECT)); // TODO 打开项目
+                if (ImGui::MenuItem(GUI_TEXT_OPEN_FOLDER)); // TODO 打开文件夹
+                ImGui::EndMenu();
+            }
+
+            // 退出引擎
+            if (ImGui::MenuItem(GUI_TEXT_EXIT))
+                Starter::instance().close();
+
+            ImGui::EndMenu();
         }
-
-        ImGui::ShowDemoWindow();
-
-        __resource_manager();
-        __properties();
+        ImGui::EndMenuBar();
     }
 
-    void HomeLayer::close()
-    {}
+    ImGui::ShowDemoWindow();
 
-    void HomeLayer::update(DeltaTime deltaTime)
-    {
-        static bool no_titlebar = false;
-        static bool no_scrollbar = false;
-        static bool no_menu = false;
-        static bool no_move = false;
-        static bool no_resize = false;
-        static bool no_collapse = false;
-        static bool no_close = false;
-        static bool no_nav = false;
-        static bool no_background = false;
-        static bool no_bring_to_front = false;
-        static bool no_docking = false;
-
-        ImGuiWindowFlags window_flags = 0;
-        if (no_titlebar) window_flags |= ImGuiWindowFlags_NoTitleBar;
-        if (no_scrollbar) window_flags |= ImGuiWindowFlags_NoScrollbar;
-        if (!no_menu) window_flags |= ImGuiWindowFlags_MenuBar;
-        if (no_move) window_flags |= ImGuiWindowFlags_NoMove;
-        if (no_resize) window_flags |= ImGuiWindowFlags_NoResize;
-        if (no_collapse) window_flags |= ImGuiWindowFlags_NoCollapse;
-        if (no_nav) window_flags |= ImGuiWindowFlags_NoNav;
-        if (no_background) window_flags |= ImGuiWindowFlags_NoBackground;
-        if (no_bring_to_front) window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
-        if (no_docking) window_flags |= ImGuiWindowFlags_NoDocking;
-    }
-
-    void HomeLayer::event(Event &)
-    {}
-
+    __resource_manager();
+    __properties();
 }
+
+void HomeLayer::close()
+{}
+
+void HomeLayer::update(DeltaTime deltaTime)
+{
+    static bool no_titlebar = false;
+    static bool no_scrollbar = false;
+    static bool no_menu = false;
+    static bool no_move = false;
+    static bool no_resize = false;
+    static bool no_collapse = false;
+    static bool no_close = false;
+    static bool no_nav = false;
+    static bool no_background = false;
+    static bool no_bring_to_front = false;
+    static bool no_docking = false;
+
+    ImGuiWindowFlags window_flags = 0;
+    if (no_titlebar) window_flags |= ImGuiWindowFlags_NoTitleBar;
+    if (no_scrollbar) window_flags |= ImGuiWindowFlags_NoScrollbar;
+    if (!no_menu) window_flags |= ImGuiWindowFlags_MenuBar;
+    if (no_move) window_flags |= ImGuiWindowFlags_NoMove;
+    if (no_resize) window_flags |= ImGuiWindowFlags_NoResize;
+    if (no_collapse) window_flags |= ImGuiWindowFlags_NoCollapse;
+    if (no_nav) window_flags |= ImGuiWindowFlags_NoNav;
+    if (no_background) window_flags |= ImGuiWindowFlags_NoBackground;
+    if (no_bring_to_front) window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus;
+    if (no_docking) window_flags |= ImGuiWindowFlags_NoDocking;
+}
+
+void HomeLayer::event(Event &)
+{}

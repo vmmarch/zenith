@@ -23,47 +23,43 @@
  */
 #include "render/render-queue.h"
 
-namespace zenith
+void RenderQueue::push(Model &model, ShaderProgram *shader)
 {
-    void RenderQueue::push(Model &model, ShaderProgram *shader)
+    if (queue.count(shader) > 0)
     {
-        if (queue.count(shader) > 0)
-        {
-            vecq vq = queue[shader];
-            vq.push_back(model);
-        } else
-        {
-            vecq vq;
-            vq.push_back(model);
-
-            queue.insert(std::pair<ShaderProgram *, vecq>(shader, vq));
-        }
-    }
-
-    void RenderQueue::reload_all_bad_model()
+        vecq vq = queue[shader];
+        vq.push_back(model);
+    } else
     {
+        vecq vq;
+        vq.push_back(model);
 
+        queue.insert(std::pair<ShaderProgram *, vecq>(shader, vq));
     }
+}
 
-    void
-    RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projection, const glm::vec3 &camera_position,
-                            Light *light)
+void RenderQueue::reload_all_bad_model()
+{
+
+}
+
+void
+RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projection, const glm::vec3 &camera_position,
+                        Light *light)
+{
+    std::map<sp, vecq>::reverse_iterator iter;
+    for (iter = queue.rbegin(); iter != queue.rend(); iter++)
     {
-        std::map<sp, vecq>::reverse_iterator iter;
-        for (iter = queue.rbegin(); iter != queue.rend(); iter++)
-        {
-            ShaderProgram *shader = iter->first;
-            shader->bind(); // 绑定Shader
+        ShaderProgram *shader = iter->first;
+        shader->bind(); // 绑定Shader
 
-            shader->set_mat4("ViewMatrix", view_matrix);
-            shader->set_mat4("ProjectionMatrix", projection);
-            shader->set_float3("cameraPos", camera_position);
+        shader->set_mat4("ViewMatrix", view_matrix);
+        shader->set_mat4("ProjectionMatrix", projection);
+        shader->set_float3("cameraPos", camera_position);
 
-            light->update(shader);
+        light->update(shader);
 
-            for (auto model : iter->second)
-                model.draw(shader);
-        }
+        for (auto model : iter->second)
+            model.draw(shader);
     }
-
 }

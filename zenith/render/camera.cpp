@@ -23,93 +23,88 @@
  */
 #include "camera.h"
 
-namespace zenith
+Camera::Camera(const glm::vec3& , const glm::vec3& up, float yaw, float pitch)
+    : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
 {
+    this->pos = pos;
+    this->worldup = up;
+    this->yaw = yaw;
+    this->pitch = pitch;
+    mouse_sens = MOUSE_SENS;
 
-    Camera::Camera(const glm::vec3& , const glm::vec3& up, float yaw, float pitch)
-        : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
+    update_camera_vector();
+}
+
+void Camera::direction(camera_movement movement)
+{
+    float velocity = move_speed * delta_time;
+    if(movement == FORWARD)
+        pos += front * velocity;
+    if(movement == BACKWARD)
+        pos -= front * velocity;
+    if(movement == LEFT)
+        pos -= right * velocity;
+    if(movement == RIGHT)
+        pos += right * velocity;
+}
+
+void Camera::perspective(float x, float y, bool constraint_pitch)
+{
+    x *= mouse_sens;
+    y *= mouse_sens;
+
+    yaw += x;
+    pitch += y;
+
+    if(constraint_pitch)
     {
-        this->pos = pos;
-        this->worldup = up;
-        this->yaw = yaw;
-        this->pitch = pitch;
-        mouse_sens = MOUSE_SENS;
-
-        update_camera_vector();
+        if(pitch > CONSTRAINT_PITCH)
+            pitch = CONSTRAINT_PITCH;
+        if(pitch < -CONSTRAINT_PITCH)
+            pitch = -CONSTRAINT_PITCH;
     }
 
-    void Camera::direction(camera_movement movement)
-    {
-        float velocity = move_speed * delta_time;
-        if(movement == FORWARD)
-            pos += front * velocity;
-        if(movement == BACKWARD)
-            pos -= front * velocity;
-        if(movement == LEFT)
-            pos -= right * velocity;
-        if(movement == RIGHT)
-            pos += right * velocity;
-    }
+    update_camera_vector();
+}
 
-    void Camera::perspective(float x, float y, bool constraint_pitch)
-    {
-        x *= mouse_sens;
-        y *= mouse_sens;
+void Camera::SetZoom(float value)
+{
+    if (this->camera_zoom >= 1.0f && this->camera_zoom <= 45.0f)
+        this->camera_zoom -= value;
+    if (this->camera_zoom <= 1.0f)
+        this->camera_zoom = 1.0f;
+    if (this->camera_zoom >= 45.0f)
+        this->camera_zoom = 45.0f;
+}
 
-        yaw += x;
-        pitch += y;
+glm::mat4 Camera::get_view_matrix()
+{
+    return glm::lookAt(pos, (pos + front), up);
+}
 
-        if(constraint_pitch)
-        {
-            if(pitch > CONSTRAINT_PITCH)
-                pitch = CONSTRAINT_PITCH;
-            if(pitch < -CONSTRAINT_PITCH)
-                pitch = -CONSTRAINT_PITCH;
-        }
+void Camera::update_camera_vector()
+{
+    glm::vec3 _front_;
+    _front_.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+    _front_.y = sin(glm::radians(pitch));
+    _front_.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+    front = glm::normalize(_front_);
 
-        update_camera_vector();
-    }
+    right = glm::normalize(glm::cross(front, worldup));
+    up    = glm::normalize(glm::cross(right, front));
+}
 
-    void Camera::SetZoom(float value)
-    {
-        if (this->camera_zoom >= 1.0f && this->camera_zoom <= 45.0f)
-            this->camera_zoom -= value;
-        if (this->camera_zoom <= 1.0f)
-            this->camera_zoom = 1.0f;
-        if (this->camera_zoom >= 45.0f)
-            this->camera_zoom = 45.0f;
-    }
+float Camera::GetCameraZoom() const
+{
+    return camera_zoom;;
+}
 
-    glm::mat4 Camera::get_view_matrix()
-    {
-        return glm::lookAt(pos, (pos + front), up);
-    }
+glm::mat4 Camera::get_projection()
+{
+    return glm::perspective(GetCameraZoom(), get_screen_aspect_radio(), -1.0f, 1.0f);
+}
 
-    void Camera::update_camera_vector()
-    {
-        glm::vec3 _front_;
-        _front_.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-        _front_.y = sin(glm::radians(pitch));
-        _front_.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-        front = glm::normalize(_front_);
-
-        right = glm::normalize(glm::cross(front, worldup));
-        up    = glm::normalize(glm::cross(right, front));
-    }
-
-    float Camera::GetCameraZoom() const
-    {
-        return camera_zoom;;
-    }
-
-    glm::mat4 Camera::get_projection()
-    {
-        return glm::perspective(GetCameraZoom(), get_screen_aspect_radio(), -1.0f, 1.0f);
-    }
-
-    glm::vec3 Camera::get_camera_position()
-    {
-        return this->pos;
-    }
-
+glm::vec3 Camera::get_camera_position()
+{
+    return this->pos;
 }

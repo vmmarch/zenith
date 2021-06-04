@@ -23,17 +23,22 @@
  */
 #pragma once
 
-namespace zenith
-{
-    class DeltaTime
-    {
-    public:
-        DeltaTime(float time_ = 0.0f) : time(time_) {}
-        operator float() const { return time; }
-        float seconds() { return time; }
-        float milliseconds() const { return time * 1000.0f; }
 
-    private:
-        float time;
-    };
-}
+class DeltaTime
+{
+public:
+    DeltaTime(float time_ = 0.0f) : time(time_)
+    {}
+
+    operator float() const
+    { return time; }
+
+    float seconds()
+    { return time; }
+
+    float milliseconds() const
+    { return time * 1000.0f; }
+
+private:
+    float time;
+};

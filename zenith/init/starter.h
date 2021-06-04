@@ -31,33 +31,36 @@
 #include "event/mouse-event.h"
 #include "sandbox/sandbox.h"
 
-namespace zenith
+class Starter
 {
-    class Starter
-    {
-    public:
-        Starter(zenith_char, int, int);
-        ~Starter();
-        void event(Event&); // 事件处理
-        void domain();
+public:
+    Starter(zenith_char, int, int);
 
-        Window& GetWindow() { return *window; }
+    ~Starter();
 
-        // ===========================================================
-        // event
-        void close();
-        void update(DeltaTime deltaTime);
+    void event(Event &); // 事件处理
+    void domain();
 
-        static Starter& instance() { return *__instance; }
-    private:
-        void init_window(zenith_char, int, int);
+    Window &GetWindow()
+    { return *window; }
 
-    private:
-        int running = true;
-        zenith_scope<Window> window;
-        SandBox* sandbox;
-        float last_frame_time = 0.0f;
+    // ===========================================================
+    // event
+    void close();
 
-        static Starter* __instance;
-    };
-}
+    void update(DeltaTime deltaTime);
+
+    static Starter &instance()
+    { return *__instance; }
+
+private:
+    void init_window(zenith_char, int, int);
+
+private:
+    int running = true;
+    zenith_scope<Window> window;
+    SandBox *sandbox;
+    float last_frame_time = 0.0f;
+
+    static Starter *__instance;
+};

@@ -30,27 +30,21 @@
 #include <glfw-api.h>
 #include <stb_image.h>
 
-namespace zenith
+class Texture
 {
-    class Texture
-    {
-    public:
+public:
+    Texture(const char *file, GLenum type = GL_TEXTURE_2D);
+    ~Texture();
+    inline unsigned int get_id() const;
+    void bind(GLenum unit);
+    void unbind();
 
-        Texture(const char* file, GLenum type = GL_TEXTURE_2D);
-        ~Texture();
+private:
+    void load_form_file(const char *file);
 
-        inline unsigned int get_id() const;
-
-        void bind(GLenum unit);
-        void unbind();
-
-    private:
-        void load_form_file(const char* file);
-
-    private:
-        GLuint  id;
-        int     width;
-        int     height;
-        GLuint  type;
-    };
-}
+private:
+    GLuint id;
+    int width;
+    int height;
+    GLuint type;
+};

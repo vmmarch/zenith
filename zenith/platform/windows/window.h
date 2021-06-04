@@ -26,44 +26,39 @@
 #include <api/glfw-api.h>
 #include "render/graphics-context.h"
 
-namespace zenith::win
+class WinWindow : public Window
 {
+public:
+    WinWindow(const v_winprops&);
+    virtual ~WinWindow();
 
-    class WinWindow : public Window
+    void setTitle(zenith_char title) override { info.title = title; }
+    zenith_char getTitle() const override { return info.title; }
+    zenith_uint32 get_width() const override { return info.width; }
+    zenith_uint32 get_height() const override { return info.height; }
+
+    void SetEventCallback(const f_callback&) override;
+
+    bool is_close() override;
+    void close_window() override;
+    void update() override;
+
+    void* GetWindowHANDLE() const override;
+    GLFWwindow* get_glfw_window() const override;
+private:
+    struct v_info
     {
-    public:
-        WinWindow(const v_winprops&);
-        virtual ~WinWindow();
+        zenith_char title;
+        zenith_uint32 width, height;
 
-        void setTitle(zenith_char title) override { info.title = title; }
-        zenith_char getTitle() const override { return info.title; }
-        zenith_uint32 get_width() const override { return info.width; }
-        zenith_uint32 get_height() const override { return info.height; }
-
-        void SetEventCallback(const f_callback&) override;
-
-        bool is_close() override;
-        void close_window() override;
-        void update() override;
-
-        void* GetWindowHANDLE() const override;
-        GLFWwindow* get_glfw_window() const override;
-    private:
-        struct v_info
-        {
-            zenith_char title;
-            zenith_uint32 width, height;
-
-            f_callback fn;
-        };
-
-        v_info info;
-        GLFWwindow* window;
-        GraphicsContext* graphics_context;
-
-        void initialize(const v_winprops&);
-        void callback();
-        void destroy(GLFWwindow* window);
+        f_callback fn;
     };
 
-}
+    v_info info;
+    GLFWwindow* window;
+    GraphicsContext* graphics_context;
+
+    void initialize(const v_winprops&);
+    void callback();
+    void destroy(GLFWwindow* window);
+};

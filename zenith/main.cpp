@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 #   endif
 #endif
 
-    auto app = new zenith::Starter("zenith", 1260, 880);
+    auto app = new Starter("zenith", 1260, 880);
     app->domain();
 
     return 0;

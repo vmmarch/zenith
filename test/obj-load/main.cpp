@@ -26,7 +26,7 @@
 
 int main()
 {
-    zenith::ObjImporter importer;
+    ObjImporter importer;
     importer.ReadFile("C:/Users/aorus/Downloads/Girl/Girl_1.obj");
 
     for(auto vec : importer.GetVertexArray())

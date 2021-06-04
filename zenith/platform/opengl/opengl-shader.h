@@ -25,43 +25,42 @@
 
 #include "shader.h"
 
-namespace zenith
+
+class OpenGLShaderProgram : public ShaderProgram
 {
-    class OpenGLShaderProgram : public ShaderProgram
+public:
+    OpenGLShaderProgram(zenith_char path, zenith_char debugname);
+    ~OpenGLShaderProgram() override;
+    void bind() override;
+    void unbind() override;
+    zenith_uint get_id() const override { return shader_id; }
+    void set_bool(zenith_char, bool) override;
+    void set_int(zenith_char, int) override;
+    void set_float(zenith_char, float) override;
+    void set_float2(zenith_char, glm::vec2) override;
+    void set_float3(zenith_char, glm::vec3) override;
+    void set_float4(zenith_char, glm::vec4) override;
+    void set_mat3(zenith_char, glm::mat3) override;
+    void set_mat4(zenith_char, glm::mat4) override;
+
+    zenith_uint32 get_mark_id() const override;
+
+    bool is_load_success() const override
     {
-    public:
-        OpenGLShaderProgram(zenith_char path, zenith_char debugname);
-        ~OpenGLShaderProgram() override;
-        void bind() override;
-        void unbind() override;
-        zenith_uint get_id() const override { return shader_id; }
-        void set_bool(zenith_char, bool) override;
-        void set_int(zenith_char, int) override;
-        void set_float(zenith_char, float) override;
-        void set_float2(zenith_char, glm::vec2) override;
-        void set_float3(zenith_char, glm::vec3) override;
-        void set_float4(zenith_char, glm::vec4) override;
-        void set_mat3(zenith_char, glm::mat3) override;
-        void set_mat4(zenith_char, glm::mat4) override;
+        return error;
+    }
 
-        zenith_uint32 get_mark_id() const override;
+    void reload() override;
 
-        bool is_load_success() const override
-        {
-            return error;
-        }
+private:
+    zenith_uint shader_id;
 
-        void reload() override;
+private:
 
-    private:
-        zenith_uint shader_id;
+    // utility function for checking shader compilation/linking errors.
+    // ------------------------------------------------------------------------
+    bool error = false;
+    zenith_uint32 mark_id;
+    void checkCompileErrors(unsigned int shader, const std::string& type);
+};
 
-    private:
-
-        // utility function for checking shader compilation/linking errors.
-        // ------------------------------------------------------------------------
-        bool error = false;
-        zenith_uint32 mark_id;
-        void checkCompileErrors(unsigned int shader, const std::string& type);
-    };
-}
