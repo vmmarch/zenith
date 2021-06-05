@@ -36,10 +36,6 @@ Model::Model(glm::vec3 position, Material *material, Texture *or_tex_diff, Textu
 {
     std::vector<GLuint> indices;
     std::vector<vertex_t> mesh = load_obj(file, indices);
-    for (GLuint item : indices)
-    {
-        std::cout << item << std::endl;
-    }
     this->meshs.push_back(new Mesh(mesh.data(), mesh.size(), indices.data(), indices.size(),
                                    glm::vec3(1.f, 0.f, 0.f),
                                    glm::vec3(0.f),
