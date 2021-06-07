@@ -26,7 +26,7 @@
 #include <zenith/glob.h>
 
 #ifdef __ZENITH_ENABLE_ASSERT__
-    #define __ZENITH_ASSERT__(check, msg) if(check) printf("%s", msg)
+    #define Assert(check, msg) if(check) printf("Assert: %s", msg)
 #else
-    #define __ZENITH_ASSERT__(check, msg) {}
+    #define Assert(check, msg)
 #endif

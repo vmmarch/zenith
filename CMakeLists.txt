@@ -123,6 +123,7 @@ ADD_DEFINITIONS(
         -D__ZENITH_IN_CHINA__                           # 引擎语言为中文
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
         -DZENITH_GLAD_CORE                              # GLAD使用Core版本
+        -D__ZENITH_ENABLE_ASSERT__                      # 开启断言
 )
 
 IF(DEBUG MATCHES ON)
