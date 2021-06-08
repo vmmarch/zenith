@@ -79,9 +79,9 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/light SOURCE_LIGHT)
 
 INCLUDE_DIRECTORIES(SYSTEM tool)
 
-# ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 # for modules dir.
-# ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 INCLUDE_DIRECTORIES(SYSTEM modules)
 INCLUDE_DIRECTORIES(SYSTEM modules/imgui)
 INCLUDE_DIRECTORIES(SYSTEM modules/imgui/backends)
