@@ -45,23 +45,25 @@ static std::vector<vertex_t> load_obj(const char* path, std::vector<GLuint>& ind
     if(!file.is_open())
         ZENITH_ERROR(CANNOT_OPEN_FILE, path);
 
-    std::vector<vertex_t> vertices;
+    std::vector<vertex_t>       vertices;
 
-    std::vector<glm::vec3> positions;
-    std::vector<glm::vec2> texcoords;
-    std::vector<glm::vec3> normals;
+    std::vector<glm::vec3>      positions;
+    std::vector<glm::vec2>      texcoords;
+    std::vector<glm::vec3>      normals;
 
     std::vector<GLint>          texcoord_indices;
     std::vector<GLint>          normal_indices;
     std::vector<GLuint>         position_indices;
 
-    std::string line;
-    std::string prefix;
-    std::stringstream stream;
+    std::string                 line;
+    std::string                 prefix;
+    std::stringstream           stream;
 
-    glm::vec3 temp_vec3;
-    glm::vec2 temp_vec2;
-    int       temp_int = 0;
+    glm::vec3                   temp_vec3;
+    glm::vec2                   temp_vec2;
+    int                         temp_int = 0;
+
+    int                         index = 0;
 
     while(std::getline(file, line))
     {
@@ -116,6 +118,7 @@ static std::vector<vertex_t> load_obj(const char* path, std::vector<GLuint>& ind
                 if (counter > 2)
                     counter = 0;
             }
+
             continue;
         }
 
@@ -143,7 +146,7 @@ static std::vector<vertex_t> load_obj(const char* path, std::vector<GLuint>& ind
         vertices[i].position     = positions[position_indices[i] - 1];
         vertices[i].normal       = normals[normal_indices[i] - 1];
         vertices[i].texcoord     = texcoords[texcoord_indices[i] - 1];
-        vertices[i].color        = glm::vec3(1.f, 1.f, 1.f);
+        vertices[i].color        = glm::vec3(0.5f, 0.5f, 0.5f);
     }
 
     return vertices;

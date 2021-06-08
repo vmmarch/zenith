@@ -27,6 +27,7 @@
 #include "example/example-layer.h"
 #include "event/mouse-event.h"
 #include "state.h"
+#include "init/starter.h"
 
 #include "model/loader.h"
 
@@ -51,6 +52,7 @@ void SandBox::initialize()
     light = new PointLight(glm::vec3(0.0f));
 
     ShaderProgram *program = shader_manager->get_program("core");
+
     Renderer::submit(*new Model(
             glm::vec3(0.0f, 0.0f, 0.0f),
             new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
@@ -58,6 +60,8 @@ void SandBox::initialize()
             new Texture("../resources/container_specular.png"),
             "D:/model/cube.obj"
     ), program);
+
+
 }
 
 void SandBox::update(DeltaTime delta_time)
@@ -68,6 +72,12 @@ void SandBox::update(DeltaTime delta_time)
     reload_setting();
 
     camera.update((float) State::get_width(), (float) State::get_height(), delta_time);
+
+    // 关闭窗口
+    if(Input::pressed(ZENITH_KEY_ESCAPE))
+    {
+        Starter::instance().close();
+    }
 
     // 禁止鼠标移动相机
     if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))

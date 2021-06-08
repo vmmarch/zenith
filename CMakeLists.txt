@@ -79,9 +79,9 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/zenith/light SOURCE_LIGHT)
 
 INCLUDE_DIRECTORIES(SYSTEM tool)
 
-# ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 # for modules dir.
-# ---------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------
 INCLUDE_DIRECTORIES(SYSTEM modules)
 INCLUDE_DIRECTORIES(SYSTEM modules/imgui)
 INCLUDE_DIRECTORIES(SYSTEM modules/imgui/backends)
@@ -123,6 +123,7 @@ ADD_DEFINITIONS(
         -D__ZENITH_IN_CHINA__                           # 引擎语言为中文
         -D__ZENITH_RENDERAPI_OPENGL__                   # 引擎渲染API使用OpenGL
         -DZENITH_GLAD_CORE                              # GLAD使用Core版本
+        -D__ZENITH_ENABLE_ASSERT__                      # 开启断言
 )
 
 IF(DEBUG MATCHES ON)
