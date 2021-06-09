@@ -143,9 +143,9 @@ static std::vector<vertex_t> load_obj(const char* path, std::vector<GLuint>& ind
 
     for(size_t i = 0; i < position_indices.size(); i++)
     {
-        vertices[i].position     = positions[position_indices[i] - 1];
-        vertices[i].normal       = normals[normal_indices[i] - 1];
-        vertices[i].texcoord     = texcoords[texcoord_indices[i] - 1];
+        vertices[i].position     = positions[position_indices[i]  - 1];
+        vertices[i].normal       = normals[normal_indices[i]      - 1];
+        vertices[i].texcoord     = texcoords[texcoord_indices[i]  - 1];
         vertices[i].color        = glm::vec3(0.5f, 0.5f, 0.5f);
     }
 
