@@ -67,6 +67,6 @@ private:
     // Textures
     std::vector<Texture*> textures;
 
-    Light* light;
+    Light* light{};
 };
 
