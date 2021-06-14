@@ -114,7 +114,7 @@ float get_float(int k)
     switch (k)
     {
         case KEY_CAMERA_MOVE_SPEED:
-            return settings->Flags_CursorMoveCamera;
+            return settings->Camera_Move_Speed;
     }
 
     return 0.0f;

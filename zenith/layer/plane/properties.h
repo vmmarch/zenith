@@ -28,13 +28,16 @@
 
 static bool line_check = false;
 static bool enable_track = true;
-static float track_item = 3.0f;
+static float track_item;
 
 /**
  * 属性面板配置
  */
 static void __properties()
 {
+
+    track_item = get_float(KEY_CAMERA_MOVE_SPEED);
+
     ImGui::Begin(GUI_TEXT_PROPERTIES);
     if (ImGui::TreeNode("投影相机"))
     {

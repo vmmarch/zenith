@@ -56,11 +56,10 @@ void SandBox::initialize()
     Renderer::submit(*new Model(
             glm::vec3(0.0f, 0.0f, 0.0f),
             new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
-            new Texture("../resources/container.png"),
-            new Texture("../resources/container_specular.png"),
+            new Texture(R"(C:\Users\Mi\Documents\models\mandalorian\texture.png)"),
+            new Texture(R"(C:\Users\Mi\Documents\models\mandalorian\texture2.png)"),
             R"(C:\Users\Mi\Documents\models\mandalorian\Mandalorian.obj)"
     ), program);
-
 
 }
 
@@ -83,10 +82,21 @@ void SandBox::update(DeltaTime delta_time)
     // 禁止鼠标移动相机
     if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
     {
-        set_value(KEY_CURSOR_MOVE_CAMER, !get_bool(KEY_CURSOR_MOVE_CAMER));
+        set_value(KEY_CAMERA_MOVE_SPEED, get_float(KEY_CAMERA_MOVE_SPEED) + 1.0f);
     }
 
-        // 隐藏鼠标
+    // 增加相机速度
+    if (Input::pressed(ZENITH_KEY_PAGEUP))
+    {
+        set_value(KEY_CAMERA_MOVE_SPEED, get_float(KEY_CAMERA_MOVE_SPEED) + 1.0f);
+    }
+
+    if (Input::pressed(ZENITH_KEY_PAGEDOWN))
+    {
+        set_value(KEY_CAMERA_MOVE_SPEED, get_float(KEY_CAMERA_MOVE_SPEED) - 1.0f);
+    }
+
+    // 隐藏鼠标
     else if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
     {
         if (!cursor_hide)
