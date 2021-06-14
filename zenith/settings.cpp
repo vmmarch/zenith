@@ -26,10 +26,11 @@
 
 struct settings_t
 {
-    bool CAN_BE_RELOAD = false;           // 是否重新加载
-    bool Flags_MultiSample = false;           // 多重采样抗锯齿
-    bool Flags_DepthTest = false;           // 多重采样抗锯齿
-    bool Flags_CursorMoveCamera = true;            // 鼠标移动相机
+    bool   CAN_BE_RELOAD = false;                 // 是否重新加载
+    bool   Flags_MultiSample = false;             // 多重采样抗锯齿
+    bool   Flags_DepthTest = false;               // 多重采样抗锯齿
+    bool   Flags_CursorMoveCamera = true;         // 鼠标移动相机
+    float  Camera_Move_Speed = 3.0f;              // 相机移动速度
 };
 
 settings_t *settings = new settings_t();
@@ -54,19 +55,16 @@ void set_value(int k, bool v)
     settings->CAN_BE_RELOAD = true;
 }
 
-bool get_value(int k)
+void set_value(int k, float v)
 {
-    switch (k)
-    {
-        case KEY_MULTISAMPLE:
-            return settings->Flags_MultiSample;
-        case KEY_DEPTHTEST:
-            return settings->Flags_DepthTest;
-        case KEY_CURSOR_MOVE_CAMER:
-            return settings->Flags_CursorMoveCamera;
-    }
+    switch (k) {
 
-    return false;
+        case KEY_CAMERA_MOVE_SPEED:
+            settings->Camera_Move_Speed = v;
+            break;
+        default:
+            return;
+    }
 }
 
 /**
@@ -94,4 +92,30 @@ void reload_setting()
 
         settings->CAN_BE_RELOAD = false;
     }
+}
+
+bool get_bool(int k)
+{
+    switch (k)
+    {
+        case KEY_MULTISAMPLE:
+            return settings->Flags_MultiSample;
+        case KEY_DEPTHTEST:
+            return settings->Flags_DepthTest;
+        case KEY_CURSOR_MOVE_CAMER:
+            return settings->Flags_CursorMoveCamera;
+    }
+
+    return false;
+}
+
+float get_float(int k)
+{
+    switch (k)
+    {
+        case KEY_CAMERA_MOVE_SPEED:
+            return settings->Flags_CursorMoveCamera;
+    }
+
+    return 0.0f;
 }

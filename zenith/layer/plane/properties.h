@@ -27,6 +27,8 @@
 #include "settings.h"
 
 static bool line_check = false;
+static bool enable_track = true;
+static float track_item = 3.0f;
 
 /**
  * 属性面板配置
@@ -36,7 +38,7 @@ static void __properties()
     ImGui::Begin(GUI_TEXT_PROPERTIES);
     if (ImGui::TreeNode("投影相机"))
     {
-        if (get_value(KEY_CURSOR_MOVE_CAMER))
+        if (get_bool(KEY_CURSOR_MOVE_CAMER))
         {
             if (ImGui::Button("关闭鼠标移动相机"))
             {
@@ -54,7 +56,7 @@ static void __properties()
 
     if (ImGui::TreeNode("配置"))
     {
-        if (get_value(KEY_MULTISAMPLE))
+        if (get_bool(KEY_MULTISAMPLE))
         {
             if (ImGui::Button("关闭多重采样抗锯齿"))
             {
@@ -68,7 +70,7 @@ static void __properties()
             }
         }
 
-        if (get_value(KEY_DEPTHTEST))
+        if (get_bool(KEY_DEPTHTEST))
         {
             if (ImGui::Button("关闭深度缓冲"))
             {
@@ -100,6 +102,11 @@ static void __properties()
 
         ImGui::TreePop();
     }
+
+    ImGui::Checkbox("相机移动速度", &enable_track);
+    ImGui::PushItemWidth(120);
+    ImGui::SameLine(140); enable_track |= ImGui::DragFloat("##item", &track_item, 0.25f, 3.0f, 99.0f, "Speed = %f");
+    set_value(KEY_CAMERA_MOVE_SPEED, track_item);
 
     ImGui::End();
 }

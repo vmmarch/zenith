@@ -63,6 +63,12 @@ public:
     void perspective(float x, float y, bool constraint_pitch = true);
 
     /**
+     * 设置相机移动速度
+     * @param speed 移动速度
+     */
+    void set_move_speed(float speed) { this->move_speed = speed; }
+
+    /**
      * 缩放
      * @param value
      */

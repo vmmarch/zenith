@@ -31,9 +31,10 @@
 #define ZENITH_TRUE  true
 #define ZENITH_FALSE false
 
-const static int KEY_MULTISAMPLE = 0;        // 多重采样抗锯齿
-const static int KEY_DEPTHTEST = 1;        // 深度测试
+const static int KEY_MULTISAMPLE = 0;              // 多重采样抗锯齿
+const static int KEY_DEPTHTEST = 1;                // 深度测试
 const static int KEY_CURSOR_MOVE_CAMER = 2;        // 禁止鼠标移动相机
+const static int KEY_CAMERA_MOVE_SPEED = 3;        // 相机移动速度
 
 
 /**
@@ -43,11 +44,13 @@ const static int KEY_CURSOR_MOVE_CAMER = 2;        // 禁止鼠标移动相机
  * @param v V_XXX
  */
 EXTAPI void set_value(int k, bool v);
+EXTAPI void set_value(int k, float v);
 
 /**
  * 判断当前配置是否开启
  */
-EXTAPI bool get_value(int k);
+EXTAPI bool  get_bool(int k);
+EXTAPI float get_float(int k);
 
 /**
  * 重新加载配置

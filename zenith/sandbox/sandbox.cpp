@@ -58,7 +58,7 @@ void SandBox::initialize()
             new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
             new Texture("../resources/container.png"),
             new Texture("../resources/container_specular.png"),
-            "D:/model/cube.obj"
+            R"(C:\Users\Mi\Documents\models\mandalorian\Mandalorian.obj)"
     ), program);
 
 
@@ -71,6 +71,7 @@ void SandBox::update(DeltaTime delta_time)
     // reload settings
     reload_setting();
 
+    camera.set_move_speed(get_float(KEY_CAMERA_MOVE_SPEED));
     camera.update((float) State::get_width(), (float) State::get_height(), delta_time);
 
     // 关闭窗口
@@ -82,7 +83,7 @@ void SandBox::update(DeltaTime delta_time)
     // 禁止鼠标移动相机
     if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
     {
-        set_value(KEY_CURSOR_MOVE_CAMER, !get_value(KEY_CURSOR_MOVE_CAMER));
+        set_value(KEY_CURSOR_MOVE_CAMER, !get_bool(KEY_CURSOR_MOVE_CAMER));
     }
 
         // 隐藏鼠标
@@ -120,7 +121,7 @@ void SandBox::event(Event &e)
 {
     if (e.GetEventType() == event::type::EVENT_MOUSE_MOVED)
     {
-        if (!get_value(KEY_CURSOR_MOVE_CAMER)) return;
+        if (!get_bool(KEY_CURSOR_MOVE_CAMER)) return;
         auto &event = dynamic_cast<MouseMovedEvent &>(e);
 
         float xpos = event.GetX();
