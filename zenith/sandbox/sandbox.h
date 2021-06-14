@@ -45,7 +45,6 @@ public:
     explicit SandBox(Window* window);
 
     void initialize();
-    void initialize_material();
 
     void render() override;
     void update(DeltaTime deltaTime) override;

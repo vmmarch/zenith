@@ -40,7 +40,7 @@ void ShaderManager::load_shaders(const std::string &folder)
     struct _finddata_t fileinfo{};
     std::string p;
 
-    if ((h_file = _findfirst(p.assign(folder).append("/*-vfs").c_str(), &fileinfo)) != -1)
+    if ((h_file = _findfirst(p.assign(folder).append("/*.vfs").c_str(), &fileinfo)) != -1)
     {
         do
         {

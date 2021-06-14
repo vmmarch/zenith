@@ -225,19 +225,19 @@ static void load_shader(zenith_char path, std::string &vtext, std::string &ftext
 
 static bool check_status(std::string &line, int &status)
 {
-    if (line == "// @vertex")
+    if (line == "#- vertex")
     {
         status = RD_VERTEX;
         return true;
     }
 
-    if (line == "// @fragment")
+    if (line == "#- fragment")
     {
         status = RD_FRAGMENT;
         return true;
     }
 
-    if (line == "// @end")
+    if (line == "#- end")
     {
         status = RD_NONE;
         return true;

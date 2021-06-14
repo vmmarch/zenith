@@ -36,7 +36,7 @@ public:
 
     ShaderProgram *get_program(const std::string &name)
     {
-        auto shader = shaders[(name + "-vfs")];
+        auto shader = shaders[(name + ".vfs")];
         if (shader == nullptr)
             ZENITH_ERROR(CANNOT_READ_SHADER, name.c_str());
 
