@@ -50,6 +50,7 @@ SandBox::SandBox(Window *window)
 void SandBox::initialize()
 {
 
+    // 点光源
     light = new PointLight(glm::vec3(2.0f));
 
     Shader *shader = shader_manager->get_shader("core");
@@ -78,6 +79,7 @@ void SandBox::update(DeltaTime delta_time)
     if(Input::pressed(ZENITH_KEY_ESCAPE))
     {
         Starter::instance().close();
+        abort();
     }
 
     // 禁止鼠标移动相机
