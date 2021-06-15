@@ -39,7 +39,7 @@ public:
          GLuint isize,
          glm::vec3 position = glm::vec3(0.f),
          glm::vec3 rotation = glm::vec3(0.f),
-         glm::vec3 scale = glm::vec3(1.f),
+         glm::vec3 scale = glm::vec3(0.1f),
          glm::vec3 origin = glm::vec3(0.f)
     );
 
@@ -56,8 +56,6 @@ public:
     void move(glm::vec3 position);
 
     void rotate(glm::vec3 rotation);
-
-    void scale_up(glm::vec3 scale);
 
     void draw(Shader *shader);
 

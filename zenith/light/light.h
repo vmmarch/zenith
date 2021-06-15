@@ -31,7 +31,7 @@ protected:
     glm::vec3 position;
 
 public:
-    explicit Light(const glm::vec3 &_color) : color(_color) {
+    explicit Light(glm::vec3 _color) : color(_color) {
     }
 
     /**

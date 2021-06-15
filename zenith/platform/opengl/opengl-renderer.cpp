@@ -65,7 +65,7 @@ void OpenGLRenderer::draw_models()
                             light);
 }
 
-void OpenGLRenderer::draw_model(Model &model)
+void OpenGLRenderer::draw_model(Model* model)
 {
     // TODO Draw Model.
 }

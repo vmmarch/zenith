@@ -60,7 +60,12 @@ public:
               Texture *or_tex_diff,
               Texture *or_tex_spec);
 
-    void rotate(const glm::vec3 &rotation);
+    void rotate(glm::vec3 rotation);
+
+    void scale_up(glm::vec3 scale);
+    void scale_down(glm::vec3 scale);
+
+    glm::vec3 get_scale();
 
     void draw(Shader *shader);
 
@@ -70,5 +75,6 @@ private:
     Texture *override_texture_specular;
     std::vector<Mesh *> meshs;
     glm::vec3 position;
+    glm::vec3 scale;
 
 };

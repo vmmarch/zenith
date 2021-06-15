@@ -51,9 +51,9 @@ public:
 
     virtual void draw_models() = 0;
 
-    virtual void draw_model(Model&) = 0;
+    virtual void draw_model(Model*) = 0;
 
-    virtual void submit(Model& model, Shader* shader) = 0;
+    virtual void submit(Model* model, Shader* shader) = 0;
 
     // 创建渲染器
     static zenith_scope<AbstractRenderer> Create();
@@ -81,9 +81,9 @@ public:
 
     static void draw_models();
 
-    static void draw_model(Model&);
+    static void draw_model(Model*);
 
-    static void submit(Model& model, Shader* shader);
+    static void submit(Model* model, Shader* shader);
 
 private:
     static zenith_scope<AbstractRenderer> s_renderer;

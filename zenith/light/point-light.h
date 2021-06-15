@@ -29,7 +29,7 @@
 class PointLight : public Light
 {
 public:
-    explicit PointLight(const glm::vec3& color) : Light(color) {}
+    explicit PointLight(glm::vec3 color) : Light(color) {}
     void update(Shader* shader) override;
 };
 

@@ -66,12 +66,12 @@ void Renderer::draw_models()
     s_renderer->draw_models();
 }
 
-void Renderer::draw_model(Model &model)
+void Renderer::draw_model(Model* model)
 {
     s_renderer->draw_model(model);
 }
 
-void Renderer::submit(Model &model, Shader *shader)
+void Renderer::submit(Model* model, Shader *shader)
 {
     s_renderer->submit(model, shader);
 }

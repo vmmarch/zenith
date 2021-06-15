@@ -55,13 +55,14 @@ void SandBox::initialize()
 
     Shader *shader = shader_manager->get_shader("core");
 
-    Renderer::submit(*new Model(
+    choose_model = new Model(
             glm::vec3(0.0f, 0.0f, 0.0f),
             new Material(glm::vec3(0.1f), glm::vec3(1.0f), glm::vec3(1.0f), 0, 1),
             new Texture(R"(C:\Users\Mi\Documents\models\mandalorian\texture.png)"),
             new Texture(R"(C:\Users\Mi\Documents\models\mandalorian\2.png)"),
             R"(C:\Users\Mi\Documents\models\mandalorian\Mandalorian.obj)"
-    ), shader);
+    );
+    Renderer::submit(choose_model, shader);
 
 }
 
@@ -97,6 +98,16 @@ void SandBox::update(DeltaTime delta_time)
     if (Input::pressed(ZENITH_KEY_PAGEDOWN))
     {
         set_value(KEY_CAMERA_MOVE_SPEED, get_float(KEY_CAMERA_MOVE_SPEED) - 1.0f);
+    }
+
+    if(Input::pressed(ZENITH_KEY_HOME))
+    {
+        choose_model->scale_up(glm::vec3(0.1f));
+    }
+
+    if(Input::pressed(ZENITH_KEY_END))
+    {
+        choose_model->scale_down( glm::vec3(0.1f));
     }
 
     // 隐藏鼠标

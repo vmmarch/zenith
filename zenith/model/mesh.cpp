@@ -113,7 +113,7 @@ void Mesh::set_origin(const glm::vec3 origin)
     this->origin = origin;
 }
 
-void Mesh::set_scale(const glm::vec3 scale)
+void Mesh::set_scale(glm::vec3 scale)
 {
     this->scale = scale;
 }
@@ -126,11 +126,6 @@ void Mesh::move(glm::vec3 position)
 void Mesh::rotate(glm::vec3 rotation)
 {
     this->rotation += rotation;
-}
-
-void Mesh::scale_up(glm::vec3 scale)
-{
-    this->scale += scale;
 }
 
 void Mesh::draw(Shader *shader)

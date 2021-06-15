@@ -23,7 +23,7 @@
  */
 #include "render/render-queue.h"
 
-void RenderQueue::push(Model &model, Shader *shader)
+void RenderQueue::push(Model* model, Shader *shader)
 {
     if (queue.count(shader) > 0)
     {
@@ -44,7 +44,7 @@ void RenderQueue::reload_all_bad_model()
 }
 
 void
-RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projection, const glm::vec3 &camera_position,
+RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projection, glm::vec3 camera_position,
                         Light *light)
 {
     std::map<sp, vecq>::reverse_iterator iter;
@@ -60,7 +60,7 @@ RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projectio
 
         for (auto model : iter->second)
         {
-            model.draw(shader);
+            model->draw(shader);
         }
     }
 }

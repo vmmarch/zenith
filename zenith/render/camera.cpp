@@ -23,7 +23,7 @@
  */
 #include "camera.h"
 
-Camera::Camera(const glm::vec3& , const glm::vec3& up, float yaw, float pitch)
+Camera::Camera(glm::vec3 , glm::vec3 up, float yaw, float pitch)
     : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
 {
     this->pos = pos;

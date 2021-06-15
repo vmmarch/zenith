@@ -41,8 +41,8 @@ enum camera_movement
 class Camera
 {
 public:
-    explicit Camera(const glm::vec3& pos = glm::vec3(0.0f, 0.0f, 5.0f),
-           const glm::vec3& up = glm::vec3(0.0f, 0.1f, 0.0f),
+    explicit Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 5.0f),
+           glm::vec3 up = glm::vec3(0.0f, 0.1f, 0.0f),
            float yaw = YAW, float pitch = PITCH);
 
     /**

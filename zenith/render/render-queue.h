@@ -32,18 +32,18 @@
 #include <map>
 #include <vector>
 
-typedef Shader*              sp;
-typedef std::vector<Model>          vecq;
+typedef Shader*                      sp;
+typedef std::vector<Model*>          vecq;
 
 class RenderQueue
 {
 public:
-    void push(Model& model, Shader* shader);
-    void draw_queue(const glm::mat4& view_matrix, const glm::mat4& projection, const glm::vec3& camera_position,
+    void push(Model* model, Shader* shader);
+    void draw_queue(const glm::mat4& view_matrix, const glm::mat4& projection, glm::vec3 camera_position,
                     Light* light);
 
     void reload_all_bad_model();
 private:
     std::map<sp, vecq> queue;
-    std::map<std::string, Model&> bad_models;
+    std::map<std::string, Model*> bad_models;
 };

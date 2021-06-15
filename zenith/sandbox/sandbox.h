@@ -67,5 +67,6 @@ private:
     std::vector<Texture*> textures;
 
     Light* light{};
+    Model* choose_model{};
 };
 
