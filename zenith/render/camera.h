@@ -25,13 +25,7 @@
 
 #include "event/input.h"
 #include <api/glfw-api.h>
-
-#define YAW -90.0f
-#define PITCH 0.0f
-#define SPEED 3.0f
-#define MOUSE_SENS 0.1f
-#define ZOOM 45.0f
-#define CONSTRAINT_PITCH 89.0f
+#include "_config.h"
 
 enum camera_movement
 {
@@ -41,9 +35,9 @@ enum camera_movement
 class Camera
 {
 public:
-    explicit Camera(glm::vec3 pos = glm::vec3(0.0f, 0.0f, 5.0f),
-           glm::vec3 up = glm::vec3(0.0f, 0.1f, 0.0f),
-           float yaw = YAW, float pitch = PITCH);
+    explicit Camera(glm::vec3 pos = CAMERA_POSITION,
+           glm::vec3 up = CAMERA_UP,
+           float yaw = CAMERA_YAW, float pitch = CAMERA_PITCH);
 
     /**
      * 移动相机
@@ -91,7 +85,7 @@ public:
      * Get/Set 鼠标灵敏度
      * @param sensitivity 鼠标灵敏度
      */
-    void set_mouse_sensitivity(float sensitivity) { mouse_sens = sensitivity; }
+    void  set_mouse_sensitivity(float sensitivity) { mouse_sens = sensitivity; }
     float get_mouse_sensitivity() { return mouse_sens; }
 
     void update(float _screen_w, float _screen_h, float _delta_time)

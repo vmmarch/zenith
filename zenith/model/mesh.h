@@ -25,9 +25,9 @@
 
 #include "shader.h"
 #include "vertex.h"
+#include "_config.h"
 
 #include <glfw-api.h>
-
 
 class Mesh
 {
@@ -37,10 +37,10 @@ public:
          GLuint vsize,
          GLuint *indices,
          GLuint isize,
-         glm::vec3 position = glm::vec3(0.f),
-         glm::vec3 rotation = glm::vec3(0.f),
-         glm::vec3 scale = glm::vec3(0.1f),
-         glm::vec3 origin = glm::vec3(0.f)
+         glm::vec3 position,
+         glm::vec3 rotation,
+         glm::vec3 scale,
+         glm::vec3 origin
     );
 
     ~Mesh();

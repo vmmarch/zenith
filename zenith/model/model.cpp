@@ -22,7 +22,6 @@
  * @author 2B键盘
  */
 #include "model.h"
-#include "_config.h"
 
 #include <utility>
 
@@ -38,10 +37,10 @@ Model::Model(glm::vec3 position, Material *material, Texture *or_tex_diff, Textu
     std::vector<GLuint> indices;
     std::vector<vertex_t> mesh = load_obj(file, indices);
     this->meshs.push_back(new Mesh(mesh.data(), mesh.size(), indices.data(), indices.size(),
-                                   glm::vec3(1.f, 0.f, 0.f),
-                                   glm::vec3(0.0f),
-                                   glm::vec3(0.0f),
-                                   glm::vec3(1.f))
+                                   position,
+                                   MESH_ROTATION,
+                                   MODEL_SCALE,
+                                   MESH_ORIGIN)
     );
 
     init(position, material, or_tex_diff, or_tex_spec);
@@ -53,7 +52,7 @@ void Model::init(glm::vec3 position, Material *material, Texture *or_tex_diff, T
     this->material = material;
     this->override_texture_diffuse = or_tex_diff;
     this->override_texture_specular = or_tex_spec;
-    this->scale = glm::vec3(MODEL_SCALE);
+    this->scale = MODEL_SCALE;
 
     for (auto &item : meshs)
     {

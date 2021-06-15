@@ -24,13 +24,13 @@
 #include "camera.h"
 
 Camera::Camera(glm::vec3 , glm::vec3 up, float yaw, float pitch)
-    : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(SPEED), camera_zoom(ZOOM)
+    : front(glm::vec3(0.0f, 0.0f, 0.0f)), move_speed(CAMERA_SPEED), camera_zoom(CAMERA_ZOOM)
 {
     this->pos = pos;
     this->worldup = up;
     this->yaw = yaw;
     this->pitch = pitch;
-    mouse_sens = MOUSE_SENS;
+    mouse_sens = CAMERA_MOUSE_SENS;
 
     update_camera_vector();
 }
@@ -58,10 +58,10 @@ void Camera::perspective(float x, float y, bool constraint_pitch)
 
     if(constraint_pitch)
     {
-        if(pitch > CONSTRAINT_PITCH)
-            pitch = CONSTRAINT_PITCH;
-        if(pitch < -CONSTRAINT_PITCH)
-            pitch = -CONSTRAINT_PITCH;
+        if(pitch > CAMERA_CONSTRAINT_PITCH)
+            pitch = CAMERA_CONSTRAINT_PITCH;
+        if(pitch < -CAMERA_CONSTRAINT_PITCH)
+            pitch = -CAMERA_CONSTRAINT_PITCH;
     }
 
     update_camera_vector();
@@ -69,12 +69,12 @@ void Camera::perspective(float x, float y, bool constraint_pitch)
 
 void Camera::SetZoom(float value)
 {
-    if (this->camera_zoom >= 1.0f && this->camera_zoom <= 45.0f)
+    if (this->camera_zoom >= 1.0f && this->camera_zoom <= CAMERA_ZOOM)
         this->camera_zoom -= value;
     if (this->camera_zoom <= 1.0f)
         this->camera_zoom = 1.0f;
-    if (this->camera_zoom >= 45.0f)
-        this->camera_zoom = 45.0f;
+    if (this->camera_zoom >= CAMERA_ZOOM)
+        this->camera_zoom = CAMERA_ZOOM;
 }
 
 glm::mat4 Camera::get_view_matrix()
