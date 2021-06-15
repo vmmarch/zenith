@@ -1,4 +1,4 @@
-# 天顶3D游戏引擎
+# 天顶3D游戏引擎 ![Converage](https://img.shields.io/badge/converage-3%25-brightgreen) ![Build](https://img.shields.io/badge/build-in%20development-brightgreen) ![Issue](https://img.shields.io/badge/issues-submit-blue)
 
 天顶3D游戏引擎可以帮助你快速的构建出一套跨平台的游戏项目，目前底层3D API是使用的OpenGL。后续会对接更多的API如：Direct3D，Vulkan等3D图形API。
 
