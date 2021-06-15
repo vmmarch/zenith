@@ -26,11 +26,11 @@
 #include "shader.h"
 
 
-class OpenGLShaderProgram : public ShaderProgram
+class OpenGLShader : public Shader
 {
 public:
-    OpenGLShaderProgram(zenith_char path, zenith_char debugname);
-    ~OpenGLShaderProgram() override;
+    OpenGLShader(zenith_char path, zenith_char debugname);
+    ~OpenGLShader() override;
     void bind() override;
     void unbind() override;
     zenith_uint get_id() const override { return shader_id; }

@@ -23,7 +23,7 @@
  */
 #include "render/render-queue.h"
 
-void RenderQueue::push(Model &model, ShaderProgram *shader)
+void RenderQueue::push(Model &model, Shader *shader)
 {
     if (queue.count(shader) > 0)
     {
@@ -34,7 +34,7 @@ void RenderQueue::push(Model &model, ShaderProgram *shader)
         vecq vq;
         vq.push_back(model);
 
-        queue.insert(std::pair<ShaderProgram *, vecq>(shader, vq));
+        queue.insert(std::pair<Shader *, vecq>(shader, vq));
     }
 }
 
@@ -50,7 +50,7 @@ RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projectio
     std::map<sp, vecq>::reverse_iterator iter;
     for (iter = queue.rbegin(); iter != queue.rend(); iter++)
     {
-        ShaderProgram *shader = iter->first;
+        Shader *shader = iter->first;
         shader->bind(); // 绑定Shader
 
         shader->set_mat4("ViewMatrix", view_matrix);
@@ -59,6 +59,8 @@ RenderQueue::draw_queue(const glm::mat4 &view_matrix, const glm::mat4 &projectio
         light->update(shader);
 
         for (auto model : iter->second)
+        {
             model.draw(shader);
+        }
     }
 }

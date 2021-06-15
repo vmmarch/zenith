@@ -28,10 +28,10 @@
 #include <api/glfw-api.h>
 #include "zenith/type.h"
 
-class ShaderProgram : Loader
+class Shader : Loader
 {
 public:
-    virtual ~ShaderProgram() = default;
+    virtual ~Shader() = default;
     virtual void bind() = 0;
     virtual void unbind() = 0;
     virtual zenith_uint get_id() const = 0;
@@ -52,7 +52,7 @@ public:
     /*!
      * 创建着色器
      */
-    static ShaderProgram* Create(zenith_char path, zenith_char debugname = "shader");
+    static Shader* Create(zenith_char path, zenith_char debugname = "shader");
 };
 
 

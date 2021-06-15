@@ -62,7 +62,7 @@ public:
 
     void rotate(const glm::vec3 &rotation);
 
-    void draw(ShaderProgram *shader);
+    void draw(Shader *shader);
 
 private:
     Material *material;

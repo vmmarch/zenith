@@ -93,7 +93,7 @@ void Mesh::update_matrix()
     this->matrix = glm::scale(this->matrix, this->scale);
 }
 
-void Mesh::set_matrix(ShaderProgram *shader)
+void Mesh::set_matrix(Shader *shader)
 {
     shader->set_mat4("ModelMatrix", matrix);
 }
@@ -133,7 +133,7 @@ void Mesh::scale_up(glm::vec3 scale)
     this->scale += scale;
 }
 
-void Mesh::draw(ShaderProgram *shader)
+void Mesh::draw(Shader *shader)
 {
     update_matrix();
     set_matrix(shader);

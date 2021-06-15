@@ -71,7 +71,7 @@ void Renderer::draw_model(Model &model)
     s_renderer->draw_model(model);
 }
 
-void Renderer::submit(Model &model, ShaderProgram *shader)
+void Renderer::submit(Model &model, Shader *shader)
 {
     s_renderer->submit(model, shader);
 }

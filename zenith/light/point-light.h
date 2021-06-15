@@ -16,34 +16,21 @@
  *
  *! ************************************************************************/
 
-/*! ===> Creates on 2021/4/7. <=== */
+/*! ===> Creates on 2021/6/15. <=== */
 
 /*!
  * @author 2B键盘
  */
-#pragma once
+#ifndef ZENITH_POINT_LIGHT_H
+#define ZENITH_POINT_LIGHT_H
 
-#include "render/renderer.h"
-#include "render/render-queue.h"
+#include "light.h"
 
-class OpenGLRenderer : public AbstractRenderer
+class PointLight : public Light
 {
 public:
-    ~OpenGLRenderer() override = default;
-    void clear_color(const glm::vec4&) override;
-    void clear() override;
-    void begin(Camera&, Light*) override;
-    void disable_depth_test() override;
-    void enable_depth_test() override;
-    void submit(Model& model, Shader* shader) override { render_queue.push(model, shader); }
-    void draw_model(Model&) override;
-    void draw_models() override;
-
-private:
-    glm::mat4 projection;
-    glm::mat4 view_matrix;
-    glm::vec3 camera_position;
-
-    RenderQueue render_queue;
-    Light* light;
+    explicit PointLight(const glm::vec3& color) : Light(color) {}
+    void update(Shader* shader) override;
 };
+
+#endif //ZENITH_POINT_LIGHT_H

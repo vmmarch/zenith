@@ -30,6 +30,7 @@
 #include "init/starter.h"
 
 #include "model/loader.h"
+#include "light/point-light.h"
 
 static bool first = true;
 
@@ -49,9 +50,9 @@ SandBox::SandBox(Window *window)
 void SandBox::initialize()
 {
 
-    light = new PointLight(glm::vec3(0.0f));
+    light = new PointLight(glm::vec3(2.0f));
 
-    ShaderProgram *program = shader_manager->get_program("core");
+    Shader *shader = shader_manager->get_shader("core");
 
     Renderer::submit(*new Model(
             glm::vec3(0.0f, 0.0f, 0.0f),
@@ -59,7 +60,7 @@ void SandBox::initialize()
             new Texture(R"(C:\Users\Mi\Documents\models\mandalorian\texture.png)"),
             new Texture(R"(C:\Users\Mi\Documents\models\mandalorian\2.png)"),
             R"(C:\Users\Mi\Documents\models\mandalorian\Mandalorian.obj)"
-    ), program);
+    ), shader);
 
 }
 

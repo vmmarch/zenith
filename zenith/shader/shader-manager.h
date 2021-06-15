@@ -34,7 +34,7 @@ class ShaderManager
 public:
     ShaderManager() = default;
 
-    ShaderProgram *get_program(const std::string &name)
+    Shader *get_shader(const std::string &name)
     {
         auto shader = shaders[(name + ".vfs")];
         if (shader == nullptr)
@@ -46,5 +46,5 @@ public:
     void load_shaders(const std::string &folder);
 
 private:
-    std::map<std::string, ShaderProgram *> shaders;
+    std::map<std::string, Shader *> shaders;
 };

@@ -142,7 +142,7 @@ IF(PLATFORM MATCHES WINDOWS)
     SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp)
 ELSE(PLATFORM MATCHES MACOS)
     SET(IMAGE_BACKENDS_1 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_glfw.cpp)
-    SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp)
+    SET(IMAGE_BACKENDS_2 ${CMAKE_CURRENT_SOURCE_DIR}/modules/imgui/backends/imgui_impl_opengl3.cpp zenith/light/point-light.h zenith/light/point-light.cpp)
 ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME}

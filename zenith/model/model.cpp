@@ -68,7 +68,7 @@ void Model::rotate(const glm::vec3 &rotation)
         item->rotate(rotation);
 }
 
-void Model::draw(ShaderProgram *shader)
+void Model::draw(Shader *shader)
 {
     this->material->update(shader);
 

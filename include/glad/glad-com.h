@@ -4333,12 +4333,12 @@ GLAPI PFNGLPROGRAMPARAMETERIPROC glad_glProgramParameteri;
 typedef void (APIENTRYP PFNGLUSEPROGRAMSTAGESPROC)(GLuint pipeline, GLbitfield stages, GLuint program);
 GLAPI PFNGLUSEPROGRAMSTAGESPROC glad_glUseProgramStages;
 #define glUseProgramStages glad_glUseProgramStages
-typedef void (APIENTRYP PFNGLACTIVESHADERPROGRAMPROC)(GLuint pipeline, GLuint program);
-GLAPI PFNGLACTIVESHADERPROGRAMPROC glad_glActiveShaderProgram;
-#define glActiveShaderProgram glad_glActiveShaderProgram
-typedef GLuint (APIENTRYP PFNGLCREATESHADERPROGRAMVPROC)(GLenum type, GLsizei count, const GLchar *const*strings);
-GLAPI PFNGLCREATESHADERPROGRAMVPROC glad_glCreateShaderProgramv;
-#define glCreateShaderProgramv glad_glCreateShaderProgramv
+typedef void (APIENTRYP PFNGLACTIVEShaderPROC)(GLuint pipeline, GLuint program);
+GLAPI PFNGLACTIVEShaderPROC glad_glActiveShader;
+#define glActiveShader glad_glActiveShader
+typedef GLuint (APIENTRYP PFNGLCREATEShaderVPROC)(GLenum type, GLsizei count, const GLchar *const*strings);
+GLAPI PFNGLCREATEShaderVPROC glad_glCreateShaderv;
+#define glCreateShaderv glad_glCreateShaderv
 typedef void (APIENTRYP PFNGLBINDPROGRAMPIPELINEPROC)(GLuint pipeline);
 GLAPI PFNGLBINDPROGRAMPIPELINEPROC glad_glBindProgramPipeline;
 #define glBindProgramPipeline glad_glBindProgramPipeline

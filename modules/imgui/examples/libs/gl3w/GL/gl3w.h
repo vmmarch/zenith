@@ -458,8 +458,8 @@ extern PFNGLGETPROGRAMBINARYPROC gl3wGetProgramBinary;
 extern PFNGLPROGRAMBINARYPROC gl3wProgramBinary;
 extern PFNGLPROGRAMPARAMETERIPROC gl3wProgramParameteri;
 extern PFNGLUSEPROGRAMSTAGESPROC gl3wUseProgramStages;
-extern PFNGLACTIVESHADERPROGRAMPROC gl3wActiveShaderProgram;
-extern PFNGLCREATESHADERPROGRAMVPROC gl3wCreateShaderProgramv;
+extern PFNGLACTIVEShaderPROC gl3wActiveShader;
+extern PFNGLCREATEShaderVPROC gl3wCreateShaderv;
 extern PFNGLBINDPROGRAMPIPELINEPROC gl3wBindProgramPipeline;
 extern PFNGLDELETEPROGRAMPIPELINESPROC gl3wDeleteProgramPipelines;
 extern PFNGLGENPROGRAMPIPELINESPROC gl3wGenProgramPipelines;
@@ -1063,8 +1063,8 @@ extern PFNGLTEXTURESTORAGE3DMULTISAMPLEEXTPROC gl3wTextureStorage3DMultisampleEX
 #define glProgramBinary		gl3wProgramBinary
 #define glProgramParameteri		gl3wProgramParameteri
 #define glUseProgramStages		gl3wUseProgramStages
-#define glActiveShaderProgram		gl3wActiveShaderProgram
-#define glCreateShaderProgramv		gl3wCreateShaderProgramv
+#define glActiveShader		gl3wActiveShader
+#define glCreateShaderv		gl3wCreateShaderv
 #define glBindProgramPipeline		gl3wBindProgramPipeline
 #define glDeleteProgramPipelines		gl3wDeleteProgramPipelines
 #define glGenProgramPipelines		gl3wGenProgramPipelines

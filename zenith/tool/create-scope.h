@@ -79,14 +79,14 @@ static zenith_scope<AbstractRenderer> create_renderer()
 /**
  * @return 着色器实例
  */
-static ShaderProgram* create_shader_program(zenith_char path, zenith_char debugname)
+static Shader* create_shader_shader(zenith_char path, zenith_char debugname)
 {
     switch (AbstractRenderer::GetRenderAPI())
     {
         case render::api::NONE:
             break;
         case render::api::GL:
-            return new OpenGLShaderProgram(path, debugname);
+            return new OpenGLShader(path, debugname);
         case render::api::DX:
             break;
     }

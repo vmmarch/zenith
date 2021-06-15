@@ -59,14 +59,14 @@ public:
 
     void scale_up(glm::vec3 scale);
 
-    void draw(ShaderProgram *shader);
+    void draw(Shader *shader);
 
 private:
     void setup_mesh();
 
     void update_matrix();
 
-    void set_matrix(ShaderProgram *shader);
+    void set_matrix(Shader *shader);
 
 private:
     vertex_t *vertices;

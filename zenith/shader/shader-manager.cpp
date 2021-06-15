@@ -53,7 +53,7 @@ void ShaderManager::load_shaders(const std::string &folder)
                 std::string np(folder);
                 zenith_char path = np.append("/").append(fileinfo.name).c_str();
                 shaders.insert(
-                        std::make_pair<std::string, ShaderProgram *>(fileinfo.name, ShaderProgram::Create(path)));
+                        std::make_pair<std::string, Shader *>(fileinfo.name, Shader::Create(path)));
             }
         } while (_findnext(h_file, &fileinfo) == 0);
     }
@@ -69,8 +69,8 @@ void ShaderManager::load_shaders(const std::string &folder)
         if(ptr->d_name[0] == '.')
             continue;
 
-        shaders.insert(std::make_pair<std::string, ShaderProgram*>(
-                ptr->d_name, ShaderProgram::Create((folder + "/" + ptr->d_name).c_str())));
+        shaders.insert(std::make_pair<std::string, Shader*>(
+                ptr->d_name, Shader::Create((folder + "/" + ptr->d_name).c_str())));
     }
 
     closedir(dir);

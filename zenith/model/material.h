@@ -49,7 +49,7 @@ public:
         this->specular_tex      = specular_tex;
     }
 
-    void update(ShaderProgram* shader)
+    void update(Shader* shader)
     {
         shader->set_float3("material.ambient", ambient);
         shader->set_float3("material.diffuse", diffuse);

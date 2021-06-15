@@ -39,7 +39,7 @@ static zenith_uint32 mark_count = 0;
 
 static void load_shader(zenith_char path, std::string &vtext, std::string &ftext);
 
-OpenGLShaderProgram::OpenGLShaderProgram(zenith_char path, zenith_char debugname)
+OpenGLShader::OpenGLShader(zenith_char path, zenith_char debugname)
 {
     mark_id = (mark_count++);
 
@@ -91,70 +91,70 @@ OpenGLShaderProgram::OpenGLShaderProgram(zenith_char path, zenith_char debugname
 // #endif
 }
 
-OpenGLShaderProgram::~OpenGLShaderProgram()
+OpenGLShader::~OpenGLShader()
 {
     glDeleteProgram(shader_id);
 }
 
-void OpenGLShaderProgram::bind()
+void OpenGLShader::bind()
 {
     GLAPI_BindProgram(shader_id);
 }
 
-void OpenGLShaderProgram::unbind()
+void OpenGLShader::unbind()
 {
     GLAPI_UnbindProgram();
 }
 
-void OpenGLShaderProgram::set_bool(zenith_char name, bool value)
+void OpenGLShader::set_bool(zenith_char name, bool value)
 {
     GLAPI_Uniform1i(shader_id, name, value);
 }
 
-void OpenGLShaderProgram::set_int(zenith_char name, int value)
+void OpenGLShader::set_int(zenith_char name, int value)
 {
     GLAPI_Uniform1i(shader_id, name, value);
 }
 
-void OpenGLShaderProgram::set_float(zenith_char name, float value)
+void OpenGLShader::set_float(zenith_char name, float value)
 {
     GLAPI_Uniform1f(shader_id, name, value);
 }
 
-void OpenGLShaderProgram::set_float2(zenith_char name, glm::vec2 value)
+void OpenGLShader::set_float2(zenith_char name, glm::vec2 value)
 {
     GLAPI_Uniform2f(shader_id, name, value.x, value.y);
 }
 
-void OpenGLShaderProgram::set_float3(zenith_char name, glm::vec3 value)
+void OpenGLShader::set_float3(zenith_char name, glm::vec3 value)
 {
     GLAPI_Uniform3f(shader_id, name, value.x, value.y, value.z);
 }
 
-void OpenGLShaderProgram::set_float4(zenith_char name, glm::vec4 value)
+void OpenGLShader::set_float4(zenith_char name, glm::vec4 value)
 {
     GLAPI_Uniform4f(shader_id, name, value.r, value.g, value.b, value.a);
 }
 
-void OpenGLShaderProgram::set_mat3(zenith_char name, glm::mat3 value)
+void OpenGLShader::set_mat3(zenith_char name, glm::mat3 value)
 {
     GLAPI_UniformMatrix3fv(shader_id, name, value);
 }
 
-void OpenGLShaderProgram::set_mat4(zenith_char name, glm::mat4 value)
+void OpenGLShader::set_mat4(zenith_char name, glm::mat4 value)
 {
     GLAPI_UniformMatrix4fv(shader_id, name, value);
 }
 
-void OpenGLShaderProgram::reload()
+void OpenGLShader::reload()
 {
     // TODO This function not implement in current.
 }
 
-zenith_uint32 OpenGLShaderProgram::get_mark_id() const
+zenith_uint32 OpenGLShader::get_mark_id() const
 { return mark_id; }
 
-void OpenGLShaderProgram::checkCompileErrors(unsigned int shader, const std::string &type)
+void OpenGLShader::checkCompileErrors(unsigned int shader, const std::string &type)
 {
     int success;
     char infoLog[1024];

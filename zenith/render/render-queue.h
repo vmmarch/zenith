@@ -32,13 +32,13 @@
 #include <map>
 #include <vector>
 
-typedef ShaderProgram*              sp;
+typedef Shader*              sp;
 typedef std::vector<Model>          vecq;
 
 class RenderQueue
 {
 public:
-    void push(Model& model, ShaderProgram* shader);
+    void push(Model& model, Shader* shader);
     void draw_queue(const glm::mat4& view_matrix, const glm::mat4& projection, const glm::vec3& camera_position,
                     Light* light);
 

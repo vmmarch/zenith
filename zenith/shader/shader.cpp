@@ -24,7 +24,7 @@
 #include "shader.h"
 #include "tool/create-scope.h"
 
-ShaderProgram* ShaderProgram::Create(zenith_char path, zenith_char debugname)
+Shader* Shader::Create(zenith_char path, zenith_char debugname)
 {
-    return create_shader_program(path, debugname);
+    return create_shader_shader(path, debugname);
 }
