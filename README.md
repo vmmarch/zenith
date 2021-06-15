@@ -23,3 +23,7 @@
 - MacOS暂不支持ImGUI布局。
 - 构建工具选用CMake 3.0以上版本。
 - GL以及其他图形API都包含在项目中，无需单独安装。
+
+## issue
+
+如果你有疑问可以发布到[issues](https://github.com/orvals/zenith/issues)上，我们会查看并解决你的问题
