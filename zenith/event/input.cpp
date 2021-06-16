@@ -39,3 +39,4 @@ bool Input::pressed(zenith_keycode key)
     auto state = glfwGetKey(State::get_glfw_window(), static_cast<int32_t>(key));
     return state == GLFW_PRESS || state == GLFW_REPEAT;
 }
+
