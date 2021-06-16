@@ -31,7 +31,6 @@
 #define SCROLLED_UP         1
 #define SCROLLED_DOWN       2
 
-
 class Input
 {
 public:

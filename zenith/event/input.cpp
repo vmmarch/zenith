@@ -24,7 +24,6 @@
 #include "input.h"
 #include "state.h"
 
-
 bool Input::multikey(zenith_keycode key1, zenith_keycode key2)
 {
     return pressed(key1) && pressed(key2);
