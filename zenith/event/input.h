@@ -34,15 +34,18 @@
 class Input
 {
 public:
-    static bool pressed(zenith_keycode);
+    /**
+     * @return 键盘是否按下
+     */
+    static bool pressed(keycode);
 
     /**
      * 两个键是否按下
      */
-    static bool multikey(zenith_keycode key1, zenith_keycode key2);
+    static bool pressed(keycode key1, keycode key2);
 
     /**
      * 三个键是否按下
      */
-    static bool multikey(zenith_keycode key1, zenith_keycode key2, zenith_keycode key3);
+    static bool pressed(keycode key1, keycode key2, keycode key3);
 };

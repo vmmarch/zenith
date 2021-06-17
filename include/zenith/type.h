@@ -51,7 +51,7 @@ typedef uint16_t zenith_uint16;
 typedef uint32_t zenith_uint32;
 typedef void *zenith_any;
 
-typedef zenith_uint16 zenith_keycode;
+typedef zenith_uint16 keycode;
 
 typedef void (*zenith_noparam_fn)();
 

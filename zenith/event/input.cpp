@@ -24,19 +24,18 @@
 #include "input.h"
 #include "state.h"
 
-bool Input::multikey(zenith_keycode key1, zenith_keycode key2)
+bool Input::pressed(keycode key1, keycode key2)
 {
     return pressed(key1) && pressed(key2);
 }
 
-bool Input::multikey(zenith_keycode key1, zenith_keycode key2, zenith_keycode key3)
+bool Input::pressed(keycode key1, keycode key2, keycode key3)
 {
     return pressed(key1) && pressed(key2) && pressed(key3);
 }
 
-bool Input::pressed(zenith_keycode key)
+bool Input::pressed(keycode key)
 {
     auto state = glfwGetKey(State::get_glfw_window(), static_cast<int32_t>(key));
-    return state == GLFW_PRESS || state == GLFW_REPEAT;
+    return state == GLFW_PRESS;
 }
-

@@ -30,15 +30,15 @@
 class KeyEvent : public Event
 {
 public:
-    KeyEvent(zenith_keycode keycode) : __keycode(keycode)
+    KeyEvent(keycode keycode) : __keycode(keycode)
     {}
 
-    zenith_keycode getKeycode()
+    keycode getKeycode()
     { return __keycode; }
 
     CLASSIF(event::KEYBOARD);
 private:
-    zenith_keycode __keycode;
+    keycode __keycode;
 };
 
 /**
@@ -47,7 +47,7 @@ private:
 class KeyPressedEvent : public KeyEvent
 {
 public:
-    KeyPressedEvent(zenith_keycode keycode, int repeat)
+    KeyPressedEvent(keycode keycode, int repeat)
             : KeyEvent(keycode), __repeat(repeat)
     {}
 
@@ -62,7 +62,7 @@ private:
 class KeyReleasedEvent : public KeyEvent
 {
 public:
-    KeyReleasedEvent(zenith_keycode keycode) : KeyEvent(keycode)
+    KeyReleasedEvent(keycode keycode) : KeyEvent(keycode)
     {}
 
     TYPE(event::type::EVENT_KEY_RELEASED);
@@ -71,7 +71,7 @@ public:
 class KeyTypeEvent : public KeyEvent
 {
 public:
-    KeyTypeEvent(const zenith_keycode keycode) : KeyEvent(keycode)
+    KeyTypeEvent(const keycode keycode) : KeyEvent(keycode)
     {}
 
     TYPE(event::type::KEY_TYPE);

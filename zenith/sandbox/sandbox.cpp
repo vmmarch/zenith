@@ -84,7 +84,7 @@ void SandBox::update(DeltaTime delta_time)
     }
 
     // 禁止鼠标移动相机
-    if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
+    if (Input::pressed(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_LEFTSHIFT, ZENITH_KEY_C))
     {
         set_value(KEY_CAMERA_MOVE_SPEED, get_float(KEY_CAMERA_MOVE_SPEED) + 1.0f);
     }
@@ -111,7 +111,7 @@ void SandBox::update(DeltaTime delta_time)
     }
 
     // 隐藏鼠标
-    else if (Input::multikey(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
+    else if (Input::pressed(ZENITH_KEY_LEFTCONTROL, ZENITH_KEY_C))
     {
         if (!cursor_hide)
             glfwSetInputMode(window->get_glfw_window(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
