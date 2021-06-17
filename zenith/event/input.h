@@ -26,6 +26,7 @@
 #include "event/key-event.h"
 #include <zenith/type.h>
 #include <api/glfw-api.h>
+#include <map>
 
 #define NOT_SCROLLED        0
 #define SCROLLED_UP         1

@@ -34,8 +34,7 @@ bool Input::pressed(keycode key1, keycode key2, keycode key3)
     return pressed(key1) && pressed(key2) && pressed(key3);
 }
 
-bool Input::pressed(keycode key)
-{
+bool Input::pressed(keycode key) {
     auto state = glfwGetKey(State::get_glfw_window(), static_cast<int32_t>(key));
     return state == GLFW_PRESS;
 }
