@@ -29,7 +29,6 @@
 #include "state.h"
 #include "init/starter.h"
 
-#include "model/loader.h"
 #include "light/point-light.h"
 
 static bool first = true;
@@ -39,7 +38,7 @@ SandBox::SandBox(Window *window)
 {
     main_layer = new ExampleLayer();
 
-    this->imlayer = new ImGuiLayer();
+    this->imgui_layer = new ImGuiLayer();
     layer_stack.push(new HomeLayer());
     layer_stack.push(new EditorLayer());
 
@@ -130,11 +129,11 @@ void SandBox::render()
     Renderer::clear();
 
 #ifndef __ZENITH_PLATFORM_MACOS__
-    imlayer->begin();
+    imgui_layer->begin();
     {
         layer_stack.render();
     }
-    imlayer->end();
+    imgui_layer->end();
 #endif
 
     // 渲染模型

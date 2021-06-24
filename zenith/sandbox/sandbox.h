@@ -53,7 +53,7 @@ public:
 
 private:
     LayerStack layer_stack;
-    ImGuiLayer* imlayer {};
+    ImGuiLayer* imgui_layer;
     Camera camera;
     Window* window;
     float last_x = 0, last_y = 0;
